@@ -315,7 +315,8 @@ trait SdkClientMethodsPart3
             return false;
         }
 
-        return match ($scheme) {"BearerAuth" => $auth->bearerAuth !== null,"CookieAuth" => $auth->cookieAuth !== null,"TokenCookieAuth" => $auth->tokenCookieAuth !== null,default => false,
+        return match ($scheme) {
+            "BearerAuth" => $auth->bearerAuth !== null,"CookieAuth" => $auth->cookieAuth !== null,"TokenCookieAuth" => $auth->tokenCookieAuth !== null,default => false,
         };
     }
 }

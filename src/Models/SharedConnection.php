@@ -55,8 +55,12 @@ class ConnectionDetails implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "connection_uri") || $data->connection_uri === null) { throw new SdkValidationError("connection_uri", 'required', "Required property 'connection_uri' is missing or null"); }
-        if (!property_exists($data, "connection_parameters") || $data->connection_parameters === null) { throw new SdkValidationError("connection_parameters", 'required', "Required property 'connection_parameters' is missing or null"); }
+        if (!property_exists($data, "connection_uri") || $data->connection_uri === null) {
+            throw new SdkValidationError("connection_uri", 'required', "Required property 'connection_uri' is missing or null");
+        }
+        if (!property_exists($data, "connection_parameters") || $data->connection_parameters === null) {
+            throw new SdkValidationError("connection_parameters", 'required', "Required property 'connection_parameters' is missing or null");
+        }
         return new self(
             connectionUri: SdkClient::stringValue($data->connection_uri),
             connectionParameters: SdkClient::hydrateClass($data->connection_parameters, ConnectionParameters::class),
@@ -142,11 +146,21 @@ class ConnectionParameters implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "database") || $data->database === null) { throw new SdkValidationError("database", 'required', "Required property 'database' is missing or null"); }
-        if (!property_exists($data, "password") || $data->password === null) { throw new SdkValidationError("password", 'required', "Required property 'password' is missing or null"); }
-        if (!property_exists($data, "role") || $data->role === null) { throw new SdkValidationError("role", 'required', "Required property 'role' is missing or null"); }
-        if (!property_exists($data, "host") || $data->host === null) { throw new SdkValidationError("host", 'required', "Required property 'host' is missing or null"); }
-        if (!property_exists($data, "pooler_host") || $data->pooler_host === null) { throw new SdkValidationError("pooler_host", 'required', "Required property 'pooler_host' is missing or null"); }
+        if (!property_exists($data, "database") || $data->database === null) {
+            throw new SdkValidationError("database", 'required', "Required property 'database' is missing or null");
+        }
+        if (!property_exists($data, "password") || $data->password === null) {
+            throw new SdkValidationError("password", 'required', "Required property 'password' is missing or null");
+        }
+        if (!property_exists($data, "role") || $data->role === null) {
+            throw new SdkValidationError("role", 'required', "Required property 'role' is missing or null");
+        }
+        if (!property_exists($data, "host") || $data->host === null) {
+            throw new SdkValidationError("host", 'required', "Required property 'host' is missing or null");
+        }
+        if (!property_exists($data, "pooler_host") || $data->pooler_host === null) {
+            throw new SdkValidationError("pooler_host", 'required', "Required property 'pooler_host' is missing or null");
+        }
         return new self(
             database: SdkClient::stringValue($data->database),
             password: SdkClient::stringValue($data->password),

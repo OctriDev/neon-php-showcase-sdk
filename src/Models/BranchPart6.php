@@ -45,7 +45,9 @@ class BranchUpdateRequest implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "branch") || $data->branch === null) { throw new SdkValidationError("branch", 'required', "Required property 'branch' is missing or null"); }
+        if (!property_exists($data, "branch") || $data->branch === null) {
+            throw new SdkValidationError("branch", 'required', "Required property 'branch' is missing or null");
+        }
         return new self(
             branch: SdkClient::hydrateClass($data->branch, BranchUpdateRequestBranch::class),
         );
@@ -146,8 +148,12 @@ class DatabaseCreateRequestDatabase implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "name") || $data->name === null) { throw new SdkValidationError("name", 'required', "Required property 'name' is missing or null"); }
-        if (!property_exists($data, "owner_name") || $data->owner_name === null) { throw new SdkValidationError("owner_name", 'required', "Required property 'owner_name' is missing or null"); }
+        if (!property_exists($data, "name") || $data->name === null) {
+            throw new SdkValidationError("name", 'required', "Required property 'name' is missing or null");
+        }
+        if (!property_exists($data, "owner_name") || $data->owner_name === null) {
+            throw new SdkValidationError("owner_name", 'required', "Required property 'owner_name' is missing or null");
+        }
         return new self(
             name: SdkClient::stringValue($data->name),
             ownerName: SdkClient::stringValue($data->owner_name),
@@ -193,7 +199,9 @@ class DatabaseCreateRequest implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "database") || $data->database === null) { throw new SdkValidationError("database", 'required', "Required property 'database' is missing or null"); }
+        if (!property_exists($data, "database") || $data->database === null) {
+            throw new SdkValidationError("database", 'required', "Required property 'database' is missing or null");
+        }
         return new self(
             database: SdkClient::hydrateClass($data->database, DatabaseCreateRequestDatabase::class),
         );
@@ -248,8 +256,12 @@ class DatabaseOperations implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "database") || $data->database === null) { throw new SdkValidationError("database", 'required', "Required property 'database' is missing or null"); }
-        if (!property_exists($data, "operations") || $data->operations === null) { throw new SdkValidationError("operations", 'required', "Required property 'operations' is missing or null"); }
+        if (!property_exists($data, "database") || $data->database === null) {
+            throw new SdkValidationError("database", 'required', "Required property 'database' is missing or null");
+        }
+        if (!property_exists($data, "operations") || $data->operations === null) {
+            throw new SdkValidationError("operations", 'required', "Required property 'operations' is missing or null");
+        }
         return new self(
             database: SdkClient::hydrateClass($data->database, Database::class),
             operations: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, Operation::class), SdkClient::arrayValue($data->operations))),
@@ -295,7 +307,9 @@ class DatabaseResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "database") || $data->database === null) { throw new SdkValidationError("database", 'required', "Required property 'database' is missing or null"); }
+        if (!property_exists($data, "database") || $data->database === null) {
+            throw new SdkValidationError("database", 'required', "Required property 'database' is missing or null");
+        }
         return new self(
             database: SdkClient::hydrateClass($data->database, Database::class),
         );

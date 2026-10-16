@@ -105,13 +105,27 @@ class SendNeonAuthTestEmailRequest implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "host") || $data->host === null) { throw new SdkValidationError("host", 'required', "Required property 'host' is missing or null"); }
-        if (!property_exists($data, "port") || $data->port === null) { throw new SdkValidationError("port", 'required', "Required property 'port' is missing or null"); }
-        if (!property_exists($data, "username") || $data->username === null) { throw new SdkValidationError("username", 'required', "Required property 'username' is missing or null"); }
-        if (!property_exists($data, "password") || $data->password === null) { throw new SdkValidationError("password", 'required', "Required property 'password' is missing or null"); }
-        if (!property_exists($data, "sender_email") || $data->sender_email === null) { throw new SdkValidationError("sender_email", 'required', "Required property 'sender_email' is missing or null"); }
-        if (!property_exists($data, "sender_name") || $data->sender_name === null) { throw new SdkValidationError("sender_name", 'required', "Required property 'sender_name' is missing or null"); }
-        if (!property_exists($data, "recipient_email") || $data->recipient_email === null) { throw new SdkValidationError("recipient_email", 'required', "Required property 'recipient_email' is missing or null"); }
+        if (!property_exists($data, "host") || $data->host === null) {
+            throw new SdkValidationError("host", 'required', "Required property 'host' is missing or null");
+        }
+        if (!property_exists($data, "port") || $data->port === null) {
+            throw new SdkValidationError("port", 'required', "Required property 'port' is missing or null");
+        }
+        if (!property_exists($data, "username") || $data->username === null) {
+            throw new SdkValidationError("username", 'required', "Required property 'username' is missing or null");
+        }
+        if (!property_exists($data, "password") || $data->password === null) {
+            throw new SdkValidationError("password", 'required', "Required property 'password' is missing or null");
+        }
+        if (!property_exists($data, "sender_email") || $data->sender_email === null) {
+            throw new SdkValidationError("sender_email", 'required', "Required property 'sender_email' is missing or null");
+        }
+        if (!property_exists($data, "sender_name") || $data->sender_name === null) {
+            throw new SdkValidationError("sender_name", 'required', "Required property 'sender_name' is missing or null");
+        }
+        if (!property_exists($data, "recipient_email") || $data->recipient_email === null) {
+            throw new SdkValidationError("recipient_email", 'required', "Required property 'recipient_email' is missing or null");
+        }
         return new self(
             host: SdkClient::stringValue($data->host),
             port: SdkClient::intValue($data->port),
@@ -174,7 +188,9 @@ class SendNeonAuthTestEmailResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "success") || $data->success === null) { throw new SdkValidationError("success", 'required', "Required property 'success' is missing or null"); }
+        if (!property_exists($data, "success") || $data->success === null) {
+            throw new SdkValidationError("success", 'required', "Required property 'success' is missing or null");
+        }
         return new self(
             success: SdkClient::boolValue($data->success),
             errorMessage: (property_exists($data, "error_message") ? SdkClient::stringValue($data->error_message) : SdkNotGiven::Value),
@@ -220,7 +236,9 @@ class UpdateNeonAuthAllowLocalhostRequest implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "allow_localhost") || $data->allow_localhost === null) { throw new SdkValidationError("allow_localhost", 'required', "Required property 'allow_localhost' is missing or null"); }
+        if (!property_exists($data, "allow_localhost") || $data->allow_localhost === null) {
+            throw new SdkValidationError("allow_localhost", 'required', "Required property 'allow_localhost' is missing or null");
+        }
         return new self(
             allowLocalhost: SdkClient::boolValue($data->allow_localhost),
         );
@@ -265,7 +283,9 @@ class UpdateNeonAuthUserRoleRequest implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "roles") || $data->roles === null) { throw new SdkValidationError("roles", 'required', "Required property 'roles' is missing or null"); }
+        if (!property_exists($data, "roles") || $data->roles === null) {
+            throw new SdkValidationError("roles", 'required', "Required property 'roles' is missing or null");
+        }
         return new self(
             roles: array_values(array_map(static fn($item) => SdkClient::stringValue($item), SdkClient::arrayValue($data->roles))),
         );
@@ -310,7 +330,9 @@ class UpdateNeonAuthUserRoleResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "id") || $data->id === null) { throw new SdkValidationError("id", 'required', "Required property 'id' is missing or null"); }
+        if (!property_exists($data, "id") || $data->id === null) {
+            throw new SdkValidationError("id", 'required', "Required property 'id' is missing or null");
+        }
         return new self(
             id: SdkClient::stringValue($data->id),
         );

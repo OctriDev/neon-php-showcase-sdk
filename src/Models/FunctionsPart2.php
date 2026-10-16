@@ -45,7 +45,9 @@ class FunctionTriggerSchedule implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "cron") || $data->cron === null) { throw new SdkValidationError("cron", 'required', "Required property 'cron' is missing or null"); }
+        if (!property_exists($data, "cron") || $data->cron === null) {
+            throw new SdkValidationError("cron", 'required', "Required property 'cron' is missing or null");
+        }
         return new self(
             cron: SdkClient::stringValue($data->cron),
         );
@@ -102,7 +104,9 @@ class FunctionTriggerStorageObjectCreated implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "bucket_name") || $data->bucket_name === null) { throw new SdkValidationError("bucket_name", 'required', "Required property 'bucket_name' is missing or null"); }
+        if (!property_exists($data, "bucket_name") || $data->bucket_name === null) {
+            throw new SdkValidationError("bucket_name", 'required', "Required property 'bucket_name' is missing or null");
+        }
         return new self(
             bucketName: SdkClient::stringValue($data->bucket_name),
             prefix: (property_exists($data, "prefix") ? SdkClient::stringValue($data->prefix) : SdkNotGiven::Value),
@@ -212,11 +216,21 @@ class NeonFunction implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "id") || $data->id === null) { throw new SdkValidationError("id", 'required', "Required property 'id' is missing or null"); }
-        if (!property_exists($data, "slug") || $data->slug === null) { throw new SdkValidationError("slug", 'required', "Required property 'slug' is missing or null"); }
-        if (!property_exists($data, "name") || $data->name === null) { throw new SdkValidationError("name", 'required', "Required property 'name' is missing or null"); }
-        if (!property_exists($data, "invocation_url") || $data->invocation_url === null) { throw new SdkValidationError("invocation_url", 'required', "Required property 'invocation_url' is missing or null"); }
-        if (!property_exists($data, "created_at") || $data->created_at === null) { throw new SdkValidationError("created_at", 'required', "Required property 'created_at' is missing or null"); }
+        if (!property_exists($data, "id") || $data->id === null) {
+            throw new SdkValidationError("id", 'required', "Required property 'id' is missing or null");
+        }
+        if (!property_exists($data, "slug") || $data->slug === null) {
+            throw new SdkValidationError("slug", 'required', "Required property 'slug' is missing or null");
+        }
+        if (!property_exists($data, "name") || $data->name === null) {
+            throw new SdkValidationError("name", 'required', "Required property 'name' is missing or null");
+        }
+        if (!property_exists($data, "invocation_url") || $data->invocation_url === null) {
+            throw new SdkValidationError("invocation_url", 'required', "Required property 'invocation_url' is missing or null");
+        }
+        if (!property_exists($data, "created_at") || $data->created_at === null) {
+            throw new SdkValidationError("created_at", 'required', "Required property 'created_at' is missing or null");
+        }
         return new self(
             id: SdkClient::stringValue($data->id),
             slug: SdkClient::stringValue($data->slug),
@@ -239,9 +253,24 @@ final readonly class NeonFunctionDeploymentStatusEnum implements SdkOpenEnum
     public const COMPLETED = "completed";
     public const FAILED = "failed";
     private function __construct(public string $value) {}
-    public static function from(string|int $value): static { return new self((string) $value); }
-    public static function tryFrom(string|int|null $value): ?static { return $value === null ? null : self::from($value); }
-    public function getValue(): string { return $this->value; }
-    public function jsonSerialize(): string { return $this->value; }
-    public function __toString(): string { return (string) $this->value; }
+    public static function from(string|int $value): static
+    {
+        return new self((string) $value);
+    }
+    public static function tryFrom(string|int|null $value): ?static
+    {
+        return $value === null ? null : self::from($value);
+    }
+    public function getValue(): string
+    {
+        return $this->value;
+    }
+    public function jsonSerialize(): string
+    {
+        return $this->value;
+    }
+    public function __toString(): string
+    {
+        return (string) $this->value;
+    }
 }

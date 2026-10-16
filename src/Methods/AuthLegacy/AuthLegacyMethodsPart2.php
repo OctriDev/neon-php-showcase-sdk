@@ -25,7 +25,7 @@ trait AuthLegacyMethodsPart2
 
         Validation::validatePattern('project_id', $projectId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('PATCH', "/projects/" . SdkClient::encodePathSegment($projectId) . "/auth/email_server", $clientConfig, body: $body, decoder: 'json', operationId: 'updateAuthLegacyEmailServer', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('PATCH', "/projects/" . SdkClient::encodePathSegment($projectId) . "/auth/email_server", $clientConfig, body: $body, decoder: 'json', operationId: 'updateAuthLegacyEmailServer', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::hydrateUnionAs($sdkResponse->data, NeonAuthEmailServerConfigResponse::class, [StandardEmailServerResponse::class, SharedEmailServer::class], "type", ["standard" => StandardEmailServerResponse::class, "shared" => SharedEmailServer::class], UnknownNeonAuthEmailServerConfigResponse::class));
     }
 
@@ -46,6 +46,6 @@ trait AuthLegacyMethodsPart2
 
         Validation::validatePattern('project_id', $projectId, '^[a-z0-9-]{1,60}$');
 
-        return SdkClient::request('DELETE', "/projects/" . SdkClient::encodePathSegment($projectId) . "/auth/integration/" . SdkClient::encodePathSegment($authProvider) . "", $clientConfig, body: ['delete_data' => $deleteData], decoder: 'empty', operationId: 'deleteAuthLegacyIntegration', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)])->data;
+        return SdkClient::request('DELETE', "/projects/" . SdkClient::encodePathSegment($projectId) . "/auth/integration/" . SdkClient::encodePathSegment($authProvider) . "", $clientConfig, body: ['delete_data' => $deleteData], decoder: 'empty', operationId: 'deleteAuthLegacyIntegration', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)])->data;
     }
 }

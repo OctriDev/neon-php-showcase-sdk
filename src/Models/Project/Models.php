@@ -45,7 +45,9 @@ class ProjectsApplicationsMapResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "applications") || $data->applications === null) { throw new SdkValidationError("applications", 'required', "Required property 'applications' is missing or null"); }
+        if (!property_exists($data, "applications") || $data->applications === null) {
+            throw new SdkValidationError("applications", 'required', "Required property 'applications' is missing or null");
+        }
         return new self(
             applications: SdkClient::mapValues(SdkClient::stringMapValue($data->applications), static fn($item) => array_values(array_map(static fn($item) => SdkClient::hydrateStringEnumOrString($item, ApplicationType::class), SdkClient::arrayValue($item)))),
         );
@@ -90,7 +92,9 @@ class ProjectsIntegrationsMapResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "integrations") || $data->integrations === null) { throw new SdkValidationError("integrations", 'required', "Required property 'integrations' is missing or null"); }
+        if (!property_exists($data, "integrations") || $data->integrations === null) {
+            throw new SdkValidationError("integrations", 'required', "Required property 'integrations' is missing or null");
+        }
         return new self(
             integrations: SdkClient::mapValues(SdkClient::stringMapValue($data->integrations), static fn($item) => array_values(array_map(static fn($item) => SdkClient::hydrateStringEnumOrString($item, ApplicationType::class), SdkClient::arrayValue($item)))),
         );

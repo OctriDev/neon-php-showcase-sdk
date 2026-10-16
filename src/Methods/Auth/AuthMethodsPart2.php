@@ -37,7 +37,7 @@ trait AuthMethodsPart2
         Validation::validateLength('recipient_email', $recipientEmail, min: 1, max: 256);
         Validation::validateEmail('recipient_email', $recipientEmail);
 
-        $sdkResponse = SdkClient::request('POST', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth/send_test_email", $clientConfig, body: ['host' => $host, 'port' => $port, 'username' => $username, 'password' => $password, 'sender_email' => $senderEmail, 'sender_name' => $senderName, 'recipient_email' => $recipientEmail], returnType: SendNeonAuthTestEmailResponse::class, decoder: 'json', operationId: 'sendAuthTestEmail', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('POST', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth/send_test_email", $clientConfig, body: ['host' => $host, 'port' => $port, 'username' => $username, 'password' => $password, 'sender_email' => $senderEmail, 'sender_name' => $senderName, 'recipient_email' => $recipientEmail], returnType: SendNeonAuthTestEmailResponse::class, decoder: 'json', operationId: 'sendAuthTestEmail', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, SendNeonAuthTestEmailResponse::class));
     }
 
@@ -62,7 +62,7 @@ trait AuthMethodsPart2
         Validation::validateLength('recipient_email', $recipientEmail, min: 1, max: 256);
         Validation::validateEmail('recipient_email', $recipientEmail);
 
-        $sdkResponse = SdkClient::request('POST', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth/email_provider/test", $clientConfig, body: ['recipient_email' => $recipientEmail], returnType: SendNeonAuthTestEmailResponse::class, decoder: 'json', operationId: 'sendAuthEmailProviderTest', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('POST', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth/email_provider/test", $clientConfig, body: ['recipient_email' => $recipientEmail], returnType: SendNeonAuthTestEmailResponse::class, decoder: 'json', operationId: 'sendAuthEmailProviderTest', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, SendNeonAuthTestEmailResponse::class));
     }
 
@@ -83,7 +83,7 @@ trait AuthMethodsPart2
 
         Validation::validatePattern('branch_id', $branchId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth/email_and_password", $clientConfig, returnType: NeonAuthEmailAndPasswordConfig::class, decoder: 'json', operationId: 'getAuthEmailAndPasswordConfig', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth/email_and_password", $clientConfig, returnType: NeonAuthEmailAndPasswordConfig::class, decoder: 'json', operationId: 'getAuthEmailAndPasswordConfig', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, NeonAuthEmailAndPasswordConfig::class));
     }
 
@@ -111,7 +111,7 @@ trait AuthMethodsPart2
 
         Validation::validatePattern('branch_id', $branchId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('PATCH', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth/email_and_password", $clientConfig, body: ['enabled' => $enabled, 'email_verification_method' => $emailVerificationMethod, 'require_email_verification' => $requireEmailVerification, 'auto_sign_in_after_verification' => $autoSignInAfterVerification, 'send_verification_email_on_sign_up' => $sendVerificationEmailOnSignUp, 'send_verification_email_on_sign_in' => $sendVerificationEmailOnSignIn, 'disable_sign_up' => $disableSignUp], returnType: NeonAuthEmailAndPasswordConfig::class, decoder: 'json', operationId: 'updateAuthEmailAndPasswordConfig', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('PATCH', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth/email_and_password", $clientConfig, body: ['enabled' => $enabled, 'email_verification_method' => $emailVerificationMethod, 'require_email_verification' => $requireEmailVerification, 'auto_sign_in_after_verification' => $autoSignInAfterVerification, 'send_verification_email_on_sign_up' => $sendVerificationEmailOnSignUp, 'send_verification_email_on_sign_in' => $sendVerificationEmailOnSignIn, 'disable_sign_up' => $disableSignUp], returnType: NeonAuthEmailAndPasswordConfig::class, decoder: 'json', operationId: 'updateAuthEmailAndPasswordConfig', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, NeonAuthEmailAndPasswordConfig::class));
     }
 
@@ -132,7 +132,7 @@ trait AuthMethodsPart2
 
         Validation::validatePattern('branch_id', $branchId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth/email_provider", $clientConfig, decoder: 'json', operationId: 'getAuthEmailProvider', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth/email_provider", $clientConfig, decoder: 'json', operationId: 'getAuthEmailProvider', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::hydrateUnionAs($sdkResponse->data, NeonAuthEmailServerConfigResponse::class, [StandardEmailServerResponse::class, SharedEmailServer::class], "type", ["standard" => StandardEmailServerResponse::class, "shared" => SharedEmailServer::class], UnknownNeonAuthEmailServerConfigResponse::class));
     }
 
@@ -154,7 +154,7 @@ trait AuthMethodsPart2
 
         Validation::validatePattern('branch_id', $branchId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('PATCH', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth/email_provider", $clientConfig, body: $body, decoder: 'json', operationId: 'updateAuthEmailProvider', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('PATCH', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth/email_provider", $clientConfig, body: $body, decoder: 'json', operationId: 'updateAuthEmailProvider', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::hydrateUnionAs($sdkResponse->data, NeonAuthEmailServerConfigResponse::class, [StandardEmailServerResponse::class, SharedEmailServer::class], "type", ["standard" => StandardEmailServerResponse::class, "shared" => SharedEmailServer::class], UnknownNeonAuthEmailServerConfigResponse::class));
     }
 
@@ -175,7 +175,7 @@ trait AuthMethodsPart2
 
         Validation::validatePattern('branch_id', $branchId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth/allow_localhost", $clientConfig, returnType: NeonAuthAllowLocalhostResponse::class, decoder: 'json', operationId: 'getAuthAllowLocalhost', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth/allow_localhost", $clientConfig, returnType: NeonAuthAllowLocalhostResponse::class, decoder: 'json', operationId: 'getAuthAllowLocalhost', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, NeonAuthAllowLocalhostResponse::class));
     }
 
@@ -197,7 +197,7 @@ trait AuthMethodsPart2
 
         Validation::validatePattern('branch_id', $branchId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('PATCH', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth/allow_localhost", $clientConfig, body: ['allow_localhost' => $allowLocalhost], returnType: NeonAuthAllowLocalhostResponse::class, decoder: 'json', operationId: 'updateAuthAllowLocalhost', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('PATCH', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth/allow_localhost", $clientConfig, body: ['allow_localhost' => $allowLocalhost], returnType: NeonAuthAllowLocalhostResponse::class, decoder: 'json', operationId: 'updateAuthAllowLocalhost', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, NeonAuthAllowLocalhostResponse::class));
     }
 
@@ -218,7 +218,7 @@ trait AuthMethodsPart2
 
         Validation::validatePattern('branch_id', $branchId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth/plugins", $clientConfig, returnType: NeonAuthPluginConfigs::class, decoder: 'json', operationId: 'getAuthPluginConfigs', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth/plugins", $clientConfig, returnType: NeonAuthPluginConfigs::class, decoder: 'json', operationId: 'getAuthPluginConfigs', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, NeonAuthPluginConfigs::class));
     }
 
@@ -252,7 +252,7 @@ trait AuthMethodsPart2
             Validation::validateRange('membership_limit', $membershipLimit, min: 1);
         }
 
-        $sdkResponse = SdkClient::request('PATCH', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth/plugins/organization", $clientConfig, body: ['enabled' => $enabled, 'organization_limit' => $organizationLimit, 'membership_limit' => $membershipLimit, 'creator_role' => $creatorRole, 'send_invitation_email' => $sendInvitationEmail], returnType: NeonAuthOrganizationConfig::class, decoder: 'json', operationId: 'updateAuthOrganizationPlugin', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('PATCH', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth/plugins/organization", $clientConfig, body: ['enabled' => $enabled, 'organization_limit' => $organizationLimit, 'membership_limit' => $membershipLimit, 'creator_role' => $creatorRole, 'send_invitation_email' => $sendInvitationEmail], returnType: NeonAuthOrganizationConfig::class, decoder: 'json', operationId: 'updateAuthOrganizationPlugin', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, NeonAuthOrganizationConfig::class));
     }
 
@@ -276,7 +276,7 @@ trait AuthMethodsPart2
 
         Validation::validateLength('name', $name, min: 1, max: 256);
 
-        $sdkResponse = SdkClient::request('PATCH', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth/config", $clientConfig, body: ['name' => $name], returnType: NeonAuthConfigResponse::class, decoder: 'json', operationId: 'updateAuthConfig', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('PATCH', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth/config", $clientConfig, body: ['name' => $name], returnType: NeonAuthConfigResponse::class, decoder: 'json', operationId: 'updateAuthConfig', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, NeonAuthConfigResponse::class));
     }
 
@@ -304,7 +304,7 @@ trait AuthMethodsPart2
             Validation::validateRange('expires_in', $expiresIn, min: 5, max: 1440);
         }
 
-        $sdkResponse = SdkClient::request('PATCH', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth/plugins/magic-link", $clientConfig, body: ['enabled' => $enabled, 'expires_in' => $expiresIn, 'disable_sign_up' => $disableSignUp], returnType: NeonAuthMagicLinkConfig::class, decoder: 'json', operationId: 'updateAuthMagicLinkPlugin', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('PATCH', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth/plugins/magic-link", $clientConfig, body: ['enabled' => $enabled, 'expires_in' => $expiresIn, 'disable_sign_up' => $disableSignUp], returnType: NeonAuthMagicLinkConfig::class, decoder: 'json', operationId: 'updateAuthMagicLinkPlugin', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, NeonAuthMagicLinkConfig::class));
     }
 }

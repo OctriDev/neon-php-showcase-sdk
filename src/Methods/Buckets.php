@@ -12,11 +12,26 @@ final readonly class CreateBucketsAccessLevel implements SdkOpenEnum
     public const PRIVATE = "private";
     public const PUBLIC_READ = "public_read";
     private function __construct(public string $value) {}
-    public static function from(string|int $value): static { return new self((string) $value); }
-    public static function tryFrom(string|int|null $value): ?static { return $value === null ? null : self::from($value); }
-    public function getValue(): string { return $this->value; }
-    public function jsonSerialize(): string { return $this->value; }
-    public function __toString(): string { return (string) $this->value; }
+    public static function from(string|int $value): static
+    {
+        return new self((string) $value);
+    }
+    public static function tryFrom(string|int|null $value): ?static
+    {
+        return $value === null ? null : self::from($value);
+    }
+    public function getValue(): string
+    {
+        return $this->value;
+    }
+    public function jsonSerialize(): string
+    {
+        return $this->value;
+    }
+    public function __toString(): string
+    {
+        return (string) $this->value;
+    }
 }
 
 final readonly class PresignBucketsObjectOperation implements SdkOpenEnum
@@ -24,11 +39,26 @@ final readonly class PresignBucketsObjectOperation implements SdkOpenEnum
     public const UPLOAD = "upload";
     public const DOWNLOAD = "download";
     private function __construct(public string $value) {}
-    public static function from(string|int $value): static { return new self((string) $value); }
-    public static function tryFrom(string|int|null $value): ?static { return $value === null ? null : self::from($value); }
-    public function getValue(): string { return $this->value; }
-    public function jsonSerialize(): string { return $this->value; }
-    public function __toString(): string { return (string) $this->value; }
+    public static function from(string|int $value): static
+    {
+        return new self((string) $value);
+    }
+    public static function tryFrom(string|int|null $value): ?static
+    {
+        return $value === null ? null : self::from($value);
+    }
+    public function getValue(): string
+    {
+        return $this->value;
+    }
+    public function jsonSerialize(): string
+    {
+        return $this->value;
+    }
+    public function __toString(): string
+    {
+        return (string) $this->value;
+    }
 }
 
 class Buckets
@@ -53,7 +83,7 @@ class Buckets
 
         Validation::validateLength('name', $name, min: 1, max: 255);
 
-        $sdkResponse = SdkClient::request('POST', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/buckets", $clientConfig, body: ['name' => $name, 'access_level' => $accessLevel], returnType: BucketResponse::class, decoder: 'json', operationId: 'createBuckets', requestOptions: $requestOptions, errors: [410 => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class), "default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('POST', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/buckets", $clientConfig, body: ['name' => $name, 'access_level' => $accessLevel], returnType: BucketResponse::class, decoder: 'json', operationId: 'createBuckets', requestOptions: $requestOptions, errors: [410 => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class), "default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, BucketResponse::class));
     }
 
@@ -74,7 +104,7 @@ class Buckets
 
         Validation::validatePattern('branch_id', $branchId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/buckets", $clientConfig, returnType: BucketsListResponse::class, decoder: 'json', operationId: 'listBuckets', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/buckets", $clientConfig, returnType: BucketsListResponse::class, decoder: 'json', operationId: 'listBuckets', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, BucketsListResponse::class));
     }
 
@@ -97,7 +127,7 @@ class Buckets
 
         Validation::validateLength('bucket_name', $bucketName, min: 1, max: 255);
 
-        return SdkClient::request('DELETE', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/buckets/" . SdkClient::encodePathSegment($bucketName) . "", $clientConfig, decoder: 'empty', operationId: 'deleteBuckets', requestOptions: $requestOptions, errors: [404 => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class), "default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)])->data;
+        return SdkClient::request('DELETE', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/buckets/" . SdkClient::encodePathSegment($bucketName) . "", $clientConfig, decoder: 'empty', operationId: 'deleteBuckets', requestOptions: $requestOptions, errors: [404 => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class), "default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)])->data;
     }
 
 
@@ -128,7 +158,7 @@ class Buckets
             Validation::validateRange('limit', $limit, min: 1, max: 1000);
         }
 
-        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/buckets/" . SdkClient::encodePathSegment($bucketName) . "/objects", $clientConfig, query: ['prefix' => new SdkQueryValue($prefix, "form", true), 'delimiter' => new SdkQueryValue($delimiter, "form", true), 'cursor' => new SdkQueryValue($cursor, "form", true), 'limit' => new SdkQueryValue($limit, "form", true)], returnType: BucketObjectsListResponse::class, decoder: 'json', operationId: 'listBucketsObjects', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/buckets/" . SdkClient::encodePathSegment($bucketName) . "/objects", $clientConfig, query: ['prefix' => new SdkQueryValue($prefix, "form", true), 'delimiter' => new SdkQueryValue($delimiter, "form", true), 'cursor' => new SdkQueryValue($cursor, "form", true), 'limit' => new SdkQueryValue($limit, "form", true)], returnType: BucketObjectsListResponse::class, decoder: 'json', operationId: 'listBucketsObjects', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, BucketObjectsListResponse::class));
     }
 
@@ -227,7 +257,7 @@ class Buckets
 
         Validation::validateLength('object_key', $objectKey, min: 1, max: 1024);
 
-        return SdkClient::request('DELETE', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/buckets/" . SdkClient::encodePathSegment($bucketName) . "/objects/" . SdkClient::encodePathSegment($objectKey) . "", $clientConfig, decoder: 'empty', operationId: 'deleteBucketsObject', requestOptions: $requestOptions, errors: [404 => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class), "default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)])->data;
+        return SdkClient::request('DELETE', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/buckets/" . SdkClient::encodePathSegment($bucketName) . "/objects/" . SdkClient::encodePathSegment($objectKey) . "", $clientConfig, decoder: 'empty', operationId: 'deleteBucketsObject', requestOptions: $requestOptions, errors: [404 => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class), "default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)])->data;
     }
 
 
@@ -253,7 +283,7 @@ class Buckets
 
         Validation::validateLength('object_key', $objectKey, min: 1, max: 1024);
 
-        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/buckets/" . SdkClient::encodePathSegment($bucketName) . "/objects/" . SdkClient::encodePathSegment($objectKey) . "/download", $clientConfig, decoder: 'bytes', operationId: 'getBucketsObject', requestOptions: $requestOptions, errors: [404 => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class), "default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/buckets/" . SdkClient::encodePathSegment($bucketName) . "/objects/" . SdkClient::encodePathSegment($objectKey) . "/download", $clientConfig, decoder: 'bytes', operationId: 'getBucketsObject', requestOptions: $requestOptions, errors: [404 => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class), "default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::stringValue($sdkResponse->data));
     }
 
@@ -280,7 +310,7 @@ class Buckets
 
         Validation::validateLength('prefix', $prefix, min: 1, max: 1024);
 
-        $sdkResponse = SdkClient::request('DELETE', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/buckets/" . SdkClient::encodePathSegment($bucketName) . "/objects-by-prefix", $clientConfig, query: ['prefix' => new SdkQueryValue($prefix, "form", true)], returnType: BucketObjectsDeletePrefixResponse::class, decoder: 'json', operationId: 'deleteBucketsObjectsByPrefix', requestOptions: $requestOptions, errors: [404 => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class), "default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('DELETE', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/buckets/" . SdkClient::encodePathSegment($bucketName) . "/objects-by-prefix", $clientConfig, query: ['prefix' => new SdkQueryValue($prefix, "form", true)], returnType: BucketObjectsDeletePrefixResponse::class, decoder: 'json', operationId: 'deleteBucketsObjectsByPrefix', requestOptions: $requestOptions, errors: [404 => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class), "default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, BucketObjectsDeletePrefixResponse::class));
     }
 
@@ -314,7 +344,7 @@ class Buckets
             Validation::validateRange('expires_in_seconds', $expiresInSeconds, min: 1, max: 604800);
         }
 
-        $sdkResponse = SdkClient::request('POST', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/buckets/" . SdkClient::encodePathSegment($bucketName) . "/objects/" . SdkClient::encodePathSegment($objectKey) . "/presign", $clientConfig, body: ['operation' => $operation, 'content_type' => $contentType, 'expires_in_seconds' => $expiresInSeconds], returnType: PresignResponse::class, decoder: 'json', operationId: 'presignBucketsObject', requestOptions: $requestOptions, errors: [404 => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class), "default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('POST', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/buckets/" . SdkClient::encodePathSegment($bucketName) . "/objects/" . SdkClient::encodePathSegment($objectKey) . "/presign", $clientConfig, body: ['operation' => $operation, 'content_type' => $contentType, 'expires_in_seconds' => $expiresInSeconds], returnType: PresignResponse::class, decoder: 'json', operationId: 'presignBucketsObject', requestOptions: $requestOptions, errors: [404 => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class), "default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, PresignResponse::class));
     }
 }

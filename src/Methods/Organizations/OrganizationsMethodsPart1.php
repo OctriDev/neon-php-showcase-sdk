@@ -22,7 +22,7 @@ trait OrganizationsMethodsPart1
 
         Validation::validatePattern('org_id', $orgId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('GET', "/organizations/" . SdkClient::encodePathSegment($orgId) . "", $clientConfig, returnType: Organization::class, decoder: 'json', operationId: 'getOrganization', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('GET', "/organizations/" . SdkClient::encodePathSegment($orgId) . "", $clientConfig, returnType: Organization::class, decoder: 'json', operationId: 'getOrganization', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, Organization::class));
     }
 
@@ -40,7 +40,7 @@ trait OrganizationsMethodsPart1
 
         Validation::validatePattern('org_id', $orgId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('GET', "/organizations/" . SdkClient::encodePathSegment($orgId) . "/api_keys", $clientConfig, decoder: 'json', operationId: 'listOrganizationsApiKeys', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('GET', "/organizations/" . SdkClient::encodePathSegment($orgId) . "/api_keys", $clientConfig, decoder: 'json', operationId: 'listOrganizationsApiKeys', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, OrgApiKeysListResponseItem::class), SdkClient::arrayValue($sdkResponse->data))));
     }
 
@@ -59,7 +59,7 @@ trait OrganizationsMethodsPart1
 
         Validation::validatePattern('org_id', $orgId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('POST', "/organizations/" . SdkClient::encodePathSegment($orgId) . "/api_keys", $clientConfig, body: $body, returnType: OrgApiKeyCreateResponse::class, decoder: 'json', operationId: 'createOrganizationsApiKey', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('POST', "/organizations/" . SdkClient::encodePathSegment($orgId) . "/api_keys", $clientConfig, body: $body, returnType: OrgApiKeyCreateResponse::class, decoder: 'json', operationId: 'createOrganizationsApiKey', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, OrgApiKeyCreateResponse::class));
     }
 
@@ -78,7 +78,7 @@ trait OrganizationsMethodsPart1
 
         Validation::validatePattern('org_id', $orgId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('DELETE', "/organizations/" . SdkClient::encodePathSegment($orgId) . "/api_keys/" . SdkClient::encodePathSegment($keyId) . "", $clientConfig, returnType: OrgApiKeyRevokeResponse::class, decoder: 'json', operationId: 'revokeOrganizationsApiKey', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('DELETE', "/organizations/" . SdkClient::encodePathSegment($orgId) . "/api_keys/" . SdkClient::encodePathSegment($keyId) . "", $clientConfig, returnType: OrgApiKeyRevokeResponse::class, decoder: 'json', operationId: 'revokeOrganizationsApiKey', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, OrgApiKeyRevokeResponse::class));
     }
 
@@ -96,7 +96,7 @@ trait OrganizationsMethodsPart1
 
         Validation::validatePattern('org_id', $orgId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('GET', "/organizations/" . SdkClient::encodePathSegment($orgId) . "/billing/spending_limit", $clientConfig, returnType: SpendingLimitResponse::class, decoder: 'json', operationId: 'getOrganizationSpendingLimit', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('GET', "/organizations/" . SdkClient::encodePathSegment($orgId) . "/billing/spending_limit", $clientConfig, returnType: SpendingLimitResponse::class, decoder: 'json', operationId: 'getOrganizationSpendingLimit', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, SpendingLimitResponse::class));
     }
 
@@ -117,7 +117,7 @@ trait OrganizationsMethodsPart1
 
         Validation::validateRange('spending_limit_cents', $spendingLimitCents, min: 1);
 
-        $sdkResponse = SdkClient::request('PUT', "/organizations/" . SdkClient::encodePathSegment($orgId) . "/billing/spending_limit", $clientConfig, body: ['spending_limit_cents' => $spendingLimitCents], returnType: SpendingLimitResponse::class, decoder: 'json', operationId: 'setOrganizationSpendingLimit', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('PUT', "/organizations/" . SdkClient::encodePathSegment($orgId) . "/billing/spending_limit", $clientConfig, body: ['spending_limit_cents' => $spendingLimitCents], returnType: SpendingLimitResponse::class, decoder: 'json', operationId: 'setOrganizationSpendingLimit', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, SpendingLimitResponse::class));
     }
 
@@ -135,7 +135,7 @@ trait OrganizationsMethodsPart1
 
         Validation::validatePattern('org_id', $orgId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('DELETE', "/organizations/" . SdkClient::encodePathSegment($orgId) . "/billing/spending_limit", $clientConfig, returnType: EmptyResponse::class, decoder: 'json', operationId: 'deleteOrganizationSpendingLimit', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('DELETE', "/organizations/" . SdkClient::encodePathSegment($orgId) . "/billing/spending_limit", $clientConfig, returnType: EmptyResponse::class, decoder: 'json', operationId: 'deleteOrganizationSpendingLimit', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, EmptyResponse::class));
     }
 
@@ -161,7 +161,7 @@ trait OrganizationsMethodsPart1
             Validation::validateRange('limit', $limit, min: 1, max: 500);
         }
 
-        $sdkResponse = SdkClient::request('GET', "/organizations/" . SdkClient::encodePathSegment($orgId) . "/members", $clientConfig, query: ['sort_by' => new SdkQueryValue($sortBy, "form", true), 'cursor' => new SdkQueryValue($cursor, "form", true), 'sort_order' => new SdkQueryValue($sortOrder, "form", true), 'limit' => new SdkQueryValue($limit, "form", true)], returnType: OrganizationMembersResponse::class, decoder: 'json', operationId: 'listOrganizationsMembers', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('GET', "/organizations/" . SdkClient::encodePathSegment($orgId) . "/members", $clientConfig, query: ['sort_by' => new SdkQueryValue($sortBy, "form", true), 'cursor' => new SdkQueryValue($cursor, "form", true), 'sort_order' => new SdkQueryValue($sortOrder, "form", true), 'limit' => new SdkQueryValue($limit, "form", true)], returnType: OrganizationMembersResponse::class, decoder: 'json', operationId: 'listOrganizationsMembers', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, OrganizationMembersResponse::class));
     }
 
@@ -182,7 +182,7 @@ trait OrganizationsMethodsPart1
 
         Validation::validateUuid('member_id', $memberId);
 
-        $sdkResponse = SdkClient::request('GET', "/organizations/" . SdkClient::encodePathSegment($orgId) . "/members/" . SdkClient::encodePathSegment($memberId) . "", $clientConfig, returnType: Member::class, decoder: 'json', operationId: 'getOrganizationMember', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('GET', "/organizations/" . SdkClient::encodePathSegment($orgId) . "/members/" . SdkClient::encodePathSegment($memberId) . "", $clientConfig, returnType: Member::class, decoder: 'json', operationId: 'getOrganizationMember', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, Member::class));
     }
 
@@ -204,7 +204,7 @@ trait OrganizationsMethodsPart1
 
         Validation::validateUuid('member_id', $memberId);
 
-        $sdkResponse = SdkClient::request('PATCH', "/organizations/" . SdkClient::encodePathSegment($orgId) . "/members/" . SdkClient::encodePathSegment($memberId) . "", $clientConfig, body: ['role' => $role], returnType: Member::class, decoder: 'json', operationId: 'updateOrganizationMember', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('PATCH', "/organizations/" . SdkClient::encodePathSegment($orgId) . "/members/" . SdkClient::encodePathSegment($memberId) . "", $clientConfig, body: ['role' => $role], returnType: Member::class, decoder: 'json', operationId: 'updateOrganizationMember', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, Member::class));
     }
 
@@ -225,7 +225,7 @@ trait OrganizationsMethodsPart1
 
         Validation::validateUuid('member_id', $memberId);
 
-        $sdkResponse = SdkClient::request('DELETE', "/organizations/" . SdkClient::encodePathSegment($orgId) . "/members/" . SdkClient::encodePathSegment($memberId) . "", $clientConfig, returnType: EmptyResponse::class, decoder: 'json', operationId: 'removeOrganizationMember', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('DELETE', "/organizations/" . SdkClient::encodePathSegment($orgId) . "/members/" . SdkClient::encodePathSegment($memberId) . "", $clientConfig, returnType: EmptyResponse::class, decoder: 'json', operationId: 'removeOrganizationMember', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, EmptyResponse::class));
     }
 
@@ -243,7 +243,7 @@ trait OrganizationsMethodsPart1
 
         Validation::validatePattern('org_id', $orgId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('GET', "/organizations/" . SdkClient::encodePathSegment($orgId) . "/invitations", $clientConfig, returnType: OrganizationInvitationsResponse::class, decoder: 'json', operationId: 'listOrganizationsInvitations', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('GET', "/organizations/" . SdkClient::encodePathSegment($orgId) . "/invitations", $clientConfig, returnType: OrganizationInvitationsResponse::class, decoder: 'json', operationId: 'listOrganizationsInvitations', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, OrganizationInvitationsResponse::class));
     }
 
@@ -262,7 +262,7 @@ trait OrganizationsMethodsPart1
 
         Validation::validatePattern('org_id', $orgId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('POST', "/organizations/" . SdkClient::encodePathSegment($orgId) . "/invitations", $clientConfig, body: ['invitations' => $invitations], returnType: OrganizationInvitationsResponse::class, decoder: 'json', operationId: 'createOrganizationInvitations', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('POST', "/organizations/" . SdkClient::encodePathSegment($orgId) . "/invitations", $clientConfig, body: ['invitations' => $invitations], returnType: OrganizationInvitationsResponse::class, decoder: 'json', operationId: 'createOrganizationInvitations', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, OrganizationInvitationsResponse::class));
     }
 
@@ -286,7 +286,7 @@ trait OrganizationsMethodsPart1
 
         Validation::validateItems('project_ids', $projectIds, min: 1, max: 400);
 
-        $sdkResponse = SdkClient::request('POST', "/organizations/" . SdkClient::encodePathSegment($sourceOrgId) . "/projects/transfer", $clientConfig, body: ['destination_org_id' => $destinationOrgId, 'project_ids' => $projectIds], returnType: EmptyResponse::class, decoder: 'json', operationId: 'transferOrganizationsProjects', requestOptions: $requestOptions, errors: [406 => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, LimitsUnsatisfiedResponse::class), 422 => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, ProjectsWithIntegrationResponse::class), "default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('POST', "/organizations/" . SdkClient::encodePathSegment($sourceOrgId) . "/projects/transfer", $clientConfig, body: ['destination_org_id' => $destinationOrgId, 'project_ids' => $projectIds], returnType: EmptyResponse::class, decoder: 'json', operationId: 'transferOrganizationsProjects', requestOptions: $requestOptions, errors: [406 => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, LimitsUnsatisfiedResponse::class), 422 => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, ProjectsWithIntegrationResponse::class), "default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, EmptyResponse::class));
     }
 
@@ -304,7 +304,7 @@ trait OrganizationsMethodsPart1
 
         Validation::validatePattern('org_id', $orgId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('GET', "/organizations/" . SdkClient::encodePathSegment($orgId) . "/vpc/vpc_endpoints", $clientConfig, returnType: VPCEndpointsWithRegionResponse::class, decoder: 'json', operationId: 'listOrganizationVpcEndpointsAllRegions', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('GET', "/organizations/" . SdkClient::encodePathSegment($orgId) . "/vpc/vpc_endpoints", $clientConfig, returnType: VPCEndpointsWithRegionResponse::class, decoder: 'json', operationId: 'listOrganizationVpcEndpointsAllRegions', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, VPCEndpointsWithRegionResponse::class));
     }
 }

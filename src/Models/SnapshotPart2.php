@@ -104,7 +104,9 @@ class SnapshotUpdateRequest implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "snapshot") || $data->snapshot === null) { throw new SdkValidationError("snapshot", 'required', "Required property 'snapshot' is missing or null"); }
+        if (!property_exists($data, "snapshot") || $data->snapshot === null) {
+            throw new SdkValidationError("snapshot", 'required', "Required property 'snapshot' is missing or null");
+        }
         return new self(
             snapshot: SdkClient::hydrateClass($data->snapshot, SnapshotUpdateRequestSnapshot::class),
         );

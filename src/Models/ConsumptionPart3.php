@@ -127,8 +127,12 @@ class ConsumptionMetricValue implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "metric_name") || $data->metric_name === null) { throw new SdkValidationError("metric_name", 'required', "Required property 'metric_name' is missing or null"); }
-        if (!property_exists($data, "value") || $data->value === null) { throw new SdkValidationError("value", 'required', "Required property 'value' is missing or null"); }
+        if (!property_exists($data, "metric_name") || $data->metric_name === null) {
+            throw new SdkValidationError("metric_name", 'required', "Required property 'metric_name' is missing or null");
+        }
+        if (!property_exists($data, "value") || $data->value === null) {
+            throw new SdkValidationError("value", 'required', "Required property 'value' is missing or null");
+        }
         return new self(
             metricName: SdkClient::stringValue($data->metric_name),
             value: SdkClient::intValue($data->value),

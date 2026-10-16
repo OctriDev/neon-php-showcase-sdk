@@ -307,26 +307,66 @@ class Endpoint implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "host") || $data->host === null) { throw new SdkValidationError("host", 'required', "Required property 'host' is missing or null"); }
-        if (!property_exists($data, "id") || $data->id === null) { throw new SdkValidationError("id", 'required', "Required property 'id' is missing or null"); }
-        if (!property_exists($data, "project_id") || $data->project_id === null) { throw new SdkValidationError("project_id", 'required', "Required property 'project_id' is missing or null"); }
-        if (!property_exists($data, "branch_id") || $data->branch_id === null) { throw new SdkValidationError("branch_id", 'required', "Required property 'branch_id' is missing or null"); }
-        if (!property_exists($data, "autoscaling_limit_min_cu") || $data->autoscaling_limit_min_cu === null) { throw new SdkValidationError("autoscaling_limit_min_cu", 'required', "Required property 'autoscaling_limit_min_cu' is missing or null"); }
-        if (!property_exists($data, "autoscaling_limit_max_cu") || $data->autoscaling_limit_max_cu === null) { throw new SdkValidationError("autoscaling_limit_max_cu", 'required', "Required property 'autoscaling_limit_max_cu' is missing or null"); }
-        if (!property_exists($data, "region_id") || $data->region_id === null) { throw new SdkValidationError("region_id", 'required', "Required property 'region_id' is missing or null"); }
-        if (!property_exists($data, "type") || $data->type === null) { throw new SdkValidationError("type", 'required', "Required property 'type' is missing or null"); }
-        if (!property_exists($data, "current_state") || $data->current_state === null) { throw new SdkValidationError("current_state", 'required', "Required property 'current_state' is missing or null"); }
-        if (!property_exists($data, "settings") || $data->settings === null) { throw new SdkValidationError("settings", 'required', "Required property 'settings' is missing or null"); }
-        if (!property_exists($data, "pooler_enabled") || $data->pooler_enabled === null) { throw new SdkValidationError("pooler_enabled", 'required', "Required property 'pooler_enabled' is missing or null"); }
-        if (!property_exists($data, "pooler_mode") || $data->pooler_mode === null) { throw new SdkValidationError("pooler_mode", 'required', "Required property 'pooler_mode' is missing or null"); }
-        if (!property_exists($data, "disabled") || $data->disabled === null) { throw new SdkValidationError("disabled", 'required', "Required property 'disabled' is missing or null"); }
-        if (!property_exists($data, "passwordless_access") || $data->passwordless_access === null) { throw new SdkValidationError("passwordless_access", 'required', "Required property 'passwordless_access' is missing or null"); }
-        if (!property_exists($data, "creation_source") || $data->creation_source === null) { throw new SdkValidationError("creation_source", 'required', "Required property 'creation_source' is missing or null"); }
-        if (!property_exists($data, "created_at") || $data->created_at === null) { throw new SdkValidationError("created_at", 'required', "Required property 'created_at' is missing or null"); }
-        if (!property_exists($data, "updated_at") || $data->updated_at === null) { throw new SdkValidationError("updated_at", 'required', "Required property 'updated_at' is missing or null"); }
-        if (!property_exists($data, "proxy_host") || $data->proxy_host === null) { throw new SdkValidationError("proxy_host", 'required', "Required property 'proxy_host' is missing or null"); }
-        if (!property_exists($data, "suspend_timeout_seconds") || $data->suspend_timeout_seconds === null) { throw new SdkValidationError("suspend_timeout_seconds", 'required', "Required property 'suspend_timeout_seconds' is missing or null"); }
-        if (!property_exists($data, "provisioner") || $data->provisioner === null) { throw new SdkValidationError("provisioner", 'required', "Required property 'provisioner' is missing or null"); }
+        if (!property_exists($data, "host") || $data->host === null) {
+            throw new SdkValidationError("host", 'required', "Required property 'host' is missing or null");
+        }
+        if (!property_exists($data, "id") || $data->id === null) {
+            throw new SdkValidationError("id", 'required', "Required property 'id' is missing or null");
+        }
+        if (!property_exists($data, "project_id") || $data->project_id === null) {
+            throw new SdkValidationError("project_id", 'required', "Required property 'project_id' is missing or null");
+        }
+        if (!property_exists($data, "branch_id") || $data->branch_id === null) {
+            throw new SdkValidationError("branch_id", 'required', "Required property 'branch_id' is missing or null");
+        }
+        if (!property_exists($data, "autoscaling_limit_min_cu") || $data->autoscaling_limit_min_cu === null) {
+            throw new SdkValidationError("autoscaling_limit_min_cu", 'required', "Required property 'autoscaling_limit_min_cu' is missing or null");
+        }
+        if (!property_exists($data, "autoscaling_limit_max_cu") || $data->autoscaling_limit_max_cu === null) {
+            throw new SdkValidationError("autoscaling_limit_max_cu", 'required', "Required property 'autoscaling_limit_max_cu' is missing or null");
+        }
+        if (!property_exists($data, "region_id") || $data->region_id === null) {
+            throw new SdkValidationError("region_id", 'required', "Required property 'region_id' is missing or null");
+        }
+        if (!property_exists($data, "type") || $data->type === null) {
+            throw new SdkValidationError("type", 'required', "Required property 'type' is missing or null");
+        }
+        if (!property_exists($data, "current_state") || $data->current_state === null) {
+            throw new SdkValidationError("current_state", 'required', "Required property 'current_state' is missing or null");
+        }
+        if (!property_exists($data, "settings") || $data->settings === null) {
+            throw new SdkValidationError("settings", 'required', "Required property 'settings' is missing or null");
+        }
+        if (!property_exists($data, "pooler_enabled") || $data->pooler_enabled === null) {
+            throw new SdkValidationError("pooler_enabled", 'required', "Required property 'pooler_enabled' is missing or null");
+        }
+        if (!property_exists($data, "pooler_mode") || $data->pooler_mode === null) {
+            throw new SdkValidationError("pooler_mode", 'required', "Required property 'pooler_mode' is missing or null");
+        }
+        if (!property_exists($data, "disabled") || $data->disabled === null) {
+            throw new SdkValidationError("disabled", 'required', "Required property 'disabled' is missing or null");
+        }
+        if (!property_exists($data, "passwordless_access") || $data->passwordless_access === null) {
+            throw new SdkValidationError("passwordless_access", 'required', "Required property 'passwordless_access' is missing or null");
+        }
+        if (!property_exists($data, "creation_source") || $data->creation_source === null) {
+            throw new SdkValidationError("creation_source", 'required', "Required property 'creation_source' is missing or null");
+        }
+        if (!property_exists($data, "created_at") || $data->created_at === null) {
+            throw new SdkValidationError("created_at", 'required', "Required property 'created_at' is missing or null");
+        }
+        if (!property_exists($data, "updated_at") || $data->updated_at === null) {
+            throw new SdkValidationError("updated_at", 'required', "Required property 'updated_at' is missing or null");
+        }
+        if (!property_exists($data, "proxy_host") || $data->proxy_host === null) {
+            throw new SdkValidationError("proxy_host", 'required', "Required property 'proxy_host' is missing or null");
+        }
+        if (!property_exists($data, "suspend_timeout_seconds") || $data->suspend_timeout_seconds === null) {
+            throw new SdkValidationError("suspend_timeout_seconds", 'required', "Required property 'suspend_timeout_seconds' is missing or null");
+        }
+        if (!property_exists($data, "provisioner") || $data->provisioner === null) {
+            throw new SdkValidationError("provisioner", 'required', "Required property 'provisioner' is missing or null");
+        }
         return new self(
             host: SdkClient::stringValue($data->host),
             id: SdkClient::stringValue($data->id),

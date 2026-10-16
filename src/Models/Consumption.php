@@ -16,11 +16,26 @@ final readonly class ConsumptionHistoryGranularity implements SdkOpenEnum
     public const DAILY = "daily";
     public const MONTHLY = "monthly";
     private function __construct(public string $value) {}
-    public static function from(string|int $value): static { return new self((string) $value); }
-    public static function tryFrom(string|int|null $value): ?static { return $value === null ? null : self::from($value); }
-    public function getValue(): string { return $this->value; }
-    public function jsonSerialize(): string { return $this->value; }
-    public function __toString(): string { return (string) $this->value; }
+    public static function from(string|int $value): static
+    {
+        return new self((string) $value);
+    }
+    public static function tryFrom(string|int|null $value): ?static
+    {
+        return $value === null ? null : self::from($value);
+    }
+    public function getValue(): string
+    {
+        return $this->value;
+    }
+    public function jsonSerialize(): string
+    {
+        return $this->value;
+    }
+    public function __toString(): string
+    {
+        return (string) $this->value;
+    }
 }
 
 /**
@@ -81,9 +96,15 @@ class ConsumptionHistoryPerBranchV2 implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "project_id") || $data->project_id === null) { throw new SdkValidationError("project_id", 'required', "Required property 'project_id' is missing or null"); }
-        if (!property_exists($data, "branch_id") || $data->branch_id === null) { throw new SdkValidationError("branch_id", 'required', "Required property 'branch_id' is missing or null"); }
-        if (!property_exists($data, "periods") || $data->periods === null) { throw new SdkValidationError("periods", 'required', "Required property 'periods' is missing or null"); }
+        if (!property_exists($data, "project_id") || $data->project_id === null) {
+            throw new SdkValidationError("project_id", 'required', "Required property 'project_id' is missing or null");
+        }
+        if (!property_exists($data, "branch_id") || $data->branch_id === null) {
+            throw new SdkValidationError("branch_id", 'required', "Required property 'branch_id' is missing or null");
+        }
+        if (!property_exists($data, "periods") || $data->periods === null) {
+            throw new SdkValidationError("periods", 'required', "Required property 'periods' is missing or null");
+        }
         return new self(
             projectId: SdkClient::stringValue($data->project_id),
             branchId: SdkClient::stringValue($data->branch_id),
@@ -130,7 +151,9 @@ class ConsumptionHistoryPerBranchV2Response implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "branches") || $data->branches === null) { throw new SdkValidationError("branches", 'required', "Required property 'branches' is missing or null"); }
+        if (!property_exists($data, "branches") || $data->branches === null) {
+            throw new SdkValidationError("branches", 'required', "Required property 'branches' is missing or null");
+        }
         return new self(
             branches: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, ConsumptionHistoryPerBranchV2::class), SdkClient::arrayValue($data->branches))),
         );
@@ -217,10 +240,18 @@ class ConsumptionHistoryPerPeriod implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "period_id") || $data->period_id === null) { throw new SdkValidationError("period_id", 'required', "Required property 'period_id' is missing or null"); }
-        if (!property_exists($data, "period_plan") || $data->period_plan === null) { throw new SdkValidationError("period_plan", 'required', "Required property 'period_plan' is missing or null"); }
-        if (!property_exists($data, "period_start") || $data->period_start === null) { throw new SdkValidationError("period_start", 'required', "Required property 'period_start' is missing or null"); }
-        if (!property_exists($data, "consumption") || $data->consumption === null) { throw new SdkValidationError("consumption", 'required', "Required property 'consumption' is missing or null"); }
+        if (!property_exists($data, "period_id") || $data->period_id === null) {
+            throw new SdkValidationError("period_id", 'required', "Required property 'period_id' is missing or null");
+        }
+        if (!property_exists($data, "period_plan") || $data->period_plan === null) {
+            throw new SdkValidationError("period_plan", 'required', "Required property 'period_plan' is missing or null");
+        }
+        if (!property_exists($data, "period_start") || $data->period_start === null) {
+            throw new SdkValidationError("period_start", 'required', "Required property 'period_start' is missing or null");
+        }
+        if (!property_exists($data, "consumption") || $data->consumption === null) {
+            throw new SdkValidationError("consumption", 'required', "Required property 'consumption' is missing or null");
+        }
         return new self(
             periodId: SdkClient::stringValue($data->period_id),
             periodPlan: SdkClient::stringValue($data->period_plan),
@@ -311,10 +342,18 @@ class ConsumptionHistoryPerPeriodV2 implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "period_id") || $data->period_id === null) { throw new SdkValidationError("period_id", 'required', "Required property 'period_id' is missing or null"); }
-        if (!property_exists($data, "period_plan") || $data->period_plan === null) { throw new SdkValidationError("period_plan", 'required', "Required property 'period_plan' is missing or null"); }
-        if (!property_exists($data, "period_start") || $data->period_start === null) { throw new SdkValidationError("period_start", 'required', "Required property 'period_start' is missing or null"); }
-        if (!property_exists($data, "consumption") || $data->consumption === null) { throw new SdkValidationError("consumption", 'required', "Required property 'consumption' is missing or null"); }
+        if (!property_exists($data, "period_id") || $data->period_id === null) {
+            throw new SdkValidationError("period_id", 'required', "Required property 'period_id' is missing or null");
+        }
+        if (!property_exists($data, "period_plan") || $data->period_plan === null) {
+            throw new SdkValidationError("period_plan", 'required', "Required property 'period_plan' is missing or null");
+        }
+        if (!property_exists($data, "period_start") || $data->period_start === null) {
+            throw new SdkValidationError("period_start", 'required', "Required property 'period_start' is missing or null");
+        }
+        if (!property_exists($data, "consumption") || $data->consumption === null) {
+            throw new SdkValidationError("consumption", 'required', "Required property 'consumption' is missing or null");
+        }
         return new self(
             periodId: SdkClient::stringValue($data->period_id),
             periodPlan: SdkClient::stringValue($data->period_plan),

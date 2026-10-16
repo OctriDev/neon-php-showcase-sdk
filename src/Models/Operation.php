@@ -45,7 +45,9 @@ class OperationResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "operation") || $data->operation === null) { throw new SdkValidationError("operation", 'required', "Required property 'operation' is missing or null"); }
+        if (!property_exists($data, "operation") || $data->operation === null) {
+            throw new SdkValidationError("operation", 'required', "Required property 'operation' is missing or null");
+        }
         return new self(
             operation: SdkClient::hydrateClass($data->operation, Operation::class),
         );

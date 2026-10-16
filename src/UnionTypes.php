@@ -16,9 +16,7 @@ interface TriggerUpdateRequest {}
 /** A tagged union member whose tag names no branch this SDK knows, kept as received. */
 abstract class SdkUnknownMember implements \JsonSerializable
 {
-    final public function __construct(public readonly mixed $raw)
-    {
-    }
+    final public function __construct(public readonly mixed $raw) {}
 
     public function jsonSerialize(): mixed
     {
@@ -27,26 +25,16 @@ abstract class SdkUnknownMember implements \JsonSerializable
 }
 
 /** A `NeonAuthEmailServerConfig` whose tag names no branch this SDK knows, kept as received. */
-final class UnknownNeonAuthEmailServerConfig extends SdkUnknownMember implements NeonAuthEmailServerConfig
-{
-}
+final class UnknownNeonAuthEmailServerConfig extends SdkUnknownMember implements NeonAuthEmailServerConfig {}
 
 /** A `NeonAuthEmailServerConfigResponse` whose tag names no branch this SDK knows, kept as received. */
-final class UnknownNeonAuthEmailServerConfigResponse extends SdkUnknownMember implements NeonAuthEmailServerConfigResponse
-{
-}
+final class UnknownNeonAuthEmailServerConfigResponse extends SdkUnknownMember implements NeonAuthEmailServerConfigResponse {}
 
 /** A `TriggerCreateRequest` whose tag names no branch this SDK knows, kept as received. */
-final class UnknownTriggerCreateRequest extends SdkUnknownMember implements TriggerCreateRequest
-{
-}
+final class UnknownTriggerCreateRequest extends SdkUnknownMember implements TriggerCreateRequest {}
 
 /** A `TriggerUpdateRequest` whose tag names no branch this SDK knows, kept as received. */
-final class UnknownTriggerUpdateRequest extends SdkUnknownMember implements TriggerUpdateRequest
-{
-}
+final class UnknownTriggerUpdateRequest extends SdkUnknownMember implements TriggerUpdateRequest {}
 
 /** A `Trigger` whose tag names no branch this SDK knows, kept as received. */
-final class UnknownTrigger extends SdkUnknownMember implements Trigger
-{
-}
+final class UnknownTrigger extends SdkUnknownMember implements Trigger {}

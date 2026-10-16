@@ -18,11 +18,26 @@ final readonly class AuthDetailsResponseAuthMethodEnum implements SdkOpenEnum
     public const API_KEY_ORG = "api_key_org";
     public const OAUTH = "oauth";
     private function __construct(public string $value) {}
-    public static function from(string|int $value): static { return new self((string) $value); }
-    public static function tryFrom(string|int|null $value): ?static { return $value === null ? null : self::from($value); }
-    public function getValue(): string { return $this->value; }
-    public function jsonSerialize(): string { return $this->value; }
-    public function __toString(): string { return (string) $this->value; }
+    public static function from(string|int $value): static
+    {
+        return new self((string) $value);
+    }
+    public static function tryFrom(string|int|null $value): ?static
+    {
+        return $value === null ? null : self::from($value);
+    }
+    public function getValue(): string
+    {
+        return $this->value;
+    }
+    public function jsonSerialize(): string
+    {
+        return $this->value;
+    }
+    public function __toString(): string
+    {
+        return (string) $this->value;
+    }
 }
 
 /**
@@ -85,8 +100,12 @@ class AuthDetailsResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "account_id") || $data->account_id === null) { throw new SdkValidationError("account_id", 'required', "Required property 'account_id' is missing or null"); }
-        if (!property_exists($data, "auth_method") || $data->auth_method === null) { throw new SdkValidationError("auth_method", 'required', "Required property 'auth_method' is missing or null"); }
+        if (!property_exists($data, "account_id") || $data->account_id === null) {
+            throw new SdkValidationError("account_id", 'required', "Required property 'account_id' is missing or null");
+        }
+        if (!property_exists($data, "auth_method") || $data->auth_method === null) {
+            throw new SdkValidationError("auth_method", 'required', "Required property 'auth_method' is missing or null");
+        }
         return new self(
             accountId: SdkClient::stringValue($data->account_id),
             authMethod: SdkClient::hydrateStringEnumOrString($data->auth_method, AuthDetailsResponseAuthMethodEnum::class),

@@ -55,8 +55,12 @@ class AcceptProjectTransferRequestSatisfiesPlanErrorReasonsItem implements \Json
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "message") || $data->message === null) { throw new SdkValidationError("message", 'required', "Required property 'message' is missing or null"); }
-        if (!property_exists($data, "code") || $data->code === null) { throw new SdkValidationError("code", 'required', "Required property 'code' is missing or null"); }
+        if (!property_exists($data, "message") || $data->message === null) {
+            throw new SdkValidationError("message", 'required', "Required property 'message' is missing or null");
+        }
+        if (!property_exists($data, "code") || $data->code === null) {
+            throw new SdkValidationError("code", 'required', "Required property 'code' is missing or null");
+        }
         return new self(
             message: SdkClient::stringValue($data->message),
             code: SdkClient::stringValue($data->code),
@@ -102,7 +106,9 @@ class AcceptProjectTransferRequestSatisfiesPlanError implements \JsonSerializabl
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "reasons") || $data->reasons === null) { throw new SdkValidationError("reasons", 'required', "Required property 'reasons' is missing or null"); }
+        if (!property_exists($data, "reasons") || $data->reasons === null) {
+            throw new SdkValidationError("reasons", 'required', "Required property 'reasons' is missing or null");
+        }
         return new self(
             reasons: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, AcceptProjectTransferRequestSatisfiesPlanErrorReasonsItem::class), SdkClient::arrayValue($data->reasons))),
         );
@@ -205,8 +211,12 @@ class AddProjectJWKSRequest implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "jwks_url") || $data->jwks_url === null) { throw new SdkValidationError("jwks_url", 'required', "Required property 'jwks_url' is missing or null"); }
-        if (!property_exists($data, "provider_name") || $data->provider_name === null) { throw new SdkValidationError("provider_name", 'required', "Required property 'provider_name' is missing or null"); }
+        if (!property_exists($data, "jwks_url") || $data->jwks_url === null) {
+            throw new SdkValidationError("jwks_url", 'required', "Required property 'jwks_url' is missing or null");
+        }
+        if (!property_exists($data, "provider_name") || $data->provider_name === null) {
+            throw new SdkValidationError("provider_name", 'required', "Required property 'provider_name' is missing or null");
+        }
         return new self(
             jwksUrl: SdkClient::stringValue($data->jwks_url),
             providerName: SdkClient::stringValue($data->provider_name),
@@ -226,11 +236,26 @@ final readonly class AdvisorCategory implements SdkOpenEnum
     public const SECURITY = "SECURITY";
     public const PERFORMANCE = "PERFORMANCE";
     private function __construct(public string $value) {}
-    public static function from(string|int $value): static { return new self((string) $value); }
-    public static function tryFrom(string|int|null $value): ?static { return $value === null ? null : self::from($value); }
-    public function getValue(): string { return $this->value; }
-    public function jsonSerialize(): string { return $this->value; }
-    public function __toString(): string { return (string) $this->value; }
+    public static function from(string|int $value): static
+    {
+        return new self((string) $value);
+    }
+    public static function tryFrom(string|int|null $value): ?static
+    {
+        return $value === null ? null : self::from($value);
+    }
+    public function getValue(): string
+    {
+        return $this->value;
+    }
+    public function jsonSerialize(): string
+    {
+        return $this->value;
+    }
+    public function __toString(): string
+    {
+        return (string) $this->value;
+    }
 }
 
 /**
@@ -241,9 +266,24 @@ final readonly class AdvisorIssueFacingEnum implements SdkOpenEnum
     public const EXTERNAL = "EXTERNAL";
     public const INTERNAL = "INTERNAL";
     private function __construct(public string $value) {}
-    public static function from(string|int $value): static { return new self((string) $value); }
-    public static function tryFrom(string|int|null $value): ?static { return $value === null ? null : self::from($value); }
-    public function getValue(): string { return $this->value; }
-    public function jsonSerialize(): string { return $this->value; }
-    public function __toString(): string { return (string) $this->value; }
+    public static function from(string|int $value): static
+    {
+        return new self((string) $value);
+    }
+    public static function tryFrom(string|int|null $value): ?static
+    {
+        return $value === null ? null : self::from($value);
+    }
+    public function getValue(): string
+    {
+        return $this->value;
+    }
+    public function jsonSerialize(): string
+    {
+        return $this->value;
+    }
+    public function __toString(): string
+    {
+        return (string) $this->value;
+    }
 }

@@ -123,10 +123,18 @@ class CustomDomain implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "domain") || $data->domain === null) { throw new SdkValidationError("domain", 'required', "Required property 'domain' is missing or null"); }
-        if (!property_exists($data, "entity_type") || $data->entity_type === null) { throw new SdkValidationError("entity_type", 'required', "Required property 'entity_type' is missing or null"); }
-        if (!property_exists($data, "entity_id") || $data->entity_id === null) { throw new SdkValidationError("entity_id", 'required', "Required property 'entity_id' is missing or null"); }
-        if (!property_exists($data, "cname_target") || $data->cname_target === null) { throw new SdkValidationError("cname_target", 'required', "Required property 'cname_target' is missing or null"); }
+        if (!property_exists($data, "domain") || $data->domain === null) {
+            throw new SdkValidationError("domain", 'required', "Required property 'domain' is missing or null");
+        }
+        if (!property_exists($data, "entity_type") || $data->entity_type === null) {
+            throw new SdkValidationError("entity_type", 'required', "Required property 'entity_type' is missing or null");
+        }
+        if (!property_exists($data, "entity_id") || $data->entity_id === null) {
+            throw new SdkValidationError("entity_id", 'required', "Required property 'entity_id' is missing or null");
+        }
+        if (!property_exists($data, "cname_target") || $data->cname_target === null) {
+            throw new SdkValidationError("cname_target", 'required', "Required property 'cname_target' is missing or null");
+        }
         return new self(
             domain: SdkClient::stringValue($data->domain),
             entityType: SdkClient::stringValue($data->entity_type),
@@ -198,9 +206,15 @@ class CustomDomainRegisterRequest implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "domain") || $data->domain === null) { throw new SdkValidationError("domain", 'required', "Required property 'domain' is missing or null"); }
-        if (!property_exists($data, "entity_type") || $data->entity_type === null) { throw new SdkValidationError("entity_type", 'required', "Required property 'entity_type' is missing or null"); }
-        if (!property_exists($data, "entity_id") || $data->entity_id === null) { throw new SdkValidationError("entity_id", 'required', "Required property 'entity_id' is missing or null"); }
+        if (!property_exists($data, "domain") || $data->domain === null) {
+            throw new SdkValidationError("domain", 'required', "Required property 'domain' is missing or null");
+        }
+        if (!property_exists($data, "entity_type") || $data->entity_type === null) {
+            throw new SdkValidationError("entity_type", 'required', "Required property 'entity_type' is missing or null");
+        }
+        if (!property_exists($data, "entity_id") || $data->entity_id === null) {
+            throw new SdkValidationError("entity_id", 'required', "Required property 'entity_id' is missing or null");
+        }
         return new self(
             domain: SdkClient::stringValue($data->domain),
             entityType: SdkClient::stringValue($data->entity_type),
@@ -247,7 +261,9 @@ class CustomDomainsListResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "custom_domains") || $data->custom_domains === null) { throw new SdkValidationError("custom_domains", 'required', "Required property 'custom_domains' is missing or null"); }
+        if (!property_exists($data, "custom_domains") || $data->custom_domains === null) {
+            throw new SdkValidationError("custom_domains", 'required', "Required property 'custom_domains' is missing or null");
+        }
         return new self(
             customDomains: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, CustomDomain::class), SdkClient::arrayValue($data->custom_domains))),
         );
@@ -261,11 +277,26 @@ final readonly class FunctionDeployRequestRuntimeEnum implements SdkOpenEnum
 {
     public const NODEJS24 = "nodejs24";
     private function __construct(public string $value) {}
-    public static function from(string|int $value): static { return new self((string) $value); }
-    public static function tryFrom(string|int|null $value): ?static { return $value === null ? null : self::from($value); }
-    public function getValue(): string { return $this->value; }
-    public function jsonSerialize(): string { return $this->value; }
-    public function __toString(): string { return (string) $this->value; }
+    public static function from(string|int $value): static
+    {
+        return new self((string) $value);
+    }
+    public static function tryFrom(string|int|null $value): ?static
+    {
+        return $value === null ? null : self::from($value);
+    }
+    public function getValue(): string
+    {
+        return $this->value;
+    }
+    public function jsonSerialize(): string
+    {
+        return $this->value;
+    }
+    public function __toString(): string
+    {
+        return (string) $this->value;
+    }
 }
 
 /**

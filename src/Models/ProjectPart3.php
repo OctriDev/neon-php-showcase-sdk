@@ -85,11 +85,21 @@ class AvailablePreloadLibrary implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "library_name") || $data->library_name === null) { throw new SdkValidationError("library_name", 'required', "Required property 'library_name' is missing or null"); }
-        if (!property_exists($data, "description") || $data->description === null) { throw new SdkValidationError("description", 'required', "Required property 'description' is missing or null"); }
-        if (!property_exists($data, "is_default") || $data->is_default === null) { throw new SdkValidationError("is_default", 'required', "Required property 'is_default' is missing or null"); }
-        if (!property_exists($data, "is_experimental") || $data->is_experimental === null) { throw new SdkValidationError("is_experimental", 'required', "Required property 'is_experimental' is missing or null"); }
-        if (!property_exists($data, "version") || $data->version === null) { throw new SdkValidationError("version", 'required', "Required property 'version' is missing or null"); }
+        if (!property_exists($data, "library_name") || $data->library_name === null) {
+            throw new SdkValidationError("library_name", 'required', "Required property 'library_name' is missing or null");
+        }
+        if (!property_exists($data, "description") || $data->description === null) {
+            throw new SdkValidationError("description", 'required', "Required property 'description' is missing or null");
+        }
+        if (!property_exists($data, "is_default") || $data->is_default === null) {
+            throw new SdkValidationError("is_default", 'required', "Required property 'is_default' is missing or null");
+        }
+        if (!property_exists($data, "is_experimental") || $data->is_experimental === null) {
+            throw new SdkValidationError("is_experimental", 'required', "Required property 'is_experimental' is missing or null");
+        }
+        if (!property_exists($data, "version") || $data->version === null) {
+            throw new SdkValidationError("version", 'required', "Required property 'version' is missing or null");
+        }
         return new self(
             libraryName: SdkClient::stringValue($data->library_name),
             description: SdkClient::stringValue($data->description),
@@ -138,7 +148,9 @@ class ConnectionURIResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "uri") || $data->uri === null) { throw new SdkValidationError("uri", 'required', "Required property 'uri' is missing or null"); }
+        if (!property_exists($data, "uri") || $data->uri === null) {
+            throw new SdkValidationError("uri", 'required', "Required property 'uri' is missing or null");
+        }
         return new self(
             uri: SdkClient::stringValue($data->uri),
         );
@@ -183,7 +195,9 @@ class ConnectionURIsResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "connection_uris") || $data->connection_uris === null) { throw new SdkValidationError("connection_uris", 'required', "Required property 'connection_uris' is missing or null"); }
+        if (!property_exists($data, "connection_uris") || $data->connection_uris === null) {
+            throw new SdkValidationError("connection_uris", 'required', "Required property 'connection_uris' is missing or null");
+        }
         return new self(
             connectionUris: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, ConnectionDetails::class), SdkClient::arrayValue($data->connection_uris))),
         );
@@ -326,7 +340,9 @@ class GrantPermissionToProjectRequest implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "email") || $data->email === null) { throw new SdkValidationError("email", 'required', "Required property 'email' is missing or null"); }
+        if (!property_exists($data, "email") || $data->email === null) {
+            throw new SdkValidationError("email", 'required', "Required property 'email' is missing or null");
+        }
         return new self(
             email: SdkClient::stringValue($data->email),
         );
