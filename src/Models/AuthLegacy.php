@@ -45,7 +45,9 @@ class ListNeonAuthIntegrationsResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "data") || $data->data === null) { throw new SdkValidationError("data", 'required', "Required property 'data' is missing or null"); }
+        if (!property_exists($data, "data") || $data->data === null) {
+            throw new SdkValidationError("data", 'required', "Required property 'data' is missing or null");
+        }
         return new self(
             data: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, NeonAuthIntegration::class), SdkClient::arrayValue($data->data))),
         );
@@ -100,8 +102,12 @@ class NeonAuthCreateAuthProviderSDKKeysRequest implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "project_id") || $data->project_id === null) { throw new SdkValidationError("project_id", 'required', "Required property 'project_id' is missing or null"); }
-        if (!property_exists($data, "auth_provider") || $data->auth_provider === null) { throw new SdkValidationError("auth_provider", 'required', "Required property 'auth_provider' is missing or null"); }
+        if (!property_exists($data, "project_id") || $data->project_id === null) {
+            throw new SdkValidationError("project_id", 'required', "Required property 'project_id' is missing or null");
+        }
+        if (!property_exists($data, "auth_provider") || $data->auth_provider === null) {
+            throw new SdkValidationError("auth_provider", 'required', "Required property 'auth_provider' is missing or null");
+        }
         return new self(
             projectId: SdkClient::stringValue($data->project_id),
             authProvider: SdkClient::hydrateStringEnumOrString($data->auth_provider, NeonAuthSupportedAuthProvider::class),
@@ -191,9 +197,15 @@ class NeonAuthCreateIntegrationRequest implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "auth_provider") || $data->auth_provider === null) { throw new SdkValidationError("auth_provider", 'required', "Required property 'auth_provider' is missing or null"); }
-        if (!property_exists($data, "project_id") || $data->project_id === null) { throw new SdkValidationError("project_id", 'required', "Required property 'project_id' is missing or null"); }
-        if (!property_exists($data, "branch_id") || $data->branch_id === null) { throw new SdkValidationError("branch_id", 'required', "Required property 'branch_id' is missing or null"); }
+        if (!property_exists($data, "auth_provider") || $data->auth_provider === null) {
+            throw new SdkValidationError("auth_provider", 'required', "Required property 'auth_provider' is missing or null");
+        }
+        if (!property_exists($data, "project_id") || $data->project_id === null) {
+            throw new SdkValidationError("project_id", 'required', "Required property 'project_id' is missing or null");
+        }
+        if (!property_exists($data, "branch_id") || $data->branch_id === null) {
+            throw new SdkValidationError("branch_id", 'required', "Required property 'branch_id' is missing or null");
+        }
         return new self(
             authProvider: SdkClient::hydrateStringEnumOrString($data->auth_provider, NeonAuthSupportedAuthProvider::class),
             projectId: SdkClient::stringValue($data->project_id),
@@ -274,9 +286,15 @@ class NeonAuthCreateNewUserRequest implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "project_id") || $data->project_id === null) { throw new SdkValidationError("project_id", 'required', "Required property 'project_id' is missing or null"); }
-        if (!property_exists($data, "auth_provider") || $data->auth_provider === null) { throw new SdkValidationError("auth_provider", 'required', "Required property 'auth_provider' is missing or null"); }
-        if (!property_exists($data, "email") || $data->email === null) { throw new SdkValidationError("email", 'required', "Required property 'email' is missing or null"); }
+        if (!property_exists($data, "project_id") || $data->project_id === null) {
+            throw new SdkValidationError("project_id", 'required', "Required property 'project_id' is missing or null");
+        }
+        if (!property_exists($data, "auth_provider") || $data->auth_provider === null) {
+            throw new SdkValidationError("auth_provider", 'required', "Required property 'auth_provider' is missing or null");
+        }
+        if (!property_exists($data, "email") || $data->email === null) {
+            throw new SdkValidationError("email", 'required', "Required property 'email' is missing or null");
+        }
         return new self(
             projectId: SdkClient::stringValue($data->project_id),
             authProvider: SdkClient::hydrateStringEnumOrString($data->auth_provider, NeonAuthSupportedAuthProvider::class),
@@ -334,8 +352,12 @@ class NeonAuthTransferAuthProviderProjectRequest implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "project_id") || $data->project_id === null) { throw new SdkValidationError("project_id", 'required', "Required property 'project_id' is missing or null"); }
-        if (!property_exists($data, "auth_provider") || $data->auth_provider === null) { throw new SdkValidationError("auth_provider", 'required', "Required property 'auth_provider' is missing or null"); }
+        if (!property_exists($data, "project_id") || $data->project_id === null) {
+            throw new SdkValidationError("project_id", 'required', "Required property 'project_id' is missing or null");
+        }
+        if (!property_exists($data, "auth_provider") || $data->auth_provider === null) {
+            throw new SdkValidationError("auth_provider", 'required', "Required property 'auth_provider' is missing or null");
+        }
         return new self(
             projectId: SdkClient::stringValue($data->project_id),
             authProvider: SdkClient::hydrateStringEnumOrString($data->auth_provider, NeonAuthSupportedAuthProvider::class),

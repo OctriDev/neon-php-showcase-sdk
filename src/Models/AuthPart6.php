@@ -116,7 +116,9 @@ class NeonAuthOAuthProviderMcpUpdate implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "resource") || $data->resource === null) { throw new SdkValidationError("resource", 'required', "Required property 'resource' is missing or null"); }
+        if (!property_exists($data, "resource") || $data->resource === null) {
+            throw new SdkValidationError("resource", 'required', "Required property 'resource' is missing or null");
+        }
         return new self(
             resource_: SdkClient::stringValue($data->resource),
             dynamicRegistration: (property_exists($data, "dynamic_registration") && $data->dynamic_registration !== null ? SdkClient::boolValue($data->dynamic_registration) : SdkNotGiven::Value),
@@ -162,7 +164,9 @@ class NeonAuthOAuthProviderResource implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "identifier") || $data->identifier === null) { throw new SdkValidationError("identifier", 'required', "Required property 'identifier' is missing or null"); }
+        if (!property_exists($data, "identifier") || $data->identifier === null) {
+            throw new SdkValidationError("identifier", 'required', "Required property 'identifier' is missing or null");
+        }
         return new self(
             identifier: SdkClient::stringValue($data->identifier),
         );
@@ -177,11 +181,26 @@ final readonly class NeonAuthOrganizationConfigCreatorRoleEnum implements SdkOpe
     public const ADMIN = "admin";
     public const OWNER = "owner";
     private function __construct(public string $value) {}
-    public static function from(string|int $value): static { return new self((string) $value); }
-    public static function tryFrom(string|int|null $value): ?static { return $value === null ? null : self::from($value); }
-    public function getValue(): string { return $this->value; }
-    public function jsonSerialize(): string { return $this->value; }
-    public function __toString(): string { return (string) $this->value; }
+    public static function from(string|int $value): static
+    {
+        return new self((string) $value);
+    }
+    public static function tryFrom(string|int|null $value): ?static
+    {
+        return $value === null ? null : self::from($value);
+    }
+    public function getValue(): string
+    {
+        return $this->value;
+    }
+    public function jsonSerialize(): string
+    {
+        return $this->value;
+    }
+    public function __toString(): string
+    {
+        return (string) $this->value;
+    }
 }
 
 /**
@@ -262,11 +281,21 @@ class NeonAuthOrganizationConfig implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "enabled") || $data->enabled === null) { throw new SdkValidationError("enabled", 'required', "Required property 'enabled' is missing or null"); }
-        if (!property_exists($data, "organization_limit") || $data->organization_limit === null) { throw new SdkValidationError("organization_limit", 'required', "Required property 'organization_limit' is missing or null"); }
-        if (!property_exists($data, "membership_limit") || $data->membership_limit === null) { throw new SdkValidationError("membership_limit", 'required', "Required property 'membership_limit' is missing or null"); }
-        if (!property_exists($data, "creator_role") || $data->creator_role === null) { throw new SdkValidationError("creator_role", 'required', "Required property 'creator_role' is missing or null"); }
-        if (!property_exists($data, "send_invitation_email") || $data->send_invitation_email === null) { throw new SdkValidationError("send_invitation_email", 'required', "Required property 'send_invitation_email' is missing or null"); }
+        if (!property_exists($data, "enabled") || $data->enabled === null) {
+            throw new SdkValidationError("enabled", 'required', "Required property 'enabled' is missing or null");
+        }
+        if (!property_exists($data, "organization_limit") || $data->organization_limit === null) {
+            throw new SdkValidationError("organization_limit", 'required', "Required property 'organization_limit' is missing or null");
+        }
+        if (!property_exists($data, "membership_limit") || $data->membership_limit === null) {
+            throw new SdkValidationError("membership_limit", 'required', "Required property 'membership_limit' is missing or null");
+        }
+        if (!property_exists($data, "creator_role") || $data->creator_role === null) {
+            throw new SdkValidationError("creator_role", 'required', "Required property 'creator_role' is missing or null");
+        }
+        if (!property_exists($data, "send_invitation_email") || $data->send_invitation_email === null) {
+            throw new SdkValidationError("send_invitation_email", 'required', "Required property 'send_invitation_email' is missing or null");
+        }
         return new self(
             enabled: SdkClient::boolValue($data->enabled),
             organizationLimit: SdkClient::intValue($data->organization_limit),
@@ -285,9 +314,24 @@ final readonly class NeonAuthOrganizationConfigUpdateCreatorRoleEnum implements 
     public const ADMIN = "admin";
     public const OWNER = "owner";
     private function __construct(public string $value) {}
-    public static function from(string|int $value): static { return new self((string) $value); }
-    public static function tryFrom(string|int|null $value): ?static { return $value === null ? null : self::from($value); }
-    public function getValue(): string { return $this->value; }
-    public function jsonSerialize(): string { return $this->value; }
-    public function __toString(): string { return (string) $this->value; }
+    public static function from(string|int $value): static
+    {
+        return new self((string) $value);
+    }
+    public static function tryFrom(string|int|null $value): ?static
+    {
+        return $value === null ? null : self::from($value);
+    }
+    public function getValue(): string
+    {
+        return $this->value;
+    }
+    public function jsonSerialize(): string
+    {
+        return $this->value;
+    }
+    public function __toString(): string
+    {
+        return (string) $this->value;
+    }
 }

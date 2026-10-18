@@ -25,7 +25,7 @@ class Storage
 
         Validation::validatePattern('branch_id', $branchId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/storage", $clientConfig, returnType: BranchStorage::class, decoder: 'json', operationId: 'getStorage', requestOptions: $requestOptions, errors: [404 => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, BranchStorageNotEnabled::class), "default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/storage", $clientConfig, returnType: BranchStorage::class, decoder: 'json', operationId: 'getStorage', requestOptions: $requestOptions, errors: [404 => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, BranchStorageNotEnabled::class), "default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, BranchStorage::class));
     }
 }

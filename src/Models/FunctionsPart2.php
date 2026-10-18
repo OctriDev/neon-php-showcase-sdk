@@ -45,7 +45,9 @@ class FunctionTriggerSchedule implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "cron") || $data->cron === null) { throw new SdkValidationError("cron", 'required', "Required property 'cron' is missing or null"); }
+        if (!property_exists($data, "cron") || $data->cron === null) {
+            throw new SdkValidationError("cron", 'required', "Required property 'cron' is missing or null");
+        }
         return new self(
             cron: SdkClient::stringValue($data->cron),
         );
@@ -102,7 +104,9 @@ class FunctionTriggerStorageObjectCreated implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "bucket_name") || $data->bucket_name === null) { throw new SdkValidationError("bucket_name", 'required', "Required property 'bucket_name' is missing or null"); }
+        if (!property_exists($data, "bucket_name") || $data->bucket_name === null) {
+            throw new SdkValidationError("bucket_name", 'required', "Required property 'bucket_name' is missing or null");
+        }
         return new self(
             bucketName: SdkClient::stringValue($data->bucket_name),
             prefix: (property_exists($data, "prefix") && $data->prefix !== null ? SdkClient::stringValue($data->prefix) : SdkNotGiven::Value),
@@ -160,7 +164,9 @@ class ListFunctionsCustomDomainsResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "custom_domains") || $data->custom_domains === null) { throw new SdkValidationError("custom_domains", 'required', "Required property 'custom_domains' is missing or null"); }
+        if (!property_exists($data, "custom_domains") || $data->custom_domains === null) {
+            throw new SdkValidationError("custom_domains", 'required', "Required property 'custom_domains' is missing or null");
+        }
         return new self(
             customDomains: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, CustomDomain::class), SdkClient::arrayValue($data->custom_domains))),
             pagination: (property_exists($data, "pagination") && $data->pagination !== null ? SdkClient::hydrateClass($data->pagination, CursorPagination::class) : SdkNotGiven::Value),
@@ -218,7 +224,9 @@ class ListFunctionsResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "functions") || $data->functions === null) { throw new SdkValidationError("functions", 'required', "Required property 'functions' is missing or null"); }
+        if (!property_exists($data, "functions") || $data->functions === null) {
+            throw new SdkValidationError("functions", 'required', "Required property 'functions' is missing or null");
+        }
         return new self(
             functions: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, NeonFunction::class), SdkClient::arrayValue($data->functions))),
             pagination: (property_exists($data, "pagination") && $data->pagination !== null ? SdkClient::hydrateClass($data->pagination, CursorPagination::class) : SdkNotGiven::Value),
@@ -328,11 +336,21 @@ class NeonFunction implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "id") || $data->id === null) { throw new SdkValidationError("id", 'required', "Required property 'id' is missing or null"); }
-        if (!property_exists($data, "slug") || $data->slug === null) { throw new SdkValidationError("slug", 'required', "Required property 'slug' is missing or null"); }
-        if (!property_exists($data, "name") || $data->name === null) { throw new SdkValidationError("name", 'required', "Required property 'name' is missing or null"); }
-        if (!property_exists($data, "invocation_url") || $data->invocation_url === null) { throw new SdkValidationError("invocation_url", 'required', "Required property 'invocation_url' is missing or null"); }
-        if (!property_exists($data, "created_at") || $data->created_at === null) { throw new SdkValidationError("created_at", 'required', "Required property 'created_at' is missing or null"); }
+        if (!property_exists($data, "id") || $data->id === null) {
+            throw new SdkValidationError("id", 'required', "Required property 'id' is missing or null");
+        }
+        if (!property_exists($data, "slug") || $data->slug === null) {
+            throw new SdkValidationError("slug", 'required', "Required property 'slug' is missing or null");
+        }
+        if (!property_exists($data, "name") || $data->name === null) {
+            throw new SdkValidationError("name", 'required', "Required property 'name' is missing or null");
+        }
+        if (!property_exists($data, "invocation_url") || $data->invocation_url === null) {
+            throw new SdkValidationError("invocation_url", 'required', "Required property 'invocation_url' is missing or null");
+        }
+        if (!property_exists($data, "created_at") || $data->created_at === null) {
+            throw new SdkValidationError("created_at", 'required', "Required property 'created_at' is missing or null");
+        }
         return new self(
             id: SdkClient::stringValue($data->id),
             slug: SdkClient::stringValue($data->slug),

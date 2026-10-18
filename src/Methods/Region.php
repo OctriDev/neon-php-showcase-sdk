@@ -24,7 +24,7 @@ class Region
             Validation::validatePattern('org_id', $orgId, '^[a-z0-9-]{1,60}$');
         }
 
-        $sdkResponse = SdkClient::request('GET', "/regions", $clientConfig, query: ['org_id' => new SdkQueryValue($orgId, "form", true)], returnType: ActiveRegionsResponse::class, decoder: 'json', operationId: 'getActiveRegions', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('GET', "/regions", $clientConfig, query: ['org_id' => new SdkQueryValue($orgId, "form", true)], returnType: ActiveRegionsResponse::class, decoder: 'json', operationId: 'getActiveRegions', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, ActiveRegionsResponse::class));
     }
 }
