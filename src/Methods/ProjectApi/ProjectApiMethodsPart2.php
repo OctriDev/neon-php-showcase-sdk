@@ -22,7 +22,7 @@ trait ProjectApiMethodsPart2
 
         Validation::validatePattern('project_id', $projectId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/available_preload_libraries", $clientConfig, returnType: AvailablePreloadLibraries::class, decoder: 'json', operationId: 'getAvailablePreloadLibraries', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/available_preload_libraries", $clientConfig, returnType: AvailablePreloadLibraries::class, decoder: 'json', operationId: 'getAvailablePreloadLibraries', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, AvailablePreloadLibraries::class));
     }
 
@@ -41,7 +41,7 @@ trait ProjectApiMethodsPart2
 
         Validation::validatePattern('project_id', $projectId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('POST', "/projects/" . SdkClient::encodePathSegment($projectId) . "/transfer_requests", $clientConfig, body: ['ttl_seconds' => $ttlSeconds], returnType: ProjectTransferRequestResponse::class, decoder: 'json', operationId: 'createProjectTransferRequest', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('POST', "/projects/" . SdkClient::encodePathSegment($projectId) . "/transfer_requests", $clientConfig, body: ['ttl_seconds' => $ttlSeconds], returnType: ProjectTransferRequestResponse::class, decoder: 'json', operationId: 'createProjectTransferRequest', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, ProjectTransferRequestResponse::class));
     }
 
@@ -66,7 +66,7 @@ trait ProjectApiMethodsPart2
             Validation::validatePattern('org_id', $orgId, '^[a-z0-9-]{1,60}$');
         }
 
-        return SdkClient::request('PUT', "/projects/" . SdkClient::encodePathSegment($projectId) . "/transfer_requests/" . SdkClient::encodePathSegment($requestId) . "", $clientConfig, body: ['org_id' => $orgId], decoder: 'empty', operationId: 'acceptProjectTransferRequest', requestOptions: $requestOptions, errors: [406 => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, AcceptProjectTransferRequestSatisfiesPlanError::class), "default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)])->data;
+        return SdkClient::request('PUT', "/projects/" . SdkClient::encodePathSegment($projectId) . "/transfer_requests/" . SdkClient::encodePathSegment($requestId) . "", $clientConfig, body: ['org_id' => $orgId], decoder: 'empty', operationId: 'acceptProjectTransferRequest', requestOptions: $requestOptions, errors: [406 => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, AcceptProjectTransferRequestSatisfiesPlanError::class), "default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)])->data;
     }
 
 
@@ -83,7 +83,7 @@ trait ProjectApiMethodsPart2
 
         Validation::validatePattern('project_id', $projectId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/jwks", $clientConfig, returnType: ProjectJWKSResponse::class, decoder: 'json', operationId: 'getProjectJwks', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/jwks", $clientConfig, returnType: ProjectJWKSResponse::class, decoder: 'json', operationId: 'getProjectJwks', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, ProjectJWKSResponse::class));
     }
 
@@ -115,7 +115,7 @@ trait ProjectApiMethodsPart2
             Validation::validateItems('role_names', $roleNames, min: 0, max: 10);
         }
 
-        $sdkResponse = SdkClient::request('POST', "/projects/" . SdkClient::encodePathSegment($projectId) . "/jwks", $clientConfig, body: ['jwks_url' => $jwksUrl, 'provider_name' => $providerName, 'branch_id' => $branchId, 'jwt_audience' => $jwtAudience, 'role_names' => $roleNames, 'skip_role_creation' => $skipRoleCreation], returnType: JWKSCreationOperation::class, decoder: 'json', operationId: 'addProjectJwks', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('POST', "/projects/" . SdkClient::encodePathSegment($projectId) . "/jwks", $clientConfig, body: ['jwks_url' => $jwksUrl, 'provider_name' => $providerName, 'branch_id' => $branchId, 'jwt_audience' => $jwtAudience, 'role_names' => $roleNames, 'skip_role_creation' => $skipRoleCreation], returnType: JWKSCreationOperation::class, decoder: 'json', operationId: 'addProjectJwks', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, JWKSCreationOperation::class));
     }
 
@@ -134,7 +134,7 @@ trait ProjectApiMethodsPart2
 
         Validation::validatePattern('project_id', $projectId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('DELETE', "/projects/" . SdkClient::encodePathSegment($projectId) . "/jwks/" . SdkClient::encodePathSegment($jwksId) . "", $clientConfig, returnType: JWKS::class, decoder: 'json', operationId: 'deleteProjectJwks', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('DELETE', "/projects/" . SdkClient::encodePathSegment($projectId) . "/jwks/" . SdkClient::encodePathSegment($jwksId) . "", $clientConfig, returnType: JWKS::class, decoder: 'json', operationId: 'deleteProjectJwks', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, JWKS::class));
     }
 
@@ -165,7 +165,7 @@ trait ProjectApiMethodsPart2
             Validation::validatePattern('endpoint_id', $endpointId, '^[a-z0-9-]{1,60}$');
         }
 
-        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/connection_uri", $clientConfig, query: ['database_name' => new SdkQueryValue($databaseName, "form", true), 'role_name' => new SdkQueryValue($roleName, "form", true), 'branch_id' => new SdkQueryValue($branchId, "form", true), 'endpoint_id' => new SdkQueryValue($endpointId, "form", true), 'pooled' => new SdkQueryValue($pooled, "form", true)], returnType: ConnectionURIResponse::class, decoder: 'json', operationId: 'getConnectionUri', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/connection_uri", $clientConfig, query: ['database_name' => new SdkQueryValue($databaseName, "form", true), 'role_name' => new SdkQueryValue($roleName, "form", true), 'branch_id' => new SdkQueryValue($branchId, "form", true), 'endpoint_id' => new SdkQueryValue($endpointId, "form", true), 'pooled' => new SdkQueryValue($pooled, "form", true)], returnType: ConnectionURIResponse::class, decoder: 'json', operationId: 'getConnectionUri', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, ConnectionURIResponse::class));
     }
 
@@ -183,7 +183,7 @@ trait ProjectApiMethodsPart2
 
         Validation::validatePattern('project_id', $projectId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/vpc_endpoints", $clientConfig, returnType: VPCEndpointsResponse::class, decoder: 'json', operationId: 'listProjectVpcEndpoints', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/vpc_endpoints", $clientConfig, returnType: VPCEndpointsResponse::class, decoder: 'json', operationId: 'listProjectVpcEndpoints', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, VPCEndpointsResponse::class));
     }
 
@@ -202,7 +202,7 @@ trait ProjectApiMethodsPart2
 
         Validation::validatePattern('project_id', $projectId, '^[a-z0-9-]{1,60}$');
 
-        return SdkClient::request('POST', "/projects/" . SdkClient::encodePathSegment($projectId) . "/vpc_endpoints/" . SdkClient::encodePathSegment($vpcEndpointId) . "", $clientConfig, body: ['label' => $label], decoder: 'empty', operationId: 'assignProjectVpcEndpoint', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)])->data;
+        return SdkClient::request('POST', "/projects/" . SdkClient::encodePathSegment($projectId) . "/vpc_endpoints/" . SdkClient::encodePathSegment($vpcEndpointId) . "", $clientConfig, body: ['label' => $label], decoder: 'empty', operationId: 'assignProjectVpcEndpoint', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)])->data;
     }
 
 
@@ -219,6 +219,6 @@ trait ProjectApiMethodsPart2
 
         Validation::validatePattern('project_id', $projectId, '^[a-z0-9-]{1,60}$');
 
-        return SdkClient::request('DELETE', "/projects/" . SdkClient::encodePathSegment($projectId) . "/vpc_endpoints/" . SdkClient::encodePathSegment($vpcEndpointId) . "", $clientConfig, decoder: 'empty', operationId: 'deleteProjectVpcEndpoint', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)])->data;
+        return SdkClient::request('DELETE', "/projects/" . SdkClient::encodePathSegment($projectId) . "/vpc_endpoints/" . SdkClient::encodePathSegment($vpcEndpointId) . "", $clientConfig, decoder: 'empty', operationId: 'deleteProjectVpcEndpoint', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)])->data;
     }
 }

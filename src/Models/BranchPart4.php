@@ -81,7 +81,9 @@ class BranchRestoreRequest implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "source_branch_id") || $data->source_branch_id === null) { throw new SdkValidationError("source_branch_id", 'required', "Required property 'source_branch_id' is missing or null"); }
+        if (!property_exists($data, "source_branch_id") || $data->source_branch_id === null) {
+            throw new SdkValidationError("source_branch_id", 'required', "Required property 'source_branch_id' is missing or null");
+        }
         return new self(
             sourceBranchId: SdkClient::stringValue($data->source_branch_id),
             sourceLsn: (property_exists($data, "source_lsn") && $data->source_lsn !== null ? SdkClient::stringValue($data->source_lsn) : SdkNotGiven::Value),
@@ -209,8 +211,12 @@ class BranchSchemaJSONTablesItemColumnsItem implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "name") || $data->name === null) { throw new SdkValidationError("name", 'required', "Required property 'name' is missing or null"); }
-        if (!property_exists($data, "type") || $data->type === null) { throw new SdkValidationError("type", 'required', "Required property 'type' is missing or null"); }
+        if (!property_exists($data, "name") || $data->name === null) {
+            throw new SdkValidationError("name", 'required', "Required property 'name' is missing or null");
+        }
+        if (!property_exists($data, "type") || $data->type === null) {
+            throw new SdkValidationError("type", 'required', "Required property 'type' is missing or null");
+        }
         return new self(
             name: SdkClient::stringValue($data->name),
             type: SdkClient::stringValue($data->type),
@@ -278,9 +284,15 @@ class BranchSchemaJSONTablesItemConstraintsItemReferencedTable implements \JsonS
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "schema") || $data->schema === null) { throw new SdkValidationError("schema", 'required', "Required property 'schema' is missing or null"); }
-        if (!property_exists($data, "table") || $data->table === null) { throw new SdkValidationError("table", 'required', "Required property 'table' is missing or null"); }
-        if (!property_exists($data, "columns") || $data->columns === null) { throw new SdkValidationError("columns", 'required', "Required property 'columns' is missing or null"); }
+        if (!property_exists($data, "schema") || $data->schema === null) {
+            throw new SdkValidationError("schema", 'required', "Required property 'schema' is missing or null");
+        }
+        if (!property_exists($data, "table") || $data->table === null) {
+            throw new SdkValidationError("table", 'required', "Required property 'table' is missing or null");
+        }
+        if (!property_exists($data, "columns") || $data->columns === null) {
+            throw new SdkValidationError("columns", 'required', "Required property 'columns' is missing or null");
+        }
         return new self(
             schema: SdkClient::stringValue($data->schema),
             table: SdkClient::stringValue($data->table),

@@ -282,8 +282,12 @@ class ProjectBranchLogsQueryResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "logs") || $data->logs === null) { throw new SdkValidationError("logs", 'required', "Required property 'logs' is missing or null"); }
-        if (!property_exists($data, "is_truncated") || $data->is_truncated === null) { throw new SdkValidationError("is_truncated", 'required', "Required property 'is_truncated' is missing or null"); }
+        if (!property_exists($data, "logs") || $data->logs === null) {
+            throw new SdkValidationError("logs", 'required', "Required property 'logs' is missing or null");
+        }
+        if (!property_exists($data, "is_truncated") || $data->is_truncated === null) {
+            throw new SdkValidationError("is_truncated", 'required', "Required property 'is_truncated' is missing or null");
+        }
         return new self(
             logs: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, ProjectBranchLogRecord::class), SdkClient::arrayValue($data->logs))),
             isTruncated: SdkClient::boolValue($data->is_truncated),

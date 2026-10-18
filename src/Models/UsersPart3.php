@@ -85,11 +85,21 @@ class CurrentUserAuthAccount implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "email") || $data->email === null) { throw new SdkValidationError("email", 'required', "Required property 'email' is missing or null"); }
-        if (!property_exists($data, "image") || $data->image === null) { throw new SdkValidationError("image", 'required', "Required property 'image' is missing or null"); }
-        if (!property_exists($data, "login") || $data->login === null) { throw new SdkValidationError("login", 'required', "Required property 'login' is missing or null"); }
-        if (!property_exists($data, "name") || $data->name === null) { throw new SdkValidationError("name", 'required', "Required property 'name' is missing or null"); }
-        if (!property_exists($data, "provider") || $data->provider === null) { throw new SdkValidationError("provider", 'required', "Required property 'provider' is missing or null"); }
+        if (!property_exists($data, "email") || $data->email === null) {
+            throw new SdkValidationError("email", 'required', "Required property 'email' is missing or null");
+        }
+        if (!property_exists($data, "image") || $data->image === null) {
+            throw new SdkValidationError("image", 'required', "Required property 'image' is missing or null");
+        }
+        if (!property_exists($data, "login") || $data->login === null) {
+            throw new SdkValidationError("login", 'required', "Required property 'login' is missing or null");
+        }
+        if (!property_exists($data, "name") || $data->name === null) {
+            throw new SdkValidationError("name", 'required', "Required property 'name' is missing or null");
+        }
+        if (!property_exists($data, "provider") || $data->provider === null) {
+            throw new SdkValidationError("provider", 'required', "Required property 'provider' is missing or null");
+        }
         return new self(
             email: SdkClient::stringValue($data->email),
             image: SdkClient::stringValue($data->image),
@@ -272,18 +282,42 @@ class CurrentUserInfoResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "active_seconds_limit") || $data->active_seconds_limit === null) { throw new SdkValidationError("active_seconds_limit", 'required', "Required property 'active_seconds_limit' is missing or null"); }
-        if (!property_exists($data, "auth_accounts") || $data->auth_accounts === null) { throw new SdkValidationError("auth_accounts", 'required', "Required property 'auth_accounts' is missing or null"); }
-        if (!property_exists($data, "email") || $data->email === null) { throw new SdkValidationError("email", 'required', "Required property 'email' is missing or null"); }
-        if (!property_exists($data, "id") || $data->id === null) { throw new SdkValidationError("id", 'required', "Required property 'id' is missing or null"); }
-        if (!property_exists($data, "image") || $data->image === null) { throw new SdkValidationError("image", 'required', "Required property 'image' is missing or null"); }
-        if (!property_exists($data, "login") || $data->login === null) { throw new SdkValidationError("login", 'required', "Required property 'login' is missing or null"); }
-        if (!property_exists($data, "name") || $data->name === null) { throw new SdkValidationError("name", 'required', "Required property 'name' is missing or null"); }
-        if (!property_exists($data, "last_name") || $data->last_name === null) { throw new SdkValidationError("last_name", 'required', "Required property 'last_name' is missing or null"); }
-        if (!property_exists($data, "projects_limit") || $data->projects_limit === null) { throw new SdkValidationError("projects_limit", 'required', "Required property 'projects_limit' is missing or null"); }
-        if (!property_exists($data, "branches_limit") || $data->branches_limit === null) { throw new SdkValidationError("branches_limit", 'required', "Required property 'branches_limit' is missing or null"); }
-        if (!property_exists($data, "max_autoscaling_limit") || $data->max_autoscaling_limit === null) { throw new SdkValidationError("max_autoscaling_limit", 'required', "Required property 'max_autoscaling_limit' is missing or null"); }
-        if (!property_exists($data, "plan") || $data->plan === null) { throw new SdkValidationError("plan", 'required', "Required property 'plan' is missing or null"); }
+        if (!property_exists($data, "active_seconds_limit") || $data->active_seconds_limit === null) {
+            throw new SdkValidationError("active_seconds_limit", 'required', "Required property 'active_seconds_limit' is missing or null");
+        }
+        if (!property_exists($data, "auth_accounts") || $data->auth_accounts === null) {
+            throw new SdkValidationError("auth_accounts", 'required', "Required property 'auth_accounts' is missing or null");
+        }
+        if (!property_exists($data, "email") || $data->email === null) {
+            throw new SdkValidationError("email", 'required', "Required property 'email' is missing or null");
+        }
+        if (!property_exists($data, "id") || $data->id === null) {
+            throw new SdkValidationError("id", 'required', "Required property 'id' is missing or null");
+        }
+        if (!property_exists($data, "image") || $data->image === null) {
+            throw new SdkValidationError("image", 'required', "Required property 'image' is missing or null");
+        }
+        if (!property_exists($data, "login") || $data->login === null) {
+            throw new SdkValidationError("login", 'required', "Required property 'login' is missing or null");
+        }
+        if (!property_exists($data, "name") || $data->name === null) {
+            throw new SdkValidationError("name", 'required', "Required property 'name' is missing or null");
+        }
+        if (!property_exists($data, "last_name") || $data->last_name === null) {
+            throw new SdkValidationError("last_name", 'required', "Required property 'last_name' is missing or null");
+        }
+        if (!property_exists($data, "projects_limit") || $data->projects_limit === null) {
+            throw new SdkValidationError("projects_limit", 'required', "Required property 'projects_limit' is missing or null");
+        }
+        if (!property_exists($data, "branches_limit") || $data->branches_limit === null) {
+            throw new SdkValidationError("branches_limit", 'required', "Required property 'branches_limit' is missing or null");
+        }
+        if (!property_exists($data, "max_autoscaling_limit") || $data->max_autoscaling_limit === null) {
+            throw new SdkValidationError("max_autoscaling_limit", 'required', "Required property 'max_autoscaling_limit' is missing or null");
+        }
+        if (!property_exists($data, "plan") || $data->plan === null) {
+            throw new SdkValidationError("plan", 'required', "Required property 'plan' is missing or null");
+        }
         return new self(
             activeSecondsLimit: SdkClient::intValue($data->active_seconds_limit),
             authAccounts: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, CurrentUserAuthAccount::class), SdkClient::arrayValue($data->auth_accounts))),
@@ -316,9 +350,24 @@ final readonly class IdentityProviderId implements SdkOpenEnum
     public const VERCELMP = "vercelmp";
     public const KEYCLOAK = "keycloak";
     private function __construct(public string $value) {}
-    public static function from(string|int $value): static { return new self((string) $value); }
-    public static function tryFrom(string|int|null $value): ?static { return $value === null ? null : self::from($value); }
-    public function getValue(): string { return $this->value; }
-    public function jsonSerialize(): string { return $this->value; }
-    public function __toString(): string { return (string) $this->value; }
+    public static function from(string|int $value): static
+    {
+        return new self((string) $value);
+    }
+    public static function tryFrom(string|int|null $value): ?static
+    {
+        return $value === null ? null : self::from($value);
+    }
+    public function getValue(): string
+    {
+        return $this->value;
+    }
+    public function jsonSerialize(): string
+    {
+        return $this->value;
+    }
+    public function __toString(): string
+    {
+        return (string) $this->value;
+    }
 }

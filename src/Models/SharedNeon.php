@@ -55,8 +55,12 @@ class NeonAuthAddDomainToRedirectURIWhitelistRequest implements \JsonSerializabl
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "domain") || $data->domain === null) { throw new SdkValidationError("domain", 'required', "Required property 'domain' is missing or null"); }
-        if (!property_exists($data, "auth_provider") || $data->auth_provider === null) { throw new SdkValidationError("auth_provider", 'required', "Required property 'auth_provider' is missing or null"); }
+        if (!property_exists($data, "domain") || $data->domain === null) {
+            throw new SdkValidationError("domain", 'required', "Required property 'domain' is missing or null");
+        }
+        if (!property_exists($data, "auth_provider") || $data->auth_provider === null) {
+            throw new SdkValidationError("auth_provider", 'required', "Required property 'auth_provider' is missing or null");
+        }
         return new self(
             domain: SdkClient::stringValue($data->domain),
             authProvider: SdkClient::hydrateStringEnumOrString($data->auth_provider, NeonAuthSupportedAuthProvider::class),
@@ -138,7 +142,9 @@ class NeonAuthAddOAuthProviderRequest implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "id") || $data->id === null) { throw new SdkValidationError("id", 'required', "Required property 'id' is missing or null"); }
+        if (!property_exists($data, "id") || $data->id === null) {
+            throw new SdkValidationError("id", 'required', "Required property 'id' is missing or null");
+        }
         return new self(
             id: SdkClient::hydrateStringEnumOrString($data->id, NeonAuthOauthProviderId::class),
             clientId: (property_exists($data, "client_id") && $data->client_id !== null ? SdkClient::stringValue($data->client_id) : SdkNotGiven::Value),
@@ -258,13 +264,27 @@ class NeonAuthCreateIntegrationResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "auth_provider") || $data->auth_provider === null) { throw new SdkValidationError("auth_provider", 'required', "Required property 'auth_provider' is missing or null"); }
-        if (!property_exists($data, "auth_provider_project_id") || $data->auth_provider_project_id === null) { throw new SdkValidationError("auth_provider_project_id", 'required', "Required property 'auth_provider_project_id' is missing or null"); }
-        if (!property_exists($data, "pub_client_key") || $data->pub_client_key === null) { throw new SdkValidationError("pub_client_key", 'required', "Required property 'pub_client_key' is missing or null"); }
-        if (!property_exists($data, "secret_server_key") || $data->secret_server_key === null) { throw new SdkValidationError("secret_server_key", 'required', "Required property 'secret_server_key' is missing or null"); }
-        if (!property_exists($data, "jwks_url") || $data->jwks_url === null) { throw new SdkValidationError("jwks_url", 'required', "Required property 'jwks_url' is missing or null"); }
-        if (!property_exists($data, "schema_name") || $data->schema_name === null) { throw new SdkValidationError("schema_name", 'required', "Required property 'schema_name' is missing or null"); }
-        if (!property_exists($data, "table_name") || $data->table_name === null) { throw new SdkValidationError("table_name", 'required', "Required property 'table_name' is missing or null"); }
+        if (!property_exists($data, "auth_provider") || $data->auth_provider === null) {
+            throw new SdkValidationError("auth_provider", 'required', "Required property 'auth_provider' is missing or null");
+        }
+        if (!property_exists($data, "auth_provider_project_id") || $data->auth_provider_project_id === null) {
+            throw new SdkValidationError("auth_provider_project_id", 'required', "Required property 'auth_provider_project_id' is missing or null");
+        }
+        if (!property_exists($data, "pub_client_key") || $data->pub_client_key === null) {
+            throw new SdkValidationError("pub_client_key", 'required', "Required property 'pub_client_key' is missing or null");
+        }
+        if (!property_exists($data, "secret_server_key") || $data->secret_server_key === null) {
+            throw new SdkValidationError("secret_server_key", 'required', "Required property 'secret_server_key' is missing or null");
+        }
+        if (!property_exists($data, "jwks_url") || $data->jwks_url === null) {
+            throw new SdkValidationError("jwks_url", 'required', "Required property 'jwks_url' is missing or null");
+        }
+        if (!property_exists($data, "schema_name") || $data->schema_name === null) {
+            throw new SdkValidationError("schema_name", 'required', "Required property 'schema_name' is missing or null");
+        }
+        if (!property_exists($data, "table_name") || $data->table_name === null) {
+            throw new SdkValidationError("table_name", 'required', "Required property 'table_name' is missing or null");
+        }
         return new self(
             authProvider: SdkClient::hydrateStringEnumOrString($data->auth_provider, NeonAuthSupportedAuthProvider::class),
             authProviderProjectId: SdkClient::stringValue($data->auth_provider_project_id),
@@ -316,7 +336,9 @@ class NeonAuthCreateNewUserResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "id") || $data->id === null) { throw new SdkValidationError("id", 'required', "Required property 'id' is missing or null"); }
+        if (!property_exists($data, "id") || $data->id === null) {
+            throw new SdkValidationError("id", 'required', "Required property 'id' is missing or null");
+        }
         return new self(
             id: SdkClient::stringValue($data->id),
         );
