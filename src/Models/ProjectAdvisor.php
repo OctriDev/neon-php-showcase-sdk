@@ -15,26 +15,11 @@ final readonly class AdvisorCategory implements SdkOpenEnum
     public const SECURITY = "SECURITY";
     public const PERFORMANCE = "PERFORMANCE";
     private function __construct(public string $value) {}
-    public static function from(string|int $value): static
-    {
-        return new self((string) $value);
-    }
-    public static function tryFrom(string|int|null $value): ?static
-    {
-        return $value === null ? null : self::from($value);
-    }
-    public function getValue(): string
-    {
-        return $this->value;
-    }
-    public function jsonSerialize(): string
-    {
-        return $this->value;
-    }
-    public function __toString(): string
-    {
-        return (string) $this->value;
-    }
+    public static function from(string|int $value): static { return new self((string) $value); }
+    public static function tryFrom(string|int|null $value): ?static { return $value === null ? null : self::from($value); }
+    public function getValue(): string { return $this->value; }
+    public function jsonSerialize(): string { return $this->value; }
+    public function __toString(): string { return (string) $this->value; }
 }
 
 /**
@@ -45,26 +30,11 @@ final readonly class AdvisorIssueFacingEnum implements SdkOpenEnum
     public const EXTERNAL = "EXTERNAL";
     public const INTERNAL = "INTERNAL";
     private function __construct(public string $value) {}
-    public static function from(string|int $value): static
-    {
-        return new self((string) $value);
-    }
-    public static function tryFrom(string|int|null $value): ?static
-    {
-        return $value === null ? null : self::from($value);
-    }
-    public function getValue(): string
-    {
-        return $this->value;
-    }
-    public function jsonSerialize(): string
-    {
-        return $this->value;
-    }
-    public function __toString(): string
-    {
-        return (string) $this->value;
-    }
+    public static function from(string|int $value): static { return new self((string) $value); }
+    public static function tryFrom(string|int|null $value): ?static { return $value === null ? null : self::from($value); }
+    public function getValue(): string { return $this->value; }
+    public function jsonSerialize(): string { return $this->value; }
+    public function __toString(): string { return (string) $this->value; }
 }
 
 /**
@@ -195,36 +165,16 @@ class AdvisorIssue implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "name") || $data->name === null) {
-            throw new SdkValidationError("name", 'required', "Required property 'name' is missing or null");
-        }
-        if (!property_exists($data, "title") || $data->title === null) {
-            throw new SdkValidationError("title", 'required', "Required property 'title' is missing or null");
-        }
-        if (!property_exists($data, "level") || $data->level === null) {
-            throw new SdkValidationError("level", 'required', "Required property 'level' is missing or null");
-        }
-        if (!property_exists($data, "facing") || $data->facing === null) {
-            throw new SdkValidationError("facing", 'required', "Required property 'facing' is missing or null");
-        }
-        if (!property_exists($data, "categories") || $data->categories === null) {
-            throw new SdkValidationError("categories", 'required', "Required property 'categories' is missing or null");
-        }
-        if (!property_exists($data, "description") || $data->description === null) {
-            throw new SdkValidationError("description", 'required', "Required property 'description' is missing or null");
-        }
-        if (!property_exists($data, "detail") || $data->detail === null) {
-            throw new SdkValidationError("detail", 'required', "Required property 'detail' is missing or null");
-        }
-        if (!property_exists($data, "remediation") || $data->remediation === null) {
-            throw new SdkValidationError("remediation", 'required', "Required property 'remediation' is missing or null");
-        }
-        if (!property_exists($data, "metadata") || $data->metadata === null) {
-            throw new SdkValidationError("metadata", 'required', "Required property 'metadata' is missing or null");
-        }
-        if (!property_exists($data, "cache_key") || $data->cache_key === null) {
-            throw new SdkValidationError("cache_key", 'required', "Required property 'cache_key' is missing or null");
-        }
+        if (!property_exists($data, "name") || $data->name === null) { throw new SdkValidationError("name", 'required', "Required property 'name' is missing or null"); }
+        if (!property_exists($data, "title") || $data->title === null) { throw new SdkValidationError("title", 'required', "Required property 'title' is missing or null"); }
+        if (!property_exists($data, "level") || $data->level === null) { throw new SdkValidationError("level", 'required', "Required property 'level' is missing or null"); }
+        if (!property_exists($data, "facing") || $data->facing === null) { throw new SdkValidationError("facing", 'required', "Required property 'facing' is missing or null"); }
+        if (!property_exists($data, "categories") || $data->categories === null) { throw new SdkValidationError("categories", 'required', "Required property 'categories' is missing or null"); }
+        if (!property_exists($data, "description") || $data->description === null) { throw new SdkValidationError("description", 'required', "Required property 'description' is missing or null"); }
+        if (!property_exists($data, "detail") || $data->detail === null) { throw new SdkValidationError("detail", 'required', "Required property 'detail' is missing or null"); }
+        if (!property_exists($data, "remediation") || $data->remediation === null) { throw new SdkValidationError("remediation", 'required', "Required property 'remediation' is missing or null"); }
+        if (!property_exists($data, "metadata") || $data->metadata === null) { throw new SdkValidationError("metadata", 'required', "Required property 'metadata' is missing or null"); }
+        if (!property_exists($data, "cache_key") || $data->cache_key === null) { throw new SdkValidationError("cache_key", 'required', "Required property 'cache_key' is missing or null"); }
         return new self(
             name: SdkClient::stringValue($data->name),
             title: SdkClient::stringValue($data->title),

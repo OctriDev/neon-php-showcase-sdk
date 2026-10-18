@@ -57,9 +57,7 @@ class CreateBranchNeonAuthNewUserRequest implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "email") || $data->email === null) {
-            throw new SdkValidationError("email", 'required', "Required property 'email' is missing or null");
-        }
+        if (!property_exists($data, "email") || $data->email === null) { throw new SdkValidationError("email", 'required', "Required property 'email' is missing or null"); }
         return new self(
             email: SdkClient::stringValue($data->email),
             name: (property_exists($data, "name") && $data->name !== null ? SdkClient::stringValue($data->name) : SdkNotGiven::Value),
@@ -117,9 +115,7 @@ class EnableNeonAuthIntegrationRequest implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "auth_provider") || $data->auth_provider === null) {
-            throw new SdkValidationError("auth_provider", 'required', "Required property 'auth_provider' is missing or null");
-        }
+        if (!property_exists($data, "auth_provider") || $data->auth_provider === null) { throw new SdkValidationError("auth_provider", 'required', "Required property 'auth_provider' is missing or null"); }
         return new self(
             authProvider: SdkClient::hydrateStringEnumOrString($data->auth_provider, NeonAuthSupportedAuthProvider::class),
             databaseName: (property_exists($data, "database_name") && $data->database_name !== null ? SdkClient::stringValue($data->database_name) : SdkNotGiven::Value),
@@ -165,9 +161,7 @@ class ListNeonAuthOAuthClientsResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "clients") || $data->clients === null) {
-            throw new SdkValidationError("clients", 'required', "Required property 'clients' is missing or null");
-        }
+        if (!property_exists($data, "clients") || $data->clients === null) { throw new SdkValidationError("clients", 'required', "Required property 'clients' is missing or null"); }
         return new self(
             clients: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, NeonAuthOAuthClient::class), SdkClient::arrayValue($data->clients))),
         );
@@ -212,9 +206,7 @@ class NeonAuthAllowLocalhostResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "allow_localhost") || $data->allow_localhost === null) {
-            throw new SdkValidationError("allow_localhost", 'required', "Required property 'allow_localhost' is missing or null");
-        }
+        if (!property_exists($data, "allow_localhost") || $data->allow_localhost === null) { throw new SdkValidationError("allow_localhost", 'required', "Required property 'allow_localhost' is missing or null"); }
         return new self(
             allowLocalhost: SdkClient::boolValue($data->allow_localhost),
         );
@@ -259,9 +251,7 @@ class NeonAuthConfigResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "name") || $data->name === null) {
-            throw new SdkValidationError("name", 'required', "Required property 'name' is missing or null");
-        }
+        if (!property_exists($data, "name") || $data->name === null) { throw new SdkValidationError("name", 'required', "Required property 'name' is missing or null"); }
         return new self(
             name: SdkClient::stringValue($data->name),
         );
@@ -306,9 +296,7 @@ class NeonAuthConfigUpdate implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "name") || $data->name === null) {
-            throw new SdkValidationError("name", 'required', "Required property 'name' is missing or null");
-        }
+        if (!property_exists($data, "name") || $data->name === null) { throw new SdkValidationError("name", 'required', "Required property 'name' is missing or null"); }
         return new self(
             name: SdkClient::stringValue($data->name),
         );

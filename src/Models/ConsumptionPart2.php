@@ -55,12 +55,8 @@ class ConsumptionHistoryPerProject implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "project_id") || $data->project_id === null) {
-            throw new SdkValidationError("project_id", 'required', "Required property 'project_id' is missing or null");
-        }
-        if (!property_exists($data, "periods") || $data->periods === null) {
-            throw new SdkValidationError("periods", 'required', "Required property 'periods' is missing or null");
-        }
+        if (!property_exists($data, "project_id") || $data->project_id === null) { throw new SdkValidationError("project_id", 'required', "Required property 'project_id' is missing or null"); }
+        if (!property_exists($data, "periods") || $data->periods === null) { throw new SdkValidationError("periods", 'required', "Required property 'periods' is missing or null"); }
         return new self(
             projectId: SdkClient::stringValue($data->project_id),
             periods: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, ConsumptionHistoryPerPeriod::class), SdkClient::arrayValue($data->periods))),
@@ -106,9 +102,7 @@ class ConsumptionHistoryPerProjectResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "projects") || $data->projects === null) {
-            throw new SdkValidationError("projects", 'required', "Required property 'projects' is missing or null");
-        }
+        if (!property_exists($data, "projects") || $data->projects === null) { throw new SdkValidationError("projects", 'required', "Required property 'projects' is missing or null"); }
         return new self(
             projects: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, ConsumptionHistoryPerProject::class), SdkClient::arrayValue($data->projects))),
         );
@@ -163,12 +157,8 @@ class ConsumptionHistoryPerProjectV2 implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "project_id") || $data->project_id === null) {
-            throw new SdkValidationError("project_id", 'required', "Required property 'project_id' is missing or null");
-        }
-        if (!property_exists($data, "periods") || $data->periods === null) {
-            throw new SdkValidationError("periods", 'required', "Required property 'periods' is missing or null");
-        }
+        if (!property_exists($data, "project_id") || $data->project_id === null) { throw new SdkValidationError("project_id", 'required', "Required property 'project_id' is missing or null"); }
+        if (!property_exists($data, "periods") || $data->periods === null) { throw new SdkValidationError("periods", 'required', "Required property 'periods' is missing or null"); }
         return new self(
             projectId: SdkClient::stringValue($data->project_id),
             periods: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, ConsumptionHistoryPerPeriodV2::class), SdkClient::arrayValue($data->periods))),
@@ -214,9 +204,7 @@ class ConsumptionHistoryPerProjectV2Response implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "projects") || $data->projects === null) {
-            throw new SdkValidationError("projects", 'required', "Required property 'projects' is missing or null");
-        }
+        if (!property_exists($data, "projects") || $data->projects === null) { throw new SdkValidationError("projects", 'required', "Required property 'projects' is missing or null"); }
         return new self(
             projects: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, ConsumptionHistoryPerProjectV2::class), SdkClient::arrayValue($data->projects))),
         );
@@ -345,27 +333,13 @@ class ConsumptionHistoryPerTimeframe implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "timeframe_start") || $data->timeframe_start === null) {
-            throw new SdkValidationError("timeframe_start", 'required', "Required property 'timeframe_start' is missing or null");
-        }
-        if (!property_exists($data, "timeframe_end") || $data->timeframe_end === null) {
-            throw new SdkValidationError("timeframe_end", 'required', "Required property 'timeframe_end' is missing or null");
-        }
-        if (!property_exists($data, "active_time_seconds") || $data->active_time_seconds === null) {
-            throw new SdkValidationError("active_time_seconds", 'required', "Required property 'active_time_seconds' is missing or null");
-        }
-        if (!property_exists($data, "compute_time_seconds") || $data->compute_time_seconds === null) {
-            throw new SdkValidationError("compute_time_seconds", 'required', "Required property 'compute_time_seconds' is missing or null");
-        }
-        if (!property_exists($data, "written_data_bytes") || $data->written_data_bytes === null) {
-            throw new SdkValidationError("written_data_bytes", 'required', "Required property 'written_data_bytes' is missing or null");
-        }
-        if (!property_exists($data, "synthetic_storage_size_bytes") || $data->synthetic_storage_size_bytes === null) {
-            throw new SdkValidationError("synthetic_storage_size_bytes", 'required', "Required property 'synthetic_storage_size_bytes' is missing or null");
-        }
-        if (!property_exists($data, "data_storage_bytes_hour") || $data->data_storage_bytes_hour === null) {
-            throw new SdkValidationError("data_storage_bytes_hour", 'required', "Required property 'data_storage_bytes_hour' is missing or null");
-        }
+        if (!property_exists($data, "timeframe_start") || $data->timeframe_start === null) { throw new SdkValidationError("timeframe_start", 'required', "Required property 'timeframe_start' is missing or null"); }
+        if (!property_exists($data, "timeframe_end") || $data->timeframe_end === null) { throw new SdkValidationError("timeframe_end", 'required', "Required property 'timeframe_end' is missing or null"); }
+        if (!property_exists($data, "active_time_seconds") || $data->active_time_seconds === null) { throw new SdkValidationError("active_time_seconds", 'required', "Required property 'active_time_seconds' is missing or null"); }
+        if (!property_exists($data, "compute_time_seconds") || $data->compute_time_seconds === null) { throw new SdkValidationError("compute_time_seconds", 'required', "Required property 'compute_time_seconds' is missing or null"); }
+        if (!property_exists($data, "written_data_bytes") || $data->written_data_bytes === null) { throw new SdkValidationError("written_data_bytes", 'required', "Required property 'written_data_bytes' is missing or null"); }
+        if (!property_exists($data, "synthetic_storage_size_bytes") || $data->synthetic_storage_size_bytes === null) { throw new SdkValidationError("synthetic_storage_size_bytes", 'required', "Required property 'synthetic_storage_size_bytes' is missing or null"); }
+        if (!property_exists($data, "data_storage_bytes_hour") || $data->data_storage_bytes_hour === null) { throw new SdkValidationError("data_storage_bytes_hour", 'required', "Required property 'data_storage_bytes_hour' is missing or null"); }
         return new self(
             timeframeStart: SdkClient::stringValue($data->timeframe_start),
             timeframeEnd: SdkClient::stringValue($data->timeframe_end),

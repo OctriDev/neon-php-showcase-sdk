@@ -45,9 +45,7 @@ class ProjectBranchLogFieldsResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "fields") || $data->fields === null) {
-            throw new SdkValidationError("fields", 'required', "Required property 'fields' is missing or null");
-        }
+        if (!property_exists($data, "fields") || $data->fields === null) { throw new SdkValidationError("fields", 'required', "Required property 'fields' is missing or null"); }
         return new self(
             fields: array_values(array_map(static fn($item) => SdkClient::stringValue($item), SdkClient::arrayValue($data->fields))),
         );
@@ -102,12 +100,8 @@ class ProjectBranchLogFieldValuesResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "values") || $data->values === null) {
-            throw new SdkValidationError("values", 'required', "Required property 'values' is missing or null");
-        }
-        if (!property_exists($data, "is_truncated") || $data->is_truncated === null) {
-            throw new SdkValidationError("is_truncated", 'required', "Required property 'is_truncated' is missing or null");
-        }
+        if (!property_exists($data, "values") || $data->values === null) { throw new SdkValidationError("values", 'required', "Required property 'values' is missing or null"); }
+        if (!property_exists($data, "is_truncated") || $data->is_truncated === null) { throw new SdkValidationError("is_truncated", 'required', "Required property 'is_truncated' is missing or null"); }
         return new self(
             values: array_values(array_map(static fn($item) => SdkClient::stringValue($item), SdkClient::arrayValue($data->values))),
             isTruncated: SdkClient::boolValue($data->is_truncated),
@@ -269,15 +263,9 @@ class ProjectBranchLogRecord implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "timestamp") || $data->timestamp === null) {
-            throw new SdkValidationError("timestamp", 'required', "Required property 'timestamp' is missing or null");
-        }
-        if (!property_exists($data, "message") || $data->message === null) {
-            throw new SdkValidationError("message", 'required', "Required property 'message' is missing or null");
-        }
-        if (!property_exists($data, "attributes") || $data->attributes === null) {
-            throw new SdkValidationError("attributes", 'required', "Required property 'attributes' is missing or null");
-        }
+        if (!property_exists($data, "timestamp") || $data->timestamp === null) { throw new SdkValidationError("timestamp", 'required', "Required property 'timestamp' is missing or null"); }
+        if (!property_exists($data, "message") || $data->message === null) { throw new SdkValidationError("message", 'required', "Required property 'message' is missing or null"); }
+        if (!property_exists($data, "attributes") || $data->attributes === null) { throw new SdkValidationError("attributes", 'required', "Required property 'attributes' is missing or null"); }
         return new self(
             timestamp: SdkClient::stringValue($data->timestamp),
             message: SdkClient::stringValue($data->message),
@@ -306,26 +294,11 @@ final readonly class ProjectBranchLogSeverity implements SdkOpenEnum
     public const ERROR = "error";
     public const FATAL = "fatal";
     private function __construct(public string $value) {}
-    public static function from(string|int $value): static
-    {
-        return new self((string) $value);
-    }
-    public static function tryFrom(string|int|null $value): ?static
-    {
-        return $value === null ? null : self::from($value);
-    }
-    public function getValue(): string
-    {
-        return $this->value;
-    }
-    public function jsonSerialize(): string
-    {
-        return $this->value;
-    }
-    public function __toString(): string
-    {
-        return (string) $this->value;
-    }
+    public static function from(string|int $value): static { return new self((string) $value); }
+    public static function tryFrom(string|int|null $value): ?static { return $value === null ? null : self::from($value); }
+    public function getValue(): string { return $this->value; }
+    public function jsonSerialize(): string { return $this->value; }
+    public function __toString(): string { return (string) $this->value; }
 }
 
 /**
@@ -341,24 +314,9 @@ final readonly class ProjectBranchLogsInvalidQueryReasonEnum implements SdkOpenE
     public const INVALID_LOGQL = "invalid_logql";
     public const CONFLICTING_FILTERS = "conflicting_filters";
     private function __construct(public string $value) {}
-    public static function from(string|int $value): static
-    {
-        return new self((string) $value);
-    }
-    public static function tryFrom(string|int|null $value): ?static
-    {
-        return $value === null ? null : self::from($value);
-    }
-    public function getValue(): string
-    {
-        return $this->value;
-    }
-    public function jsonSerialize(): string
-    {
-        return $this->value;
-    }
-    public function __toString(): string
-    {
-        return (string) $this->value;
-    }
+    public static function from(string|int $value): static { return new self((string) $value); }
+    public static function tryFrom(string|int|null $value): ?static { return $value === null ? null : self::from($value); }
+    public function getValue(): string { return $this->value; }
+    public function jsonSerialize(): string { return $this->value; }
+    public function __toString(): string { return (string) $this->value; }
 }

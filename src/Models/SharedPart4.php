@@ -157,18 +157,10 @@ class Role implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "branch_id") || $data->branch_id === null) {
-            throw new SdkValidationError("branch_id", 'required', "Required property 'branch_id' is missing or null");
-        }
-        if (!property_exists($data, "name") || $data->name === null) {
-            throw new SdkValidationError("name", 'required', "Required property 'name' is missing or null");
-        }
-        if (!property_exists($data, "created_at") || $data->created_at === null) {
-            throw new SdkValidationError("created_at", 'required', "Required property 'created_at' is missing or null");
-        }
-        if (!property_exists($data, "updated_at") || $data->updated_at === null) {
-            throw new SdkValidationError("updated_at", 'required', "Required property 'updated_at' is missing or null");
-        }
+        if (!property_exists($data, "branch_id") || $data->branch_id === null) { throw new SdkValidationError("branch_id", 'required', "Required property 'branch_id' is missing or null"); }
+        if (!property_exists($data, "name") || $data->name === null) { throw new SdkValidationError("name", 'required', "Required property 'name' is missing or null"); }
+        if (!property_exists($data, "created_at") || $data->created_at === null) { throw new SdkValidationError("created_at", 'required', "Required property 'created_at' is missing or null"); }
+        if (!property_exists($data, "updated_at") || $data->updated_at === null) { throw new SdkValidationError("updated_at", 'required', "Required property 'updated_at' is missing or null"); }
         return new self(
             branchId: SdkClient::stringValue($data->branch_id),
             name: SdkClient::stringValue($data->name),
@@ -219,9 +211,7 @@ class RolesResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "roles") || $data->roles === null) {
-            throw new SdkValidationError("roles", 'required', "Required property 'roles' is missing or null");
-        }
+        if (!property_exists($data, "roles") || $data->roles === null) { throw new SdkValidationError("roles", 'required', "Required property 'roles' is missing or null"); }
         return new self(
             roles: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, Role::class), SdkClient::arrayValue($data->roles))),
         );

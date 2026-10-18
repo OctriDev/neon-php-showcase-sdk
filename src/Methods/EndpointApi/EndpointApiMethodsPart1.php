@@ -23,7 +23,7 @@ trait EndpointApiMethodsPart1
 
         Validation::validatePattern('project_id', $projectId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('POST', "/projects/" . SdkClient::encodePathSegment($projectId) . "/endpoints", $clientConfig, body: ['endpoint' => $endpoint], returnType: EndpointOperations::class, decoder: 'json', operationId: 'createEndpoint', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('POST', "/projects/" . SdkClient::encodePathSegment($projectId) . "/endpoints", $clientConfig, body: ['endpoint' => $endpoint], returnType: EndpointOperations::class, decoder: 'json', operationId: 'createEndpoint', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, EndpointOperations::class));
     }
 
@@ -41,7 +41,7 @@ trait EndpointApiMethodsPart1
 
         Validation::validatePattern('project_id', $projectId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/endpoints", $clientConfig, returnType: EndpointsResponse::class, decoder: 'json', operationId: 'listEndpoint', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/endpoints", $clientConfig, returnType: EndpointsResponse::class, decoder: 'json', operationId: 'listEndpoint', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, EndpointsResponse::class));
     }
 
@@ -62,7 +62,7 @@ trait EndpointApiMethodsPart1
 
         Validation::validatePattern('endpoint_id', $endpointId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/endpoints/" . SdkClient::encodePathSegment($endpointId) . "", $clientConfig, returnType: EndpointResponse::class, decoder: 'json', operationId: 'getEndpoint', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/endpoints/" . SdkClient::encodePathSegment($endpointId) . "", $clientConfig, returnType: EndpointResponse::class, decoder: 'json', operationId: 'getEndpoint', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, EndpointResponse::class));
     }
 
@@ -83,7 +83,7 @@ trait EndpointApiMethodsPart1
 
         Validation::validatePattern('endpoint_id', $endpointId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('DELETE', "/projects/" . SdkClient::encodePathSegment($projectId) . "/endpoints/" . SdkClient::encodePathSegment($endpointId) . "", $clientConfig, returnType: EndpointOperations::class, decoder: 'json', operationId: 'deleteEndpoint', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('DELETE', "/projects/" . SdkClient::encodePathSegment($projectId) . "/endpoints/" . SdkClient::encodePathSegment($endpointId) . "", $clientConfig, returnType: EndpointOperations::class, decoder: 'json', operationId: 'deleteEndpoint', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, EndpointOperations::class));
     }
 
@@ -105,7 +105,7 @@ trait EndpointApiMethodsPart1
 
         Validation::validatePattern('endpoint_id', $endpointId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('PATCH', "/projects/" . SdkClient::encodePathSegment($projectId) . "/endpoints/" . SdkClient::encodePathSegment($endpointId) . "", $clientConfig, body: ['endpoint' => $endpoint], returnType: EndpointOperations::class, decoder: 'json', operationId: 'updateEndpoint', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('PATCH', "/projects/" . SdkClient::encodePathSegment($projectId) . "/endpoints/" . SdkClient::encodePathSegment($endpointId) . "", $clientConfig, body: ['endpoint' => $endpoint], returnType: EndpointOperations::class, decoder: 'json', operationId: 'updateEndpoint', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, EndpointOperations::class));
     }
 
@@ -126,7 +126,7 @@ trait EndpointApiMethodsPart1
 
         Validation::validatePattern('endpoint_id', $endpointId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('POST', "/projects/" . SdkClient::encodePathSegment($projectId) . "/endpoints/" . SdkClient::encodePathSegment($endpointId) . "/start", $clientConfig, returnType: EndpointOperations::class, decoder: 'json', operationId: 'startEndpoint', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('POST', "/projects/" . SdkClient::encodePathSegment($projectId) . "/endpoints/" . SdkClient::encodePathSegment($endpointId) . "/start", $clientConfig, returnType: EndpointOperations::class, decoder: 'json', operationId: 'startEndpoint', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, EndpointOperations::class));
     }
 
@@ -147,7 +147,7 @@ trait EndpointApiMethodsPart1
 
         Validation::validatePattern('endpoint_id', $endpointId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('POST', "/projects/" . SdkClient::encodePathSegment($projectId) . "/endpoints/" . SdkClient::encodePathSegment($endpointId) . "/suspend", $clientConfig, returnType: EndpointOperations::class, decoder: 'json', operationId: 'suspendEndpoint', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('POST', "/projects/" . SdkClient::encodePathSegment($projectId) . "/endpoints/" . SdkClient::encodePathSegment($endpointId) . "/suspend", $clientConfig, returnType: EndpointOperations::class, decoder: 'json', operationId: 'suspendEndpoint', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, EndpointOperations::class));
     }
 
@@ -168,7 +168,7 @@ trait EndpointApiMethodsPart1
 
         Validation::validatePattern('endpoint_id', $endpointId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('POST', "/projects/" . SdkClient::encodePathSegment($projectId) . "/endpoints/" . SdkClient::encodePathSegment($endpointId) . "/restart", $clientConfig, returnType: EndpointOperations::class, decoder: 'json', operationId: 'restartEndpoint', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('POST', "/projects/" . SdkClient::encodePathSegment($projectId) . "/endpoints/" . SdkClient::encodePathSegment($endpointId) . "/restart", $clientConfig, returnType: EndpointOperations::class, decoder: 'json', operationId: 'restartEndpoint', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, EndpointOperations::class));
     }
 }

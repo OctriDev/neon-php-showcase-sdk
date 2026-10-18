@@ -45,9 +45,7 @@ class ActiveRegionsResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "regions") || $data->regions === null) {
-            throw new SdkValidationError("regions", 'required', "Required property 'regions' is missing or null");
-        }
+        if (!property_exists($data, "regions") || $data->regions === null) { throw new SdkValidationError("regions", 'required', "Required property 'regions' is missing or null"); }
         return new self(
             regions: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, RegionResponse::class), SdkClient::arrayValue($data->regions))),
         );
@@ -132,21 +130,11 @@ class RegionResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "region_id") || $data->region_id === null) {
-            throw new SdkValidationError("region_id", 'required', "Required property 'region_id' is missing or null");
-        }
-        if (!property_exists($data, "name") || $data->name === null) {
-            throw new SdkValidationError("name", 'required', "Required property 'name' is missing or null");
-        }
-        if (!property_exists($data, "default") || $data->default === null) {
-            throw new SdkValidationError("default", 'required', "Required property 'default' is missing or null");
-        }
-        if (!property_exists($data, "geo_lat") || $data->geo_lat === null) {
-            throw new SdkValidationError("geo_lat", 'required', "Required property 'geo_lat' is missing or null");
-        }
-        if (!property_exists($data, "geo_long") || $data->geo_long === null) {
-            throw new SdkValidationError("geo_long", 'required', "Required property 'geo_long' is missing or null");
-        }
+        if (!property_exists($data, "region_id") || $data->region_id === null) { throw new SdkValidationError("region_id", 'required', "Required property 'region_id' is missing or null"); }
+        if (!property_exists($data, "name") || $data->name === null) { throw new SdkValidationError("name", 'required', "Required property 'name' is missing or null"); }
+        if (!property_exists($data, "default") || $data->default === null) { throw new SdkValidationError("default", 'required', "Required property 'default' is missing or null"); }
+        if (!property_exists($data, "geo_lat") || $data->geo_lat === null) { throw new SdkValidationError("geo_lat", 'required', "Required property 'geo_lat' is missing or null"); }
+        if (!property_exists($data, "geo_long") || $data->geo_long === null) { throw new SdkValidationError("geo_long", 'required', "Required property 'geo_long' is missing or null"); }
         return new self(
             regionId: SdkClient::stringValue($data->region_id),
             name: SdkClient::stringValue($data->name),

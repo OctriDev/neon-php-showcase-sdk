@@ -87,18 +87,10 @@ class BucketObjectsListResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "folders") || $data->folders === null) {
-            throw new SdkValidationError("folders", 'required', "Required property 'folders' is missing or null");
-        }
-        if (!property_exists($data, "objects") || $data->objects === null) {
-            throw new SdkValidationError("objects", 'required', "Required property 'objects' is missing or null");
-        }
-        if (!property_exists($data, "prefix") || $data->prefix === null) {
-            throw new SdkValidationError("prefix", 'required', "Required property 'prefix' is missing or null");
-        }
-        if (!property_exists($data, "is_truncated") || $data->is_truncated === null) {
-            throw new SdkValidationError("is_truncated", 'required', "Required property 'is_truncated' is missing or null");
-        }
+        if (!property_exists($data, "folders") || $data->folders === null) { throw new SdkValidationError("folders", 'required', "Required property 'folders' is missing or null"); }
+        if (!property_exists($data, "objects") || $data->objects === null) { throw new SdkValidationError("objects", 'required', "Required property 'objects' is missing or null"); }
+        if (!property_exists($data, "prefix") || $data->prefix === null) { throw new SdkValidationError("prefix", 'required', "Required property 'prefix' is missing or null"); }
+        if (!property_exists($data, "is_truncated") || $data->is_truncated === null) { throw new SdkValidationError("is_truncated", 'required', "Required property 'is_truncated' is missing or null"); }
         return new self(
             folders: array_values(array_map(static fn($item) => SdkClient::stringValue($item), SdkClient::arrayValue($data->folders))),
             objects: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, BucketObject::class), SdkClient::arrayValue($data->objects))),
@@ -147,9 +139,7 @@ class BucketResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "bucket") || $data->bucket === null) {
-            throw new SdkValidationError("bucket", 'required', "Required property 'bucket' is missing or null");
-        }
+        if (!property_exists($data, "bucket") || $data->bucket === null) { throw new SdkValidationError("bucket", 'required', "Required property 'bucket' is missing or null"); }
         return new self(
             bucket: SdkClient::hydrateClass($data->bucket, Bucket::class),
         );
@@ -194,9 +184,7 @@ class BucketsListResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "buckets") || $data->buckets === null) {
-            throw new SdkValidationError("buckets", 'required', "Required property 'buckets' is missing or null");
-        }
+        if (!property_exists($data, "buckets") || $data->buckets === null) { throw new SdkValidationError("buckets", 'required', "Required property 'buckets' is missing or null"); }
         return new self(
             buckets: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, Bucket::class), SdkClient::arrayValue($data->buckets))),
         );
@@ -211,26 +199,11 @@ final readonly class PresignRequestOperationEnum implements SdkOpenEnum
     public const UPLOAD = "upload";
     public const DOWNLOAD = "download";
     private function __construct(public string $value) {}
-    public static function from(string|int $value): static
-    {
-        return new self((string) $value);
-    }
-    public static function tryFrom(string|int|null $value): ?static
-    {
-        return $value === null ? null : self::from($value);
-    }
-    public function getValue(): string
-    {
-        return $this->value;
-    }
-    public function jsonSerialize(): string
-    {
-        return $this->value;
-    }
-    public function __toString(): string
-    {
-        return (string) $this->value;
-    }
+    public static function from(string|int $value): static { return new self((string) $value); }
+    public static function tryFrom(string|int|null $value): ?static { return $value === null ? null : self::from($value); }
+    public function getValue(): string { return $this->value; }
+    public function jsonSerialize(): string { return $this->value; }
+    public function __toString(): string { return (string) $this->value; }
 }
 
 /**
@@ -295,9 +268,7 @@ class PresignRequest implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "operation") || $data->operation === null) {
-            throw new SdkValidationError("operation", 'required', "Required property 'operation' is missing or null");
-        }
+        if (!property_exists($data, "operation") || $data->operation === null) { throw new SdkValidationError("operation", 'required', "Required property 'operation' is missing or null"); }
         return new self(
             operation: SdkClient::hydrateStringEnumOrString($data->operation, PresignRequestOperationEnum::class),
             contentType: (property_exists($data, "content_type") && $data->content_type !== null ? SdkClient::stringValue($data->content_type) : SdkNotGiven::Value),

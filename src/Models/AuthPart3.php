@@ -189,27 +189,13 @@ class NeonAuthOAuthClient implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "client_id") || $data->client_id === null) {
-            throw new SdkValidationError("client_id", 'required', "Required property 'client_id' is missing or null");
-        }
-        if (!property_exists($data, "name") || $data->name === null) {
-            throw new SdkValidationError("name", 'required', "Required property 'name' is missing or null");
-        }
-        if (!property_exists($data, "type") || $data->type === null) {
-            throw new SdkValidationError("type", 'required', "Required property 'type' is missing or null");
-        }
-        if (!property_exists($data, "redirect_uris") || $data->redirect_uris === null) {
-            throw new SdkValidationError("redirect_uris", 'required', "Required property 'redirect_uris' is missing or null");
-        }
-        if (!property_exists($data, "resources") || $data->resources === null) {
-            throw new SdkValidationError("resources", 'required', "Required property 'resources' is missing or null");
-        }
-        if (!property_exists($data, "skip_consent") || $data->skip_consent === null) {
-            throw new SdkValidationError("skip_consent", 'required', "Required property 'skip_consent' is missing or null");
-        }
-        if (!property_exists($data, "disabled") || $data->disabled === null) {
-            throw new SdkValidationError("disabled", 'required', "Required property 'disabled' is missing or null");
-        }
+        if (!property_exists($data, "client_id") || $data->client_id === null) { throw new SdkValidationError("client_id", 'required', "Required property 'client_id' is missing or null"); }
+        if (!property_exists($data, "name") || $data->name === null) { throw new SdkValidationError("name", 'required', "Required property 'name' is missing or null"); }
+        if (!property_exists($data, "type") || $data->type === null) { throw new SdkValidationError("type", 'required', "Required property 'type' is missing or null"); }
+        if (!property_exists($data, "redirect_uris") || $data->redirect_uris === null) { throw new SdkValidationError("redirect_uris", 'required', "Required property 'redirect_uris' is missing or null"); }
+        if (!property_exists($data, "resources") || $data->resources === null) { throw new SdkValidationError("resources", 'required', "Required property 'resources' is missing or null"); }
+        if (!property_exists($data, "skip_consent") || $data->skip_consent === null) { throw new SdkValidationError("skip_consent", 'required', "Required property 'skip_consent' is missing or null"); }
+        if (!property_exists($data, "disabled") || $data->disabled === null) { throw new SdkValidationError("disabled", 'required', "Required property 'disabled' is missing or null"); }
         return new self(
             clientId: SdkClient::stringValue($data->client_id),
             name: SdkClient::stringValue($data->name),

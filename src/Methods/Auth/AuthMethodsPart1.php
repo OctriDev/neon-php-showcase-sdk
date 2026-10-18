@@ -25,7 +25,7 @@ trait AuthMethodsPart1
 
         Validation::validatePattern('branch_id', $branchId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth", $clientConfig, returnType: NeonAuthIntegration::class, decoder: 'json', operationId: 'getAuth', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth", $clientConfig, returnType: NeonAuthIntegration::class, decoder: 'json', operationId: 'getAuth', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, NeonAuthIntegration::class));
     }
 
@@ -48,7 +48,7 @@ trait AuthMethodsPart1
 
         Validation::validatePattern('branch_id', $branchId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('POST', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth", $clientConfig, body: ['auth_provider' => $authProvider, 'database_name' => $databaseName], returnType: NeonAuthCreateIntegrationResponse::class, decoder: 'json', operationId: 'createAuth', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('POST', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth", $clientConfig, body: ['auth_provider' => $authProvider, 'database_name' => $databaseName], returnType: NeonAuthCreateIntegrationResponse::class, decoder: 'json', operationId: 'createAuth', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, NeonAuthCreateIntegrationResponse::class));
     }
 
@@ -69,7 +69,7 @@ trait AuthMethodsPart1
 
         Validation::validatePattern('branch_id', $branchId, '^[a-z0-9-]{1,60}$');
 
-        return SdkClient::request('DELETE', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth", $clientConfig, body: ['delete_data' => $deleteData], decoder: 'empty', operationId: 'disableAuth', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)])->data;
+        return SdkClient::request('DELETE', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth", $clientConfig, body: ['delete_data' => $deleteData], decoder: 'empty', operationId: 'disableAuth', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)])->data;
     }
 
 
@@ -89,7 +89,7 @@ trait AuthMethodsPart1
 
         Validation::validatePattern('branch_id', $branchId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth/domains", $clientConfig, returnType: NeonAuthRedirectURIWhitelistResponse::class, decoder: 'json', operationId: 'listAuthTrustedDomains', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth/domains", $clientConfig, returnType: NeonAuthRedirectURIWhitelistResponse::class, decoder: 'json', operationId: 'listAuthTrustedDomains', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, NeonAuthRedirectURIWhitelistResponse::class));
     }
 
@@ -113,7 +113,7 @@ trait AuthMethodsPart1
 
         Validation::validateUri('domain', $domain);
 
-        return SdkClient::request('POST', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth/domains", $clientConfig, body: ['domain' => $domain, 'auth_provider' => $authProvider], decoder: 'empty', operationId: 'addAuthTrustedDomain', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)])->data;
+        return SdkClient::request('POST', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth/domains", $clientConfig, body: ['domain' => $domain, 'auth_provider' => $authProvider], decoder: 'empty', operationId: 'addAuthTrustedDomain', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)])->data;
     }
 
 
@@ -134,7 +134,7 @@ trait AuthMethodsPart1
 
         Validation::validatePattern('branch_id', $branchId, '^[a-z0-9-]{1,60}$');
 
-        return SdkClient::request('DELETE', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth/domains", $clientConfig, body: ['auth_provider' => $authProvider, 'domains' => $domains], decoder: 'empty', operationId: 'deleteAuthTrustedDomain', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)])->data;
+        return SdkClient::request('DELETE', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth/domains", $clientConfig, body: ['auth_provider' => $authProvider, 'domains' => $domains], decoder: 'empty', operationId: 'deleteAuthTrustedDomain', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)])->data;
     }
 
 
@@ -163,7 +163,7 @@ trait AuthMethodsPart1
             Validation::validateLength('name', $name, min: 1, max: 255);
         }
 
-        $sdkResponse = SdkClient::request('POST', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth/users", $clientConfig, body: ['email' => $email, 'name' => $name], returnType: NeonAuthCreateNewUserResponse::class, decoder: 'json', operationId: 'createAuthUser', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('POST', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth/users", $clientConfig, body: ['email' => $email, 'name' => $name], returnType: NeonAuthCreateNewUserResponse::class, decoder: 'json', operationId: 'createAuthUser', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, NeonAuthCreateNewUserResponse::class));
     }
 
@@ -184,7 +184,7 @@ trait AuthMethodsPart1
 
         Validation::validatePattern('branch_id', $branchId, '^[a-z0-9-]{1,60}$');
 
-        return SdkClient::request('DELETE', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth/users/" . SdkClient::encodePathSegment($authUserId) . "", $clientConfig, decoder: 'empty', operationId: 'deleteAuthUser', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)])->data;
+        return SdkClient::request('DELETE', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth/users/" . SdkClient::encodePathSegment($authUserId) . "", $clientConfig, decoder: 'empty', operationId: 'deleteAuthUser', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)])->data;
     }
 
 
@@ -208,7 +208,7 @@ trait AuthMethodsPart1
 
         Validation::validateItems('roles', $roles, min: 1);
 
-        $sdkResponse = SdkClient::request('PUT', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth/users/" . SdkClient::encodePathSegment($authUserId) . "/role", $clientConfig, body: ['roles' => $roles], returnType: UpdateNeonAuthUserRoleResponse::class, decoder: 'json', operationId: 'updateAuthUserRole', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('PUT', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth/users/" . SdkClient::encodePathSegment($authUserId) . "/role", $clientConfig, body: ['roles' => $roles], returnType: UpdateNeonAuthUserRoleResponse::class, decoder: 'json', operationId: 'updateAuthUserRole', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, UpdateNeonAuthUserRoleResponse::class));
     }
 
@@ -229,7 +229,7 @@ trait AuthMethodsPart1
 
         Validation::validatePattern('branch_id', $branchId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth/oauth_providers", $clientConfig, returnType: ListNeonAuthOauthProvidersResponse::class, decoder: 'json', operationId: 'listAuthOauthProviders', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth/oauth_providers", $clientConfig, returnType: ListNeonAuthOauthProvidersResponse::class, decoder: 'json', operationId: 'listAuthOauthProviders', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, ListNeonAuthOauthProvidersResponse::class));
     }
 
@@ -254,7 +254,7 @@ trait AuthMethodsPart1
 
         Validation::validatePattern('branch_id', $branchId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('POST', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth/oauth_providers", $clientConfig, body: ['id' => $id, 'client_id' => $clientId, 'client_secret' => $clientSecret, 'microsoft_tenant_id' => $microsoftTenantId], returnType: NeonAuthOauthProvider::class, decoder: 'json', operationId: 'addAuthOauthProvider', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('POST', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth/oauth_providers", $clientConfig, body: ['id' => $id, 'client_id' => $clientId, 'client_secret' => $clientSecret, 'microsoft_tenant_id' => $microsoftTenantId], returnType: NeonAuthOauthProvider::class, decoder: 'json', operationId: 'addAuthOauthProvider', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, NeonAuthOauthProvider::class));
     }
 
@@ -279,7 +279,7 @@ trait AuthMethodsPart1
 
         Validation::validatePattern('branch_id', $branchId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('PATCH', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth/oauth_providers/" . SdkClient::encodePathSegment($oauthProviderId) . "", $clientConfig, body: ['client_id' => $clientId, 'client_secret' => $clientSecret, 'microsoft_tenant_id' => $microsoftTenantId], returnType: NeonAuthOauthProvider::class, decoder: 'json', operationId: 'updateAuthOauthProvider', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('PATCH', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth/oauth_providers/" . SdkClient::encodePathSegment($oauthProviderId) . "", $clientConfig, body: ['client_id' => $clientId, 'client_secret' => $clientSecret, 'microsoft_tenant_id' => $microsoftTenantId], returnType: NeonAuthOauthProvider::class, decoder: 'json', operationId: 'updateAuthOauthProvider', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, NeonAuthOauthProvider::class));
     }
 
@@ -300,6 +300,6 @@ trait AuthMethodsPart1
 
         Validation::validatePattern('branch_id', $branchId, '^[a-z0-9-]{1,60}$');
 
-        return SdkClient::request('DELETE', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth/oauth_providers/" . SdkClient::encodePathSegment($oauthProviderId) . "", $clientConfig, decoder: 'empty', operationId: 'deleteAuthOauthProvider', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)])->data;
+        return SdkClient::request('DELETE', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth/oauth_providers/" . SdkClient::encodePathSegment($oauthProviderId) . "", $clientConfig, decoder: 'empty', operationId: 'deleteAuthOauthProvider', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)])->data;
     }
 }

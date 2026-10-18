@@ -237,45 +237,19 @@ class BillingAccount implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "state") || $data->state === null) {
-            throw new SdkValidationError("state", 'required', "Required property 'state' is missing or null");
-        }
-        if (!property_exists($data, "payment_source") || $data->payment_source === null) {
-            throw new SdkValidationError("payment_source", 'required', "Required property 'payment_source' is missing or null");
-        }
-        if (!property_exists($data, "subscription_type") || $data->subscription_type === null) {
-            throw new SdkValidationError("subscription_type", 'required', "Required property 'subscription_type' is missing or null");
-        }
-        if (!property_exists($data, "payment_method") || $data->payment_method === null) {
-            throw new SdkValidationError("payment_method", 'required', "Required property 'payment_method' is missing or null");
-        }
-        if (!property_exists($data, "quota_reset_at_last") || $data->quota_reset_at_last === null) {
-            throw new SdkValidationError("quota_reset_at_last", 'required', "Required property 'quota_reset_at_last' is missing or null");
-        }
-        if (!property_exists($data, "name") || $data->name === null) {
-            throw new SdkValidationError("name", 'required', "Required property 'name' is missing or null");
-        }
-        if (!property_exists($data, "email") || $data->email === null) {
-            throw new SdkValidationError("email", 'required', "Required property 'email' is missing or null");
-        }
-        if (!property_exists($data, "address_city") || $data->address_city === null) {
-            throw new SdkValidationError("address_city", 'required', "Required property 'address_city' is missing or null");
-        }
-        if (!property_exists($data, "address_country") || $data->address_country === null) {
-            throw new SdkValidationError("address_country", 'required', "Required property 'address_country' is missing or null");
-        }
-        if (!property_exists($data, "address_line1") || $data->address_line1 === null) {
-            throw new SdkValidationError("address_line1", 'required', "Required property 'address_line1' is missing or null");
-        }
-        if (!property_exists($data, "address_line2") || $data->address_line2 === null) {
-            throw new SdkValidationError("address_line2", 'required', "Required property 'address_line2' is missing or null");
-        }
-        if (!property_exists($data, "address_postal_code") || $data->address_postal_code === null) {
-            throw new SdkValidationError("address_postal_code", 'required', "Required property 'address_postal_code' is missing or null");
-        }
-        if (!property_exists($data, "address_state") || $data->address_state === null) {
-            throw new SdkValidationError("address_state", 'required', "Required property 'address_state' is missing or null");
-        }
+        if (!property_exists($data, "state") || $data->state === null) { throw new SdkValidationError("state", 'required', "Required property 'state' is missing or null"); }
+        if (!property_exists($data, "payment_source") || $data->payment_source === null) { throw new SdkValidationError("payment_source", 'required', "Required property 'payment_source' is missing or null"); }
+        if (!property_exists($data, "subscription_type") || $data->subscription_type === null) { throw new SdkValidationError("subscription_type", 'required', "Required property 'subscription_type' is missing or null"); }
+        if (!property_exists($data, "payment_method") || $data->payment_method === null) { throw new SdkValidationError("payment_method", 'required', "Required property 'payment_method' is missing or null"); }
+        if (!property_exists($data, "quota_reset_at_last") || $data->quota_reset_at_last === null) { throw new SdkValidationError("quota_reset_at_last", 'required', "Required property 'quota_reset_at_last' is missing or null"); }
+        if (!property_exists($data, "name") || $data->name === null) { throw new SdkValidationError("name", 'required', "Required property 'name' is missing or null"); }
+        if (!property_exists($data, "email") || $data->email === null) { throw new SdkValidationError("email", 'required', "Required property 'email' is missing or null"); }
+        if (!property_exists($data, "address_city") || $data->address_city === null) { throw new SdkValidationError("address_city", 'required', "Required property 'address_city' is missing or null"); }
+        if (!property_exists($data, "address_country") || $data->address_country === null) { throw new SdkValidationError("address_country", 'required', "Required property 'address_country' is missing or null"); }
+        if (!property_exists($data, "address_line1") || $data->address_line1 === null) { throw new SdkValidationError("address_line1", 'required', "Required property 'address_line1' is missing or null"); }
+        if (!property_exists($data, "address_line2") || $data->address_line2 === null) { throw new SdkValidationError("address_line2", 'required', "Required property 'address_line2' is missing or null"); }
+        if (!property_exists($data, "address_postal_code") || $data->address_postal_code === null) { throw new SdkValidationError("address_postal_code", 'required', "Required property 'address_postal_code' is missing or null"); }
+        if (!property_exists($data, "address_state") || $data->address_state === null) { throw new SdkValidationError("address_state", 'required', "Required property 'address_state' is missing or null"); }
         return new self(
             state: SdkClient::hydrateStringEnumOrString($data->state, BillingAccountState::class),
             paymentSource: SdkClient::hydrateClass($data->payment_source, PaymentSource::class),
@@ -311,26 +285,11 @@ final readonly class BillingAccountState implements SdkOpenEnum
     public const DEACTIVATED = "deactivated";
     public const DELETED = "deleted";
     private function __construct(public string $value) {}
-    public static function from(string|int $value): static
-    {
-        return new self((string) $value);
-    }
-    public static function tryFrom(string|int|null $value): ?static
-    {
-        return $value === null ? null : self::from($value);
-    }
-    public function getValue(): string
-    {
-        return $this->value;
-    }
-    public function jsonSerialize(): string
-    {
-        return $this->value;
-    }
-    public function __toString(): string
-    {
-        return (string) $this->value;
-    }
+    public static function from(string|int $value): static { return new self((string) $value); }
+    public static function tryFrom(string|int|null $value): ?static { return $value === null ? null : self::from($value); }
+    public function getValue(): string { return $this->value; }
+    public function jsonSerialize(): string { return $this->value; }
+    public function __toString(): string { return (string) $this->value; }
 }
 
 /**
@@ -350,24 +309,9 @@ final readonly class BillingPaymentMethod implements SdkOpenEnum
     public const SPONSORSHIP = "sponsorship";
     public const SHARED_PAYMENT_TOKEN = "shared_payment_token";
     private function __construct(public string $value) {}
-    public static function from(string|int $value): static
-    {
-        return new self((string) $value);
-    }
-    public static function tryFrom(string|int|null $value): ?static
-    {
-        return $value === null ? null : self::from($value);
-    }
-    public function getValue(): string
-    {
-        return $this->value;
-    }
-    public function jsonSerialize(): string
-    {
-        return $this->value;
-    }
-    public function __toString(): string
-    {
-        return (string) $this->value;
-    }
+    public static function from(string|int $value): static { return new self((string) $value); }
+    public static function tryFrom(string|int|null $value): ?static { return $value === null ? null : self::from($value); }
+    public function getValue(): string { return $this->value; }
+    public function jsonSerialize(): string { return $this->value; }
+    public function __toString(): string { return (string) $this->value; }
 }
