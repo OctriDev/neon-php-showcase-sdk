@@ -109,7 +109,7 @@ class AuthDetailsResponse implements \JsonSerializable
         return new self(
             accountId: SdkClient::stringValue($data->account_id),
             authMethod: SdkClient::hydrateStringEnumOrString($data->auth_method, AuthDetailsResponseAuthMethodEnum::class),
-            authData: (property_exists($data, "auth_data") ? SdkClient::stringValue($data->auth_data) : SdkNotGiven::Value),
+            authData: (property_exists($data, "auth_data") && $data->auth_data !== null ? SdkClient::stringValue($data->auth_data) : SdkNotGiven::Value),
         );
     }
 }

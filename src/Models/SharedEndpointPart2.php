@@ -101,9 +101,9 @@ class EndpointSettingsData implements \JsonSerializable
     public static function fromObject(object $data): self
     {
         return new self(
-            pgSettings: (property_exists($data, "pg_settings") ? SdkClient::mapValues(SdkClient::stringMapValue($data->pg_settings), static fn($item) => SdkClient::stringValue($item)) : SdkNotGiven::Value),
-            pgbouncerSettings: (property_exists($data, "pgbouncer_settings") ? SdkClient::mapValues(SdkClient::stringMapValue($data->pgbouncer_settings), static fn($item) => SdkClient::stringValue($item)) : SdkNotGiven::Value),
-            preloadLibraries: (property_exists($data, "preload_libraries") ? SdkClient::hydrateClass($data->preload_libraries, PreloadLibraries::class) : SdkNotGiven::Value),
+            pgSettings: (property_exists($data, "pg_settings") && $data->pg_settings !== null ? SdkClient::mapValues(SdkClient::stringMapValue($data->pg_settings), static fn($item) => SdkClient::stringValue($item)) : SdkNotGiven::Value),
+            pgbouncerSettings: (property_exists($data, "pgbouncer_settings") && $data->pgbouncer_settings !== null ? SdkClient::mapValues(SdkClient::stringMapValue($data->pgbouncer_settings), static fn($item) => SdkClient::stringValue($item)) : SdkNotGiven::Value),
+            preloadLibraries: (property_exists($data, "preload_libraries") && $data->preload_libraries !== null ? SdkClient::hydrateClass($data->preload_libraries, PreloadLibraries::class) : SdkNotGiven::Value),
         );
     }
 }

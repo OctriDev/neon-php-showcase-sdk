@@ -21,9 +21,9 @@ class BranchNamespace
      *
      * @param string $projectId
      * @param BranchCreateRequest|SdkNotGiven $body
-     * @return BranchResponse
+     * @return CreateBranchResponse
      */
-    public function create(string $projectId, BranchCreateRequest|SdkNotGiven $body = SdkNotGiven::Value, ?RequestOptions $requestOptions = null): BranchResponse
+    public function create(string $projectId, BranchCreateRequest|SdkNotGiven $body = SdkNotGiven::Value, ?RequestOptions $requestOptions = null): CreateBranchResponse
     {
         return BranchApi::createBranch($this->clientConfig, $projectId, $body, $requestOptions);
     }
@@ -39,9 +39,9 @@ class BranchNamespace
      * @param ListBranchSortOrder|SdkNotGiven $sortOrder
      * @param int|SdkNotGiven $limit
      * @param bool|SdkNotGiven $includeDeleted
-     * @return BranchesResponse
+     * @return ListBranchResponse
      */
-    public function list_(string $projectId, string|SdkNotGiven $search = SdkNotGiven::Value, ListBranchSortBy|SdkNotGiven $sortBy = SdkNotGiven::Value, string|SdkNotGiven $cursor = SdkNotGiven::Value, ListBranchSortOrder|SdkNotGiven $sortOrder = SdkNotGiven::Value, int|SdkNotGiven $limit = SdkNotGiven::Value, bool|SdkNotGiven $includeDeleted = SdkNotGiven::Value, ?RequestOptions $requestOptions = null): BranchesResponse
+    public function list_(string $projectId, string|SdkNotGiven $search = SdkNotGiven::Value, ListBranchSortBy|SdkNotGiven $sortBy = SdkNotGiven::Value, string|SdkNotGiven $cursor = SdkNotGiven::Value, ListBranchSortOrder|SdkNotGiven $sortOrder = SdkNotGiven::Value, int|SdkNotGiven $limit = SdkNotGiven::Value, bool|SdkNotGiven $includeDeleted = SdkNotGiven::Value, ?RequestOptions $requestOptions = null): ListBranchResponse
     {
         return BranchApi::listBranch($this->clientConfig, $projectId, $search, $sortBy, $cursor, $sortOrder, $limit, $includeDeleted, $requestOptions);
     }
@@ -52,9 +52,9 @@ class BranchNamespace
      *
      * @param string $projectId
      * @param BranchAnonymizedCreateRequest $body
-     * @return BranchResponse
+     * @return CreateBranchResponse
      */
-    public function createAnonymized(string $projectId, BranchAnonymizedCreateRequest $body, ?RequestOptions $requestOptions = null): BranchResponse
+    public function createAnonymized(string $projectId, BranchAnonymizedCreateRequest $body, ?RequestOptions $requestOptions = null): CreateBranchResponse
     {
         return BranchApi::createBranchAnonymized($this->clientConfig, $projectId, $body, $requestOptions);
     }
@@ -78,9 +78,9 @@ class BranchNamespace
      *
      * @param string $projectId
      * @param string $branchId
-     * @return BranchResponse
+     * @return GetBranchResponse
      */
-    public function get(string $projectId, string $branchId, ?RequestOptions $requestOptions = null): BranchResponse
+    public function get(string $projectId, string $branchId, ?RequestOptions $requestOptions = null): GetBranchResponse
     {
         return BranchApi::getBranch($this->clientConfig, $projectId, $branchId, $requestOptions);
     }

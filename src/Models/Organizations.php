@@ -125,6 +125,66 @@ class Invitation implements \JsonSerializable
 }
 
 /**
+ * Typed representation of the `ListOrganizationsMembersResponse` API schema.
+ */
+class ListOrganizationsMembersResponse implements \JsonSerializable
+{
+    /**
+     * Members of the organization, each combining membership details (role, status) with the associated user's identity.
+     *
+     * @var list<MemberWithUser>
+     */
+    public readonly array $members;
+    /**
+     * To paginate the response, issue an initial request with `limit` value. Then, add the value returned in the response `.pagination.next` attribute into the request under the `cursor` query parameter to the subsequent request to retrieve next page in pagination. The contents on cursor `next` are opaque, clients are not expected to make any assumptions on the format of the data inside the cursor.
+     *
+     * @var CursorPagination|SdkNotGiven
+     */
+    public readonly CursorPagination|SdkNotGiven $pagination;
+
+    /**
+     * @param list<MemberWithUser> $members
+     * @param CursorPagination|SdkNotGiven $pagination
+     */
+    public function __construct(
+        array $members,
+        CursorPagination|SdkNotGiven $pagination = SdkNotGiven::Value,
+    ) {
+        $this->members = $members;
+        $this->pagination = $pagination;
+    }
+
+    /** @return array<array-key, mixed> */
+    public function toArray(): array
+    {
+        $values = [
+            "members" => $this->members,
+        ];
+        if ($this->pagination !== SdkNotGiven::Value) {
+            $values["pagination"] = $this->pagination;
+        }
+        return $values;
+    }
+
+    /** @return object */
+    public function jsonSerialize(): object
+    {
+        return (object) $this->toArray();
+    }
+
+    public static function fromObject(object $data): self
+    {
+        if (!property_exists($data, "members") || $data->members === null) {
+            throw new SdkValidationError("members", 'required', "Required property 'members' is missing or null");
+        }
+        return new self(
+            members: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, MemberWithUser::class), SdkClient::arrayValue($data->members))),
+            pagination: (property_exists($data, "pagination") && $data->pagination !== null ? SdkClient::hydrateClass($data->pagination, CursorPagination::class) : SdkNotGiven::Value),
+        );
+    }
+}
+
+/**
  * Typed representation of the `Member` API schema.
  */
 class Member implements \JsonSerializable
@@ -221,7 +281,7 @@ class Member implements \JsonSerializable
             userId: SdkClient::stringValue($data->user_id),
             orgId: SdkClient::stringValue($data->org_id),
             role: SdkClient::hydrateStringEnumOrString($data->role, MemberRole::class),
-            joinedAt: (property_exists($data, "joined_at") ? SdkClient::stringValue($data->joined_at) : SdkNotGiven::Value),
+            joinedAt: (property_exists($data, "joined_at") && $data->joined_at !== null ? SdkClient::stringValue($data->joined_at) : SdkNotGiven::Value),
         );
     }
 }
@@ -326,69 +386,8 @@ class MemberUserInfo implements \JsonSerializable
         }
         return new self(
             email: SdkClient::stringValue($data->email),
-            hasMfa: (property_exists($data, "has_mfa") ? SdkClient::boolValue($data->has_mfa) : SdkNotGiven::Value),
-            deactivatedAt: (property_exists($data, "deactivated_at") ? SdkClient::stringValue($data->deactivated_at) : SdkNotGiven::Value),
-        );
-    }
-}
-
-/**
- * Typed representation of the `MemberWithUser` API schema.
- */
-class MemberWithUser implements \JsonSerializable
-{
-    /**
-     * Membership record for the user in the organization.
-     *
-     * @var Member
-     */
-    public readonly Member $member;
-    /**
-     * Profile information for the organization member.
-     *
-     * @var MemberUserInfo
-     */
-    public readonly MemberUserInfo $user;
-
-    /**
-     * @param Member $member
-     * @param MemberUserInfo $user
-     */
-    public function __construct(
-        Member $member,
-        MemberUserInfo $user,
-    ) {
-        $this->member = $member;
-        $this->user = $user;
-    }
-
-    /** @return array<array-key, mixed> */
-    public function toArray(): array
-    {
-        $values = [
-            "member" => $this->member,
-            "user" => $this->user,
-        ];
-        return $values;
-    }
-
-    /** @return object */
-    public function jsonSerialize(): object
-    {
-        return (object) $this->toArray();
-    }
-
-    public static function fromObject(object $data): self
-    {
-        if (!property_exists($data, "member") || $data->member === null) {
-            throw new SdkValidationError("member", 'required', "Required property 'member' is missing or null");
-        }
-        if (!property_exists($data, "user") || $data->user === null) {
-            throw new SdkValidationError("user", 'required', "Required property 'user' is missing or null");
-        }
-        return new self(
-            member: SdkClient::hydrateClass($data->member, Member::class),
-            user: SdkClient::hydrateClass($data->user, MemberUserInfo::class),
+            hasMfa: (property_exists($data, "has_mfa") && $data->has_mfa !== null ? SdkClient::boolValue($data->has_mfa) : SdkNotGiven::Value),
+            deactivatedAt: (property_exists($data, "deactivated_at") && $data->deactivated_at !== null ? SdkClient::stringValue($data->deactivated_at) : SdkNotGiven::Value),
         );
     }
 }

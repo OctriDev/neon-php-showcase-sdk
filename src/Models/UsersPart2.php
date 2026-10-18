@@ -290,11 +290,11 @@ class BillingAccount implements \JsonSerializable
             addressLine2: SdkClient::stringValue($data->address_line2),
             addressPostalCode: SdkClient::stringValue($data->address_postal_code),
             addressState: SdkClient::stringValue($data->address_state),
-            addressCountryName: (property_exists($data, "address_country_name") ? SdkClient::stringValue($data->address_country_name) : SdkNotGiven::Value),
-            orbPortalUrl: (property_exists($data, "orb_portal_url") ? SdkClient::stringValue($data->orb_portal_url) : SdkNotGiven::Value),
-            taxId: (property_exists($data, "tax_id") ? SdkClient::stringValue($data->tax_id) : SdkNotGiven::Value),
-            taxIdType: (property_exists($data, "tax_id_type") ? SdkClient::stringValue($data->tax_id_type) : SdkNotGiven::Value),
-            planDetails: (property_exists($data, "plan_details") ? SdkClient::hydrateClass($data->plan_details, PlanDetails::class) : SdkNotGiven::Value),
+            addressCountryName: (property_exists($data, "address_country_name") && $data->address_country_name !== null ? SdkClient::stringValue($data->address_country_name) : SdkNotGiven::Value),
+            orbPortalUrl: (property_exists($data, "orb_portal_url") && $data->orb_portal_url !== null ? SdkClient::stringValue($data->orb_portal_url) : SdkNotGiven::Value),
+            taxId: (property_exists($data, "tax_id") && $data->tax_id !== null ? SdkClient::stringValue($data->tax_id) : SdkNotGiven::Value),
+            taxIdType: (property_exists($data, "tax_id_type") && $data->tax_id_type !== null ? SdkClient::stringValue($data->tax_id_type) : SdkNotGiven::Value),
+            planDetails: (property_exists($data, "plan_details") && $data->plan_details !== null ? SdkClient::hydrateClass($data->plan_details, PlanDetails::class) : SdkNotGiven::Value),
             spendingLimitCents: (property_exists($data, "spending_limit_cents") ? ($data->spending_limit_cents === null ? null : SdkClient::intValue($data->spending_limit_cents)) : SdkNotGiven::Value),
         );
     }

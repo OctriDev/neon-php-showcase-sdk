@@ -150,9 +150,9 @@ trait OrganizationsMethodsPart1
      * @param string|SdkNotGiven $cursor
      * @param ListOrganizationsMembersSortOrder|SdkNotGiven $sortOrder
      * @param int|SdkNotGiven $limit
-     * @return OrganizationMembersResponse
+     * @return ListOrganizationsMembersResponse
      */
-    public static function listOrganizationsMembers(ClientConfig $clientConfig, string $orgId, ListOrganizationsMembersSortBy|SdkNotGiven $sortBy = SdkNotGiven::Value, string|SdkNotGiven $cursor = SdkNotGiven::Value, ListOrganizationsMembersSortOrder|SdkNotGiven $sortOrder = SdkNotGiven::Value, int|SdkNotGiven $limit = SdkNotGiven::Value, ?RequestOptions $requestOptions = null): OrganizationMembersResponse
+    public static function listOrganizationsMembers(ClientConfig $clientConfig, string $orgId, ListOrganizationsMembersSortBy|SdkNotGiven $sortBy = SdkNotGiven::Value, string|SdkNotGiven $cursor = SdkNotGiven::Value, ListOrganizationsMembersSortOrder|SdkNotGiven $sortOrder = SdkNotGiven::Value, int|SdkNotGiven $limit = SdkNotGiven::Value, ?RequestOptions $requestOptions = null): ListOrganizationsMembersResponse
     {
 
         Validation::validatePattern('org_id', $orgId, '^[a-z0-9-]{1,60}$');
@@ -161,8 +161,8 @@ trait OrganizationsMethodsPart1
             Validation::validateRange('limit', $limit, min: 1, max: 500);
         }
 
-        $sdkResponse = SdkClient::request('GET', "/organizations/" . SdkClient::encodePathSegment($orgId) . "/members", $clientConfig, query: ['sort_by' => new SdkQueryValue($sortBy, "form", true), 'cursor' => new SdkQueryValue($cursor, "form", true), 'sort_order' => new SdkQueryValue($sortOrder, "form", true), 'limit' => new SdkQueryValue($limit, "form", true)], returnType: OrganizationMembersResponse::class, decoder: 'json', operationId: 'listOrganizationsMembers', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
-        return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, OrganizationMembersResponse::class));
+        $sdkResponse = SdkClient::request('GET', "/organizations/" . SdkClient::encodePathSegment($orgId) . "/members", $clientConfig, query: ['sort_by' => new SdkQueryValue($sortBy, "form", true), 'cursor' => new SdkQueryValue($cursor, "form", true), 'sort_order' => new SdkQueryValue($sortOrder, "form", true), 'limit' => new SdkQueryValue($limit, "form", true)], returnType: ListOrganizationsMembersResponse::class, decoder: 'json', operationId: 'listOrganizationsMembers', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, ListOrganizationsMembersResponse::class));
     }
 
 

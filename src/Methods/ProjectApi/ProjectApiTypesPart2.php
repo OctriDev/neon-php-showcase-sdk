@@ -84,10 +84,10 @@ class UpdateProjectProject implements \JsonSerializable
     public static function fromObject(object $data): self
     {
         return new self(
-            settings: (property_exists($data, "settings") ? SdkClient::hydrateClass($data->settings, ProjectSettingsData::class) : SdkNotGiven::Value),
-            name: (property_exists($data, "name") ? SdkClient::stringValue($data->name) : SdkNotGiven::Value),
-            defaultEndpointSettings: (property_exists($data, "default_endpoint_settings") ? SdkClient::hydrateClass($data->default_endpoint_settings, DefaultEndpointSettings::class) : SdkNotGiven::Value),
-            historyRetentionSeconds: (property_exists($data, "history_retention_seconds") ? SdkClient::intValue($data->history_retention_seconds) : SdkNotGiven::Value),
+            settings: (property_exists($data, "settings") && $data->settings !== null ? SdkClient::hydrateClass($data->settings, ProjectSettingsData::class) : SdkNotGiven::Value),
+            name: (property_exists($data, "name") && $data->name !== null ? SdkClient::stringValue($data->name) : SdkNotGiven::Value),
+            defaultEndpointSettings: (property_exists($data, "default_endpoint_settings") && $data->default_endpoint_settings !== null ? SdkClient::hydrateClass($data->default_endpoint_settings, DefaultEndpointSettings::class) : SdkNotGiven::Value),
+            historyRetentionSeconds: (property_exists($data, "history_retention_seconds") && $data->history_retention_seconds !== null ? SdkClient::intValue($data->history_retention_seconds) : SdkNotGiven::Value),
         );
     }
 }

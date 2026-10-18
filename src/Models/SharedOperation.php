@@ -196,10 +196,10 @@ class Operation implements \JsonSerializable
             createdAt: SdkClient::stringValue($data->created_at),
             updatedAt: SdkClient::stringValue($data->updated_at),
             totalDurationMs: SdkClient::intValue($data->total_duration_ms),
-            branchId: (property_exists($data, "branch_id") ? SdkClient::stringValue($data->branch_id) : SdkNotGiven::Value),
-            endpointId: (property_exists($data, "endpoint_id") ? SdkClient::stringValue($data->endpoint_id) : SdkNotGiven::Value),
-            error: (property_exists($data, "error") ? SdkClient::stringValue($data->error) : SdkNotGiven::Value),
-            retryAt: (property_exists($data, "retry_at") ? SdkClient::stringValue($data->retry_at) : SdkNotGiven::Value),
+            branchId: (property_exists($data, "branch_id") && $data->branch_id !== null ? SdkClient::stringValue($data->branch_id) : SdkNotGiven::Value),
+            endpointId: (property_exists($data, "endpoint_id") && $data->endpoint_id !== null ? SdkClient::stringValue($data->endpoint_id) : SdkNotGiven::Value),
+            error: (property_exists($data, "error") && $data->error !== null ? SdkClient::stringValue($data->error) : SdkNotGiven::Value),
+            retryAt: (property_exists($data, "retry_at") && $data->retry_at !== null ? SdkClient::stringValue($data->retry_at) : SdkNotGiven::Value),
         );
     }
 }

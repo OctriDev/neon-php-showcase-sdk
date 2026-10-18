@@ -16,15 +16,15 @@ trait BranchApiMethodsPart1
      *
      * @param string $projectId
      * @param BranchCreateRequest|SdkNotGiven $body
-     * @return BranchResponse
+     * @return CreateBranchResponse
      */
-    public static function createBranch(ClientConfig $clientConfig, string $projectId, BranchCreateRequest|SdkNotGiven $body = SdkNotGiven::Value, ?RequestOptions $requestOptions = null): BranchResponse
+    public static function createBranch(ClientConfig $clientConfig, string $projectId, BranchCreateRequest|SdkNotGiven $body = SdkNotGiven::Value, ?RequestOptions $requestOptions = null): CreateBranchResponse
     {
 
         Validation::validatePattern('project_id', $projectId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('POST', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches", $clientConfig, body: $body, returnType: BranchResponse::class, decoder: 'json', operationId: 'createBranch', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
-        return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, BranchResponse::class));
+        $sdkResponse = SdkClient::request('POST', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches", $clientConfig, body: $body, returnType: CreateBranchResponse::class, decoder: 'json', operationId: 'createBranch', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, CreateBranchResponse::class));
     }
 
 
@@ -40,9 +40,9 @@ trait BranchApiMethodsPart1
      * @param ListBranchSortOrder|SdkNotGiven $sortOrder
      * @param int|SdkNotGiven $limit
      * @param bool|SdkNotGiven $includeDeleted
-     * @return BranchesResponse
+     * @return ListBranchResponse
      */
-    public static function listBranch(ClientConfig $clientConfig, string $projectId, string|SdkNotGiven $search = SdkNotGiven::Value, ListBranchSortBy|SdkNotGiven $sortBy = SdkNotGiven::Value, string|SdkNotGiven $cursor = SdkNotGiven::Value, ListBranchSortOrder|SdkNotGiven $sortOrder = SdkNotGiven::Value, int|SdkNotGiven $limit = SdkNotGiven::Value, bool|SdkNotGiven $includeDeleted = SdkNotGiven::Value, ?RequestOptions $requestOptions = null): BranchesResponse
+    public static function listBranch(ClientConfig $clientConfig, string $projectId, string|SdkNotGiven $search = SdkNotGiven::Value, ListBranchSortBy|SdkNotGiven $sortBy = SdkNotGiven::Value, string|SdkNotGiven $cursor = SdkNotGiven::Value, ListBranchSortOrder|SdkNotGiven $sortOrder = SdkNotGiven::Value, int|SdkNotGiven $limit = SdkNotGiven::Value, bool|SdkNotGiven $includeDeleted = SdkNotGiven::Value, ?RequestOptions $requestOptions = null): ListBranchResponse
     {
 
         Validation::validatePattern('project_id', $projectId, '^[a-z0-9-]{1,60}$');
@@ -51,8 +51,8 @@ trait BranchApiMethodsPart1
             Validation::validateRange('limit', $limit, min: 1, max: 10000);
         }
 
-        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches", $clientConfig, query: ['search' => new SdkQueryValue($search, "form", true), 'sort_by' => new SdkQueryValue($sortBy, "form", true), 'cursor' => new SdkQueryValue($cursor, "form", true), 'sort_order' => new SdkQueryValue($sortOrder, "form", true), 'limit' => new SdkQueryValue($limit, "form", true), 'include_deleted' => new SdkQueryValue($includeDeleted, "form", true)], returnType: BranchesResponse::class, decoder: 'json', operationId: 'listBranch', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
-        return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, BranchesResponse::class));
+        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches", $clientConfig, query: ['search' => new SdkQueryValue($search, "form", true), 'sort_by' => new SdkQueryValue($sortBy, "form", true), 'cursor' => new SdkQueryValue($cursor, "form", true), 'sort_order' => new SdkQueryValue($sortOrder, "form", true), 'limit' => new SdkQueryValue($limit, "form", true), 'include_deleted' => new SdkQueryValue($includeDeleted, "form", true)], returnType: ListBranchResponse::class, decoder: 'json', operationId: 'listBranch', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, ListBranchResponse::class));
     }
 
 
@@ -63,15 +63,15 @@ trait BranchApiMethodsPart1
      *
      * @param string $projectId
      * @param BranchAnonymizedCreateRequest $body
-     * @return BranchResponse
+     * @return CreateBranchResponse
      */
-    public static function createBranchAnonymized(ClientConfig $clientConfig, string $projectId, BranchAnonymizedCreateRequest $body, ?RequestOptions $requestOptions = null): BranchResponse
+    public static function createBranchAnonymized(ClientConfig $clientConfig, string $projectId, BranchAnonymizedCreateRequest $body, ?RequestOptions $requestOptions = null): CreateBranchResponse
     {
 
         Validation::validatePattern('project_id', $projectId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('POST', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branch_anonymized", $clientConfig, body: $body, returnType: BranchResponse::class, decoder: 'json', operationId: 'createBranchAnonymized', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
-        return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, BranchResponse::class));
+        $sdkResponse = SdkClient::request('POST', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branch_anonymized", $clientConfig, body: $body, returnType: CreateBranchResponse::class, decoder: 'json', operationId: 'createBranchAnonymized', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, CreateBranchResponse::class));
     }
 
 
@@ -101,17 +101,17 @@ trait BranchApiMethodsPart1
      *
      * @param string $projectId
      * @param string $branchId
-     * @return BranchResponse
+     * @return GetBranchResponse
      */
-    public static function getBranch(ClientConfig $clientConfig, string $projectId, string $branchId, ?RequestOptions $requestOptions = null): BranchResponse
+    public static function getBranch(ClientConfig $clientConfig, string $projectId, string $branchId, ?RequestOptions $requestOptions = null): GetBranchResponse
     {
 
         Validation::validatePattern('project_id', $projectId, '^[a-z0-9-]{1,60}$');
 
         Validation::validatePattern('branch_id', $branchId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "", $clientConfig, returnType: BranchResponse::class, decoder: 'json', operationId: 'getBranch', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
-        return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, BranchResponse::class));
+        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "", $clientConfig, returnType: GetBranchResponse::class, decoder: 'json', operationId: 'getBranch', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, GetBranchResponse::class));
     }
 
 

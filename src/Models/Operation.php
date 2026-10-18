@@ -8,6 +8,66 @@ declare(strict_types=1);
 namespace octridev_neon;
 
 /**
+ * Typed representation of the `ListOperationResponse` API schema.
+ */
+class ListOperationResponse implements \JsonSerializable
+{
+    /**
+     * Required array value serialized in the `operations` wire field.
+     *
+     * @var list<Operation>
+     */
+    public readonly array $operations;
+    /**
+     * Cursor-based pagination. The `cursor` value reflects the endpoint's sort field (for example, an ID or timestamp), so pass it back unchanged.
+     *
+     * @var Pagination|SdkNotGiven
+     */
+    public readonly Pagination|SdkNotGiven $pagination;
+
+    /**
+     * @param list<Operation> $operations
+     * @param Pagination|SdkNotGiven $pagination
+     */
+    public function __construct(
+        array $operations,
+        Pagination|SdkNotGiven $pagination = SdkNotGiven::Value,
+    ) {
+        $this->operations = $operations;
+        $this->pagination = $pagination;
+    }
+
+    /** @return array<array-key, mixed> */
+    public function toArray(): array
+    {
+        $values = [
+            "operations" => $this->operations,
+        ];
+        if ($this->pagination !== SdkNotGiven::Value) {
+            $values["pagination"] = $this->pagination;
+        }
+        return $values;
+    }
+
+    /** @return object */
+    public function jsonSerialize(): object
+    {
+        return (object) $this->toArray();
+    }
+
+    public static function fromObject(object $data): self
+    {
+        if (!property_exists($data, "operations") || $data->operations === null) {
+            throw new SdkValidationError("operations", 'required', "Required property 'operations' is missing or null");
+        }
+        return new self(
+            operations: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, Operation::class), SdkClient::arrayValue($data->operations))),
+            pagination: (property_exists($data, "pagination") && $data->pagination !== null ? SdkClient::hydrateClass($data->pagination, Pagination::class) : SdkNotGiven::Value),
+        );
+    }
+}
+
+/**
  * Typed representation of the `OperationResponse` API schema.
  */
 class OperationResponse implements \JsonSerializable

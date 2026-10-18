@@ -374,8 +374,8 @@ class ConsumptionHistoryPerTimeframe implements \JsonSerializable
             writtenDataBytes: SdkClient::uint64Value($data->written_data_bytes),
             syntheticStorageSizeBytes: SdkClient::uint64Value($data->synthetic_storage_size_bytes),
             dataStorageBytesHour: SdkClient::uint64Value($data->data_storage_bytes_hour),
-            logicalSizeBytes: (property_exists($data, "logical_size_bytes") ? SdkClient::uint64Value($data->logical_size_bytes) : SdkNotGiven::Value),
-            logicalSizeBytesHour: (property_exists($data, "logical_size_bytes_hour") ? SdkClient::uint64Value($data->logical_size_bytes_hour) : SdkNotGiven::Value),
+            logicalSizeBytes: (property_exists($data, "logical_size_bytes") && $data->logical_size_bytes !== null ? SdkClient::uint64Value($data->logical_size_bytes) : SdkNotGiven::Value),
+            logicalSizeBytesHour: (property_exists($data, "logical_size_bytes_hour") && $data->logical_size_bytes_hour !== null ? SdkClient::uint64Value($data->logical_size_bytes_hour) : SdkNotGiven::Value),
         );
     }
 }

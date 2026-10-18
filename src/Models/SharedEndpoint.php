@@ -388,12 +388,12 @@ class Endpoint implements \JsonSerializable
             proxyHost: SdkClient::stringValue($data->proxy_host),
             suspendTimeoutSeconds: SdkClient::intValue($data->suspend_timeout_seconds),
             provisioner: SdkClient::stringValue($data->provisioner),
-            name: (property_exists($data, "name") ? SdkClient::stringValue($data->name) : SdkNotGiven::Value),
-            pendingState: (property_exists($data, "pending_state") ? SdkClient::hydrateStringEnumOrString($data->pending_state, EndpointState::class) : SdkNotGiven::Value),
-            lastActive: (property_exists($data, "last_active") ? SdkClient::stringValue($data->last_active) : SdkNotGiven::Value),
-            startedAt: (property_exists($data, "started_at") ? SdkClient::stringValue($data->started_at) : SdkNotGiven::Value),
-            suspendedAt: (property_exists($data, "suspended_at") ? SdkClient::stringValue($data->suspended_at) : SdkNotGiven::Value),
-            computeReleaseVersion: (property_exists($data, "compute_release_version") ? SdkClient::stringValue($data->compute_release_version) : SdkNotGiven::Value),
+            name: (property_exists($data, "name") && $data->name !== null ? SdkClient::stringValue($data->name) : SdkNotGiven::Value),
+            pendingState: (property_exists($data, "pending_state") && $data->pending_state !== null ? SdkClient::hydrateStringEnumOrString($data->pending_state, EndpointState::class) : SdkNotGiven::Value),
+            lastActive: (property_exists($data, "last_active") && $data->last_active !== null ? SdkClient::stringValue($data->last_active) : SdkNotGiven::Value),
+            startedAt: (property_exists($data, "started_at") && $data->started_at !== null ? SdkClient::stringValue($data->started_at) : SdkNotGiven::Value),
+            suspendedAt: (property_exists($data, "suspended_at") && $data->suspended_at !== null ? SdkClient::stringValue($data->suspended_at) : SdkNotGiven::Value),
+            computeReleaseVersion: (property_exists($data, "compute_release_version") && $data->compute_release_version !== null ? SdkClient::stringValue($data->compute_release_version) : SdkNotGiven::Value),
         );
     }
 }

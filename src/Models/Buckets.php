@@ -197,7 +197,7 @@ class BucketCreateRequest implements \JsonSerializable
         }
         return new self(
             name: SdkClient::stringValue($data->name),
-            accessLevel: (property_exists($data, "access_level") ? SdkClient::hydrateStringEnumOrString($data->access_level, BucketCreateRequestAccessLevelEnum::class) : SdkNotGiven::Value),
+            accessLevel: (property_exists($data, "access_level") && $data->access_level !== null ? SdkClient::hydrateStringEnumOrString($data->access_level, BucketCreateRequestAccessLevelEnum::class) : SdkNotGiven::Value),
         );
     }
 }

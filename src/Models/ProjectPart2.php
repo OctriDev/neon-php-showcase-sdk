@@ -8,121 +8,91 @@ declare(strict_types=1);
 namespace octridev_neon;
 
 /**
- * Typed representation of the `AdvisorIssue` API schema.
+ * Typed representation of the `CreateProjectResponse` API schema.
  */
-class AdvisorIssue implements \JsonSerializable
+class CreateProjectResponse implements \JsonSerializable
 {
     /**
-     * Unique identifier for the issue type
+     * Full details of the project, including configuration, consumption metrics, and ownership.
      *
-     * @var string
+     * @var Project
      */
-    public readonly string $name;
+    public readonly Project $project;
     /**
-     * Human-readable title
+     * Connection URIs for the project. Each entry contains credentials and should be treated as sensitive.
      *
-     * @var string
+     * @var list<ConnectionDetails>
      */
-    public readonly string $title;
+    public readonly array $connectionUris;
     /**
-     * Severity level of the issue
+     * Roles belonging to the branch. Each role includes fields such as `branch_id`, `name`, `protected`, `created_at`, and `updated_at`.
      *
-     * @var string
+     * @var list<Role>
      */
-    public readonly string $level;
+    public readonly array $roles;
     /**
-     * Whether this issue affects external API exposure or is internal only
+     * Databases on the branch. Each includes `id`, `name`, `owner_name`, and `created_at`.
      *
-     * @var AdvisorIssueFacingEnum|string
+     * @var list<Database>
      */
-    public readonly AdvisorIssueFacingEnum|string $facing;
+    public readonly array $databases;
     /**
-     * Categories this issue belongs to
+     * Required array value serialized in the `operations` wire field.
      *
-     * @var list<AdvisorCategory|string>
+     * @var list<Operation>
      */
-    public readonly array $categories;
+    public readonly array $operations;
     /**
-     * Detailed description of what this check detects
+     * Branch returned by the request.
      *
-     * @var string
+     * @var Branch
      */
-    public readonly string $description;
+    public readonly Branch $branch;
     /**
-     * Specific details about this instance of the issue
+     * Compute endpoints in the project. Each includes `id`, `branch_id`, `host`, and `type`.
      *
-     * @var string
+     * @var list<Endpoint>
      */
-    public readonly string $detail;
-    /**
-     * URL to documentation on how to fix this issue
-     *
-     * @var string
-     */
-    public readonly string $remediation;
-    /**
-     * Additional context-specific metadata
-     *
-     * @var array<string,mixed>
-     */
-    public readonly array $metadata;
-    /**
-     * Unique key for caching this issue result
-     *
-     * @var string
-     */
-    public readonly string $cacheKey;
+    public readonly array $endpoints;
 
     /**
-     * @param string $name
-     * @param string $title
-     * @param string $level
-     * @param AdvisorIssueFacingEnum|string $facing
-     * @param list<AdvisorCategory|string> $categories
-     * @param string $description
-     * @param string $detail
-     * @param string $remediation
-     * @param array<string,mixed> $metadata
-     * @param string $cacheKey
+     * @param Project $project
+     * @param list<ConnectionDetails> $connectionUris
+     * @param list<Role> $roles
+     * @param list<Database> $databases
+     * @param list<Operation> $operations
+     * @param Branch $branch
+     * @param list<Endpoint> $endpoints
      */
     public function __construct(
-        string $name,
-        string $title,
-        string $level,
-        AdvisorIssueFacingEnum|string $facing,
-        array $categories,
-        string $description,
-        string $detail,
-        string $remediation,
-        array $metadata,
-        string $cacheKey,
+        Project $project,
+        array $connectionUris,
+        array $roles,
+        array $databases,
+        array $operations,
+        Branch $branch,
+        array $endpoints,
     ) {
-        $this->name = $name;
-        $this->title = $title;
-        $this->level = $level;
-        $this->facing = $facing;
-        $this->categories = $categories;
-        $this->description = $description;
-        $this->detail = $detail;
-        $this->remediation = $remediation;
-        $this->metadata = $metadata;
-        $this->cacheKey = $cacheKey;
+        $this->project = $project;
+        $this->connectionUris = $connectionUris;
+        $this->roles = $roles;
+        $this->databases = $databases;
+        $this->operations = $operations;
+        $this->branch = $branch;
+        $this->endpoints = $endpoints;
     }
 
     /** @return array<array-key, mixed> */
     public function toArray(): array
     {
         $values = [
-            "name" => $this->name,
-            "title" => $this->title,
-            "level" => $this->level,
-            "facing" => $this->facing,
-            "categories" => $this->categories,
-            "description" => $this->description,
-            "detail" => $this->detail,
-            "remediation" => $this->remediation,
-            "metadata" => $this->metadata,
-            "cache_key" => $this->cacheKey,
+            "project" => $this->project,
+            "connection_uris" => $this->connectionUris,
+            "roles" => $this->roles,
+            "databases" => $this->databases,
+            "operations" => $this->operations,
+            "branch" => $this->branch,
+            "endpoints" => $this->endpoints,
         ];
         return $values;
     }
@@ -135,79 +105,94 @@ class AdvisorIssue implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "name") || $data->name === null) {
-            throw new SdkValidationError("name", 'required', "Required property 'name' is missing or null");
+        if (!property_exists($data, "project") || $data->project === null) {
+            throw new SdkValidationError("project", 'required', "Required property 'project' is missing or null");
         }
-        if (!property_exists($data, "title") || $data->title === null) {
-            throw new SdkValidationError("title", 'required', "Required property 'title' is missing or null");
+        if (!property_exists($data, "connection_uris") || $data->connection_uris === null) {
+            throw new SdkValidationError("connection_uris", 'required', "Required property 'connection_uris' is missing or null");
         }
-        if (!property_exists($data, "level") || $data->level === null) {
-            throw new SdkValidationError("level", 'required', "Required property 'level' is missing or null");
+        if (!property_exists($data, "roles") || $data->roles === null) {
+            throw new SdkValidationError("roles", 'required', "Required property 'roles' is missing or null");
         }
-        if (!property_exists($data, "facing") || $data->facing === null) {
-            throw new SdkValidationError("facing", 'required', "Required property 'facing' is missing or null");
+        if (!property_exists($data, "databases") || $data->databases === null) {
+            throw new SdkValidationError("databases", 'required', "Required property 'databases' is missing or null");
         }
-        if (!property_exists($data, "categories") || $data->categories === null) {
-            throw new SdkValidationError("categories", 'required', "Required property 'categories' is missing or null");
+        if (!property_exists($data, "operations") || $data->operations === null) {
+            throw new SdkValidationError("operations", 'required', "Required property 'operations' is missing or null");
         }
-        if (!property_exists($data, "description") || $data->description === null) {
-            throw new SdkValidationError("description", 'required', "Required property 'description' is missing or null");
+        if (!property_exists($data, "branch") || $data->branch === null) {
+            throw new SdkValidationError("branch", 'required', "Required property 'branch' is missing or null");
         }
-        if (!property_exists($data, "detail") || $data->detail === null) {
-            throw new SdkValidationError("detail", 'required', "Required property 'detail' is missing or null");
-        }
-        if (!property_exists($data, "remediation") || $data->remediation === null) {
-            throw new SdkValidationError("remediation", 'required', "Required property 'remediation' is missing or null");
-        }
-        if (!property_exists($data, "metadata") || $data->metadata === null) {
-            throw new SdkValidationError("metadata", 'required', "Required property 'metadata' is missing or null");
-        }
-        if (!property_exists($data, "cache_key") || $data->cache_key === null) {
-            throw new SdkValidationError("cache_key", 'required', "Required property 'cache_key' is missing or null");
+        if (!property_exists($data, "endpoints") || $data->endpoints === null) {
+            throw new SdkValidationError("endpoints", 'required', "Required property 'endpoints' is missing or null");
         }
         return new self(
-            name: SdkClient::stringValue($data->name),
-            title: SdkClient::stringValue($data->title),
-            level: SdkClient::stringValue($data->level),
-            facing: SdkClient::hydrateStringEnumOrString($data->facing, AdvisorIssueFacingEnum::class),
-            categories: array_values(array_map(static fn($item) => SdkClient::hydrateStringEnumOrString($item, AdvisorCategory::class), SdkClient::arrayValue($data->categories))),
-            description: SdkClient::stringValue($data->description),
-            detail: SdkClient::stringValue($data->detail),
-            remediation: SdkClient::stringValue($data->remediation),
-            metadata: SdkClient::stringMapValue($data->metadata),
-            cacheKey: SdkClient::stringValue($data->cache_key),
+            project: SdkClient::hydrateClass($data->project, Project::class),
+            connectionUris: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, ConnectionDetails::class), SdkClient::arrayValue($data->connection_uris))),
+            roles: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, Role::class), SdkClient::arrayValue($data->roles))),
+            databases: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, Database::class), SdkClient::arrayValue($data->databases))),
+            operations: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, Operation::class), SdkClient::arrayValue($data->operations))),
+            branch: SdkClient::hydrateClass($data->branch, Branch::class),
+            endpoints: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, Endpoint::class), SdkClient::arrayValue($data->endpoints))),
         );
     }
 }
 
 /**
- * A list of IP addresses that are allowed to connect to the compute endpoint. If the list is empty or not set, all IP addresses are allowed. If protected_branches_only is true, the list will be applied only to protected branches.
+ * A collection of settings for a Neon endpoint
  */
-class AllowedIps implements \JsonSerializable
+class DefaultEndpointSettings implements \JsonSerializable
 {
     /**
-     * A list of IP addresses that are allowed to connect to the endpoint.
+     * A raw representation of Postgres settings
      *
-     * @var list<string>|SdkNotGiven
+     * @var array<string,string>|SdkNotGiven
      */
-    public readonly array|SdkNotGiven $ips;
+    public readonly array|SdkNotGiven $pgSettings;
     /**
-     * If true, the list will be applied only to protected branches.
+     * Deprecated. Use the endpoint-level connection pooler configuration instead. Removal scheduled for June 20, 2026.
      *
-     * @var bool|SdkNotGiven
+     * @var array<string,string>|SdkNotGiven
      */
-    public readonly bool|SdkNotGiven $protectedBranchesOnly;
+    public readonly array|SdkNotGiven $pgbouncerSettings;
+    /**
+     * Minimum number of Compute Units for this endpoint. At least 0.25 and no greater than `autoscaling_limit_max_cu`.
+     *
+     * @var float|SdkNotGiven
+     */
+    public readonly float|SdkNotGiven $autoscalingLimitMinCu;
+    /**
+     * Default maximum number of Compute Units for endpoints created under this account. At least 0.25.
+     *
+     * @var float|SdkNotGiven
+     */
+    public readonly float|SdkNotGiven $autoscalingLimitMaxCu;
+    /**
+     * Scale-to-zero idle timeout, in seconds, before the compute suspends. `0` uses the plan default; `-1` disables scale-to-zero (never suspends). Minimum is plan-dependent (Scale: 60); maximum 604800 (one week). Free cannot change it; Launch can only enable or disable; Scale can set any value.
+     *
+     * @var int|SdkNotGiven
+     */
+    public readonly int|SdkNotGiven $suspendTimeoutSeconds;
 
     /**
-     * @param list<string>|SdkNotGiven $ips
-     * @param bool|SdkNotGiven $protectedBranchesOnly
+     * @param array<string,string>|SdkNotGiven $pgSettings
+     * @param array<string,string>|SdkNotGiven $pgbouncerSettings
+     * @param float|SdkNotGiven $autoscalingLimitMinCu
+     * @param float|SdkNotGiven $autoscalingLimitMaxCu
+     * @param int|SdkNotGiven $suspendTimeoutSeconds
      */
     public function __construct(
-        array|SdkNotGiven $ips = SdkNotGiven::Value,
-        bool|SdkNotGiven $protectedBranchesOnly = SdkNotGiven::Value,
+        array|SdkNotGiven $pgSettings = SdkNotGiven::Value,
+        array|SdkNotGiven $pgbouncerSettings = SdkNotGiven::Value,
+        float|SdkNotGiven $autoscalingLimitMinCu = SdkNotGiven::Value,
+        float|SdkNotGiven $autoscalingLimitMaxCu = SdkNotGiven::Value,
+        int|SdkNotGiven $suspendTimeoutSeconds = SdkNotGiven::Value,
     ) {
-        $this->ips = $ips;
-        $this->protectedBranchesOnly = $protectedBranchesOnly;
+        $this->pgSettings = $pgSettings;
+        $this->pgbouncerSettings = $pgbouncerSettings;
+        $this->autoscalingLimitMinCu = $autoscalingLimitMinCu;
+        $this->autoscalingLimitMaxCu = $autoscalingLimitMaxCu;
+        $this->suspendTimeoutSeconds = $suspendTimeoutSeconds;
     }
 
     /** @return array<array-key, mixed> */
@@ -215,11 +200,20 @@ class AllowedIps implements \JsonSerializable
     {
         $values = [
         ];
-        if ($this->ips !== SdkNotGiven::Value) {
-            $values["ips"] = $this->ips;
+        if ($this->pgSettings !== SdkNotGiven::Value) {
+            $values["pg_settings"] = $this->pgSettings;
         }
-        if ($this->protectedBranchesOnly !== SdkNotGiven::Value) {
-            $values["protected_branches_only"] = $this->protectedBranchesOnly;
+        if ($this->pgbouncerSettings !== SdkNotGiven::Value) {
+            $values["pgbouncer_settings"] = $this->pgbouncerSettings;
+        }
+        if ($this->autoscalingLimitMinCu !== SdkNotGiven::Value) {
+            $values["autoscaling_limit_min_cu"] = $this->autoscalingLimitMinCu;
+        }
+        if ($this->autoscalingLimitMaxCu !== SdkNotGiven::Value) {
+            $values["autoscaling_limit_max_cu"] = $this->autoscalingLimitMaxCu;
+        }
+        if ($this->suspendTimeoutSeconds !== SdkNotGiven::Value) {
+            $values["suspend_timeout_seconds"] = $this->suspendTimeoutSeconds;
         }
         return $values;
     }
@@ -233,73 +227,42 @@ class AllowedIps implements \JsonSerializable
     public static function fromObject(object $data): self
     {
         return new self(
-            ips: (property_exists($data, "ips") ? array_values(array_map(static fn($item) => SdkClient::stringValue($item), SdkClient::arrayValue($data->ips))) : SdkNotGiven::Value),
-            protectedBranchesOnly: (property_exists($data, "protected_branches_only") ? SdkClient::boolValue($data->protected_branches_only) : SdkNotGiven::Value),
+            pgSettings: (property_exists($data, "pg_settings") && $data->pg_settings !== null ? SdkClient::mapValues(SdkClient::stringMapValue($data->pg_settings), static fn($item) => SdkClient::stringValue($item)) : SdkNotGiven::Value),
+            pgbouncerSettings: (property_exists($data, "pgbouncer_settings") && $data->pgbouncer_settings !== null ? SdkClient::mapValues(SdkClient::stringMapValue($data->pgbouncer_settings), static fn($item) => SdkClient::stringValue($item)) : SdkNotGiven::Value),
+            autoscalingLimitMinCu: (property_exists($data, "autoscaling_limit_min_cu") && $data->autoscaling_limit_min_cu !== null ? SdkClient::floatValue($data->autoscaling_limit_min_cu) : SdkNotGiven::Value),
+            autoscalingLimitMaxCu: (property_exists($data, "autoscaling_limit_max_cu") && $data->autoscaling_limit_max_cu !== null ? SdkClient::floatValue($data->autoscaling_limit_max_cu) : SdkNotGiven::Value),
+            suspendTimeoutSeconds: (property_exists($data, "suspend_timeout_seconds") && $data->suspend_timeout_seconds !== null ? SdkClient::intValue($data->suspend_timeout_seconds) : SdkNotGiven::Value),
         );
     }
 }
 
 /**
- * Type of application integration
+ * Typed representation of the `GrantPermissionToProjectRequest` API schema.
  */
-final readonly class ApplicationType implements SdkOpenEnum
-{
-    public const VERCEL = "vercel";
-    public const GITHUB = "github";
-    public const DATADOG = "datadog";
-    public const OPENTELEMETRY = "opentelemetry";
-    private function __construct(public string $value) {}
-    public static function from(string|int $value): static
-    {
-        return new self((string) $value);
-    }
-    public static function tryFrom(string|int|null $value): ?static
-    {
-        return $value === null ? null : self::from($value);
-    }
-    public function getValue(): string
-    {
-        return $this->value;
-    }
-    public function jsonSerialize(): string
-    {
-        return $this->value;
-    }
-    public function __toString(): string
-    {
-        return (string) $this->value;
-    }
-}
-
-/**
- * Typed representation of the `AvailablePreloadLibraries` API schema.
- */
-class AvailablePreloadLibraries implements \JsonSerializable
+class GrantPermissionToProjectRequest implements \JsonSerializable
 {
     /**
-     * Preload libraries available for the project's Postgres version. Each entry includes `library_name`, `description`, `is_default`, `is_experimental`, and `version`.
+     * Email address of the user to grant project access to.
      *
-     * @var list<AvailablePreloadLibrary>|SdkNotGiven
+     * @var string
      */
-    public readonly array|SdkNotGiven $libraries;
+    public readonly string $email;
 
     /**
-     * @param list<AvailablePreloadLibrary>|SdkNotGiven $libraries
+     * @param string $email
      */
     public function __construct(
-        array|SdkNotGiven $libraries = SdkNotGiven::Value,
+        string $email,
     ) {
-        $this->libraries = $libraries;
+        $this->email = $email;
     }
 
     /** @return array<array-key, mixed> */
     public function toArray(): array
     {
         $values = [
+            "email" => $this->email,
         ];
-        if ($this->libraries !== SdkNotGiven::Value) {
-            $values["libraries"] = $this->libraries;
-        }
         return $values;
     }
 
@@ -311,8 +274,11 @@ class AvailablePreloadLibraries implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
+        if (!property_exists($data, "email") || $data->email === null) {
+            throw new SdkValidationError("email", 'required', "Required property 'email' is missing or null");
+        }
         return new self(
-            libraries: (property_exists($data, "libraries") ? array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, AvailablePreloadLibrary::class), SdkClient::arrayValue($data->libraries))) : SdkNotGiven::Value),
+            email: SdkClient::stringValue($data->email),
         );
     }
 }

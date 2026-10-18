@@ -140,10 +140,10 @@ class CustomDomain implements \JsonSerializable
             entityType: SdkClient::stringValue($data->entity_type),
             entityId: SdkClient::stringValue($data->entity_id),
             cnameTarget: SdkClient::stringValue($data->cname_target),
-            status: (property_exists($data, "status") ? SdkClient::stringValue($data->status) : SdkNotGiven::Value),
-            dnsStatus: (property_exists($data, "dns_status") ? SdkClient::stringValue($data->dns_status) : SdkNotGiven::Value),
-            bindingStatus: (property_exists($data, "binding_status") ? SdkClient::stringValue($data->binding_status) : SdkNotGiven::Value),
-            statusReason: (property_exists($data, "status_reason") ? SdkClient::stringValue($data->status_reason) : SdkNotGiven::Value),
+            status: (property_exists($data, "status") && $data->status !== null ? SdkClient::stringValue($data->status) : SdkNotGiven::Value),
+            dnsStatus: (property_exists($data, "dns_status") && $data->dns_status !== null ? SdkClient::stringValue($data->dns_status) : SdkNotGiven::Value),
+            bindingStatus: (property_exists($data, "binding_status") && $data->binding_status !== null ? SdkClient::stringValue($data->binding_status) : SdkNotGiven::Value),
+            statusReason: (property_exists($data, "status_reason") && $data->status_reason !== null ? SdkClient::stringValue($data->status_reason) : SdkNotGiven::Value),
         );
     }
 }
@@ -364,9 +364,9 @@ class FunctionDeployRequest implements \JsonSerializable
     public static function fromObject(object $data): self
     {
         return new self(
-            zip: (property_exists($data, "zip") ? SdkClient::stringValue($data->zip) : SdkNotGiven::Value),
-            runtime: (property_exists($data, "runtime") ? SdkClient::hydrateStringEnumOrString($data->runtime, FunctionDeployRequestRuntimeEnum::class) : SdkNotGiven::Value),
-            environment: (property_exists($data, "environment") ? SdkClient::stringValue($data->environment) : SdkNotGiven::Value),
+            zip: (property_exists($data, "zip") && $data->zip !== null ? SdkClient::stringValue($data->zip) : SdkNotGiven::Value),
+            runtime: (property_exists($data, "runtime") && $data->runtime !== null ? SdkClient::hydrateStringEnumOrString($data->runtime, FunctionDeployRequestRuntimeEnum::class) : SdkNotGiven::Value),
+            environment: (property_exists($data, "environment") && $data->environment !== null ? SdkClient::stringValue($data->environment) : SdkNotGiven::Value),
         );
     }
 }

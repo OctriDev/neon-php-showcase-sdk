@@ -297,8 +297,8 @@ class ScheduleTriggerCreateRequest implements TriggerCreateRequest, \JsonSeriali
             functionSlug: SdkClient::stringValue($data->function_slug),
             name: SdkClient::stringValue($data->name),
             schedule: SdkClient::hydrateClass($data->schedule, FunctionTriggerSchedule::class),
-            functionPath: (property_exists($data, "function_path") ? SdkClient::stringValue($data->function_path) : SdkNotGiven::Value),
-            enabled: (property_exists($data, "enabled") ? SdkClient::boolValue($data->enabled) : SdkNotGiven::Value),
+            functionPath: (property_exists($data, "function_path") && $data->function_path !== null ? SdkClient::stringValue($data->function_path) : SdkNotGiven::Value),
+            enabled: (property_exists($data, "enabled") && $data->enabled !== null ? SdkClient::boolValue($data->enabled) : SdkNotGiven::Value),
         );
     }
 }

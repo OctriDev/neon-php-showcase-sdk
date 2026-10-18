@@ -35,9 +35,9 @@ class OperationNamespace
      * @param string $projectId
      * @param string|SdkNotGiven $cursor
      * @param int|SdkNotGiven $limit
-     * @return OperationsResponse
+     * @return ListOperationResponse
      */
-    public function list_(string $projectId, string|SdkNotGiven $cursor = SdkNotGiven::Value, int|SdkNotGiven $limit = SdkNotGiven::Value, ?RequestOptions $requestOptions = null): OperationsResponse
+    public function list_(string $projectId, string|SdkNotGiven $cursor = SdkNotGiven::Value, int|SdkNotGiven $limit = SdkNotGiven::Value, ?RequestOptions $requestOptions = null): ListOperationResponse
     {
         return OperationApi::listOperation($this->clientConfig, $projectId, $cursor, $limit, $requestOptions);
     }

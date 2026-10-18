@@ -156,16 +156,16 @@ class DataAPISettings implements \JsonSerializable
     public static function fromObject(object $data): self
     {
         return new self(
-            dbAggregatesEnabled: (property_exists($data, "db_aggregates_enabled") ? SdkClient::boolValue($data->db_aggregates_enabled) : SdkNotGiven::Value),
-            dbAnonRole: (property_exists($data, "db_anon_role") ? SdkClient::stringValue($data->db_anon_role) : SdkNotGiven::Value),
-            dbExtraSearchPath: (property_exists($data, "db_extra_search_path") ? SdkClient::stringValue($data->db_extra_search_path) : SdkNotGiven::Value),
-            dbMaxRows: (property_exists($data, "db_max_rows") ? SdkClient::intValue($data->db_max_rows) : SdkNotGiven::Value),
-            dbSchemas: (property_exists($data, "db_schemas") ? array_values(array_map(static fn($item) => SdkClient::stringValue($item), SdkClient::arrayValue($data->db_schemas))) : SdkNotGiven::Value),
-            jwtRoleClaimKey: (property_exists($data, "jwt_role_claim_key") ? SdkClient::stringValue($data->jwt_role_claim_key) : SdkNotGiven::Value),
-            jwtCacheMaxLifetime: (property_exists($data, "jwt_cache_max_lifetime") ? SdkClient::intValue($data->jwt_cache_max_lifetime) : SdkNotGiven::Value),
-            openapiMode: (property_exists($data, "openapi_mode") ? SdkClient::stringValue($data->openapi_mode) : SdkNotGiven::Value),
-            serverCorsAllowedOrigins: (property_exists($data, "server_cors_allowed_origins") ? SdkClient::stringValue($data->server_cors_allowed_origins) : SdkNotGiven::Value),
-            serverTimingEnabled: (property_exists($data, "server_timing_enabled") ? SdkClient::boolValue($data->server_timing_enabled) : SdkNotGiven::Value),
+            dbAggregatesEnabled: (property_exists($data, "db_aggregates_enabled") && $data->db_aggregates_enabled !== null ? SdkClient::boolValue($data->db_aggregates_enabled) : SdkNotGiven::Value),
+            dbAnonRole: (property_exists($data, "db_anon_role") && $data->db_anon_role !== null ? SdkClient::stringValue($data->db_anon_role) : SdkNotGiven::Value),
+            dbExtraSearchPath: (property_exists($data, "db_extra_search_path") && $data->db_extra_search_path !== null ? SdkClient::stringValue($data->db_extra_search_path) : SdkNotGiven::Value),
+            dbMaxRows: (property_exists($data, "db_max_rows") && $data->db_max_rows !== null ? SdkClient::intValue($data->db_max_rows) : SdkNotGiven::Value),
+            dbSchemas: (property_exists($data, "db_schemas") && $data->db_schemas !== null ? array_values(array_map(static fn($item) => SdkClient::stringValue($item), SdkClient::arrayValue($data->db_schemas))) : SdkNotGiven::Value),
+            jwtRoleClaimKey: (property_exists($data, "jwt_role_claim_key") && $data->jwt_role_claim_key !== null ? SdkClient::stringValue($data->jwt_role_claim_key) : SdkNotGiven::Value),
+            jwtCacheMaxLifetime: (property_exists($data, "jwt_cache_max_lifetime") && $data->jwt_cache_max_lifetime !== null ? SdkClient::intValue($data->jwt_cache_max_lifetime) : SdkNotGiven::Value),
+            openapiMode: (property_exists($data, "openapi_mode") && $data->openapi_mode !== null ? SdkClient::stringValue($data->openapi_mode) : SdkNotGiven::Value),
+            serverCorsAllowedOrigins: (property_exists($data, "server_cors_allowed_origins") && $data->server_cors_allowed_origins !== null ? SdkClient::stringValue($data->server_cors_allowed_origins) : SdkNotGiven::Value),
+            serverTimingEnabled: (property_exists($data, "server_timing_enabled") && $data->server_timing_enabled !== null ? SdkClient::boolValue($data->server_timing_enabled) : SdkNotGiven::Value),
         );
     }
 }
@@ -211,7 +211,7 @@ class DataAPIUpdateRequest implements \JsonSerializable
     public static function fromObject(object $data): self
     {
         return new self(
-            settings: (property_exists($data, "settings") ? SdkClient::hydrateClass($data->settings, DataAPISettings::class) : SdkNotGiven::Value),
+            settings: (property_exists($data, "settings") && $data->settings !== null ? SdkClient::hydrateClass($data->settings, DataAPISettings::class) : SdkNotGiven::Value),
         );
     }
 }

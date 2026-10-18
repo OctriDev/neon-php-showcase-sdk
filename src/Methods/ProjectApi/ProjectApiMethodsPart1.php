@@ -46,9 +46,9 @@ trait ProjectApiMethodsPart1
      * @param string|SdkNotGiven $orgId
      * @param int|SdkNotGiven $timeout
      * @param bool|SdkNotGiven $recoverable
-     * @return ProjectsResponse
+     * @return ListProjectsResponse
      */
-    public static function listProjects(ClientConfig $clientConfig, string|SdkNotGiven $cursor = SdkNotGiven::Value, int|SdkNotGiven $limit = SdkNotGiven::Value, string|SdkNotGiven $search = SdkNotGiven::Value, string|SdkNotGiven $orgId = SdkNotGiven::Value, int|SdkNotGiven $timeout = SdkNotGiven::Value, bool|SdkNotGiven $recoverable = SdkNotGiven::Value, ?RequestOptions $requestOptions = null): ProjectsResponse
+    public static function listProjects(ClientConfig $clientConfig, string|SdkNotGiven $cursor = SdkNotGiven::Value, int|SdkNotGiven $limit = SdkNotGiven::Value, string|SdkNotGiven $search = SdkNotGiven::Value, string|SdkNotGiven $orgId = SdkNotGiven::Value, int|SdkNotGiven $timeout = SdkNotGiven::Value, bool|SdkNotGiven $recoverable = SdkNotGiven::Value, ?RequestOptions $requestOptions = null): ListProjectsResponse
     {
 
         if ($limit !== SdkNotGiven::Value) {
@@ -63,8 +63,8 @@ trait ProjectApiMethodsPart1
             Validation::validateRange('timeout', $timeout, min: 100, max: 30000);
         }
 
-        $sdkResponse = SdkClient::request('GET', "/projects", $clientConfig, query: ['cursor' => new SdkQueryValue($cursor, "form", true), 'limit' => new SdkQueryValue($limit, "form", true), 'search' => new SdkQueryValue($search, "form", true), 'org_id' => new SdkQueryValue($orgId, "form", true), 'timeout' => new SdkQueryValue($timeout, "form", true), 'recoverable' => new SdkQueryValue($recoverable, "form", true)], returnType: ProjectsResponse::class, decoder: 'json', operationId: 'listProjects', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
-        return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, ProjectsResponse::class));
+        $sdkResponse = SdkClient::request('GET', "/projects", $clientConfig, query: ['cursor' => new SdkQueryValue($cursor, "form", true), 'limit' => new SdkQueryValue($limit, "form", true), 'search' => new SdkQueryValue($search, "form", true), 'org_id' => new SdkQueryValue($orgId, "form", true), 'timeout' => new SdkQueryValue($timeout, "form", true), 'recoverable' => new SdkQueryValue($recoverable, "form", true)], returnType: ListProjectsResponse::class, decoder: 'json', operationId: 'listProjects', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, ListProjectsResponse::class));
     }
 
 
@@ -74,13 +74,13 @@ trait ProjectApiMethodsPart1
      * Creates a Neon project within an organization. If using a personal API key, include the `org_id` parameter to specify which organization to create the project in. If using an org API key, `org_id` is automatically inferred from the key. Plan limits define how many projects you can create. For more information, see [Manage projects](https://neon.com/docs/manage/projects/). You can specify a region and Postgres version in the request body. Neon supports Postgres 14 through 18, with 19 rolling out to enabled regions. For supported regions and `region_id` values, see [Regions](https://neon.com/docs/introduction/regions/). project: Configuration for the new project, including name, region, and Postgres compute and storage settings.
      *
      * @param CreateProjectProject $project
-     * @return ProjectResponse
+     * @return CreateProjectResponse
      */
-    public static function createProject(ClientConfig $clientConfig, CreateProjectProject $project, ?RequestOptions $requestOptions = null): ProjectResponse
+    public static function createProject(ClientConfig $clientConfig, CreateProjectProject $project, ?RequestOptions $requestOptions = null): CreateProjectResponse
     {
 
-        $sdkResponse = SdkClient::request('POST', "/projects", $clientConfig, body: ['project' => $project], returnType: ProjectResponse::class, decoder: 'json', operationId: 'createProject', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
-        return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, ProjectResponse::class));
+        $sdkResponse = SdkClient::request('POST', "/projects", $clientConfig, body: ['project' => $project], returnType: CreateProjectResponse::class, decoder: 'json', operationId: 'createProject', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, CreateProjectResponse::class));
     }
 
 
@@ -93,9 +93,9 @@ trait ProjectApiMethodsPart1
      * @param int|SdkNotGiven $limit
      * @param string|SdkNotGiven $search
      * @param int|SdkNotGiven $timeout
-     * @return ProjectsResponse
+     * @return ListSharedProjectsResponse
      */
-    public static function listSharedProjects(ClientConfig $clientConfig, string|SdkNotGiven $cursor = SdkNotGiven::Value, int|SdkNotGiven $limit = SdkNotGiven::Value, string|SdkNotGiven $search = SdkNotGiven::Value, int|SdkNotGiven $timeout = SdkNotGiven::Value, ?RequestOptions $requestOptions = null): ProjectsResponse
+    public static function listSharedProjects(ClientConfig $clientConfig, string|SdkNotGiven $cursor = SdkNotGiven::Value, int|SdkNotGiven $limit = SdkNotGiven::Value, string|SdkNotGiven $search = SdkNotGiven::Value, int|SdkNotGiven $timeout = SdkNotGiven::Value, ?RequestOptions $requestOptions = null): ListSharedProjectsResponse
     {
 
         if ($limit !== SdkNotGiven::Value) {
@@ -106,8 +106,8 @@ trait ProjectApiMethodsPart1
             Validation::validateRange('timeout', $timeout, min: 100, max: 30000);
         }
 
-        $sdkResponse = SdkClient::request('GET', "/projects/shared", $clientConfig, query: ['cursor' => new SdkQueryValue($cursor, "form", true), 'limit' => new SdkQueryValue($limit, "form", true), 'search' => new SdkQueryValue($search, "form", true), 'timeout' => new SdkQueryValue($timeout, "form", true)], returnType: ProjectsResponse::class, decoder: 'json', operationId: 'listSharedProjects', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
-        return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, ProjectsResponse::class));
+        $sdkResponse = SdkClient::request('GET', "/projects/shared", $clientConfig, query: ['cursor' => new SdkQueryValue($cursor, "form", true), 'limit' => new SdkQueryValue($limit, "form", true), 'search' => new SdkQueryValue($search, "form", true), 'timeout' => new SdkQueryValue($timeout, "form", true)], returnType: ListSharedProjectsResponse::class, decoder: 'json', operationId: 'listSharedProjects', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, ListSharedProjectsResponse::class));
     }
 
 
@@ -136,15 +136,15 @@ trait ProjectApiMethodsPart1
      *
      * @param string $projectId
      * @param UpdateProjectProject $project
-     * @return ProjectResponse
+     * @return UpdateProjectResponse
      */
-    public static function updateProject(ClientConfig $clientConfig, string $projectId, UpdateProjectProject $project, ?RequestOptions $requestOptions = null): ProjectResponse
+    public static function updateProject(ClientConfig $clientConfig, string $projectId, UpdateProjectProject $project, ?RequestOptions $requestOptions = null): UpdateProjectResponse
     {
 
         Validation::validatePattern('project_id', $projectId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('PATCH', "/projects/" . SdkClient::encodePathSegment($projectId) . "", $clientConfig, body: ['project' => $project], returnType: ProjectResponse::class, decoder: 'json', operationId: 'updateProject', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
-        return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, ProjectResponse::class));
+        $sdkResponse = SdkClient::request('PATCH', "/projects/" . SdkClient::encodePathSegment($projectId) . "", $clientConfig, body: ['project' => $project], returnType: UpdateProjectResponse::class, decoder: 'json', operationId: 'updateProject', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, UpdateProjectResponse::class));
     }
 
 

@@ -220,51 +220,82 @@ class AddProjectJWKSRequest implements \JsonSerializable
         return new self(
             jwksUrl: SdkClient::stringValue($data->jwks_url),
             providerName: SdkClient::stringValue($data->provider_name),
-            branchId: (property_exists($data, "branch_id") ? SdkClient::stringValue($data->branch_id) : SdkNotGiven::Value),
-            jwtAudience: (property_exists($data, "jwt_audience") ? SdkClient::stringValue($data->jwt_audience) : SdkNotGiven::Value),
-            roleNames: (property_exists($data, "role_names") ? array_values(array_map(static fn($item) => SdkClient::stringValue($item), SdkClient::arrayValue($data->role_names))) : SdkNotGiven::Value),
-            skipRoleCreation: (property_exists($data, "skip_role_creation") ? SdkClient::boolValue($data->skip_role_creation) : SdkNotGiven::Value),
+            branchId: (property_exists($data, "branch_id") && $data->branch_id !== null ? SdkClient::stringValue($data->branch_id) : SdkNotGiven::Value),
+            jwtAudience: (property_exists($data, "jwt_audience") && $data->jwt_audience !== null ? SdkClient::stringValue($data->jwt_audience) : SdkNotGiven::Value),
+            roleNames: (property_exists($data, "role_names") && $data->role_names !== null ? array_values(array_map(static fn($item) => SdkClient::stringValue($item), SdkClient::arrayValue($data->role_names))) : SdkNotGiven::Value),
+            skipRoleCreation: (property_exists($data, "skip_role_creation") && $data->skip_role_creation !== null ? SdkClient::boolValue($data->skip_role_creation) : SdkNotGiven::Value),
         );
     }
 }
 
 /**
- * Category of an advisor issue
+ * A list of IP addresses that are allowed to connect to the compute endpoint. If the list is empty or not set, all IP addresses are allowed. If protected_branches_only is true, the list will be applied only to protected branches.
  */
-final readonly class AdvisorCategory implements SdkOpenEnum
+class AllowedIps implements \JsonSerializable
 {
-    public const SECURITY = "SECURITY";
-    public const PERFORMANCE = "PERFORMANCE";
-    private function __construct(public string $value) {}
-    public static function from(string|int $value): static
-    {
-        return new self((string) $value);
+    /**
+     * A list of IP addresses that are allowed to connect to the endpoint.
+     *
+     * @var list<string>|SdkNotGiven
+     */
+    public readonly array|SdkNotGiven $ips;
+    /**
+     * If true, the list will be applied only to protected branches.
+     *
+     * @var bool|SdkNotGiven
+     */
+    public readonly bool|SdkNotGiven $protectedBranchesOnly;
+
+    /**
+     * @param list<string>|SdkNotGiven $ips
+     * @param bool|SdkNotGiven $protectedBranchesOnly
+     */
+    public function __construct(
+        array|SdkNotGiven $ips = SdkNotGiven::Value,
+        bool|SdkNotGiven $protectedBranchesOnly = SdkNotGiven::Value,
+    ) {
+        $this->ips = $ips;
+        $this->protectedBranchesOnly = $protectedBranchesOnly;
     }
-    public static function tryFrom(string|int|null $value): ?static
+
+    /** @return array<array-key, mixed> */
+    public function toArray(): array
     {
-        return $value === null ? null : self::from($value);
+        $values = [
+        ];
+        if ($this->ips !== SdkNotGiven::Value) {
+            $values["ips"] = $this->ips;
+        }
+        if ($this->protectedBranchesOnly !== SdkNotGiven::Value) {
+            $values["protected_branches_only"] = $this->protectedBranchesOnly;
+        }
+        return $values;
     }
-    public function getValue(): string
+
+    /** @return object */
+    public function jsonSerialize(): object
     {
-        return $this->value;
+        return (object) $this->toArray();
     }
-    public function jsonSerialize(): string
+
+    public static function fromObject(object $data): self
     {
-        return $this->value;
-    }
-    public function __toString(): string
-    {
-        return (string) $this->value;
+        return new self(
+            ips: (property_exists($data, "ips") && $data->ips !== null ? array_values(array_map(static fn($item) => SdkClient::stringValue($item), SdkClient::arrayValue($data->ips))) : SdkNotGiven::Value),
+            protectedBranchesOnly: (property_exists($data, "protected_branches_only") && $data->protected_branches_only !== null ? SdkClient::boolValue($data->protected_branches_only) : SdkNotGiven::Value),
+        );
     }
 }
 
 /**
- * Whether this issue affects external API exposure or is internal only
+ * Type of application integration
  */
-final readonly class AdvisorIssueFacingEnum implements SdkOpenEnum
+final readonly class ApplicationType implements SdkOpenEnum
 {
-    public const EXTERNAL = "EXTERNAL";
-    public const INTERNAL = "INTERNAL";
+    public const VERCEL = "vercel";
+    public const GITHUB = "github";
+    public const DATADOG = "datadog";
+    public const OPENTELEMETRY = "opentelemetry";
     private function __construct(public string $value) {}
     public static function from(string|int $value): static
     {

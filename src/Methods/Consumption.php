@@ -23,9 +23,9 @@ class Consumption
      * @param string|SdkNotGiven $orgId
      * @param bool|SdkNotGiven $includeV1Metrics
      * @param list<string>|SdkNotGiven $metrics
-     * @return ConsumptionHistoryPerProjectResponse
+     * @return GetConsumptionHistoryPerProjectResponse
      */
-    public static function getConsumptionHistoryPerProject(ClientConfig $clientConfig, string $from, string $to, ConsumptionHistoryGranularity $granularity, string|SdkNotGiven $cursor = SdkNotGiven::Value, int|SdkNotGiven $limit = SdkNotGiven::Value, array|SdkNotGiven $projectIds = SdkNotGiven::Value, string|SdkNotGiven $orgId = SdkNotGiven::Value, bool|SdkNotGiven $includeV1Metrics = SdkNotGiven::Value, array|SdkNotGiven $metrics = SdkNotGiven::Value, ?RequestOptions $requestOptions = null): ConsumptionHistoryPerProjectResponse
+    public static function getConsumptionHistoryPerProject(ClientConfig $clientConfig, string $from, string $to, ConsumptionHistoryGranularity $granularity, string|SdkNotGiven $cursor = SdkNotGiven::Value, int|SdkNotGiven $limit = SdkNotGiven::Value, array|SdkNotGiven $projectIds = SdkNotGiven::Value, string|SdkNotGiven $orgId = SdkNotGiven::Value, bool|SdkNotGiven $includeV1Metrics = SdkNotGiven::Value, array|SdkNotGiven $metrics = SdkNotGiven::Value, ?RequestOptions $requestOptions = null): GetConsumptionHistoryPerProjectResponse
     {
 
         Validation::validateDateTime('from', $from);
@@ -44,8 +44,8 @@ class Consumption
             Validation::validatePattern('org_id', $orgId, '^[a-z0-9-]{1,60}$');
         }
 
-        $sdkResponse = SdkClient::request('GET', "/consumption_history/projects", $clientConfig, query: ['from' => new SdkQueryValue($from, "form", true), 'to' => new SdkQueryValue($to, "form", true), 'granularity' => new SdkQueryValue($granularity, "form", true), 'cursor' => new SdkQueryValue($cursor, "form", true), 'limit' => new SdkQueryValue($limit, "form", true), 'project_ids' => new SdkQueryValue($projectIds, "form", true), 'org_id' => new SdkQueryValue($orgId, "form", true), 'include_v1_metrics' => new SdkQueryValue($includeV1Metrics, "form", true), 'metrics' => new SdkQueryValue($metrics, "form", true)], returnType: ConsumptionHistoryPerProjectResponse::class, decoder: 'json', operationId: 'getConsumptionHistoryPerProject', requestOptions: $requestOptions, errors: [403 => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class), 404 => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class), 406 => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class), 429 => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class), "default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
-        return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, ConsumptionHistoryPerProjectResponse::class));
+        $sdkResponse = SdkClient::request('GET', "/consumption_history/projects", $clientConfig, query: ['from' => new SdkQueryValue($from, "form", true), 'to' => new SdkQueryValue($to, "form", true), 'granularity' => new SdkQueryValue($granularity, "form", true), 'cursor' => new SdkQueryValue($cursor, "form", true), 'limit' => new SdkQueryValue($limit, "form", true), 'project_ids' => new SdkQueryValue($projectIds, "form", true), 'org_id' => new SdkQueryValue($orgId, "form", true), 'include_v1_metrics' => new SdkQueryValue($includeV1Metrics, "form", true), 'metrics' => new SdkQueryValue($metrics, "form", true)], returnType: GetConsumptionHistoryPerProjectResponse::class, decoder: 'json', operationId: 'getConsumptionHistoryPerProject', requestOptions: $requestOptions, errors: [403 => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class), 404 => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class), 406 => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class), 429 => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class), "default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, GetConsumptionHistoryPerProjectResponse::class));
     }
 
 
@@ -62,9 +62,9 @@ class Consumption
      * @param string|SdkNotGiven $cursor
      * @param int|SdkNotGiven $limit
      * @param list<string>|SdkNotGiven $projectIds
-     * @return ConsumptionHistoryPerProjectV2Response
+     * @return GetConsumptionHistoryPerProjectV2Response
      */
-    public static function getConsumptionHistoryPerProjectV2(ClientConfig $clientConfig, string $from, string $to, ConsumptionHistoryGranularity $granularity, string $orgId, array $metrics, string|SdkNotGiven $cursor = SdkNotGiven::Value, int|SdkNotGiven $limit = SdkNotGiven::Value, array|SdkNotGiven $projectIds = SdkNotGiven::Value, ?RequestOptions $requestOptions = null): ConsumptionHistoryPerProjectV2Response
+    public static function getConsumptionHistoryPerProjectV2(ClientConfig $clientConfig, string $from, string $to, ConsumptionHistoryGranularity $granularity, string $orgId, array $metrics, string|SdkNotGiven $cursor = SdkNotGiven::Value, int|SdkNotGiven $limit = SdkNotGiven::Value, array|SdkNotGiven $projectIds = SdkNotGiven::Value, ?RequestOptions $requestOptions = null): GetConsumptionHistoryPerProjectV2Response
     {
 
         Validation::validateDateTime('from', $from);
@@ -81,8 +81,8 @@ class Consumption
             Validation::validateItems('project_ids', $projectIds, min: 0, max: 100);
         }
 
-        $sdkResponse = SdkClient::request('GET', "/consumption_history/v2/projects", $clientConfig, query: ['from' => new SdkQueryValue($from, "form", true), 'to' => new SdkQueryValue($to, "form", true), 'granularity' => new SdkQueryValue($granularity, "form", true), 'org_id' => new SdkQueryValue($orgId, "form", true), 'metrics' => new SdkQueryValue($metrics, "form", true), 'cursor' => new SdkQueryValue($cursor, "form", true), 'limit' => new SdkQueryValue($limit, "form", true), 'project_ids' => new SdkQueryValue($projectIds, "form", true)], returnType: ConsumptionHistoryPerProjectV2Response::class, decoder: 'json', operationId: 'getConsumptionHistoryPerProjectV2', requestOptions: $requestOptions, errors: [403 => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class), 404 => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class), 406 => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class), 429 => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class), "default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
-        return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, ConsumptionHistoryPerProjectV2Response::class));
+        $sdkResponse = SdkClient::request('GET', "/consumption_history/v2/projects", $clientConfig, query: ['from' => new SdkQueryValue($from, "form", true), 'to' => new SdkQueryValue($to, "form", true), 'granularity' => new SdkQueryValue($granularity, "form", true), 'org_id' => new SdkQueryValue($orgId, "form", true), 'metrics' => new SdkQueryValue($metrics, "form", true), 'cursor' => new SdkQueryValue($cursor, "form", true), 'limit' => new SdkQueryValue($limit, "form", true), 'project_ids' => new SdkQueryValue($projectIds, "form", true)], returnType: GetConsumptionHistoryPerProjectV2Response::class, decoder: 'json', operationId: 'getConsumptionHistoryPerProjectV2', requestOptions: $requestOptions, errors: [403 => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class), 404 => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class), 406 => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class), 429 => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class), "default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, GetConsumptionHistoryPerProjectV2Response::class));
     }
 
 
@@ -100,9 +100,9 @@ class Consumption
      * @param string|SdkNotGiven $cursor
      * @param int|SdkNotGiven $limit
      * @param list<string>|SdkNotGiven $branchIds
-     * @return ConsumptionHistoryPerBranchV2Response
+     * @return GetConsumptionHistoryPerBranchV2Response
      */
-    public static function getConsumptionHistoryPerBranchV2(ClientConfig $clientConfig, array $projectIds, string $from, string $to, ConsumptionHistoryGranularity $granularity, string $orgId, array $metrics, string|SdkNotGiven $cursor = SdkNotGiven::Value, int|SdkNotGiven $limit = SdkNotGiven::Value, array|SdkNotGiven $branchIds = SdkNotGiven::Value, ?RequestOptions $requestOptions = null): ConsumptionHistoryPerBranchV2Response
+    public static function getConsumptionHistoryPerBranchV2(ClientConfig $clientConfig, array $projectIds, string $from, string $to, ConsumptionHistoryGranularity $granularity, string $orgId, array $metrics, string|SdkNotGiven $cursor = SdkNotGiven::Value, int|SdkNotGiven $limit = SdkNotGiven::Value, array|SdkNotGiven $branchIds = SdkNotGiven::Value, ?RequestOptions $requestOptions = null): GetConsumptionHistoryPerBranchV2Response
     {
 
         Validation::validateItems('project_ids', $projectIds, min: 1, max: 100);
@@ -121,7 +121,7 @@ class Consumption
             Validation::validateItems('branch_ids', $branchIds, min: 0, max: 100);
         }
 
-        $sdkResponse = SdkClient::request('GET', "/consumption_history/v2/branches", $clientConfig, query: ['project_ids' => new SdkQueryValue($projectIds, "form", true), 'from' => new SdkQueryValue($from, "form", true), 'to' => new SdkQueryValue($to, "form", true), 'granularity' => new SdkQueryValue($granularity, "form", true), 'org_id' => new SdkQueryValue($orgId, "form", true), 'metrics' => new SdkQueryValue($metrics, "form", true), 'cursor' => new SdkQueryValue($cursor, "form", true), 'limit' => new SdkQueryValue($limit, "form", true), 'branch_ids' => new SdkQueryValue($branchIds, "form", true)], returnType: ConsumptionHistoryPerBranchV2Response::class, decoder: 'json', operationId: 'getConsumptionHistoryPerBranchV2', requestOptions: $requestOptions, errors: [403 => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class), 404 => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class), 406 => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class), 429 => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class), "default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
-        return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, ConsumptionHistoryPerBranchV2Response::class));
+        $sdkResponse = SdkClient::request('GET', "/consumption_history/v2/branches", $clientConfig, query: ['project_ids' => new SdkQueryValue($projectIds, "form", true), 'from' => new SdkQueryValue($from, "form", true), 'to' => new SdkQueryValue($to, "form", true), 'granularity' => new SdkQueryValue($granularity, "form", true), 'org_id' => new SdkQueryValue($orgId, "form", true), 'metrics' => new SdkQueryValue($metrics, "form", true), 'cursor' => new SdkQueryValue($cursor, "form", true), 'limit' => new SdkQueryValue($limit, "form", true), 'branch_ids' => new SdkQueryValue($branchIds, "form", true)], returnType: GetConsumptionHistoryPerBranchV2Response::class, decoder: 'json', operationId: 'getConsumptionHistoryPerBranchV2', requestOptions: $requestOptions, errors: [403 => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class), 404 => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class), 406 => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class), 429 => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class), "default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, GetConsumptionHistoryPerBranchV2Response::class));
     }
 }

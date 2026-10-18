@@ -109,7 +109,127 @@ class FunctionTriggerStorageObjectCreated implements \JsonSerializable
         }
         return new self(
             bucketName: SdkClient::stringValue($data->bucket_name),
-            prefix: (property_exists($data, "prefix") ? SdkClient::stringValue($data->prefix) : SdkNotGiven::Value),
+            prefix: (property_exists($data, "prefix") && $data->prefix !== null ? SdkClient::stringValue($data->prefix) : SdkNotGiven::Value),
+        );
+    }
+}
+
+/**
+ * Typed representation of the `ListFunctionsCustomDomainsResponse` API schema.
+ */
+class ListFunctionsCustomDomainsResponse implements \JsonSerializable
+{
+    /**
+     * Required array value serialized in the `custom_domains` wire field.
+     *
+     * @var list<CustomDomain>
+     */
+    public readonly array $customDomains;
+    /**
+     * To paginate the response, issue an initial request with `limit` value. Then, add the value returned in the response `.pagination.next` attribute into the request under the `cursor` query parameter to the subsequent request to retrieve next page in pagination. The contents on cursor `next` are opaque, clients are not expected to make any assumptions on the format of the data inside the cursor.
+     *
+     * @var CursorPagination|SdkNotGiven
+     */
+    public readonly CursorPagination|SdkNotGiven $pagination;
+
+    /**
+     * @param list<CustomDomain> $customDomains
+     * @param CursorPagination|SdkNotGiven $pagination
+     */
+    public function __construct(
+        array $customDomains,
+        CursorPagination|SdkNotGiven $pagination = SdkNotGiven::Value,
+    ) {
+        $this->customDomains = $customDomains;
+        $this->pagination = $pagination;
+    }
+
+    /** @return array<array-key, mixed> */
+    public function toArray(): array
+    {
+        $values = [
+            "custom_domains" => $this->customDomains,
+        ];
+        if ($this->pagination !== SdkNotGiven::Value) {
+            $values["pagination"] = $this->pagination;
+        }
+        return $values;
+    }
+
+    /** @return object */
+    public function jsonSerialize(): object
+    {
+        return (object) $this->toArray();
+    }
+
+    public static function fromObject(object $data): self
+    {
+        if (!property_exists($data, "custom_domains") || $data->custom_domains === null) {
+            throw new SdkValidationError("custom_domains", 'required', "Required property 'custom_domains' is missing or null");
+        }
+        return new self(
+            customDomains: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, CustomDomain::class), SdkClient::arrayValue($data->custom_domains))),
+            pagination: (property_exists($data, "pagination") && $data->pagination !== null ? SdkClient::hydrateClass($data->pagination, CursorPagination::class) : SdkNotGiven::Value),
+        );
+    }
+}
+
+/**
+ * Typed representation of the `ListFunctionsResponse` API schema.
+ */
+class ListFunctionsResponse implements \JsonSerializable
+{
+    /**
+     * Required array value serialized in the `functions` wire field.
+     *
+     * @var list<NeonFunction>
+     */
+    public readonly array $functions;
+    /**
+     * To paginate the response, issue an initial request with `limit` value. Then, add the value returned in the response `.pagination.next` attribute into the request under the `cursor` query parameter to the subsequent request to retrieve next page in pagination. The contents on cursor `next` are opaque, clients are not expected to make any assumptions on the format of the data inside the cursor.
+     *
+     * @var CursorPagination|SdkNotGiven
+     */
+    public readonly CursorPagination|SdkNotGiven $pagination;
+
+    /**
+     * @param list<NeonFunction> $functions
+     * @param CursorPagination|SdkNotGiven $pagination
+     */
+    public function __construct(
+        array $functions,
+        CursorPagination|SdkNotGiven $pagination = SdkNotGiven::Value,
+    ) {
+        $this->functions = $functions;
+        $this->pagination = $pagination;
+    }
+
+    /** @return array<array-key, mixed> */
+    public function toArray(): array
+    {
+        $values = [
+            "functions" => $this->functions,
+        ];
+        if ($this->pagination !== SdkNotGiven::Value) {
+            $values["pagination"] = $this->pagination;
+        }
+        return $values;
+    }
+
+    /** @return object */
+    public function jsonSerialize(): object
+    {
+        return (object) $this->toArray();
+    }
+
+    public static function fromObject(object $data): self
+    {
+        if (!property_exists($data, "functions") || $data->functions === null) {
+            throw new SdkValidationError("functions", 'required', "Required property 'functions' is missing or null");
+        }
+        return new self(
+            functions: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, NeonFunction::class), SdkClient::arrayValue($data->functions))),
+            pagination: (property_exists($data, "pagination") && $data->pagination !== null ? SdkClient::hydrateClass($data->pagination, CursorPagination::class) : SdkNotGiven::Value),
         );
     }
 }
@@ -237,40 +357,8 @@ class NeonFunction implements \JsonSerializable
             name: SdkClient::stringValue($data->name),
             invocationUrl: SdkClient::stringValue($data->invocation_url),
             createdAt: SdkClient::stringValue($data->created_at),
-            currentDeployment: (property_exists($data, "current_deployment") ? SdkClient::hydrateClass($data->current_deployment, NeonFunctionDeployment::class) : SdkNotGiven::Value),
-            activeDeployment: (property_exists($data, "active_deployment") ? SdkClient::hydrateClass($data->active_deployment, NeonFunctionDeployment::class) : SdkNotGiven::Value),
+            currentDeployment: (property_exists($data, "current_deployment") && $data->current_deployment !== null ? SdkClient::hydrateClass($data->current_deployment, NeonFunctionDeployment::class) : SdkNotGiven::Value),
+            activeDeployment: (property_exists($data, "active_deployment") && $data->active_deployment !== null ? SdkClient::hydrateClass($data->active_deployment, NeonFunctionDeployment::class) : SdkNotGiven::Value),
         );
-    }
-}
-
-/**
- * Build lifecycle status of the deployment.
- */
-final readonly class NeonFunctionDeploymentStatusEnum implements SdkOpenEnum
-{
-    public const PENDING = "pending";
-    public const BUILDING = "building";
-    public const COMPLETED = "completed";
-    public const FAILED = "failed";
-    private function __construct(public string $value) {}
-    public static function from(string|int $value): static
-    {
-        return new self((string) $value);
-    }
-    public static function tryFrom(string|int|null $value): ?static
-    {
-        return $value === null ? null : self::from($value);
-    }
-    public function getValue(): string
-    {
-        return $this->value;
-    }
-    public function jsonSerialize(): string
-    {
-        return $this->value;
-    }
-    public function __toString(): string
-    {
-        return (string) $this->value;
     }
 }

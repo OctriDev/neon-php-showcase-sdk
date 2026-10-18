@@ -257,7 +257,7 @@ class ConsumptionHistoryPerPeriod implements \JsonSerializable
             periodPlan: SdkClient::stringValue($data->period_plan),
             periodStart: SdkClient::stringValue($data->period_start),
             consumption: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, ConsumptionHistoryPerTimeframe::class), SdkClient::arrayValue($data->consumption))),
-            periodEnd: (property_exists($data, "period_end") ? SdkClient::stringValue($data->period_end) : SdkNotGiven::Value),
+            periodEnd: (property_exists($data, "period_end") && $data->period_end !== null ? SdkClient::stringValue($data->period_end) : SdkNotGiven::Value),
         );
     }
 }
@@ -359,7 +359,7 @@ class ConsumptionHistoryPerPeriodV2 implements \JsonSerializable
             periodPlan: SdkClient::stringValue($data->period_plan),
             periodStart: SdkClient::stringValue($data->period_start),
             consumption: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, ConsumptionHistoryPerTimeframeV2::class), SdkClient::arrayValue($data->consumption))),
-            periodEnd: (property_exists($data, "period_end") ? SdkClient::stringValue($data->period_end) : SdkNotGiven::Value),
+            periodEnd: (property_exists($data, "period_end") && $data->period_end !== null ? SdkClient::stringValue($data->period_end) : SdkNotGiven::Value),
         );
     }
 }

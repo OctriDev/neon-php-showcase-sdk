@@ -110,11 +110,11 @@ class ScheduleTriggerUpdateRequest implements TriggerUpdateRequest, \JsonSeriali
         }
         return new self(
             type: SdkClient::hydrateEnum($data->type, ScheduleTriggerUpdateRequestTypeEnum::class),
-            functionSlug: (property_exists($data, "function_slug") ? SdkClient::stringValue($data->function_slug) : SdkNotGiven::Value),
-            name: (property_exists($data, "name") ? SdkClient::stringValue($data->name) : SdkNotGiven::Value),
-            functionPath: (property_exists($data, "function_path") ? SdkClient::stringValue($data->function_path) : SdkNotGiven::Value),
-            schedule: (property_exists($data, "schedule") ? SdkClient::hydrateClass($data->schedule, FunctionTriggerSchedule::class) : SdkNotGiven::Value),
-            enabled: (property_exists($data, "enabled") ? SdkClient::boolValue($data->enabled) : SdkNotGiven::Value),
+            functionSlug: (property_exists($data, "function_slug") && $data->function_slug !== null ? SdkClient::stringValue($data->function_slug) : SdkNotGiven::Value),
+            name: (property_exists($data, "name") && $data->name !== null ? SdkClient::stringValue($data->name) : SdkNotGiven::Value),
+            functionPath: (property_exists($data, "function_path") && $data->function_path !== null ? SdkClient::stringValue($data->function_path) : SdkNotGiven::Value),
+            schedule: (property_exists($data, "schedule") && $data->schedule !== null ? SdkClient::hydrateClass($data->schedule, FunctionTriggerSchedule::class) : SdkNotGiven::Value),
+            enabled: (property_exists($data, "enabled") && $data->enabled !== null ? SdkClient::boolValue($data->enabled) : SdkNotGiven::Value),
         );
     }
 }

@@ -190,6 +190,9 @@ class Buckets
             foreach ($_items as $_item) {
                 yield $_item;
             }
+            if (!$_page->isTruncated) {
+                return;
+            }
             $_next = $_page->nextCursor;
             if ($_next === SdkNotGiven::Value) {
                 return;
@@ -226,7 +229,7 @@ class Buckets
                 return;
             }
             $_next = $_page->nextCursor;
-            $_hasMore = $_next !== SdkNotGiven::Value && $_next !== $_cursor;
+            $_hasMore = $_page->isTruncated && $_next !== SdkNotGiven::Value && $_next !== $_cursor;
             yield ['data' => $_page, 'items' => $_items, 'hasMore' => $_hasMore];
             if (!$_hasMore) {
                 return;

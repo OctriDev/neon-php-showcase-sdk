@@ -152,10 +152,10 @@ class CreateProjectProjectBranch implements \JsonSerializable
     public static function fromObject(object $data): self
     {
         return new self(
-            name: (property_exists($data, "name") ? SdkClient::stringValue($data->name) : SdkNotGiven::Value),
-            roleName: (property_exists($data, "role_name") ? SdkClient::stringValue($data->role_name) : SdkNotGiven::Value),
-            databaseName: (property_exists($data, "database_name") ? SdkClient::stringValue($data->database_name) : SdkNotGiven::Value),
-            annotations: (property_exists($data, "annotations") ? SdkClient::mapValues(SdkClient::stringMapValue($data->annotations), static fn($item) => SdkClient::stringValue($item)) : SdkNotGiven::Value),
+            name: (property_exists($data, "name") && $data->name !== null ? SdkClient::stringValue($data->name) : SdkNotGiven::Value),
+            roleName: (property_exists($data, "role_name") && $data->role_name !== null ? SdkClient::stringValue($data->role_name) : SdkNotGiven::Value),
+            databaseName: (property_exists($data, "database_name") && $data->database_name !== null ? SdkClient::stringValue($data->database_name) : SdkNotGiven::Value),
+            annotations: (property_exists($data, "annotations") && $data->annotations !== null ? SdkClient::mapValues(SdkClient::stringMapValue($data->annotations), static fn($item) => SdkClient::stringValue($item)) : SdkNotGiven::Value),
         );
     }
 }
@@ -345,19 +345,19 @@ class CreateProjectProject implements \JsonSerializable
     public static function fromObject(object $data): self
     {
         return new self(
-            settings: (property_exists($data, "settings") ? SdkClient::hydrateClass($data->settings, ProjectSettingsData::class) : SdkNotGiven::Value),
-            name: (property_exists($data, "name") ? SdkClient::stringValue($data->name) : SdkNotGiven::Value),
-            realtime: (property_exists($data, "realtime") ? SdkClient::hydrateClass($data->realtime, RealtimeOptions::class) : SdkNotGiven::Value),
-            branch: (property_exists($data, "branch") ? SdkClient::hydrateClass($data->branch, CreateProjectProjectBranch::class) : SdkNotGiven::Value),
-            autoscalingLimitMinCu: (property_exists($data, "autoscaling_limit_min_cu") ? SdkClient::floatValue($data->autoscaling_limit_min_cu) : SdkNotGiven::Value),
-            autoscalingLimitMaxCu: (property_exists($data, "autoscaling_limit_max_cu") ? SdkClient::floatValue($data->autoscaling_limit_max_cu) : SdkNotGiven::Value),
-            provisioner: (property_exists($data, "provisioner") ? SdkClient::stringValue($data->provisioner) : SdkNotGiven::Value),
-            regionId: (property_exists($data, "region_id") ? SdkClient::stringValue($data->region_id) : SdkNotGiven::Value),
-            defaultEndpointSettings: (property_exists($data, "default_endpoint_settings") ? SdkClient::hydrateClass($data->default_endpoint_settings, DefaultEndpointSettings::class) : SdkNotGiven::Value),
-            pgVersion: (property_exists($data, "pg_version") ? SdkClient::intValue($data->pg_version) : SdkNotGiven::Value),
-            storePasswords: (property_exists($data, "store_passwords") ? SdkClient::boolValue($data->store_passwords) : SdkNotGiven::Value),
-            historyRetentionSeconds: (property_exists($data, "history_retention_seconds") ? SdkClient::intValue($data->history_retention_seconds) : SdkNotGiven::Value),
-            orgId: (property_exists($data, "org_id") ? SdkClient::stringValue($data->org_id) : SdkNotGiven::Value),
+            settings: (property_exists($data, "settings") && $data->settings !== null ? SdkClient::hydrateClass($data->settings, ProjectSettingsData::class) : SdkNotGiven::Value),
+            name: (property_exists($data, "name") && $data->name !== null ? SdkClient::stringValue($data->name) : SdkNotGiven::Value),
+            realtime: (property_exists($data, "realtime") && $data->realtime !== null ? SdkClient::hydrateClass($data->realtime, RealtimeOptions::class) : SdkNotGiven::Value),
+            branch: (property_exists($data, "branch") && $data->branch !== null ? SdkClient::hydrateClass($data->branch, CreateProjectProjectBranch::class) : SdkNotGiven::Value),
+            autoscalingLimitMinCu: (property_exists($data, "autoscaling_limit_min_cu") && $data->autoscaling_limit_min_cu !== null ? SdkClient::floatValue($data->autoscaling_limit_min_cu) : SdkNotGiven::Value),
+            autoscalingLimitMaxCu: (property_exists($data, "autoscaling_limit_max_cu") && $data->autoscaling_limit_max_cu !== null ? SdkClient::floatValue($data->autoscaling_limit_max_cu) : SdkNotGiven::Value),
+            provisioner: (property_exists($data, "provisioner") && $data->provisioner !== null ? SdkClient::stringValue($data->provisioner) : SdkNotGiven::Value),
+            regionId: (property_exists($data, "region_id") && $data->region_id !== null ? SdkClient::stringValue($data->region_id) : SdkNotGiven::Value),
+            defaultEndpointSettings: (property_exists($data, "default_endpoint_settings") && $data->default_endpoint_settings !== null ? SdkClient::hydrateClass($data->default_endpoint_settings, DefaultEndpointSettings::class) : SdkNotGiven::Value),
+            pgVersion: (property_exists($data, "pg_version") && $data->pg_version !== null ? SdkClient::intValue($data->pg_version) : SdkNotGiven::Value),
+            storePasswords: (property_exists($data, "store_passwords") && $data->store_passwords !== null ? SdkClient::boolValue($data->store_passwords) : SdkNotGiven::Value),
+            historyRetentionSeconds: (property_exists($data, "history_retention_seconds") && $data->history_retention_seconds !== null ? SdkClient::intValue($data->history_retention_seconds) : SdkNotGiven::Value),
+            orgId: (property_exists($data, "org_id") && $data->org_id !== null ? SdkClient::stringValue($data->org_id) : SdkNotGiven::Value),
         );
     }
 }

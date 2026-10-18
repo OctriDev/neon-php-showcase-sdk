@@ -88,8 +88,8 @@ class BranchSchemaJSONTablesItemConstraintsItem implements \JsonSerializable
         return new self(
             type: SdkClient::stringValue($data->type),
             columns: array_values(array_map(static fn($item) => SdkClient::stringValue($item), SdkClient::arrayValue($data->columns))),
-            name: (property_exists($data, "name") ? SdkClient::stringValue($data->name) : SdkNotGiven::Value),
-            referencedTable: (property_exists($data, "referenced_table") ? SdkClient::hydrateClass($data->referenced_table, BranchSchemaJSONTablesItemConstraintsItemReferencedTable::class) : SdkNotGiven::Value),
+            name: (property_exists($data, "name") && $data->name !== null ? SdkClient::stringValue($data->name) : SdkNotGiven::Value),
+            referencedTable: (property_exists($data, "referenced_table") && $data->referenced_table !== null ? SdkClient::hydrateClass($data->referenced_table, BranchSchemaJSONTablesItemConstraintsItemReferencedTable::class) : SdkNotGiven::Value),
         );
     }
 }
@@ -177,7 +177,7 @@ class BranchSchemaJSONTablesItem implements \JsonSerializable
             schema: SdkClient::stringValue($data->schema),
             name: SdkClient::stringValue($data->name),
             columns: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, BranchSchemaJSONTablesItemColumnsItem::class), SdkClient::arrayValue($data->columns))),
-            constraints: (property_exists($data, "constraints") ? array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, BranchSchemaJSONTablesItemConstraintsItem::class), SdkClient::arrayValue($data->constraints))) : SdkNotGiven::Value),
+            constraints: (property_exists($data, "constraints") && $data->constraints !== null ? array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, BranchSchemaJSONTablesItemConstraintsItem::class), SdkClient::arrayValue($data->constraints))) : SdkNotGiven::Value),
         );
     }
 }
@@ -282,8 +282,8 @@ class BranchSchemaResponse implements \JsonSerializable
     public static function fromObject(object $data): self
     {
         return new self(
-            sql: (property_exists($data, "sql") ? SdkClient::stringValue($data->sql) : SdkNotGiven::Value),
-            json: (property_exists($data, "json") ? SdkClient::hydrateClass($data->json, BranchSchemaJSON::class) : SdkNotGiven::Value),
+            sql: (property_exists($data, "sql") && $data->sql !== null ? SdkClient::stringValue($data->sql) : SdkNotGiven::Value),
+            json: (property_exists($data, "json") && $data->json !== null ? SdkClient::hydrateClass($data->json, BranchSchemaJSON::class) : SdkNotGiven::Value),
         );
     }
 }
@@ -353,8 +353,8 @@ class BranchUpdateRequestBranch implements \JsonSerializable
     public static function fromObject(object $data): self
     {
         return new self(
-            name: (property_exists($data, "name") ? SdkClient::stringValue($data->name) : SdkNotGiven::Value),
-            protected_: (property_exists($data, "protected") ? SdkClient::boolValue($data->protected) : SdkNotGiven::Value),
+            name: (property_exists($data, "name") && $data->name !== null ? SdkClient::stringValue($data->name) : SdkNotGiven::Value),
+            protected_: (property_exists($data, "protected") && $data->protected !== null ? SdkClient::boolValue($data->protected) : SdkNotGiven::Value),
             expiresAt: (property_exists($data, "expires_at") ? ($data->expires_at === null ? null : SdkClient::stringValue($data->expires_at)) : SdkNotGiven::Value),
         );
     }

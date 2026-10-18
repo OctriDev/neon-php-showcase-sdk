@@ -28,9 +28,9 @@ class ConsumptionNamespace
      * @param string|SdkNotGiven $orgId
      * @param bool|SdkNotGiven $includeV1Metrics
      * @param list<string>|SdkNotGiven $metrics
-     * @return ConsumptionHistoryPerProjectResponse
+     * @return GetConsumptionHistoryPerProjectResponse
      */
-    public function getHistoryPerProject(string $from, string $to, ConsumptionHistoryGranularity $granularity, string|SdkNotGiven $cursor = SdkNotGiven::Value, int|SdkNotGiven $limit = SdkNotGiven::Value, array|SdkNotGiven $projectIds = SdkNotGiven::Value, string|SdkNotGiven $orgId = SdkNotGiven::Value, bool|SdkNotGiven $includeV1Metrics = SdkNotGiven::Value, array|SdkNotGiven $metrics = SdkNotGiven::Value, ?RequestOptions $requestOptions = null): ConsumptionHistoryPerProjectResponse
+    public function getHistoryPerProject(string $from, string $to, ConsumptionHistoryGranularity $granularity, string|SdkNotGiven $cursor = SdkNotGiven::Value, int|SdkNotGiven $limit = SdkNotGiven::Value, array|SdkNotGiven $projectIds = SdkNotGiven::Value, string|SdkNotGiven $orgId = SdkNotGiven::Value, bool|SdkNotGiven $includeV1Metrics = SdkNotGiven::Value, array|SdkNotGiven $metrics = SdkNotGiven::Value, ?RequestOptions $requestOptions = null): GetConsumptionHistoryPerProjectResponse
     {
         return Consumption::getConsumptionHistoryPerProject($this->clientConfig, $from, $to, $granularity, $cursor, $limit, $projectIds, $orgId, $includeV1Metrics, $metrics, $requestOptions);
     }
@@ -47,9 +47,9 @@ class ConsumptionNamespace
      * @param string|SdkNotGiven $cursor
      * @param int|SdkNotGiven $limit
      * @param list<string>|SdkNotGiven $projectIds
-     * @return ConsumptionHistoryPerProjectV2Response
+     * @return GetConsumptionHistoryPerProjectV2Response
      */
-    public function getHistoryPerProjectV2(string $from, string $to, ConsumptionHistoryGranularity $granularity, string $orgId, array $metrics, string|SdkNotGiven $cursor = SdkNotGiven::Value, int|SdkNotGiven $limit = SdkNotGiven::Value, array|SdkNotGiven $projectIds = SdkNotGiven::Value, ?RequestOptions $requestOptions = null): ConsumptionHistoryPerProjectV2Response
+    public function getHistoryPerProjectV2(string $from, string $to, ConsumptionHistoryGranularity $granularity, string $orgId, array $metrics, string|SdkNotGiven $cursor = SdkNotGiven::Value, int|SdkNotGiven $limit = SdkNotGiven::Value, array|SdkNotGiven $projectIds = SdkNotGiven::Value, ?RequestOptions $requestOptions = null): GetConsumptionHistoryPerProjectV2Response
     {
         return Consumption::getConsumptionHistoryPerProjectV2($this->clientConfig, $from, $to, $granularity, $orgId, $metrics, $cursor, $limit, $projectIds, $requestOptions);
     }
@@ -67,9 +67,9 @@ class ConsumptionNamespace
      * @param string|SdkNotGiven $cursor
      * @param int|SdkNotGiven $limit
      * @param list<string>|SdkNotGiven $branchIds
-     * @return ConsumptionHistoryPerBranchV2Response
+     * @return GetConsumptionHistoryPerBranchV2Response
      */
-    public function getHistoryPerBranchV2(array $projectIds, string $from, string $to, ConsumptionHistoryGranularity $granularity, string $orgId, array $metrics, string|SdkNotGiven $cursor = SdkNotGiven::Value, int|SdkNotGiven $limit = SdkNotGiven::Value, array|SdkNotGiven $branchIds = SdkNotGiven::Value, ?RequestOptions $requestOptions = null): ConsumptionHistoryPerBranchV2Response
+    public function getHistoryPerBranchV2(array $projectIds, string $from, string $to, ConsumptionHistoryGranularity $granularity, string $orgId, array $metrics, string|SdkNotGiven $cursor = SdkNotGiven::Value, int|SdkNotGiven $limit = SdkNotGiven::Value, array|SdkNotGiven $branchIds = SdkNotGiven::Value, ?RequestOptions $requestOptions = null): GetConsumptionHistoryPerBranchV2Response
     {
         return Consumption::getConsumptionHistoryPerBranchV2($this->clientConfig, $projectIds, $from, $to, $granularity, $orgId, $metrics, $cursor, $limit, $branchIds, $requestOptions);
     }

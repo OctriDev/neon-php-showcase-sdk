@@ -8,72 +8,118 @@ declare(strict_types=1);
 namespace octridev_neon;
 
 /**
- * Typed representation of the `AvailablePreloadLibrary` API schema.
+ * Typed representation of the `JWKS` API schema.
  */
-class AvailablePreloadLibrary implements \JsonSerializable
+class JWKS implements \JsonSerializable
 {
     /**
-     * Name of the Postgres shared preload library as it appears in the `shared_preload_libraries` parameter (for example, `pg_stat_statements`).
+     * The JWKS configuration's ID.
      *
      * @var string
      */
-    public readonly string $libraryName;
+    public readonly string $id;
     /**
-     * Human-readable explanation of the library's purpose and behavior.
+     * The Neon project ID. Returned as `id` from `GET /projects`.
      *
      * @var string
      */
-    public readonly string $description;
+    public readonly string $projectId;
     /**
-     * Whether this library is loaded by default in the `shared_preload_libraries` configuration for new compute endpoints.
+     * The Neon branch ID. Returned as `id` from `GET /projects/{project_id}/branches`.
      *
-     * @var bool
+     * @var string|SdkNotGiven
      */
-    public readonly bool $isDefault;
+    public readonly string|SdkNotGiven $branchId;
     /**
-     * Marks the library as experimental. Experimental libraries may be unstable, subject to breaking changes, or not recommended for production use.
-     *
-     * @var bool
-     */
-    public readonly bool $isExperimental;
-    /**
-     * Version of the preload library.
+     * URL of the provider's JWKS endpoint used to verify JWTs.
      *
      * @var string
      */
-    public readonly string $version;
+    public readonly string $jwksUrl;
+    /**
+     * The name of the authentication provider (e.g., Clerk, Stytch, Auth0)
+     *
+     * @var string
+     */
+    public readonly string $providerName;
+    /**
+     * The date and time when the JWKS was created
+     *
+     * @var string
+     */
+    public readonly string $createdAt;
+    /**
+     * The date and time when the JWKS was last modified
+     *
+     * @var string
+     */
+    public readonly string $updatedAt;
+    /**
+     * Expected JWT `aud` claim value configured for this JWKS.
+     *
+     * @var string|SdkNotGiven
+     */
+    public readonly string|SdkNotGiven $jwtAudience;
+    /**
+     * Database role names that are permitted to authenticate using this JWKS configuration.
+     *
+     * @var list<string>|SdkNotGiven
+     */
+    public readonly array|SdkNotGiven $roleNames;
 
     /**
-     * @param string $libraryName
-     * @param string $description
-     * @param bool $isDefault
-     * @param bool $isExperimental
-     * @param string $version
+     * @param string $id
+     * @param string $projectId
+     * @param string $jwksUrl
+     * @param string $providerName
+     * @param string $createdAt
+     * @param string $updatedAt
+     * @param string|SdkNotGiven $branchId
+     * @param string|SdkNotGiven $jwtAudience
+     * @param list<string>|SdkNotGiven $roleNames
      */
     public function __construct(
-        string $libraryName,
-        string $description,
-        bool $isDefault,
-        bool $isExperimental,
-        string $version,
+        string $id,
+        string $projectId,
+        string $jwksUrl,
+        string $providerName,
+        string $createdAt,
+        string $updatedAt,
+        string|SdkNotGiven $branchId = SdkNotGiven::Value,
+        string|SdkNotGiven $jwtAudience = SdkNotGiven::Value,
+        array|SdkNotGiven $roleNames = SdkNotGiven::Value,
     ) {
-        $this->libraryName = $libraryName;
-        $this->description = $description;
-        $this->isDefault = $isDefault;
-        $this->isExperimental = $isExperimental;
-        $this->version = $version;
+        $this->id = $id;
+        $this->projectId = $projectId;
+        $this->jwksUrl = $jwksUrl;
+        $this->providerName = $providerName;
+        $this->createdAt = $createdAt;
+        $this->updatedAt = $updatedAt;
+        $this->branchId = $branchId;
+        $this->jwtAudience = $jwtAudience;
+        $this->roleNames = $roleNames;
     }
 
     /** @return array<array-key, mixed> */
     public function toArray(): array
     {
         $values = [
-            "library_name" => $this->libraryName,
-            "description" => $this->description,
-            "is_default" => $this->isDefault,
-            "is_experimental" => $this->isExperimental,
-            "version" => $this->version,
+            "id" => $this->id,
+            "project_id" => $this->projectId,
+            "jwks_url" => $this->jwksUrl,
+            "provider_name" => $this->providerName,
+            "created_at" => $this->createdAt,
+            "updated_at" => $this->updatedAt,
         ];
+        if ($this->branchId !== SdkNotGiven::Value) {
+            $values["branch_id"] = $this->branchId;
+        }
+        if ($this->jwtAudience !== SdkNotGiven::Value) {
+            $values["jwt_audience"] = $this->jwtAudience;
+        }
+        if ($this->roleNames !== SdkNotGiven::Value) {
+            $values["role_names"] = $this->roleNames;
+        }
         return $values;
     }
 
@@ -85,249 +131,192 @@ class AvailablePreloadLibrary implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "library_name") || $data->library_name === null) {
-            throw new SdkValidationError("library_name", 'required', "Required property 'library_name' is missing or null");
+        if (!property_exists($data, "id") || $data->id === null) {
+            throw new SdkValidationError("id", 'required', "Required property 'id' is missing or null");
         }
-        if (!property_exists($data, "description") || $data->description === null) {
-            throw new SdkValidationError("description", 'required', "Required property 'description' is missing or null");
+        if (!property_exists($data, "project_id") || $data->project_id === null) {
+            throw new SdkValidationError("project_id", 'required', "Required property 'project_id' is missing or null");
         }
-        if (!property_exists($data, "is_default") || $data->is_default === null) {
-            throw new SdkValidationError("is_default", 'required', "Required property 'is_default' is missing or null");
+        if (!property_exists($data, "jwks_url") || $data->jwks_url === null) {
+            throw new SdkValidationError("jwks_url", 'required', "Required property 'jwks_url' is missing or null");
         }
-        if (!property_exists($data, "is_experimental") || $data->is_experimental === null) {
-            throw new SdkValidationError("is_experimental", 'required', "Required property 'is_experimental' is missing or null");
+        if (!property_exists($data, "provider_name") || $data->provider_name === null) {
+            throw new SdkValidationError("provider_name", 'required', "Required property 'provider_name' is missing or null");
         }
-        if (!property_exists($data, "version") || $data->version === null) {
-            throw new SdkValidationError("version", 'required', "Required property 'version' is missing or null");
+        if (!property_exists($data, "created_at") || $data->created_at === null) {
+            throw new SdkValidationError("created_at", 'required', "Required property 'created_at' is missing or null");
+        }
+        if (!property_exists($data, "updated_at") || $data->updated_at === null) {
+            throw new SdkValidationError("updated_at", 'required', "Required property 'updated_at' is missing or null");
         }
         return new self(
-            libraryName: SdkClient::stringValue($data->library_name),
-            description: SdkClient::stringValue($data->description),
-            isDefault: SdkClient::boolValue($data->is_default),
-            isExperimental: SdkClient::boolValue($data->is_experimental),
-            version: SdkClient::stringValue($data->version),
+            id: SdkClient::stringValue($data->id),
+            projectId: SdkClient::stringValue($data->project_id),
+            jwksUrl: SdkClient::stringValue($data->jwks_url),
+            providerName: SdkClient::stringValue($data->provider_name),
+            createdAt: SdkClient::stringValue($data->created_at),
+            updatedAt: SdkClient::stringValue($data->updated_at),
+            branchId: (property_exists($data, "branch_id") && $data->branch_id !== null ? SdkClient::stringValue($data->branch_id) : SdkNotGiven::Value),
+            jwtAudience: (property_exists($data, "jwt_audience") && $data->jwt_audience !== null ? SdkClient::stringValue($data->jwt_audience) : SdkNotGiven::Value),
+            roleNames: (property_exists($data, "role_names") && $data->role_names !== null ? array_values(array_map(static fn($item) => SdkClient::stringValue($item), SdkClient::arrayValue($data->role_names))) : SdkNotGiven::Value),
         );
     }
 }
 
 /**
- * Typed representation of the `ConnectionURIResponse` API schema.
+ * Typed representation of the `JWKSCreationOperation` API schema.
  */
-class ConnectionURIResponse implements \JsonSerializable
+class JWKSCreationOperation implements \JsonSerializable
 {
     /**
-     * The connection URI.
+     * JWKS configuration associated with the project.
+     *
+     * @var JWKS
+     */
+    public readonly JWKS $jwks;
+    /**
+     * Required array value serialized in the `operations` wire field.
+     *
+     * @var list<Operation>
+     */
+    public readonly array $operations;
+
+    /**
+     * @param JWKS $jwks
+     * @param list<Operation> $operations
+     */
+    public function __construct(
+        JWKS $jwks,
+        array $operations,
+    ) {
+        $this->jwks = $jwks;
+        $this->operations = $operations;
+    }
+
+    /** @return array<array-key, mixed> */
+    public function toArray(): array
+    {
+        $values = [
+            "jwks" => $this->jwks,
+            "operations" => $this->operations,
+        ];
+        return $values;
+    }
+
+    /** @return object */
+    public function jsonSerialize(): object
+    {
+        return (object) $this->toArray();
+    }
+
+    public static function fromObject(object $data): self
+    {
+        if (!property_exists($data, "jwks") || $data->jwks === null) {
+            throw new SdkValidationError("jwks", 'required', "Required property 'jwks' is missing or null");
+        }
+        if (!property_exists($data, "operations") || $data->operations === null) {
+            throw new SdkValidationError("operations", 'required', "Required property 'operations' is missing or null");
+        }
+        return new self(
+            jwks: SdkClient::hydrateClass($data->jwks, JWKS::class),
+            operations: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, Operation::class), SdkClient::arrayValue($data->operations))),
+        );
+    }
+}
+
+/**
+ * Typed representation of the `JWKSResponse` API schema.
+ */
+class JWKSResponse implements \JsonSerializable
+{
+    /**
+     * JWKS configuration associated with the project.
+     *
+     * @var JWKS
+     */
+    public readonly JWKS $jwks;
+
+    /**
+     * @param JWKS $jwks
+     */
+    public function __construct(
+        JWKS $jwks,
+    ) {
+        $this->jwks = $jwks;
+    }
+
+    /** @return array<array-key, mixed> */
+    public function toArray(): array
+    {
+        $values = [
+            "jwks" => $this->jwks,
+        ];
+        return $values;
+    }
+
+    /** @return object */
+    public function jsonSerialize(): object
+    {
+        return (object) $this->toArray();
+    }
+
+    public static function fromObject(object $data): self
+    {
+        if (!property_exists($data, "jwks") || $data->jwks === null) {
+            throw new SdkValidationError("jwks", 'required', "Required property 'jwks' is missing or null");
+        }
+        return new self(
+            jwks: SdkClient::hydrateClass($data->jwks, JWKS::class),
+        );
+    }
+}
+
+/**
+ * A maintenance window is a time period during which Neon may perform maintenance on the project's infrastructure. During this time, the project's compute endpoints may be unavailable and existing connections can be interrupted.
+ */
+class MaintenanceWindow implements \JsonSerializable
+{
+    /**
+     * A list of weekdays when the maintenance window is active. Encoded as ints, where 1 - Monday, and 7 - Sunday.
+     *
+     * @var list<int>
+     */
+    public readonly array $weekdays;
+    /**
+     * Start time of the maintenance window, in the format of "HH:MM". Uses UTC.
      *
      * @var string
      */
-    public readonly string $uri;
-
+    public readonly string $startTime;
     /**
-     * @param string $uri
-     */
-    public function __construct(
-        string $uri,
-    ) {
-        $this->uri = $uri;
-    }
-
-    /** @return array<array-key, mixed> */
-    public function toArray(): array
-    {
-        $values = [
-            "uri" => $this->uri,
-        ];
-        return $values;
-    }
-
-    /** @return object */
-    public function jsonSerialize(): object
-    {
-        return (object) $this->toArray();
-    }
-
-    public static function fromObject(object $data): self
-    {
-        if (!property_exists($data, "uri") || $data->uri === null) {
-            throw new SdkValidationError("uri", 'required', "Required property 'uri' is missing or null");
-        }
-        return new self(
-            uri: SdkClient::stringValue($data->uri),
-        );
-    }
-}
-
-/**
- * Typed representation of the `ConnectionURIsResponse` API schema.
- */
-class ConnectionURIsResponse implements \JsonSerializable
-{
-    /**
-     * Connection URIs for the project. Each entry contains credentials and should be treated as sensitive.
-     *
-     * @var list<ConnectionDetails>
-     */
-    public readonly array $connectionUris;
-
-    /**
-     * @param list<ConnectionDetails> $connectionUris
-     */
-    public function __construct(
-        array $connectionUris,
-    ) {
-        $this->connectionUris = $connectionUris;
-    }
-
-    /** @return array<array-key, mixed> */
-    public function toArray(): array
-    {
-        $values = [
-            "connection_uris" => $this->connectionUris,
-        ];
-        return $values;
-    }
-
-    /** @return object */
-    public function jsonSerialize(): object
-    {
-        return (object) $this->toArray();
-    }
-
-    public static function fromObject(object $data): self
-    {
-        if (!property_exists($data, "connection_uris") || $data->connection_uris === null) {
-            throw new SdkValidationError("connection_uris", 'required', "Required property 'connection_uris' is missing or null");
-        }
-        return new self(
-            connectionUris: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, ConnectionDetails::class), SdkClient::arrayValue($data->connection_uris))),
-        );
-    }
-}
-
-/**
- * A collection of settings for a Neon endpoint
- */
-class DefaultEndpointSettings implements \JsonSerializable
-{
-    /**
-     * A raw representation of Postgres settings
-     *
-     * @var array<string,string>|SdkNotGiven
-     */
-    public readonly array|SdkNotGiven $pgSettings;
-    /**
-     * Deprecated. Use the endpoint-level connection pooler configuration instead. Removal scheduled for June 20, 2026.
-     *
-     * @var array<string,string>|SdkNotGiven
-     */
-    public readonly array|SdkNotGiven $pgbouncerSettings;
-    /**
-     * Minimum number of Compute Units for this endpoint. At least 0.25 and no greater than `autoscaling_limit_max_cu`.
-     *
-     * @var float|SdkNotGiven
-     */
-    public readonly float|SdkNotGiven $autoscalingLimitMinCu;
-    /**
-     * Default maximum number of Compute Units for endpoints created under this account. At least 0.25.
-     *
-     * @var float|SdkNotGiven
-     */
-    public readonly float|SdkNotGiven $autoscalingLimitMaxCu;
-    /**
-     * Scale-to-zero idle timeout, in seconds, before the compute suspends. `0` uses the plan default; `-1` disables scale-to-zero (never suspends). Minimum is plan-dependent (Scale: 60); maximum 604800 (one week). Free cannot change it; Launch can only enable or disable; Scale can set any value.
-     *
-     * @var int|SdkNotGiven
-     */
-    public readonly int|SdkNotGiven $suspendTimeoutSeconds;
-
-    /**
-     * @param array<string,string>|SdkNotGiven $pgSettings
-     * @param array<string,string>|SdkNotGiven $pgbouncerSettings
-     * @param float|SdkNotGiven $autoscalingLimitMinCu
-     * @param float|SdkNotGiven $autoscalingLimitMaxCu
-     * @param int|SdkNotGiven $suspendTimeoutSeconds
-     */
-    public function __construct(
-        array|SdkNotGiven $pgSettings = SdkNotGiven::Value,
-        array|SdkNotGiven $pgbouncerSettings = SdkNotGiven::Value,
-        float|SdkNotGiven $autoscalingLimitMinCu = SdkNotGiven::Value,
-        float|SdkNotGiven $autoscalingLimitMaxCu = SdkNotGiven::Value,
-        int|SdkNotGiven $suspendTimeoutSeconds = SdkNotGiven::Value,
-    ) {
-        $this->pgSettings = $pgSettings;
-        $this->pgbouncerSettings = $pgbouncerSettings;
-        $this->autoscalingLimitMinCu = $autoscalingLimitMinCu;
-        $this->autoscalingLimitMaxCu = $autoscalingLimitMaxCu;
-        $this->suspendTimeoutSeconds = $suspendTimeoutSeconds;
-    }
-
-    /** @return array<array-key, mixed> */
-    public function toArray(): array
-    {
-        $values = [
-        ];
-        if ($this->pgSettings !== SdkNotGiven::Value) {
-            $values["pg_settings"] = $this->pgSettings;
-        }
-        if ($this->pgbouncerSettings !== SdkNotGiven::Value) {
-            $values["pgbouncer_settings"] = $this->pgbouncerSettings;
-        }
-        if ($this->autoscalingLimitMinCu !== SdkNotGiven::Value) {
-            $values["autoscaling_limit_min_cu"] = $this->autoscalingLimitMinCu;
-        }
-        if ($this->autoscalingLimitMaxCu !== SdkNotGiven::Value) {
-            $values["autoscaling_limit_max_cu"] = $this->autoscalingLimitMaxCu;
-        }
-        if ($this->suspendTimeoutSeconds !== SdkNotGiven::Value) {
-            $values["suspend_timeout_seconds"] = $this->suspendTimeoutSeconds;
-        }
-        return $values;
-    }
-
-    /** @return object */
-    public function jsonSerialize(): object
-    {
-        return (object) $this->toArray();
-    }
-
-    public static function fromObject(object $data): self
-    {
-        return new self(
-            pgSettings: (property_exists($data, "pg_settings") ? SdkClient::mapValues(SdkClient::stringMapValue($data->pg_settings), static fn($item) => SdkClient::stringValue($item)) : SdkNotGiven::Value),
-            pgbouncerSettings: (property_exists($data, "pgbouncer_settings") ? SdkClient::mapValues(SdkClient::stringMapValue($data->pgbouncer_settings), static fn($item) => SdkClient::stringValue($item)) : SdkNotGiven::Value),
-            autoscalingLimitMinCu: (property_exists($data, "autoscaling_limit_min_cu") ? SdkClient::floatValue($data->autoscaling_limit_min_cu) : SdkNotGiven::Value),
-            autoscalingLimitMaxCu: (property_exists($data, "autoscaling_limit_max_cu") ? SdkClient::floatValue($data->autoscaling_limit_max_cu) : SdkNotGiven::Value),
-            suspendTimeoutSeconds: (property_exists($data, "suspend_timeout_seconds") ? SdkClient::intValue($data->suspend_timeout_seconds) : SdkNotGiven::Value),
-        );
-    }
-}
-
-/**
- * Typed representation of the `GrantPermissionToProjectRequest` API schema.
- */
-class GrantPermissionToProjectRequest implements \JsonSerializable
-{
-    /**
-     * Email address of the user to grant project access to.
+     * End time of the maintenance window, in the format of "HH:MM". Uses UTC.
      *
      * @var string
      */
-    public readonly string $email;
+    public readonly string $endTime;
 
     /**
-     * @param string $email
+     * @param list<int> $weekdays
+     * @param string $startTime
+     * @param string $endTime
      */
     public function __construct(
-        string $email,
+        array $weekdays,
+        string $startTime,
+        string $endTime,
     ) {
-        $this->email = $email;
+        $this->weekdays = $weekdays;
+        $this->startTime = $startTime;
+        $this->endTime = $endTime;
     }
 
     /** @return array<array-key, mixed> */
     public function toArray(): array
     {
         $values = [
-            "email" => $this->email,
+            "weekdays" => $this->weekdays,
+            "start_time" => $this->startTime,
+            "end_time" => $this->endTime,
         ];
         return $values;
     }
@@ -340,11 +329,19 @@ class GrantPermissionToProjectRequest implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "email") || $data->email === null) {
-            throw new SdkValidationError("email", 'required', "Required property 'email' is missing or null");
+        if (!property_exists($data, "weekdays") || $data->weekdays === null) {
+            throw new SdkValidationError("weekdays", 'required', "Required property 'weekdays' is missing or null");
+        }
+        if (!property_exists($data, "start_time") || $data->start_time === null) {
+            throw new SdkValidationError("start_time", 'required', "Required property 'start_time' is missing or null");
+        }
+        if (!property_exists($data, "end_time") || $data->end_time === null) {
+            throw new SdkValidationError("end_time", 'required', "Required property 'end_time' is missing or null");
         }
         return new self(
-            email: SdkClient::stringValue($data->email),
+            weekdays: array_values(array_map(static fn($item) => SdkClient::intValue($item), SdkClient::arrayValue($data->weekdays))),
+            startTime: SdkClient::stringValue($data->start_time),
+            endTime: SdkClient::stringValue($data->end_time),
         );
     }
 }

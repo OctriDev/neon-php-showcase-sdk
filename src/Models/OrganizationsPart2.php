@@ -8,6 +8,67 @@ declare(strict_types=1);
 namespace octridev_neon;
 
 /**
+ * Typed representation of the `MemberWithUser` API schema.
+ */
+class MemberWithUser implements \JsonSerializable
+{
+    /**
+     * Membership record for the user in the organization.
+     *
+     * @var Member
+     */
+    public readonly Member $member;
+    /**
+     * Profile information for the organization member.
+     *
+     * @var MemberUserInfo
+     */
+    public readonly MemberUserInfo $user;
+
+    /**
+     * @param Member $member
+     * @param MemberUserInfo $user
+     */
+    public function __construct(
+        Member $member,
+        MemberUserInfo $user,
+    ) {
+        $this->member = $member;
+        $this->user = $user;
+    }
+
+    /** @return array<array-key, mixed> */
+    public function toArray(): array
+    {
+        $values = [
+            "member" => $this->member,
+            "user" => $this->user,
+        ];
+        return $values;
+    }
+
+    /** @return object */
+    public function jsonSerialize(): object
+    {
+        return (object) $this->toArray();
+    }
+
+    public static function fromObject(object $data): self
+    {
+        if (!property_exists($data, "member") || $data->member === null) {
+            throw new SdkValidationError("member", 'required', "Required property 'member' is missing or null");
+        }
+        if (!property_exists($data, "user") || $data->user === null) {
+            throw new SdkValidationError("user", 'required', "Required property 'user' is missing or null");
+        }
+        return new self(
+            member: SdkClient::hydrateClass($data->member, Member::class),
+            user: SdkClient::hydrateClass($data->user, MemberUserInfo::class),
+        );
+    }
+}
+
+/**
  * Typed representation of the `OrganizationInvitationsResponse` API schema.
  */
 class OrganizationInvitationsResponse implements \JsonSerializable
@@ -294,67 +355,7 @@ class OrgApiKeyCreateRequestVariant1 implements \JsonSerializable
     public static function fromObject(object $data): self
     {
         return new self(
-            projectId: (property_exists($data, "project_id") ? SdkClient::stringValue($data->project_id) : SdkNotGiven::Value),
-        );
-    }
-}
-
-/**
- * Typed representation of the `OrgApiKeyCreateRequest` API schema.
- */
-class OrgApiKeyCreateRequest implements \JsonSerializable
-{
-    /**
-     * A user-specified API key name. This value is required when creating an API key.
-     *
-     * @var string
-     */
-    public readonly string $keyName;
-    /**
-     * If set, the API key can access only this project
-     *
-     * @var string|SdkNotGiven
-     */
-    public readonly string|SdkNotGiven $projectId;
-
-    /**
-     * @param string $keyName
-     * @param string|SdkNotGiven $projectId
-     */
-    public function __construct(
-        string $keyName,
-        string|SdkNotGiven $projectId = SdkNotGiven::Value,
-    ) {
-        $this->keyName = $keyName;
-        $this->projectId = $projectId;
-    }
-
-    /** @return array<array-key, mixed> */
-    public function toArray(): array
-    {
-        $values = [
-            "key_name" => $this->keyName,
-        ];
-        if ($this->projectId !== SdkNotGiven::Value) {
-            $values["project_id"] = $this->projectId;
-        }
-        return $values;
-    }
-
-    /** @return object */
-    public function jsonSerialize(): object
-    {
-        return (object) $this->toArray();
-    }
-
-    public static function fromObject(object $data): self
-    {
-        if (!property_exists($data, "key_name") || $data->key_name === null) {
-            throw new SdkValidationError("key_name", 'required', "Required property 'key_name' is missing or null");
-        }
-        return new self(
-            keyName: SdkClient::stringValue($data->key_name),
-            projectId: (property_exists($data, "project_id") ? SdkClient::stringValue($data->project_id) : SdkNotGiven::Value),
+            projectId: (property_exists($data, "project_id") && $data->project_id !== null ? SdkClient::stringValue($data->project_id) : SdkNotGiven::Value),
         );
     }
 }

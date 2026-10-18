@@ -132,14 +132,14 @@ class NeonAuthPluginConfigs implements \JsonSerializable
     public static function fromObject(object $data): self
     {
         return new self(
-            organization: (property_exists($data, "organization") ? SdkClient::hydrateClass($data->organization, NeonAuthOrganizationConfig::class) : SdkNotGiven::Value),
-            magicLink: (property_exists($data, "magic_link") ? SdkClient::hydrateClass($data->magic_link, NeonAuthMagicLinkConfig::class) : SdkNotGiven::Value),
-            phoneNumber: (property_exists($data, "phone_number") ? SdkClient::hydrateClass($data->phone_number, NeonAuthPhoneNumberConfig::class) : SdkNotGiven::Value),
-            oauthProvider: (property_exists($data, "oauth_provider") ? SdkClient::hydrateClass($data->oauth_provider, NeonAuthOAuthProviderConfig::class) : SdkNotGiven::Value),
-            emailProvider: (property_exists($data, "email_provider") ? SdkClient::hydrateUnionAs($data->email_provider, NeonAuthEmailServerConfigResponse::class, [StandardEmailServerResponse::class, SharedEmailServer::class], "type", ["standard" => StandardEmailServerResponse::class, "shared" => SharedEmailServer::class], UnknownNeonAuthEmailServerConfigResponse::class) : SdkNotGiven::Value),
-            emailAndPassword: (property_exists($data, "email_and_password") ? SdkClient::hydrateClass($data->email_and_password, NeonAuthEmailAndPasswordConfig::class) : SdkNotGiven::Value),
-            oauthProviders: (property_exists($data, "oauth_providers") ? array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, NeonAuthOauthProvider::class), SdkClient::arrayValue($data->oauth_providers))) : SdkNotGiven::Value),
-            allowLocalhost: (property_exists($data, "allow_localhost") ? SdkClient::boolValue($data->allow_localhost) : SdkNotGiven::Value),
+            organization: (property_exists($data, "organization") && $data->organization !== null ? SdkClient::hydrateClass($data->organization, NeonAuthOrganizationConfig::class) : SdkNotGiven::Value),
+            magicLink: (property_exists($data, "magic_link") && $data->magic_link !== null ? SdkClient::hydrateClass($data->magic_link, NeonAuthMagicLinkConfig::class) : SdkNotGiven::Value),
+            phoneNumber: (property_exists($data, "phone_number") && $data->phone_number !== null ? SdkClient::hydrateClass($data->phone_number, NeonAuthPhoneNumberConfig::class) : SdkNotGiven::Value),
+            oauthProvider: (property_exists($data, "oauth_provider") && $data->oauth_provider !== null ? SdkClient::hydrateClass($data->oauth_provider, NeonAuthOAuthProviderConfig::class) : SdkNotGiven::Value),
+            emailProvider: (property_exists($data, "email_provider") && $data->email_provider !== null ? SdkClient::hydrateUnionAs($data->email_provider, NeonAuthEmailServerConfigResponse::class, [StandardEmailServerResponse::class, SharedEmailServer::class], "type", ["standard" => StandardEmailServerResponse::class, "shared" => SharedEmailServer::class], UnknownNeonAuthEmailServerConfigResponse::class) : SdkNotGiven::Value),
+            emailAndPassword: (property_exists($data, "email_and_password") && $data->email_and_password !== null ? SdkClient::hydrateClass($data->email_and_password, NeonAuthEmailAndPasswordConfig::class) : SdkNotGiven::Value),
+            oauthProviders: (property_exists($data, "oauth_providers") && $data->oauth_providers !== null ? array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, NeonAuthOauthProvider::class), SdkClient::arrayValue($data->oauth_providers))) : SdkNotGiven::Value),
+            allowLocalhost: (property_exists($data, "allow_localhost") && $data->allow_localhost !== null ? SdkClient::boolValue($data->allow_localhost) : SdkNotGiven::Value),
         );
     }
 }
@@ -258,9 +258,9 @@ class NeonAuthWebhookConfig implements \JsonSerializable
         }
         return new self(
             enabled: SdkClient::boolValue($data->enabled),
-            webhookUrl: (property_exists($data, "webhook_url") ? SdkClient::stringValue($data->webhook_url) : SdkNotGiven::Value),
-            enabledEvents: (property_exists($data, "enabled_events") ? array_values(array_map(static fn($item) => SdkClient::hydrateStringEnumOrString($item, NeonAuthWebhookConfigEnabledEventsItemEnum::class), SdkClient::arrayValue($data->enabled_events))) : SdkNotGiven::Value),
-            timeoutSeconds: (property_exists($data, "timeout_seconds") ? SdkClient::intValue($data->timeout_seconds) : SdkNotGiven::Value),
+            webhookUrl: (property_exists($data, "webhook_url") && $data->webhook_url !== null ? SdkClient::stringValue($data->webhook_url) : SdkNotGiven::Value),
+            enabledEvents: (property_exists($data, "enabled_events") && $data->enabled_events !== null ? array_values(array_map(static fn($item) => SdkClient::hydrateStringEnumOrString($item, NeonAuthWebhookConfigEnabledEventsItemEnum::class), SdkClient::arrayValue($data->enabled_events))) : SdkNotGiven::Value),
+            timeoutSeconds: (property_exists($data, "timeout_seconds") && $data->timeout_seconds !== null ? SdkClient::intValue($data->timeout_seconds) : SdkNotGiven::Value),
         );
     }
 }

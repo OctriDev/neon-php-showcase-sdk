@@ -8,6 +8,172 @@ declare(strict_types=1);
 namespace octridev_neon;
 
 /**
+ * Typed representation of the `Snapshot` API schema.
+ */
+class Snapshot implements \JsonSerializable
+{
+    /**
+     * The snapshot ID.
+     *
+     * @var string
+     */
+    public readonly string $id;
+    /**
+     * Human-readable label for the snapshot.
+     *
+     * @var string
+     */
+    public readonly string $name;
+    /**
+     * WAL position (Log Sequence Number) at which the snapshot was captured, in Postgres LSN format (for example, `0/3000000`).
+     *
+     * @var string|SdkNotGiven
+     */
+    public readonly string|SdkNotGiven $lsn;
+    /**
+     * Point in time captured by the snapshot, in RFC 3339 format (UTC).
+     *
+     * @var string|SdkNotGiven
+     */
+    public readonly string|SdkNotGiven $timestamp;
+    /**
+     * Branch from which this snapshot was created.
+     *
+     * @var string|SdkNotGiven
+     */
+    public readonly string|SdkNotGiven $sourceBranchId;
+    /**
+     * Timestamp when the snapshot was created, in RFC 3339 format (UTC).
+     *
+     * @var string
+     */
+    public readonly string $createdAt;
+    /**
+     * RFC 3339 timestamp when the snapshot expires and is eligible for deletion. Null if the snapshot does not have an expiry.
+     *
+     * @var string|SdkNotGiven
+     */
+    public readonly string|SdkNotGiven $expiresAt;
+    /**
+     * True if the snapshot was created manually rather than by a schedule.
+     *
+     * @var bool|SdkNotGiven
+     */
+    public readonly bool|SdkNotGiven $manual;
+    /**
+     * Full logical size of the snapshot in bytes at the time it was taken. When absent, the logical size has not been calculated yet and the snapshot is not being charged. When present, a value of 0 means the snapshot is not being charged.
+     *
+     * @var int|SdkNotGiven
+     */
+    public readonly int|SdkNotGiven $fullSize;
+    /**
+     * Incremental Postgres storage size in bytes since the previous scheduled snapshot, when the snapshot is billed on incremental (diff) usage. When absent, either the incremental size has not been calculated yet and the snapshot is not being charged, or the snapshot is charged at full logical size (in that case `full_size` is set).
+     *
+     * @var int|SdkNotGiven
+     */
+    public readonly int|SdkNotGiven $diffSize;
+
+    /**
+     * @param string $id
+     * @param string $name
+     * @param string $createdAt
+     * @param string|SdkNotGiven $lsn
+     * @param string|SdkNotGiven $timestamp
+     * @param string|SdkNotGiven $sourceBranchId
+     * @param string|SdkNotGiven $expiresAt
+     * @param bool|SdkNotGiven $manual
+     * @param int|SdkNotGiven $fullSize
+     * @param int|SdkNotGiven $diffSize
+     */
+    public function __construct(
+        string $id,
+        string $name,
+        string $createdAt,
+        string|SdkNotGiven $lsn = SdkNotGiven::Value,
+        string|SdkNotGiven $timestamp = SdkNotGiven::Value,
+        string|SdkNotGiven $sourceBranchId = SdkNotGiven::Value,
+        string|SdkNotGiven $expiresAt = SdkNotGiven::Value,
+        bool|SdkNotGiven $manual = SdkNotGiven::Value,
+        int|SdkNotGiven $fullSize = SdkNotGiven::Value,
+        int|SdkNotGiven $diffSize = SdkNotGiven::Value,
+    ) {
+        $this->id = $id;
+        $this->name = $name;
+        $this->createdAt = $createdAt;
+        $this->lsn = $lsn;
+        $this->timestamp = $timestamp;
+        $this->sourceBranchId = $sourceBranchId;
+        $this->expiresAt = $expiresAt;
+        $this->manual = $manual;
+        $this->fullSize = $fullSize;
+        $this->diffSize = $diffSize;
+    }
+
+    /** @return array<array-key, mixed> */
+    public function toArray(): array
+    {
+        $values = [
+            "id" => $this->id,
+            "name" => $this->name,
+            "created_at" => $this->createdAt,
+        ];
+        if ($this->lsn !== SdkNotGiven::Value) {
+            $values["lsn"] = $this->lsn;
+        }
+        if ($this->timestamp !== SdkNotGiven::Value) {
+            $values["timestamp"] = $this->timestamp;
+        }
+        if ($this->sourceBranchId !== SdkNotGiven::Value) {
+            $values["source_branch_id"] = $this->sourceBranchId;
+        }
+        if ($this->expiresAt !== SdkNotGiven::Value) {
+            $values["expires_at"] = $this->expiresAt;
+        }
+        if ($this->manual !== SdkNotGiven::Value) {
+            $values["manual"] = $this->manual;
+        }
+        if ($this->fullSize !== SdkNotGiven::Value) {
+            $values["full_size"] = $this->fullSize;
+        }
+        if ($this->diffSize !== SdkNotGiven::Value) {
+            $values["diff_size"] = $this->diffSize;
+        }
+        return $values;
+    }
+
+    /** @return object */
+    public function jsonSerialize(): object
+    {
+        return (object) $this->toArray();
+    }
+
+    public static function fromObject(object $data): self
+    {
+        if (!property_exists($data, "id") || $data->id === null) {
+            throw new SdkValidationError("id", 'required', "Required property 'id' is missing or null");
+        }
+        if (!property_exists($data, "name") || $data->name === null) {
+            throw new SdkValidationError("name", 'required', "Required property 'name' is missing or null");
+        }
+        if (!property_exists($data, "created_at") || $data->created_at === null) {
+            throw new SdkValidationError("created_at", 'required', "Required property 'created_at' is missing or null");
+        }
+        return new self(
+            id: SdkClient::stringValue($data->id),
+            name: SdkClient::stringValue($data->name),
+            createdAt: SdkClient::stringValue($data->created_at),
+            lsn: (property_exists($data, "lsn") && $data->lsn !== null ? SdkClient::stringValue($data->lsn) : SdkNotGiven::Value),
+            timestamp: (property_exists($data, "timestamp") && $data->timestamp !== null ? SdkClient::stringValue($data->timestamp) : SdkNotGiven::Value),
+            sourceBranchId: (property_exists($data, "source_branch_id") && $data->source_branch_id !== null ? SdkClient::stringValue($data->source_branch_id) : SdkNotGiven::Value),
+            expiresAt: (property_exists($data, "expires_at") && $data->expires_at !== null ? SdkClient::stringValue($data->expires_at) : SdkNotGiven::Value),
+            manual: (property_exists($data, "manual") && $data->manual !== null ? SdkClient::boolValue($data->manual) : SdkNotGiven::Value),
+            fullSize: (property_exists($data, "full_size") && $data->full_size !== null ? SdkClient::intValue($data->full_size) : SdkNotGiven::Value),
+            diffSize: (property_exists($data, "diff_size") && $data->diff_size !== null ? SdkClient::intValue($data->diff_size) : SdkNotGiven::Value),
+        );
+    }
+}
+
+/**
  * Fields to update on the snapshot. Updatable fields include `name` and `expires_at`.
  */
 class SnapshotUpdateRequestSnapshot implements \JsonSerializable
@@ -60,7 +226,7 @@ class SnapshotUpdateRequestSnapshot implements \JsonSerializable
     public static function fromObject(object $data): self
     {
         return new self(
-            name: (property_exists($data, "name") ? SdkClient::stringValue($data->name) : SdkNotGiven::Value),
+            name: (property_exists($data, "name") && $data->name !== null ? SdkClient::stringValue($data->name) : SdkNotGiven::Value),
             expiresAt: (property_exists($data, "expires_at") ? ($data->expires_at === null ? null : SdkClient::stringValue($data->expires_at)) : SdkNotGiven::Value),
         );
     }

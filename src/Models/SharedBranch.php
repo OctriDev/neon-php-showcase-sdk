@@ -60,8 +60,8 @@ class BranchCreatedBy implements \JsonSerializable
     public static function fromObject(object $data): self
     {
         return new self(
-            name: (property_exists($data, "name") ? SdkClient::stringValue($data->name) : SdkNotGiven::Value),
-            image: (property_exists($data, "image") ? SdkClient::stringValue($data->image) : SdkNotGiven::Value),
+            name: (property_exists($data, "name") && $data->name !== null ? SdkClient::stringValue($data->name) : SdkNotGiven::Value),
+            image: (property_exists($data, "image") && $data->image !== null ? SdkClient::stringValue($data->image) : SdkNotGiven::Value),
         );
     }
 }

@@ -96,11 +96,11 @@ class NeonAuthOrganizationConfigUpdate implements \JsonSerializable
     public static function fromObject(object $data): self
     {
         return new self(
-            enabled: (property_exists($data, "enabled") ? SdkClient::boolValue($data->enabled) : SdkNotGiven::Value),
-            organizationLimit: (property_exists($data, "organization_limit") ? SdkClient::intValue($data->organization_limit) : SdkNotGiven::Value),
-            membershipLimit: (property_exists($data, "membership_limit") ? SdkClient::intValue($data->membership_limit) : SdkNotGiven::Value),
-            creatorRole: (property_exists($data, "creator_role") ? SdkClient::hydrateStringEnumOrString($data->creator_role, NeonAuthOrganizationConfigUpdateCreatorRoleEnum::class) : SdkNotGiven::Value),
-            sendInvitationEmail: (property_exists($data, "send_invitation_email") ? SdkClient::boolValue($data->send_invitation_email) : SdkNotGiven::Value),
+            enabled: (property_exists($data, "enabled") && $data->enabled !== null ? SdkClient::boolValue($data->enabled) : SdkNotGiven::Value),
+            organizationLimit: (property_exists($data, "organization_limit") && $data->organization_limit !== null ? SdkClient::intValue($data->organization_limit) : SdkNotGiven::Value),
+            membershipLimit: (property_exists($data, "membership_limit") && $data->membership_limit !== null ? SdkClient::intValue($data->membership_limit) : SdkNotGiven::Value),
+            creatorRole: (property_exists($data, "creator_role") && $data->creator_role !== null ? SdkClient::hydrateStringEnumOrString($data->creator_role, NeonAuthOrganizationConfigUpdateCreatorRoleEnum::class) : SdkNotGiven::Value),
+            sendInvitationEmail: (property_exists($data, "send_invitation_email") && $data->send_invitation_email !== null ? SdkClient::boolValue($data->send_invitation_email) : SdkNotGiven::Value),
         );
     }
 }
@@ -160,7 +160,7 @@ class NeonAuthPhoneNumberConfig implements \JsonSerializable
         }
         return new self(
             enabled: SdkClient::boolValue($data->enabled),
-            otpExpiresIn: (property_exists($data, "otp_expires_in") ? SdkClient::intValue($data->otp_expires_in) : SdkNotGiven::Value),
+            otpExpiresIn: (property_exists($data, "otp_expires_in") && $data->otp_expires_in !== null ? SdkClient::intValue($data->otp_expires_in) : SdkNotGiven::Value),
         );
     }
 }
@@ -218,8 +218,8 @@ class NeonAuthPhoneNumberConfigUpdate implements \JsonSerializable
     public static function fromObject(object $data): self
     {
         return new self(
-            enabled: (property_exists($data, "enabled") ? SdkClient::boolValue($data->enabled) : SdkNotGiven::Value),
-            otpExpiresIn: (property_exists($data, "otp_expires_in") ? SdkClient::intValue($data->otp_expires_in) : SdkNotGiven::Value),
+            enabled: (property_exists($data, "enabled") && $data->enabled !== null ? SdkClient::boolValue($data->enabled) : SdkNotGiven::Value),
+            otpExpiresIn: (property_exists($data, "otp_expires_in") && $data->otp_expires_in !== null ? SdkClient::intValue($data->otp_expires_in) : SdkNotGiven::Value),
         );
     }
 }

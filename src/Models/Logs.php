@@ -282,14 +282,14 @@ class ProjectBranchLogRecord implements \JsonSerializable
             timestamp: SdkClient::stringValue($data->timestamp),
             message: SdkClient::stringValue($data->message),
             attributes: SdkClient::stringMapValue($data->attributes),
-            source: (property_exists($data, "source") ? SdkClient::hydrateStringEnumOrString($data->source, ProjectBranchLogSource::class) : SdkNotGiven::Value),
-            entityId: (property_exists($data, "entity_id") ? SdkClient::stringValue($data->entity_id) : SdkNotGiven::Value),
-            serviceName: (property_exists($data, "service_name") ? SdkClient::stringValue($data->service_name) : SdkNotGiven::Value),
-            scopeName: (property_exists($data, "scope_name") ? SdkClient::stringValue($data->scope_name) : SdkNotGiven::Value),
-            severityNumber: (property_exists($data, "severity_number") ? SdkClient::intValue($data->severity_number) : SdkNotGiven::Value),
-            severityText: (property_exists($data, "severity_text") ? SdkClient::stringValue($data->severity_text) : SdkNotGiven::Value),
-            traceId: (property_exists($data, "trace_id") ? SdkClient::stringValue($data->trace_id) : SdkNotGiven::Value),
-            spanId: (property_exists($data, "span_id") ? SdkClient::stringValue($data->span_id) : SdkNotGiven::Value),
+            source: (property_exists($data, "source") && $data->source !== null ? SdkClient::hydrateStringEnumOrString($data->source, ProjectBranchLogSource::class) : SdkNotGiven::Value),
+            entityId: (property_exists($data, "entity_id") && $data->entity_id !== null ? SdkClient::stringValue($data->entity_id) : SdkNotGiven::Value),
+            serviceName: (property_exists($data, "service_name") && $data->service_name !== null ? SdkClient::stringValue($data->service_name) : SdkNotGiven::Value),
+            scopeName: (property_exists($data, "scope_name") && $data->scope_name !== null ? SdkClient::stringValue($data->scope_name) : SdkNotGiven::Value),
+            severityNumber: (property_exists($data, "severity_number") && $data->severity_number !== null ? SdkClient::intValue($data->severity_number) : SdkNotGiven::Value),
+            severityText: (property_exists($data, "severity_text") && $data->severity_text !== null ? SdkClient::stringValue($data->severity_text) : SdkNotGiven::Value),
+            traceId: (property_exists($data, "trace_id") && $data->trace_id !== null ? SdkClient::stringValue($data->trace_id) : SdkNotGiven::Value),
+            spanId: (property_exists($data, "span_id") && $data->span_id !== null ? SdkClient::stringValue($data->span_id) : SdkNotGiven::Value),
         );
     }
 }

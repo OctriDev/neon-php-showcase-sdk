@@ -172,8 +172,8 @@ class RotateCredentialResponse implements \JsonSerializable
             branchId: SdkClient::stringValue($data->branch_id),
             principalType: SdkClient::hydrateStringEnumOrString($data->principal_type, RotateCredentialResponsePrincipalTypeEnum::class),
             createdAt: SdkClient::stringValue($data->created_at),
-            name: (property_exists($data, "name") ? SdkClient::stringValue($data->name) : SdkNotGiven::Value),
-            expiresAt: (property_exists($data, "expires_at") ? SdkClient::stringValue($data->expires_at) : SdkNotGiven::Value),
+            name: (property_exists($data, "name") && $data->name !== null ? SdkClient::stringValue($data->name) : SdkNotGiven::Value),
+            expiresAt: (property_exists($data, "expires_at") && $data->expires_at !== null ? SdkClient::stringValue($data->expires_at) : SdkNotGiven::Value),
         );
     }
 }

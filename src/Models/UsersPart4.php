@@ -109,7 +109,7 @@ class PaymentSource implements \JsonSerializable
         }
         return new self(
             type: SdkClient::stringValue($data->type),
-            card: (property_exists($data, "card") ? SdkClient::hydrateClass($data->card, PaymentSourceBankCard::class) : SdkNotGiven::Value),
+            card: (property_exists($data, "card") && $data->card !== null ? SdkClient::hydrateClass($data->card, PaymentSourceBankCard::class) : SdkNotGiven::Value),
         );
     }
 }
@@ -229,9 +229,9 @@ class PaymentSourceBankCard implements \JsonSerializable
         }
         return new self(
             last4: SdkClient::stringValue($data->last4),
-            brand: (property_exists($data, "brand") ? SdkClient::hydrateStringEnumOrString($data->brand, PaymentSourceBankCardBrandEnum::class) : SdkNotGiven::Value),
-            expMonth: (property_exists($data, "exp_month") ? SdkClient::intValue($data->exp_month) : SdkNotGiven::Value),
-            expYear: (property_exists($data, "exp_year") ? SdkClient::intValue($data->exp_year) : SdkNotGiven::Value),
+            brand: (property_exists($data, "brand") && $data->brand !== null ? SdkClient::hydrateStringEnumOrString($data->brand, PaymentSourceBankCardBrandEnum::class) : SdkNotGiven::Value),
+            expMonth: (property_exists($data, "exp_month") && $data->exp_month !== null ? SdkClient::intValue($data->exp_month) : SdkNotGiven::Value),
+            expYear: (property_exists($data, "exp_year") && $data->exp_year !== null ? SdkClient::intValue($data->exp_year) : SdkNotGiven::Value),
         );
     }
 }
@@ -291,7 +291,7 @@ class PlanDetails implements \JsonSerializable
         }
         return new self(
             name: SdkClient::stringValue($data->name),
-            version: (property_exists($data, "version") ? SdkClient::hydrateClass($data->version, PlanVersion::class) : SdkNotGiven::Value),
+            version: (property_exists($data, "version") && $data->version !== null ? SdkClient::hydrateClass($data->version, PlanVersion::class) : SdkNotGiven::Value),
         );
     }
 }

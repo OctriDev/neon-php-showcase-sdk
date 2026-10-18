@@ -8,6 +8,156 @@ declare(strict_types=1);
 namespace octridev_neon;
 
 /**
+ * Typed representation of the `SpendingLimitUpdateRequest` API schema.
+ */
+class SpendingLimitUpdateRequest implements \JsonSerializable
+{
+    /**
+     * Monthly spending cap in cents. Must be positive. To remove a previously configured limit, send a DELETE request to the spending_limit endpoint — `0` and `null` are rejected here. The cap is alert-only: notifications fire at 80% and 100%, but computes are not suspended. Setting a cap below the period's already-accrued spend is permitted and will trigger the over-limit notification on the next worker run.
+     *
+     * @var int
+     */
+    public readonly int $spendingLimitCents;
+
+    /**
+     * @param int $spendingLimitCents
+     */
+    public function __construct(
+        int $spendingLimitCents,
+    ) {
+        $this->spendingLimitCents = $spendingLimitCents;
+    }
+
+    /** @return array<array-key, mixed> */
+    public function toArray(): array
+    {
+        $values = [
+            "spending_limit_cents" => $this->spendingLimitCents,
+        ];
+        return $values;
+    }
+
+    /** @return object */
+    public function jsonSerialize(): object
+    {
+        return (object) $this->toArray();
+    }
+
+    public static function fromObject(object $data): self
+    {
+        if (!property_exists($data, "spending_limit_cents") || $data->spending_limit_cents === null) {
+            throw new SdkValidationError("spending_limit_cents", 'required', "Required property 'spending_limit_cents' is missing or null");
+        }
+        return new self(
+            spendingLimitCents: SdkClient::intValue($data->spending_limit_cents),
+        );
+    }
+}
+
+/**
+ * Typed representation of the `VPCEndpointDetails` API schema.
+ */
+class VPCEndpointDetails implements \JsonSerializable
+{
+    /**
+     * Cloud provider identifier for the VPC endpoint.
+     *
+     * @var string
+     */
+    public readonly string $vpcEndpointId;
+    /**
+     * A descriptive label for the VPC endpoint
+     *
+     * @var string
+     */
+    public readonly string $label;
+    /**
+     * The current state of the VPC endpoint. `new` means the endpoint has just been configured and is pending acceptance by Neon. `accepted` means the VPC connection has been accepted by Neon.
+     *
+     * @var string
+     */
+    public readonly string $state;
+    /**
+     * The number of projects that are restricted to use this VPC endpoint.
+     *
+     * @var int
+     */
+    public readonly int $numRestrictedProjects;
+    /**
+     * A list of example projects that are restricted to use this VPC endpoint. There are at most 3 projects in the list, even if more projects are restricted.
+     *
+     * @var list<string>
+     */
+    public readonly array $exampleRestrictedProjects;
+
+    /**
+     * @param string $vpcEndpointId
+     * @param string $label
+     * @param string $state
+     * @param int $numRestrictedProjects
+     * @param list<string> $exampleRestrictedProjects
+     */
+    public function __construct(
+        string $vpcEndpointId,
+        string $label,
+        string $state,
+        int $numRestrictedProjects,
+        array $exampleRestrictedProjects,
+    ) {
+        $this->vpcEndpointId = $vpcEndpointId;
+        $this->label = $label;
+        $this->state = $state;
+        $this->numRestrictedProjects = $numRestrictedProjects;
+        $this->exampleRestrictedProjects = $exampleRestrictedProjects;
+    }
+
+    /** @return array<array-key, mixed> */
+    public function toArray(): array
+    {
+        $values = [
+            "vpc_endpoint_id" => $this->vpcEndpointId,
+            "label" => $this->label,
+            "state" => $this->state,
+            "num_restricted_projects" => $this->numRestrictedProjects,
+            "example_restricted_projects" => $this->exampleRestrictedProjects,
+        ];
+        return $values;
+    }
+
+    /** @return object */
+    public function jsonSerialize(): object
+    {
+        return (object) $this->toArray();
+    }
+
+    public static function fromObject(object $data): self
+    {
+        if (!property_exists($data, "vpc_endpoint_id") || $data->vpc_endpoint_id === null) {
+            throw new SdkValidationError("vpc_endpoint_id", 'required', "Required property 'vpc_endpoint_id' is missing or null");
+        }
+        if (!property_exists($data, "label") || $data->label === null) {
+            throw new SdkValidationError("label", 'required', "Required property 'label' is missing or null");
+        }
+        if (!property_exists($data, "state") || $data->state === null) {
+            throw new SdkValidationError("state", 'required', "Required property 'state' is missing or null");
+        }
+        if (!property_exists($data, "num_restricted_projects") || $data->num_restricted_projects === null) {
+            throw new SdkValidationError("num_restricted_projects", 'required', "Required property 'num_restricted_projects' is missing or null");
+        }
+        if (!property_exists($data, "example_restricted_projects") || $data->example_restricted_projects === null) {
+            throw new SdkValidationError("example_restricted_projects", 'required', "Required property 'example_restricted_projects' is missing or null");
+        }
+        return new self(
+            vpcEndpointId: SdkClient::stringValue($data->vpc_endpoint_id),
+            label: SdkClient::stringValue($data->label),
+            state: SdkClient::stringValue($data->state),
+            numRestrictedProjects: SdkClient::intValue($data->num_restricted_projects),
+            exampleRestrictedProjects: array_values(array_map(static fn($item) => SdkClient::stringValue($item), SdkClient::arrayValue($data->example_restricted_projects))),
+        );
+    }
+}
+
+/**
  * Typed representation of the `VPCEndpointsWithRegionResponse` API schema.
  */
 class VPCEndpointsWithRegionResponse implements \JsonSerializable

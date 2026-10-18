@@ -147,9 +147,9 @@ class NeonAuthAddOAuthProviderRequest implements \JsonSerializable
         }
         return new self(
             id: SdkClient::hydrateStringEnumOrString($data->id, NeonAuthOauthProviderId::class),
-            clientId: (property_exists($data, "client_id") ? SdkClient::stringValue($data->client_id) : SdkNotGiven::Value),
-            clientSecret: (property_exists($data, "client_secret") ? SdkClient::stringValue($data->client_secret) : SdkNotGiven::Value),
-            microsoftTenantId: (property_exists($data, "microsoft_tenant_id") ? SdkClient::stringValue($data->microsoft_tenant_id) : SdkNotGiven::Value),
+            clientId: (property_exists($data, "client_id") && $data->client_id !== null ? SdkClient::stringValue($data->client_id) : SdkNotGiven::Value),
+            clientSecret: (property_exists($data, "client_secret") && $data->client_secret !== null ? SdkClient::stringValue($data->client_secret) : SdkNotGiven::Value),
+            microsoftTenantId: (property_exists($data, "microsoft_tenant_id") && $data->microsoft_tenant_id !== null ? SdkClient::stringValue($data->microsoft_tenant_id) : SdkNotGiven::Value),
         );
     }
 }
@@ -293,7 +293,7 @@ class NeonAuthCreateIntegrationResponse implements \JsonSerializable
             jwksUrl: SdkClient::stringValue($data->jwks_url),
             schemaName: SdkClient::stringValue($data->schema_name),
             tableName: SdkClient::stringValue($data->table_name),
-            baseUrl: (property_exists($data, "base_url") ? SdkClient::stringValue($data->base_url) : SdkNotGiven::Value),
+            baseUrl: (property_exists($data, "base_url") && $data->base_url !== null ? SdkClient::stringValue($data->base_url) : SdkNotGiven::Value),
         );
     }
 }

@@ -76,7 +76,7 @@ class GeneralError implements \JsonSerializable
         return new self(
             code: SdkClient::stringValue($data->code),
             message: SdkClient::stringValue($data->message),
-            requestId: (property_exists($data, "request_id") ? SdkClient::stringValue($data->request_id) : SdkNotGiven::Value),
+            requestId: (property_exists($data, "request_id") && $data->request_id !== null ? SdkClient::stringValue($data->request_id) : SdkNotGiven::Value),
         );
     }
 }

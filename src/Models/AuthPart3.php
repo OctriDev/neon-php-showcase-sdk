@@ -72,9 +72,9 @@ class NeonAuthMagicLinkConfigUpdate implements \JsonSerializable
     public static function fromObject(object $data): self
     {
         return new self(
-            enabled: (property_exists($data, "enabled") ? SdkClient::boolValue($data->enabled) : SdkNotGiven::Value),
-            expiresIn: (property_exists($data, "expires_in") ? SdkClient::intValue($data->expires_in) : SdkNotGiven::Value),
-            disableSignUp: (property_exists($data, "disable_sign_up") ? SdkClient::boolValue($data->disable_sign_up) : SdkNotGiven::Value),
+            enabled: (property_exists($data, "enabled") && $data->enabled !== null ? SdkClient::boolValue($data->enabled) : SdkNotGiven::Value),
+            expiresIn: (property_exists($data, "expires_in") && $data->expires_in !== null ? SdkClient::intValue($data->expires_in) : SdkNotGiven::Value),
+            disableSignUp: (property_exists($data, "disable_sign_up") && $data->disable_sign_up !== null ? SdkClient::boolValue($data->disable_sign_up) : SdkNotGiven::Value),
         );
     }
 }
@@ -218,7 +218,7 @@ class NeonAuthOAuthClient implements \JsonSerializable
             resources: array_values(array_map(static fn($item) => SdkClient::stringValue($item), SdkClient::arrayValue($data->resources))),
             skipConsent: SdkClient::boolValue($data->skip_consent),
             disabled: SdkClient::boolValue($data->disabled),
-            createdAt: (property_exists($data, "created_at") ? SdkClient::stringValue($data->created_at) : SdkNotGiven::Value),
+            createdAt: (property_exists($data, "created_at") && $data->created_at !== null ? SdkClient::stringValue($data->created_at) : SdkNotGiven::Value),
         );
     }
 }
@@ -261,7 +261,7 @@ class NeonAuthOAuthClientCreatedVariant1 implements \JsonSerializable
     public static function fromObject(object $data): self
     {
         return new self(
-            clientSecret: (property_exists($data, "client_secret") ? SdkClient::stringValue($data->client_secret) : SdkNotGiven::Value),
+            clientSecret: (property_exists($data, "client_secret") && $data->client_secret !== null ? SdkClient::stringValue($data->client_secret) : SdkNotGiven::Value),
         );
     }
 }

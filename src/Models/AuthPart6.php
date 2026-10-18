@@ -60,8 +60,8 @@ class NeonAuthOAuthProviderMcp implements \JsonSerializable
     public static function fromObject(object $data): self
     {
         return new self(
-            resource_: (property_exists($data, "resource") ? SdkClient::stringValue($data->resource) : SdkNotGiven::Value),
-            dynamicRegistration: (property_exists($data, "dynamic_registration") ? SdkClient::boolValue($data->dynamic_registration) : SdkNotGiven::Value),
+            resource_: (property_exists($data, "resource") && $data->resource !== null ? SdkClient::stringValue($data->resource) : SdkNotGiven::Value),
+            dynamicRegistration: (property_exists($data, "dynamic_registration") && $data->dynamic_registration !== null ? SdkClient::boolValue($data->dynamic_registration) : SdkNotGiven::Value),
         );
     }
 }
@@ -121,7 +121,7 @@ class NeonAuthOAuthProviderMcpUpdate implements \JsonSerializable
         }
         return new self(
             resource_: SdkClient::stringValue($data->resource),
-            dynamicRegistration: (property_exists($data, "dynamic_registration") ? SdkClient::boolValue($data->dynamic_registration) : SdkNotGiven::Value),
+            dynamicRegistration: (property_exists($data, "dynamic_registration") && $data->dynamic_registration !== null ? SdkClient::boolValue($data->dynamic_registration) : SdkNotGiven::Value),
         );
     }
 }

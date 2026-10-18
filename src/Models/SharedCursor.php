@@ -72,9 +72,9 @@ class CursorPagination implements \JsonSerializable
     public static function fromObject(object $data): self
     {
         return new self(
-            next: (property_exists($data, "next") ? SdkClient::stringValue($data->next) : SdkNotGiven::Value),
-            sortBy: (property_exists($data, "sort_by") ? SdkClient::stringValue($data->sort_by) : SdkNotGiven::Value),
-            sortOrder: (property_exists($data, "sort_order") ? SdkClient::stringValue($data->sort_order) : SdkNotGiven::Value),
+            next: (property_exists($data, "next") && $data->next !== null ? SdkClient::stringValue($data->next) : SdkNotGiven::Value),
+            sortBy: (property_exists($data, "sort_by") && $data->sort_by !== null ? SdkClient::stringValue($data->sort_by) : SdkNotGiven::Value),
+            sortOrder: (property_exists($data, "sort_order") && $data->sort_order !== null ? SdkClient::stringValue($data->sort_order) : SdkNotGiven::Value),
         );
     }
 }
@@ -120,7 +120,7 @@ class CursorPaginationResponse implements \JsonSerializable
     public static function fromObject(object $data): self
     {
         return new self(
-            pagination: (property_exists($data, "pagination") ? SdkClient::hydrateClass($data->pagination, CursorPagination::class) : SdkNotGiven::Value),
+            pagination: (property_exists($data, "pagination") && $data->pagination !== null ? SdkClient::hydrateClass($data->pagination, CursorPagination::class) : SdkNotGiven::Value),
         );
     }
 }

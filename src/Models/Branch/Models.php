@@ -48,7 +48,7 @@ class AnnotationCreateValueRequest implements \JsonSerializable
     public static function fromObject(object $data): self
     {
         return new self(
-            annotationValue: (property_exists($data, "annotation_value") ? SdkClient::mapValues(SdkClient::stringMapValue($data->annotation_value), static fn($item) => SdkClient::stringValue($item)) : SdkNotGiven::Value),
+            annotationValue: (property_exists($data, "annotation_value") && $data->annotation_value !== null ? SdkClient::mapValues(SdkClient::stringMapValue($data->annotation_value), static fn($item) => SdkClient::stringValue($item)) : SdkNotGiven::Value),
         );
     }
 }
@@ -134,8 +134,8 @@ class AnnotationData implements \JsonSerializable
         return new self(
             object_: SdkClient::hydrateClass($data->object, AnnotationObjectData::class),
             value: SdkClient::mapValues(SdkClient::stringMapValue($data->value), static fn($item) => SdkClient::stringValue($item)),
-            createdAt: (property_exists($data, "created_at") ? SdkClient::stringValue($data->created_at) : SdkNotGiven::Value),
-            updatedAt: (property_exists($data, "updated_at") ? SdkClient::stringValue($data->updated_at) : SdkNotGiven::Value),
+            createdAt: (property_exists($data, "created_at") && $data->created_at !== null ? SdkClient::stringValue($data->created_at) : SdkNotGiven::Value),
+            updatedAt: (property_exists($data, "updated_at") && $data->updated_at !== null ? SdkClient::stringValue($data->updated_at) : SdkNotGiven::Value),
         );
     }
 }

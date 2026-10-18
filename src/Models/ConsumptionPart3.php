@@ -72,9 +72,9 @@ class ConsumptionHistoryPerTimeframeV2 implements \JsonSerializable
     public static function fromObject(object $data): self
     {
         return new self(
-            timeframeStart: (property_exists($data, "timeframe_start") ? SdkClient::stringValue($data->timeframe_start) : SdkNotGiven::Value),
-            timeframeEnd: (property_exists($data, "timeframe_end") ? SdkClient::stringValue($data->timeframe_end) : SdkNotGiven::Value),
-            metrics: (property_exists($data, "metrics") ? array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, ConsumptionMetricValue::class), SdkClient::arrayValue($data->metrics))) : SdkNotGiven::Value),
+            timeframeStart: (property_exists($data, "timeframe_start") && $data->timeframe_start !== null ? SdkClient::stringValue($data->timeframe_start) : SdkNotGiven::Value),
+            timeframeEnd: (property_exists($data, "timeframe_end") && $data->timeframe_end !== null ? SdkClient::stringValue($data->timeframe_end) : SdkNotGiven::Value),
+            metrics: (property_exists($data, "metrics") && $data->metrics !== null ? array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, ConsumptionMetricValue::class), SdkClient::arrayValue($data->metrics))) : SdkNotGiven::Value),
         );
     }
 }
@@ -136,6 +136,186 @@ class ConsumptionMetricValue implements \JsonSerializable
         return new self(
             metricName: SdkClient::stringValue($data->metric_name),
             value: SdkClient::intValue($data->value),
+        );
+    }
+}
+
+/**
+ * Typed representation of the `GetConsumptionHistoryPerBranchV2Response` API schema.
+ */
+class GetConsumptionHistoryPerBranchV2Response implements \JsonSerializable
+{
+    /**
+     * Per-branch consumption history records returned for the requested time range.
+     *
+     * @var list<ConsumptionHistoryPerBranchV2>
+     */
+    public readonly array $branches;
+    /**
+     * Cursor-based pagination. The `cursor` value reflects the endpoint's sort field (for example, an ID or timestamp), so pass it back unchanged.
+     *
+     * @var Pagination|SdkNotGiven
+     */
+    public readonly Pagination|SdkNotGiven $pagination;
+
+    /**
+     * @param list<ConsumptionHistoryPerBranchV2> $branches
+     * @param Pagination|SdkNotGiven $pagination
+     */
+    public function __construct(
+        array $branches,
+        Pagination|SdkNotGiven $pagination = SdkNotGiven::Value,
+    ) {
+        $this->branches = $branches;
+        $this->pagination = $pagination;
+    }
+
+    /** @return array<array-key, mixed> */
+    public function toArray(): array
+    {
+        $values = [
+            "branches" => $this->branches,
+        ];
+        if ($this->pagination !== SdkNotGiven::Value) {
+            $values["pagination"] = $this->pagination;
+        }
+        return $values;
+    }
+
+    /** @return object */
+    public function jsonSerialize(): object
+    {
+        return (object) $this->toArray();
+    }
+
+    public static function fromObject(object $data): self
+    {
+        if (!property_exists($data, "branches") || $data->branches === null) {
+            throw new SdkValidationError("branches", 'required', "Required property 'branches' is missing or null");
+        }
+        return new self(
+            branches: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, ConsumptionHistoryPerBranchV2::class), SdkClient::arrayValue($data->branches))),
+            pagination: (property_exists($data, "pagination") && $data->pagination !== null ? SdkClient::hydrateClass($data->pagination, Pagination::class) : SdkNotGiven::Value),
+        );
+    }
+}
+
+/**
+ * Typed representation of the `GetConsumptionHistoryPerProjectResponse` API schema.
+ */
+class GetConsumptionHistoryPerProjectResponse implements \JsonSerializable
+{
+    /**
+     * Per-project consumption history records included in the response.
+     *
+     * @var list<ConsumptionHistoryPerProject>
+     */
+    public readonly array $projects;
+    /**
+     * Cursor-based pagination. The `cursor` value reflects the endpoint's sort field (for example, an ID or timestamp), so pass it back unchanged.
+     *
+     * @var Pagination|SdkNotGiven
+     */
+    public readonly Pagination|SdkNotGiven $pagination;
+
+    /**
+     * @param list<ConsumptionHistoryPerProject> $projects
+     * @param Pagination|SdkNotGiven $pagination
+     */
+    public function __construct(
+        array $projects,
+        Pagination|SdkNotGiven $pagination = SdkNotGiven::Value,
+    ) {
+        $this->projects = $projects;
+        $this->pagination = $pagination;
+    }
+
+    /** @return array<array-key, mixed> */
+    public function toArray(): array
+    {
+        $values = [
+            "projects" => $this->projects,
+        ];
+        if ($this->pagination !== SdkNotGiven::Value) {
+            $values["pagination"] = $this->pagination;
+        }
+        return $values;
+    }
+
+    /** @return object */
+    public function jsonSerialize(): object
+    {
+        return (object) $this->toArray();
+    }
+
+    public static function fromObject(object $data): self
+    {
+        if (!property_exists($data, "projects") || $data->projects === null) {
+            throw new SdkValidationError("projects", 'required', "Required property 'projects' is missing or null");
+        }
+        return new self(
+            projects: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, ConsumptionHistoryPerProject::class), SdkClient::arrayValue($data->projects))),
+            pagination: (property_exists($data, "pagination") && $data->pagination !== null ? SdkClient::hydrateClass($data->pagination, Pagination::class) : SdkNotGiven::Value),
+        );
+    }
+}
+
+/**
+ * Typed representation of the `GetConsumptionHistoryPerProjectV2Response` API schema.
+ */
+class GetConsumptionHistoryPerProjectV2Response implements \JsonSerializable
+{
+    /**
+     * Per-project consumption history entries for the requested time range.
+     *
+     * @var list<ConsumptionHistoryPerProjectV2>
+     */
+    public readonly array $projects;
+    /**
+     * Cursor-based pagination. The `cursor` value reflects the endpoint's sort field (for example, an ID or timestamp), so pass it back unchanged.
+     *
+     * @var Pagination|SdkNotGiven
+     */
+    public readonly Pagination|SdkNotGiven $pagination;
+
+    /**
+     * @param list<ConsumptionHistoryPerProjectV2> $projects
+     * @param Pagination|SdkNotGiven $pagination
+     */
+    public function __construct(
+        array $projects,
+        Pagination|SdkNotGiven $pagination = SdkNotGiven::Value,
+    ) {
+        $this->projects = $projects;
+        $this->pagination = $pagination;
+    }
+
+    /** @return array<array-key, mixed> */
+    public function toArray(): array
+    {
+        $values = [
+            "projects" => $this->projects,
+        ];
+        if ($this->pagination !== SdkNotGiven::Value) {
+            $values["pagination"] = $this->pagination;
+        }
+        return $values;
+    }
+
+    /** @return object */
+    public function jsonSerialize(): object
+    {
+        return (object) $this->toArray();
+    }
+
+    public static function fromObject(object $data): self
+    {
+        if (!property_exists($data, "projects") || $data->projects === null) {
+            throw new SdkValidationError("projects", 'required', "Required property 'projects' is missing or null");
+        }
+        return new self(
+            projects: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, ConsumptionHistoryPerProjectV2::class), SdkClient::arrayValue($data->projects))),
+            pagination: (property_exists($data, "pagination") && $data->pagination !== null ? SdkClient::hydrateClass($data->pagination, Pagination::class) : SdkNotGiven::Value),
         );
     }
 }

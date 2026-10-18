@@ -41,9 +41,9 @@ class ProjectNamespace
      * @param string|SdkNotGiven $orgId
      * @param int|SdkNotGiven $timeout
      * @param bool|SdkNotGiven $recoverable
-     * @return ProjectsResponse
+     * @return ListProjectsResponse
      */
-    public function list_(string|SdkNotGiven $cursor = SdkNotGiven::Value, int|SdkNotGiven $limit = SdkNotGiven::Value, string|SdkNotGiven $search = SdkNotGiven::Value, string|SdkNotGiven $orgId = SdkNotGiven::Value, int|SdkNotGiven $timeout = SdkNotGiven::Value, bool|SdkNotGiven $recoverable = SdkNotGiven::Value, ?RequestOptions $requestOptions = null): ProjectsResponse
+    public function list_(string|SdkNotGiven $cursor = SdkNotGiven::Value, int|SdkNotGiven $limit = SdkNotGiven::Value, string|SdkNotGiven $search = SdkNotGiven::Value, string|SdkNotGiven $orgId = SdkNotGiven::Value, int|SdkNotGiven $timeout = SdkNotGiven::Value, bool|SdkNotGiven $recoverable = SdkNotGiven::Value, ?RequestOptions $requestOptions = null): ListProjectsResponse
     {
         return ProjectApi::listProjects($this->clientConfig, $cursor, $limit, $search, $orgId, $timeout, $recoverable, $requestOptions);
     }
@@ -53,9 +53,9 @@ class ProjectNamespace
      * Creates a Neon project within an organization. If using a personal API key, include the `org_id` parameter to specify which organization to create the project in. If using an org API key, `org_id` is automatically inferred from the key. Plan limits define how many projects you can create. For more information, see [Manage projects](https://neon.com/docs/manage/projects/). You can specify a region and Postgres version in the request body. Neon supports Postgres 14 through 18, with 19 rolling out to enabled regions. For supported regions and `region_id` values, see [Regions](https://neon.com/docs/introduction/regions/). project: Configuration for the new project, including name, region, and Postgres compute and storage settings.
      *
      * @param CreateProjectProject $project
-     * @return ProjectResponse
+     * @return CreateProjectResponse
      */
-    public function create(CreateProjectProject $project, ?RequestOptions $requestOptions = null): ProjectResponse
+    public function create(CreateProjectProject $project, ?RequestOptions $requestOptions = null): CreateProjectResponse
     {
         return ProjectApi::createProject($this->clientConfig, $project, $requestOptions);
     }
@@ -68,9 +68,9 @@ class ProjectNamespace
      * @param int|SdkNotGiven $limit
      * @param string|SdkNotGiven $search
      * @param int|SdkNotGiven $timeout
-     * @return ProjectsResponse
+     * @return ListSharedProjectsResponse
      */
-    public function listShared(string|SdkNotGiven $cursor = SdkNotGiven::Value, int|SdkNotGiven $limit = SdkNotGiven::Value, string|SdkNotGiven $search = SdkNotGiven::Value, int|SdkNotGiven $timeout = SdkNotGiven::Value, ?RequestOptions $requestOptions = null): ProjectsResponse
+    public function listShared(string|SdkNotGiven $cursor = SdkNotGiven::Value, int|SdkNotGiven $limit = SdkNotGiven::Value, string|SdkNotGiven $search = SdkNotGiven::Value, int|SdkNotGiven $timeout = SdkNotGiven::Value, ?RequestOptions $requestOptions = null): ListSharedProjectsResponse
     {
         return ProjectApi::listSharedProjects($this->clientConfig, $cursor, $limit, $search, $timeout, $requestOptions);
     }
@@ -93,9 +93,9 @@ class ProjectNamespace
      *
      * @param string $projectId
      * @param UpdateProjectProject $project
-     * @return ProjectResponse
+     * @return UpdateProjectResponse
      */
-    public function update(string $projectId, UpdateProjectProject $project, ?RequestOptions $requestOptions = null): ProjectResponse
+    public function update(string $projectId, UpdateProjectProject $project, ?RequestOptions $requestOptions = null): UpdateProjectResponse
     {
         return ProjectApi::updateProject($this->clientConfig, $projectId, $project, $requestOptions);
     }

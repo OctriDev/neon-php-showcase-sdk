@@ -8,6 +8,215 @@ declare(strict_types=1);
 namespace octridev_neon;
 
 /**
+ * Typed representation of the `MaskingRule` API schema.
+ */
+class MaskingRule implements \JsonSerializable
+{
+    /**
+     * The name of the database containing the table to be masked
+     *
+     * @var string
+     */
+    public readonly string $databaseName;
+    /**
+     * The name of the schema containing the table to be masked
+     *
+     * @var string
+     */
+    public readonly string $schemaName;
+    /**
+     * The name of the table containing the column to be masked
+     *
+     * @var string
+     */
+    public readonly string $tableName;
+    /**
+     * The name of the column to be masked
+     *
+     * @var string
+     */
+    public readonly string $columnName;
+    /**
+     * The PostgreSQL Anonymizer masking function to apply. Can be a predefined function (e.g., 'anon.random_string(10)', 'anon.fake_email()') or a custom function definition (e.g., 'anon.hash(column_name)')
+     *
+     * @var string|SdkNotGiven
+     */
+    public readonly string|SdkNotGiven $maskingFunction;
+    /**
+     * A literal value to set on the column when masking.
+     *
+     * @var string|SdkNotGiven
+     */
+    public readonly string|SdkNotGiven $maskingValue;
+
+    /**
+     * @param string $databaseName
+     * @param string $schemaName
+     * @param string $tableName
+     * @param string $columnName
+     * @param string|SdkNotGiven $maskingFunction
+     * @param string|SdkNotGiven $maskingValue
+     */
+    public function __construct(
+        string $databaseName,
+        string $schemaName,
+        string $tableName,
+        string $columnName,
+        string|SdkNotGiven $maskingFunction = SdkNotGiven::Value,
+        string|SdkNotGiven $maskingValue = SdkNotGiven::Value,
+    ) {
+        $this->databaseName = $databaseName;
+        $this->schemaName = $schemaName;
+        $this->tableName = $tableName;
+        $this->columnName = $columnName;
+        $this->maskingFunction = $maskingFunction;
+        $this->maskingValue = $maskingValue;
+    }
+
+    /** @return array<array-key, mixed> */
+    public function toArray(): array
+    {
+        $values = [
+            "database_name" => $this->databaseName,
+            "schema_name" => $this->schemaName,
+            "table_name" => $this->tableName,
+            "column_name" => $this->columnName,
+        ];
+        if ($this->maskingFunction !== SdkNotGiven::Value) {
+            $values["masking_function"] = $this->maskingFunction;
+        }
+        if ($this->maskingValue !== SdkNotGiven::Value) {
+            $values["masking_value"] = $this->maskingValue;
+        }
+        return $values;
+    }
+
+    /** @return object */
+    public function jsonSerialize(): object
+    {
+        return (object) $this->toArray();
+    }
+
+    public static function fromObject(object $data): self
+    {
+        if (!property_exists($data, "database_name") || $data->database_name === null) {
+            throw new SdkValidationError("database_name", 'required', "Required property 'database_name' is missing or null");
+        }
+        if (!property_exists($data, "schema_name") || $data->schema_name === null) {
+            throw new SdkValidationError("schema_name", 'required', "Required property 'schema_name' is missing or null");
+        }
+        if (!property_exists($data, "table_name") || $data->table_name === null) {
+            throw new SdkValidationError("table_name", 'required', "Required property 'table_name' is missing or null");
+        }
+        if (!property_exists($data, "column_name") || $data->column_name === null) {
+            throw new SdkValidationError("column_name", 'required', "Required property 'column_name' is missing or null");
+        }
+        return new self(
+            databaseName: SdkClient::stringValue($data->database_name),
+            schemaName: SdkClient::stringValue($data->schema_name),
+            tableName: SdkClient::stringValue($data->table_name),
+            columnName: SdkClient::stringValue($data->column_name),
+            maskingFunction: (property_exists($data, "masking_function") && $data->masking_function !== null ? SdkClient::stringValue($data->masking_function) : SdkNotGiven::Value),
+            maskingValue: (property_exists($data, "masking_value") && $data->masking_value !== null ? SdkClient::stringValue($data->masking_value) : SdkNotGiven::Value),
+        );
+    }
+}
+
+/**
+ * Typed representation of the `MaskingRulesResponse` API schema.
+ */
+class MaskingRulesResponse implements \JsonSerializable
+{
+    /**
+     * List of masking rules for the branch
+     *
+     * @var list<MaskingRule>
+     */
+    public readonly array $maskingRules;
+
+    /**
+     * @param list<MaskingRule> $maskingRules
+     */
+    public function __construct(
+        array $maskingRules,
+    ) {
+        $this->maskingRules = $maskingRules;
+    }
+
+    /** @return array<array-key, mixed> */
+    public function toArray(): array
+    {
+        $values = [
+            "masking_rules" => $this->maskingRules,
+        ];
+        return $values;
+    }
+
+    /** @return object */
+    public function jsonSerialize(): object
+    {
+        return (object) $this->toArray();
+    }
+
+    public static function fromObject(object $data): self
+    {
+        if (!property_exists($data, "masking_rules") || $data->masking_rules === null) {
+            throw new SdkValidationError("masking_rules", 'required', "Required property 'masking_rules' is missing or null");
+        }
+        return new self(
+            maskingRules: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, MaskingRule::class), SdkClient::arrayValue($data->masking_rules))),
+        );
+    }
+}
+
+/**
+ * Typed representation of the `MaskingRulesUpdateRequest` API schema.
+ */
+class MaskingRulesUpdateRequest implements \JsonSerializable
+{
+    /**
+     * List of masking rules to apply to the branch. This will replace all existing masking rules for the branch.
+     *
+     * @var list<MaskingRule>
+     */
+    public readonly array $maskingRules;
+
+    /**
+     * @param list<MaskingRule> $maskingRules
+     */
+    public function __construct(
+        array $maskingRules,
+    ) {
+        $this->maskingRules = $maskingRules;
+    }
+
+    /** @return array<array-key, mixed> */
+    public function toArray(): array
+    {
+        $values = [
+            "masking_rules" => $this->maskingRules,
+        ];
+        return $values;
+    }
+
+    /** @return object */
+    public function jsonSerialize(): object
+    {
+        return (object) $this->toArray();
+    }
+
+    public static function fromObject(object $data): self
+    {
+        if (!property_exists($data, "masking_rules") || $data->masking_rules === null) {
+            throw new SdkValidationError("masking_rules", 'required', "Required property 'masking_rules' is missing or null");
+        }
+        return new self(
+            maskingRules: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, MaskingRule::class), SdkClient::arrayValue($data->masking_rules))),
+        );
+    }
+}
+
+/**
  * Properties of the role to create.
  */
 class RoleCreateRequestRole implements \JsonSerializable
@@ -62,7 +271,7 @@ class RoleCreateRequestRole implements \JsonSerializable
         }
         return new self(
             name: SdkClient::stringValue($data->name),
-            noLogin: (property_exists($data, "no_login") ? SdkClient::boolValue($data->no_login) : SdkNotGiven::Value),
+            noLogin: (property_exists($data, "no_login") && $data->no_login !== null ? SdkClient::boolValue($data->no_login) : SdkNotGiven::Value),
         );
     }
 }
@@ -110,161 +319,6 @@ class RoleCreateRequest implements \JsonSerializable
         }
         return new self(
             role: SdkClient::hydrateClass($data->role, RoleCreateRequestRole::class),
-        );
-    }
-}
-
-/**
- * Typed representation of the `RoleOperations` API schema.
- */
-class RoleOperations implements \JsonSerializable
-{
-    /**
-     * Role details for the requested database role. The `password` field is included in the response when a role is created or its password is reset, and is not returned in subsequent read requests. Store it securely at that time.
-     *
-     * @var Role
-     */
-    public readonly Role $role;
-    /**
-     * Required array value serialized in the `operations` wire field.
-     *
-     * @var list<Operation>
-     */
-    public readonly array $operations;
-
-    /**
-     * @param Role $role
-     * @param list<Operation> $operations
-     */
-    public function __construct(
-        Role $role,
-        array $operations,
-    ) {
-        $this->role = $role;
-        $this->operations = $operations;
-    }
-
-    /** @return array<array-key, mixed> */
-    public function toArray(): array
-    {
-        $values = [
-            "role" => $this->role,
-            "operations" => $this->operations,
-        ];
-        return $values;
-    }
-
-    /** @return object */
-    public function jsonSerialize(): object
-    {
-        return (object) $this->toArray();
-    }
-
-    public static function fromObject(object $data): self
-    {
-        if (!property_exists($data, "role") || $data->role === null) {
-            throw new SdkValidationError("role", 'required', "Required property 'role' is missing or null");
-        }
-        if (!property_exists($data, "operations") || $data->operations === null) {
-            throw new SdkValidationError("operations", 'required', "Required property 'operations' is missing or null");
-        }
-        return new self(
-            role: SdkClient::hydrateClass($data->role, Role::class),
-            operations: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, Operation::class), SdkClient::arrayValue($data->operations))),
-        );
-    }
-}
-
-/**
- * Typed representation of the `RolePasswordResponse` API schema.
- */
-class RolePasswordResponse implements \JsonSerializable
-{
-    /**
-     * The role password
-     *
-     * @var string
-     */
-    public readonly string $password;
-
-    /**
-     * @param string $password
-     */
-    public function __construct(
-        string $password,
-    ) {
-        $this->password = $password;
-    }
-
-    /** @return array<array-key, mixed> */
-    public function toArray(): array
-    {
-        $values = [
-            "password" => $this->password,
-        ];
-        return $values;
-    }
-
-    /** @return object */
-    public function jsonSerialize(): object
-    {
-        return (object) $this->toArray();
-    }
-
-    public static function fromObject(object $data): self
-    {
-        if (!property_exists($data, "password") || $data->password === null) {
-            throw new SdkValidationError("password", 'required', "Required property 'password' is missing or null");
-        }
-        return new self(
-            password: SdkClient::stringValue($data->password),
-        );
-    }
-}
-
-/**
- * Typed representation of the `RoleResponse` API schema.
- */
-class RoleResponse implements \JsonSerializable
-{
-    /**
-     * Role details for the requested database role. The `password` field is included in the response when a role is created or its password is reset, and is not returned in subsequent read requests. Store it securely at that time.
-     *
-     * @var Role
-     */
-    public readonly Role $role;
-
-    /**
-     * @param Role $role
-     */
-    public function __construct(
-        Role $role,
-    ) {
-        $this->role = $role;
-    }
-
-    /** @return array<array-key, mixed> */
-    public function toArray(): array
-    {
-        $values = [
-            "role" => $this->role,
-        ];
-        return $values;
-    }
-
-    /** @return object */
-    public function jsonSerialize(): object
-    {
-        return (object) $this->toArray();
-    }
-
-    public static function fromObject(object $data): self
-    {
-        if (!property_exists($data, "role") || $data->role === null) {
-            throw new SdkValidationError("role", 'required', "Required property 'role' is missing or null");
-        }
-        return new self(
-            role: SdkClient::hydrateClass($data->role, Role::class),
         );
     }
 }

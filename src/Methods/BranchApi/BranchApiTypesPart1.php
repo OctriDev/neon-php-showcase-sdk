@@ -127,8 +127,8 @@ class UpdateBranchBranch implements \JsonSerializable
     public static function fromObject(object $data): self
     {
         return new self(
-            name: (property_exists($data, "name") ? SdkClient::stringValue($data->name) : SdkNotGiven::Value),
-            protected_: (property_exists($data, "protected") ? SdkClient::boolValue($data->protected) : SdkNotGiven::Value),
+            name: (property_exists($data, "name") && $data->name !== null ? SdkClient::stringValue($data->name) : SdkNotGiven::Value),
+            protected_: (property_exists($data, "protected") && $data->protected !== null ? SdkClient::boolValue($data->protected) : SdkNotGiven::Value),
             expiresAt: (property_exists($data, "expires_at") ? ($data->expires_at === null ? null : SdkClient::stringValue($data->expires_at)) : SdkNotGiven::Value),
         );
     }
@@ -248,8 +248,8 @@ class UpdateBranchDatabaseDatabase implements \JsonSerializable
     public static function fromObject(object $data): self
     {
         return new self(
-            name: (property_exists($data, "name") ? SdkClient::stringValue($data->name) : SdkNotGiven::Value),
-            ownerName: (property_exists($data, "owner_name") ? SdkClient::stringValue($data->owner_name) : SdkNotGiven::Value),
+            name: (property_exists($data, "name") && $data->name !== null ? SdkClient::stringValue($data->name) : SdkNotGiven::Value),
+            ownerName: (property_exists($data, "owner_name") && $data->owner_name !== null ? SdkClient::stringValue($data->owner_name) : SdkNotGiven::Value),
         );
     }
 }
@@ -309,7 +309,7 @@ class CreateBranchRoleRole implements \JsonSerializable
         }
         return new self(
             name: SdkClient::stringValue($data->name),
-            noLogin: (property_exists($data, "no_login") ? SdkClient::boolValue($data->no_login) : SdkNotGiven::Value),
+            noLogin: (property_exists($data, "no_login") && $data->no_login !== null ? SdkClient::boolValue($data->no_login) : SdkNotGiven::Value),
         );
     }
 }

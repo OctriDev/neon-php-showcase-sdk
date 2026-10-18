@@ -111,9 +111,9 @@ class OrganizationsNamespace
      * @param string|SdkNotGiven $cursor
      * @param ListOrganizationsMembersSortOrder|SdkNotGiven $sortOrder
      * @param int|SdkNotGiven $limit
-     * @return OrganizationMembersResponse
+     * @return ListOrganizationsMembersResponse
      */
-    public function listMembers(string $orgId, ListOrganizationsMembersSortBy|SdkNotGiven $sortBy = SdkNotGiven::Value, string|SdkNotGiven $cursor = SdkNotGiven::Value, ListOrganizationsMembersSortOrder|SdkNotGiven $sortOrder = SdkNotGiven::Value, int|SdkNotGiven $limit = SdkNotGiven::Value, ?RequestOptions $requestOptions = null): OrganizationMembersResponse
+    public function listMembers(string $orgId, ListOrganizationsMembersSortBy|SdkNotGiven $sortBy = SdkNotGiven::Value, string|SdkNotGiven $cursor = SdkNotGiven::Value, ListOrganizationsMembersSortOrder|SdkNotGiven $sortOrder = SdkNotGiven::Value, int|SdkNotGiven $limit = SdkNotGiven::Value, ?RequestOptions $requestOptions = null): ListOrganizationsMembersResponse
     {
         return Organizations::listOrganizationsMembers($this->clientConfig, $orgId, $sortBy, $cursor, $sortOrder, $limit, $requestOptions);
     }
