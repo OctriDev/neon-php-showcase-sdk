@@ -144,8 +144,8 @@ class Organization implements \JsonSerializable
             createdAt: SdkClient::stringValue($data->created_at),
             managedBy: SdkClient::stringValue($data->managed_by),
             updatedAt: SdkClient::stringValue($data->updated_at),
-            allowHipaaProjects: (property_exists($data, "allow_hipaa_projects") ? SdkClient::boolValue($data->allow_hipaa_projects) : SdkNotGiven::Value),
-            requireMfa: (property_exists($data, "require_mfa") ? SdkClient::boolValue($data->require_mfa) : SdkNotGiven::Value),
+            allowHipaaProjects: (property_exists($data, "allow_hipaa_projects") && $data->allow_hipaa_projects !== null ? SdkClient::boolValue($data->allow_hipaa_projects) : SdkNotGiven::Value),
+            requireMfa: (property_exists($data, "require_mfa") && $data->require_mfa !== null ? SdkClient::boolValue($data->require_mfa) : SdkNotGiven::Value),
         );
     }
 }
@@ -203,8 +203,8 @@ class PreloadLibraries implements \JsonSerializable
     public static function fromObject(object $data): self
     {
         return new self(
-            useDefaults: (property_exists($data, "use_defaults") ? SdkClient::boolValue($data->use_defaults) : SdkNotGiven::Value),
-            enabledLibraries: (property_exists($data, "enabled_libraries") ? array_values(array_map(static fn($item) => SdkClient::stringValue($item), SdkClient::arrayValue($data->enabled_libraries))) : SdkNotGiven::Value),
+            useDefaults: (property_exists($data, "use_defaults") && $data->use_defaults !== null ? SdkClient::boolValue($data->use_defaults) : SdkNotGiven::Value),
+            enabledLibraries: (property_exists($data, "enabled_libraries") && $data->enabled_libraries !== null ? array_values(array_map(static fn($item) => SdkClient::stringValue($item), SdkClient::arrayValue($data->enabled_libraries))) : SdkNotGiven::Value),
         );
     }
 }

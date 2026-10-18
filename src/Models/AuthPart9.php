@@ -177,7 +177,7 @@ class SendNeonAuthTestEmailResponse implements \JsonSerializable
         if (!property_exists($data, "success") || $data->success === null) { throw new SdkValidationError("success", 'required', "Required property 'success' is missing or null"); }
         return new self(
             success: SdkClient::boolValue($data->success),
-            errorMessage: (property_exists($data, "error_message") ? SdkClient::stringValue($data->error_message) : SdkNotGiven::Value),
+            errorMessage: (property_exists($data, "error_message") && $data->error_message !== null ? SdkClient::stringValue($data->error_message) : SdkNotGiven::Value),
         );
     }
 }

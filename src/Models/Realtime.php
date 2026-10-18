@@ -96,9 +96,9 @@ class Realtime implements \JsonSerializable
         return new self(
             enabled: SdkClient::boolValue($data->enabled),
             pending: SdkClient::boolValue($data->pending),
-            invocationUrl: (property_exists($data, "invocation_url") ? SdkClient::stringValue($data->invocation_url) : SdkNotGiven::Value),
-            revision: (property_exists($data, "revision") ? SdkClient::intValue($data->revision) : SdkNotGiven::Value),
-            allowedOrigins: (property_exists($data, "allowed_origins") ? array_values(array_map(static fn($item) => SdkClient::stringValue($item), SdkClient::arrayValue($data->allowed_origins))) : SdkNotGiven::Value),
+            invocationUrl: (property_exists($data, "invocation_url") && $data->invocation_url !== null ? SdkClient::stringValue($data->invocation_url) : SdkNotGiven::Value),
+            revision: (property_exists($data, "revision") && $data->revision !== null ? SdkClient::intValue($data->revision) : SdkNotGiven::Value),
+            allowedOrigins: (property_exists($data, "allowed_origins") && $data->allowed_origins !== null ? array_values(array_map(static fn($item) => SdkClient::stringValue($item), SdkClient::arrayValue($data->allowed_origins))) : SdkNotGiven::Value),
         );
     }
 }

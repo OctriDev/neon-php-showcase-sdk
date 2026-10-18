@@ -86,7 +86,7 @@ class CreateCredentialRequest implements \JsonSerializable
         return new self(
             scopes: array_values(array_map(static fn($item) => SdkClient::hydrateStringEnumOrString($item, CredentialScope::class), SdkClient::arrayValue($data->scopes))),
             principalType: SdkClient::hydrateStringEnumOrString($data->principal_type, CreateCredentialRequestPrincipalTypeEnum::class),
-            name: (property_exists($data, "name") ? SdkClient::stringValue($data->name) : SdkNotGiven::Value),
+            name: (property_exists($data, "name") && $data->name !== null ? SdkClient::stringValue($data->name) : SdkNotGiven::Value),
         );
     }
 }
@@ -228,8 +228,8 @@ class CreateCredentialResponse implements \JsonSerializable
             scopes: array_values(array_map(static fn($item) => SdkClient::hydrateStringEnumOrString($item, GrantedCredentialScope::class), SdkClient::arrayValue($data->scopes))),
             branchId: SdkClient::stringValue($data->branch_id),
             createdAt: SdkClient::stringValue($data->created_at),
-            name: (property_exists($data, "name") ? SdkClient::stringValue($data->name) : SdkNotGiven::Value),
-            expiresAt: (property_exists($data, "expires_at") ? SdkClient::stringValue($data->expires_at) : SdkNotGiven::Value),
+            name: (property_exists($data, "name") && $data->name !== null ? SdkClient::stringValue($data->name) : SdkNotGiven::Value),
+            expiresAt: (property_exists($data, "expires_at") && $data->expires_at !== null ? SdkClient::stringValue($data->expires_at) : SdkNotGiven::Value),
         );
     }
 }

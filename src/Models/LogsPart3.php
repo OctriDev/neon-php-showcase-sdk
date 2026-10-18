@@ -204,20 +204,20 @@ class ProjectBranchLogsQueryRequest implements \JsonSerializable
     public static function fromObject(object $data): self
     {
         return new self(
-            since: (property_exists($data, "since") ? SdkClient::stringValue($data->since) : SdkNotGiven::Value),
-            startTime: (property_exists($data, "start_time") ? SdkClient::stringValue($data->start_time) : SdkNotGiven::Value),
-            endTime: (property_exists($data, "end_time") ? SdkClient::stringValue($data->end_time) : SdkNotGiven::Value),
-            limit: (property_exists($data, "limit") ? SdkClient::intValue($data->limit) : SdkNotGiven::Value),
-            cursor: (property_exists($data, "cursor") ? SdkClient::stringValue($data->cursor) : SdkNotGiven::Value),
-            sortOrder: (property_exists($data, "sort_order") ? SdkClient::hydrateStringEnumOrString($data->sort_order, ProjectBranchLogsQueryRequestSortOrderEnum::class) : SdkNotGiven::Value),
-            source: (property_exists($data, "source") ? SdkClient::hydrateStringEnumOrString($data->source, ProjectBranchLogSource::class) : SdkNotGiven::Value),
-            serviceName: (property_exists($data, "service_name") ? SdkClient::stringValue($data->service_name) : SdkNotGiven::Value),
-            scopeName: (property_exists($data, "scope_name") ? SdkClient::stringValue($data->scope_name) : SdkNotGiven::Value),
-            minimumSeverity: (property_exists($data, "minimum_severity") ? SdkClient::hydrateStringEnumOrString($data->minimum_severity, ProjectBranchLogSeverity::class) : SdkNotGiven::Value),
-            severityText: (property_exists($data, "severity_text") ? SdkClient::stringValue($data->severity_text) : SdkNotGiven::Value),
-            bodyContains: (property_exists($data, "body_contains") ? SdkClient::stringValue($data->body_contains) : SdkNotGiven::Value),
-            traceId: (property_exists($data, "trace_id") ? SdkClient::stringValue($data->trace_id) : SdkNotGiven::Value),
-            logql: (property_exists($data, "logql") ? SdkClient::stringValue($data->logql) : SdkNotGiven::Value),
+            since: (property_exists($data, "since") && $data->since !== null ? SdkClient::stringValue($data->since) : SdkNotGiven::Value),
+            startTime: (property_exists($data, "start_time") && $data->start_time !== null ? SdkClient::stringValue($data->start_time) : SdkNotGiven::Value),
+            endTime: (property_exists($data, "end_time") && $data->end_time !== null ? SdkClient::stringValue($data->end_time) : SdkNotGiven::Value),
+            limit: (property_exists($data, "limit") && $data->limit !== null ? SdkClient::intValue($data->limit) : SdkNotGiven::Value),
+            cursor: (property_exists($data, "cursor") && $data->cursor !== null ? SdkClient::stringValue($data->cursor) : SdkNotGiven::Value),
+            sortOrder: (property_exists($data, "sort_order") && $data->sort_order !== null ? SdkClient::hydrateStringEnumOrString($data->sort_order, ProjectBranchLogsQueryRequestSortOrderEnum::class) : SdkNotGiven::Value),
+            source: (property_exists($data, "source") && $data->source !== null ? SdkClient::hydrateStringEnumOrString($data->source, ProjectBranchLogSource::class) : SdkNotGiven::Value),
+            serviceName: (property_exists($data, "service_name") && $data->service_name !== null ? SdkClient::stringValue($data->service_name) : SdkNotGiven::Value),
+            scopeName: (property_exists($data, "scope_name") && $data->scope_name !== null ? SdkClient::stringValue($data->scope_name) : SdkNotGiven::Value),
+            minimumSeverity: (property_exists($data, "minimum_severity") && $data->minimum_severity !== null ? SdkClient::hydrateStringEnumOrString($data->minimum_severity, ProjectBranchLogSeverity::class) : SdkNotGiven::Value),
+            severityText: (property_exists($data, "severity_text") && $data->severity_text !== null ? SdkClient::stringValue($data->severity_text) : SdkNotGiven::Value),
+            bodyContains: (property_exists($data, "body_contains") && $data->body_contains !== null ? SdkClient::stringValue($data->body_contains) : SdkNotGiven::Value),
+            traceId: (property_exists($data, "trace_id") && $data->trace_id !== null ? SdkClient::stringValue($data->trace_id) : SdkNotGiven::Value),
+            logql: (property_exists($data, "logql") && $data->logql !== null ? SdkClient::stringValue($data->logql) : SdkNotGiven::Value),
         );
     }
 }
@@ -287,7 +287,7 @@ class ProjectBranchLogsQueryResponse implements \JsonSerializable
         return new self(
             logs: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, ProjectBranchLogRecord::class), SdkClient::arrayValue($data->logs))),
             isTruncated: SdkClient::boolValue($data->is_truncated),
-            nextCursor: (property_exists($data, "next_cursor") ? SdkClient::stringValue($data->next_cursor) : SdkNotGiven::Value),
+            nextCursor: (property_exists($data, "next_cursor") && $data->next_cursor !== null ? SdkClient::stringValue($data->next_cursor) : SdkNotGiven::Value),
         );
     }
 }

@@ -258,9 +258,9 @@ class NeonAuthIntegration implements \JsonSerializable
             createdAt: SdkClient::stringValue($data->created_at),
             ownedBy: SdkClient::hydrateStringEnumOrString($data->owned_by, NeonAuthProviderProjectOwnedBy::class),
             jwksUrl: SdkClient::stringValue($data->jwks_url),
-            transferStatus: (property_exists($data, "transfer_status") ? SdkClient::hydrateStringEnumOrString($data->transfer_status, NeonAuthProviderProjectTransferStatus::class) : SdkNotGiven::Value),
-            baseUrl: (property_exists($data, "base_url") ? SdkClient::stringValue($data->base_url) : SdkNotGiven::Value),
-            name: (property_exists($data, "name") ? SdkClient::stringValue($data->name) : SdkNotGiven::Value),
+            transferStatus: (property_exists($data, "transfer_status") && $data->transfer_status !== null ? SdkClient::hydrateStringEnumOrString($data->transfer_status, NeonAuthProviderProjectTransferStatus::class) : SdkNotGiven::Value),
+            baseUrl: (property_exists($data, "base_url") && $data->base_url !== null ? SdkClient::stringValue($data->base_url) : SdkNotGiven::Value),
+            name: (property_exists($data, "name") && $data->name !== null ? SdkClient::stringValue($data->name) : SdkNotGiven::Value),
         );
     }
 }
@@ -342,8 +342,8 @@ class NeonAuthOauthProvider implements \JsonSerializable
         return new self(
             id: SdkClient::hydrateStringEnumOrString($data->id, NeonAuthOauthProviderId::class),
             type: SdkClient::hydrateStringEnumOrString($data->type, NeonAuthOauthProviderType::class),
-            clientId: (property_exists($data, "client_id") ? SdkClient::stringValue($data->client_id) : SdkNotGiven::Value),
-            clientSecret: (property_exists($data, "client_secret") ? SdkClient::stringValue($data->client_secret) : SdkNotGiven::Value),
+            clientId: (property_exists($data, "client_id") && $data->client_id !== null ? SdkClient::stringValue($data->client_id) : SdkNotGiven::Value),
+            clientSecret: (property_exists($data, "client_secret") && $data->client_secret !== null ? SdkClient::stringValue($data->client_secret) : SdkNotGiven::Value),
         );
     }
 }

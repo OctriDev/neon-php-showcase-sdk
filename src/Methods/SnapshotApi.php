@@ -144,7 +144,7 @@ class UpdateSnapshotSnapshot implements \JsonSerializable
     public static function fromObject(object $data): self
     {
         return new self(
-            name: (property_exists($data, "name") ? SdkClient::stringValue($data->name) : SdkNotGiven::Value),
+            name: (property_exists($data, "name") && $data->name !== null ? SdkClient::stringValue($data->name) : SdkNotGiven::Value),
             expiresAt: (property_exists($data, "expires_at") ? ($data->expires_at === null ? null : SdkClient::stringValue($data->expires_at)) : SdkNotGiven::Value),
         );
     }
@@ -287,17 +287,17 @@ class SnapshotApi
      * @param string|SdkNotGiven $name_2
      * @param string|SdkNotGiven $targetBranchId
      * @param bool|SdkNotGiven $finalizeRestore
-     * @return BranchResponse
+     * @return RestoreSnapshotResponse
      */
-    public static function restoreSnapshot(ClientConfig $clientConfig, string $projectId, string $snapshotId, string|SdkNotGiven $name = SdkNotGiven::Value, string|SdkNotGiven $name_2 = SdkNotGiven::Value, string|SdkNotGiven $targetBranchId = SdkNotGiven::Value, bool|SdkNotGiven $finalizeRestore = SdkNotGiven::Value, ?RequestOptions $requestOptions = null): BranchResponse
+    public static function restoreSnapshot(ClientConfig $clientConfig, string $projectId, string $snapshotId, string|SdkNotGiven $name = SdkNotGiven::Value, string|SdkNotGiven $name_2 = SdkNotGiven::Value, string|SdkNotGiven $targetBranchId = SdkNotGiven::Value, bool|SdkNotGiven $finalizeRestore = SdkNotGiven::Value, ?RequestOptions $requestOptions = null): RestoreSnapshotResponse
     {
 
         Validation::validatePattern('project_id', $projectId, '^[a-z0-9-]{1,60}$');
 
         Validation::validatePattern('snapshot_id', $snapshotId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('POST', "/projects/" . SdkClient::encodePathSegment($projectId) . "/snapshots/" . SdkClient::encodePathSegment($snapshotId) . "/restore", $clientConfig, query: ['name' => new SdkQueryValue($name, "form", true)], body: ['name' => $name_2, 'target_branch_id' => $targetBranchId, 'finalize_restore' => $finalizeRestore], returnType: BranchResponse::class, decoder: 'json', operationId: 'restoreSnapshot', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
-        return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, BranchResponse::class));
+        $sdkResponse = SdkClient::request('POST', "/projects/" . SdkClient::encodePathSegment($projectId) . "/snapshots/" . SdkClient::encodePathSegment($snapshotId) . "/restore", $clientConfig, query: ['name' => new SdkQueryValue($name, "form", true)], body: ['name' => $name_2, 'target_branch_id' => $targetBranchId, 'finalize_restore' => $finalizeRestore], returnType: RestoreSnapshotResponse::class, decoder: 'json', operationId: 'restoreSnapshot', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, RestoreSnapshotResponse::class));
     }
 
 

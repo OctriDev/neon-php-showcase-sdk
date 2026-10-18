@@ -93,7 +93,7 @@ class PaginationResponse implements \JsonSerializable
     public static function fromObject(object $data): self
     {
         return new self(
-            pagination: (property_exists($data, "pagination") ? SdkClient::hydrateClass($data->pagination, Pagination::class) : SdkNotGiven::Value),
+            pagination: (property_exists($data, "pagination") && $data->pagination !== null ? SdkClient::hydrateClass($data->pagination, Pagination::class) : SdkNotGiven::Value),
         );
     }
 }

@@ -144,8 +144,8 @@ class NeonAuthOAuthClientCreated implements \JsonSerializable
             resources: array_values(array_map(static fn($item) => SdkClient::stringValue($item), SdkClient::arrayValue($data->resources))),
             skipConsent: SdkClient::boolValue($data->skip_consent),
             disabled: SdkClient::boolValue($data->disabled),
-            createdAt: (property_exists($data, "created_at") ? SdkClient::stringValue($data->created_at) : SdkNotGiven::Value),
-            clientSecret: (property_exists($data, "client_secret") ? SdkClient::stringValue($data->client_secret) : SdkNotGiven::Value),
+            createdAt: (property_exists($data, "created_at") && $data->created_at !== null ? SdkClient::stringValue($data->created_at) : SdkNotGiven::Value),
+            clientSecret: (property_exists($data, "client_secret") && $data->client_secret !== null ? SdkClient::stringValue($data->client_secret) : SdkNotGiven::Value),
         );
     }
 }
@@ -239,7 +239,7 @@ class NeonAuthOAuthClientCreateRequest implements \JsonSerializable
             redirectUris: array_values(array_map(static fn($item) => SdkClient::stringValue($item), SdkClient::arrayValue($data->redirect_uris))),
             type: SdkClient::hydrateStringEnumOrString($data->type, NeonAuthOAuthClientType::class),
             resources: array_values(array_map(static fn($item) => SdkClient::stringValue($item), SdkClient::arrayValue($data->resources))),
-            skipConsent: (property_exists($data, "skip_consent") ? SdkClient::boolValue($data->skip_consent) : SdkNotGiven::Value),
+            skipConsent: (property_exists($data, "skip_consent") && $data->skip_consent !== null ? SdkClient::boolValue($data->skip_consent) : SdkNotGiven::Value),
         );
     }
 }

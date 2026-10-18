@@ -7,6 +7,137 @@ declare(strict_types=1);
 
 namespace octridev_neon;
 
+/**
+ * Typed representation of the `OrgApiKeyRevokeResponse` API schema.
+ */
+class OrgApiKeyRevokeResponse implements \JsonSerializable
+{
+    /**
+     * The API key's unique numeric ID. Distinct from the API key token (`key`).
+     *
+     * @var int
+     */
+    public readonly int $id;
+    /**
+     * The user-specified API key name
+     *
+     * @var string
+     */
+    public readonly string $name;
+    /**
+     * A timestamp indicating when the API key was created
+     *
+     * @var string
+     */
+    public readonly string $createdAt;
+    /**
+     * ID of the user who created this API key
+     *
+     * @var string
+     */
+    public readonly string $createdBy;
+    /**
+     * A timestamp indicating when the API was last used
+     *
+     * @var string|null|SdkNotGiven
+     */
+    public readonly string|null|SdkNotGiven $lastUsedAt;
+    /**
+     * The IP address from which the API key was last used
+     *
+     * @var string
+     */
+    public readonly string $lastUsedFromAddr;
+    /**
+     * A `true` or `false` value indicating whether the API key is revoked
+     *
+     * @var bool
+     */
+    public readonly bool $revoked;
+    /**
+     * If set, the API key can access only this project
+     *
+     * @var string|SdkNotGiven
+     */
+    public readonly string|SdkNotGiven $projectId;
+
+    /**
+     * @param int $id
+     * @param string $name
+     * @param string $createdAt
+     * @param string $createdBy
+     * @param string $lastUsedFromAddr
+     * @param bool $revoked
+     * @param string|null|SdkNotGiven $lastUsedAt
+     * @param string|SdkNotGiven $projectId
+     */
+    public function __construct(
+        int $id,
+        string $name,
+        string $createdAt,
+        string $createdBy,
+        string $lastUsedFromAddr,
+        bool $revoked,
+        string|null|SdkNotGiven $lastUsedAt = SdkNotGiven::Value,
+        string|SdkNotGiven $projectId = SdkNotGiven::Value,
+    ) {
+        $this->id = $id;
+        $this->name = $name;
+        $this->createdAt = $createdAt;
+        $this->createdBy = $createdBy;
+        $this->lastUsedFromAddr = $lastUsedFromAddr;
+        $this->revoked = $revoked;
+        $this->lastUsedAt = $lastUsedAt;
+        $this->projectId = $projectId;
+    }
+
+    /** @return array<array-key, mixed> */
+    public function toArray(): array
+    {
+        $values = [
+            "id" => $this->id,
+            "name" => $this->name,
+            "created_at" => $this->createdAt,
+            "created_by" => $this->createdBy,
+            "last_used_from_addr" => $this->lastUsedFromAddr,
+            "revoked" => $this->revoked,
+        ];
+        if ($this->lastUsedAt !== SdkNotGiven::Value) {
+            $values["last_used_at"] = $this->lastUsedAt;
+        }
+        if ($this->projectId !== SdkNotGiven::Value) {
+            $values["project_id"] = $this->projectId;
+        }
+        return $values;
+    }
+
+    /** @return object */
+    public function jsonSerialize(): object
+    {
+        return (object) $this->toArray();
+    }
+
+    public static function fromObject(object $data): self
+    {
+        if (!property_exists($data, "id") || $data->id === null) { throw new SdkValidationError("id", 'required', "Required property 'id' is missing or null"); }
+        if (!property_exists($data, "name") || $data->name === null) { throw new SdkValidationError("name", 'required', "Required property 'name' is missing or null"); }
+        if (!property_exists($data, "created_at") || $data->created_at === null) { throw new SdkValidationError("created_at", 'required', "Required property 'created_at' is missing or null"); }
+        if (!property_exists($data, "created_by") || $data->created_by === null) { throw new SdkValidationError("created_by", 'required', "Required property 'created_by' is missing or null"); }
+        if (!property_exists($data, "last_used_from_addr") || $data->last_used_from_addr === null) { throw new SdkValidationError("last_used_from_addr", 'required', "Required property 'last_used_from_addr' is missing or null"); }
+        if (!property_exists($data, "revoked") || $data->revoked === null) { throw new SdkValidationError("revoked", 'required', "Required property 'revoked' is missing or null"); }
+        return new self(
+            id: SdkClient::intValue($data->id),
+            name: SdkClient::stringValue($data->name),
+            createdAt: SdkClient::stringValue($data->created_at),
+            createdBy: SdkClient::stringValue($data->created_by),
+            lastUsedFromAddr: SdkClient::stringValue($data->last_used_from_addr),
+            revoked: SdkClient::boolValue($data->revoked),
+            lastUsedAt: (property_exists($data, "last_used_at") ? ($data->last_used_at === null ? null : SdkClient::stringValue($data->last_used_at)) : SdkNotGiven::Value),
+            projectId: (property_exists($data, "project_id") && $data->project_id !== null ? SdkClient::stringValue($data->project_id) : SdkNotGiven::Value),
+        );
+    }
+}
+
 class OrgApiKeysListResponseItemVariant1 implements \JsonSerializable
 {
     /**
@@ -45,7 +176,7 @@ class OrgApiKeysListResponseItemVariant1 implements \JsonSerializable
     public static function fromObject(object $data): self
     {
         return new self(
-            projectId: (property_exists($data, "project_id") ? SdkClient::stringValue($data->project_id) : SdkNotGiven::Value),
+            projectId: (property_exists($data, "project_id") && $data->project_id !== null ? SdkClient::stringValue($data->project_id) : SdkNotGiven::Value),
         );
     }
 }
@@ -164,7 +295,7 @@ class OrgApiKeysListResponseItem implements \JsonSerializable
             createdBy: SdkClient::hydrateClass($data->created_by, ApiKeyCreatorData::class),
             lastUsedFromAddr: SdkClient::stringValue($data->last_used_from_addr),
             lastUsedAt: (property_exists($data, "last_used_at") ? ($data->last_used_at === null ? null : SdkClient::stringValue($data->last_used_at)) : SdkNotGiven::Value),
-            projectId: (property_exists($data, "project_id") ? SdkClient::stringValue($data->project_id) : SdkNotGiven::Value),
+            projectId: (property_exists($data, "project_id") && $data->project_id !== null ? SdkClient::stringValue($data->project_id) : SdkNotGiven::Value),
         );
     }
 }
@@ -210,144 +341,6 @@ class SpendingLimitResponse implements \JsonSerializable
         if (!property_exists($data, "spending_limit_cents")) { throw new SdkValidationError("spending_limit_cents", 'required', "Missing required property 'spending_limit_cents'"); }
         return new self(
             spendingLimitCents: ($data->spending_limit_cents === null ? null : SdkClient::intValue($data->spending_limit_cents)),
-        );
-    }
-}
-
-/**
- * Typed representation of the `SpendingLimitUpdateRequest` API schema.
- */
-class SpendingLimitUpdateRequest implements \JsonSerializable
-{
-    /**
-     * Monthly spending cap in cents. Must be positive. To remove a previously configured limit, send a DELETE request to the spending_limit endpoint — `0` and `null` are rejected here. The cap is alert-only: notifications fire at 80% and 100%, but computes are not suspended. Setting a cap below the period's already-accrued spend is permitted and will trigger the over-limit notification on the next worker run.
-     *
-     * @var int
-     */
-    public readonly int $spendingLimitCents;
-
-    /**
-     * @param int $spendingLimitCents
-     */
-    public function __construct(
-        int $spendingLimitCents,
-    ) {
-        $this->spendingLimitCents = $spendingLimitCents;
-    }
-
-    /** @return array<array-key, mixed> */
-    public function toArray(): array
-    {
-        $values = [
-            "spending_limit_cents" => $this->spendingLimitCents,
-        ];
-        return $values;
-    }
-
-    /** @return object */
-    public function jsonSerialize(): object
-    {
-        return (object) $this->toArray();
-    }
-
-    public static function fromObject(object $data): self
-    {
-        if (!property_exists($data, "spending_limit_cents") || $data->spending_limit_cents === null) { throw new SdkValidationError("spending_limit_cents", 'required', "Required property 'spending_limit_cents' is missing or null"); }
-        return new self(
-            spendingLimitCents: SdkClient::intValue($data->spending_limit_cents),
-        );
-    }
-}
-
-/**
- * Typed representation of the `VPCEndpointDetails` API schema.
- */
-class VPCEndpointDetails implements \JsonSerializable
-{
-    /**
-     * Cloud provider identifier for the VPC endpoint.
-     *
-     * @var string
-     */
-    public readonly string $vpcEndpointId;
-    /**
-     * A descriptive label for the VPC endpoint
-     *
-     * @var string
-     */
-    public readonly string $label;
-    /**
-     * The current state of the VPC endpoint. `new` means the endpoint has just been configured and is pending acceptance by Neon. `accepted` means the VPC connection has been accepted by Neon.
-     *
-     * @var string
-     */
-    public readonly string $state;
-    /**
-     * The number of projects that are restricted to use this VPC endpoint.
-     *
-     * @var int
-     */
-    public readonly int $numRestrictedProjects;
-    /**
-     * A list of example projects that are restricted to use this VPC endpoint. There are at most 3 projects in the list, even if more projects are restricted.
-     *
-     * @var list<string>
-     */
-    public readonly array $exampleRestrictedProjects;
-
-    /**
-     * @param string $vpcEndpointId
-     * @param string $label
-     * @param string $state
-     * @param int $numRestrictedProjects
-     * @param list<string> $exampleRestrictedProjects
-     */
-    public function __construct(
-        string $vpcEndpointId,
-        string $label,
-        string $state,
-        int $numRestrictedProjects,
-        array $exampleRestrictedProjects,
-    ) {
-        $this->vpcEndpointId = $vpcEndpointId;
-        $this->label = $label;
-        $this->state = $state;
-        $this->numRestrictedProjects = $numRestrictedProjects;
-        $this->exampleRestrictedProjects = $exampleRestrictedProjects;
-    }
-
-    /** @return array<array-key, mixed> */
-    public function toArray(): array
-    {
-        $values = [
-            "vpc_endpoint_id" => $this->vpcEndpointId,
-            "label" => $this->label,
-            "state" => $this->state,
-            "num_restricted_projects" => $this->numRestrictedProjects,
-            "example_restricted_projects" => $this->exampleRestrictedProjects,
-        ];
-        return $values;
-    }
-
-    /** @return object */
-    public function jsonSerialize(): object
-    {
-        return (object) $this->toArray();
-    }
-
-    public static function fromObject(object $data): self
-    {
-        if (!property_exists($data, "vpc_endpoint_id") || $data->vpc_endpoint_id === null) { throw new SdkValidationError("vpc_endpoint_id", 'required', "Required property 'vpc_endpoint_id' is missing or null"); }
-        if (!property_exists($data, "label") || $data->label === null) { throw new SdkValidationError("label", 'required', "Required property 'label' is missing or null"); }
-        if (!property_exists($data, "state") || $data->state === null) { throw new SdkValidationError("state", 'required', "Required property 'state' is missing or null"); }
-        if (!property_exists($data, "num_restricted_projects") || $data->num_restricted_projects === null) { throw new SdkValidationError("num_restricted_projects", 'required', "Required property 'num_restricted_projects' is missing or null"); }
-        if (!property_exists($data, "example_restricted_projects") || $data->example_restricted_projects === null) { throw new SdkValidationError("example_restricted_projects", 'required', "Required property 'example_restricted_projects' is missing or null"); }
-        return new self(
-            vpcEndpointId: SdkClient::stringValue($data->vpc_endpoint_id),
-            label: SdkClient::stringValue($data->label),
-            state: SdkClient::stringValue($data->state),
-            numRestrictedProjects: SdkClient::intValue($data->num_restricted_projects),
-            exampleRestrictedProjects: array_values(array_map(static fn($item) => SdkClient::stringValue($item), SdkClient::arrayValue($data->example_restricted_projects))),
         );
     }
 }

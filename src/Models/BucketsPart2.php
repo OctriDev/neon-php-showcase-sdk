@@ -96,7 +96,7 @@ class BucketObjectsListResponse implements \JsonSerializable
             objects: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, BucketObject::class), SdkClient::arrayValue($data->objects))),
             prefix: SdkClient::stringValue($data->prefix),
             isTruncated: SdkClient::boolValue($data->is_truncated),
-            nextCursor: (property_exists($data, "next_cursor") ? SdkClient::stringValue($data->next_cursor) : SdkNotGiven::Value),
+            nextCursor: (property_exists($data, "next_cursor") && $data->next_cursor !== null ? SdkClient::stringValue($data->next_cursor) : SdkNotGiven::Value),
         );
     }
 }
@@ -271,8 +271,8 @@ class PresignRequest implements \JsonSerializable
         if (!property_exists($data, "operation") || $data->operation === null) { throw new SdkValidationError("operation", 'required', "Required property 'operation' is missing or null"); }
         return new self(
             operation: SdkClient::hydrateStringEnumOrString($data->operation, PresignRequestOperationEnum::class),
-            contentType: (property_exists($data, "content_type") ? SdkClient::stringValue($data->content_type) : SdkNotGiven::Value),
-            expiresInSeconds: (property_exists($data, "expires_in_seconds") ? SdkClient::intValue($data->expires_in_seconds) : SdkNotGiven::Value),
+            contentType: (property_exists($data, "content_type") && $data->content_type !== null ? SdkClient::stringValue($data->content_type) : SdkNotGiven::Value),
+            expiresInSeconds: (property_exists($data, "expires_in_seconds") && $data->expires_in_seconds !== null ? SdkClient::intValue($data->expires_in_seconds) : SdkNotGiven::Value),
         );
     }
 }

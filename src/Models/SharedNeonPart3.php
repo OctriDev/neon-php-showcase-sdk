@@ -252,9 +252,9 @@ class NeonAuthUpdateOAuthProviderRequest implements \JsonSerializable
     public static function fromObject(object $data): self
     {
         return new self(
-            clientId: (property_exists($data, "client_id") ? SdkClient::stringValue($data->client_id) : SdkNotGiven::Value),
-            clientSecret: (property_exists($data, "client_secret") ? SdkClient::stringValue($data->client_secret) : SdkNotGiven::Value),
-            microsoftTenantId: (property_exists($data, "microsoft_tenant_id") ? SdkClient::stringValue($data->microsoft_tenant_id) : SdkNotGiven::Value),
+            clientId: (property_exists($data, "client_id") && $data->client_id !== null ? SdkClient::stringValue($data->client_id) : SdkNotGiven::Value),
+            clientSecret: (property_exists($data, "client_secret") && $data->client_secret !== null ? SdkClient::stringValue($data->client_secret) : SdkNotGiven::Value),
+            microsoftTenantId: (property_exists($data, "microsoft_tenant_id") && $data->microsoft_tenant_id !== null ? SdkClient::stringValue($data->microsoft_tenant_id) : SdkNotGiven::Value),
         );
     }
 }

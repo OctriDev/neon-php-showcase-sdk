@@ -168,12 +168,12 @@ class CredentialMeta implements \JsonSerializable
             scopes: array_values(array_map(static fn($item) => SdkClient::hydrateStringEnumOrString($item, GrantedCredentialScope::class), SdkClient::arrayValue($data->scopes))),
             principalType: SdkClient::stringValue($data->principal_type),
             createdAt: SdkClient::stringValue($data->created_at),
-            name: (property_exists($data, "name") ? SdkClient::stringValue($data->name) : SdkNotGiven::Value),
-            branchId: (property_exists($data, "branch_id") ? SdkClient::stringValue($data->branch_id) : SdkNotGiven::Value),
-            functionId: (property_exists($data, "function_id") ? SdkClient::stringValue($data->function_id) : SdkNotGiven::Value),
-            lastUsedAt: (property_exists($data, "last_used_at") ? SdkClient::stringValue($data->last_used_at) : SdkNotGiven::Value),
-            revokedAt: (property_exists($data, "revoked_at") ? SdkClient::stringValue($data->revoked_at) : SdkNotGiven::Value),
-            expiresAt: (property_exists($data, "expires_at") ? SdkClient::stringValue($data->expires_at) : SdkNotGiven::Value),
+            name: (property_exists($data, "name") && $data->name !== null ? SdkClient::stringValue($data->name) : SdkNotGiven::Value),
+            branchId: (property_exists($data, "branch_id") && $data->branch_id !== null ? SdkClient::stringValue($data->branch_id) : SdkNotGiven::Value),
+            functionId: (property_exists($data, "function_id") && $data->function_id !== null ? SdkClient::stringValue($data->function_id) : SdkNotGiven::Value),
+            lastUsedAt: (property_exists($data, "last_used_at") && $data->last_used_at !== null ? SdkClient::stringValue($data->last_used_at) : SdkNotGiven::Value),
+            revokedAt: (property_exists($data, "revoked_at") && $data->revoked_at !== null ? SdkClient::stringValue($data->revoked_at) : SdkNotGiven::Value),
+            expiresAt: (property_exists($data, "expires_at") && $data->expires_at !== null ? SdkClient::stringValue($data->expires_at) : SdkNotGiven::Value),
         );
     }
 }

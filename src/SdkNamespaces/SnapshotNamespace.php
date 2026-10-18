@@ -81,9 +81,9 @@ class SnapshotNamespace
      * @param string|SdkNotGiven $name_2
      * @param string|SdkNotGiven $targetBranchId
      * @param bool|SdkNotGiven $finalizeRestore
-     * @return BranchResponse
+     * @return RestoreSnapshotResponse
      */
-    public function restore(string $projectId, string $snapshotId, string|SdkNotGiven $name = SdkNotGiven::Value, string|SdkNotGiven $name_2 = SdkNotGiven::Value, string|SdkNotGiven $targetBranchId = SdkNotGiven::Value, bool|SdkNotGiven $finalizeRestore = SdkNotGiven::Value, ?RequestOptions $requestOptions = null): BranchResponse
+    public function restore(string $projectId, string $snapshotId, string|SdkNotGiven $name = SdkNotGiven::Value, string|SdkNotGiven $name_2 = SdkNotGiven::Value, string|SdkNotGiven $targetBranchId = SdkNotGiven::Value, bool|SdkNotGiven $finalizeRestore = SdkNotGiven::Value, ?RequestOptions $requestOptions = null): RestoreSnapshotResponse
     {
         return SnapshotApi::restoreSnapshot($this->clientConfig, $projectId, $snapshotId, $name, $name_2, $targetBranchId, $finalizeRestore, $requestOptions);
     }

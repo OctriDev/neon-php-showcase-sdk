@@ -237,13 +237,13 @@ class NeonAuthEmailAndPasswordConfigUpdate implements \JsonSerializable
     public static function fromObject(object $data): self
     {
         return new self(
-            enabled: (property_exists($data, "enabled") ? SdkClient::boolValue($data->enabled) : SdkNotGiven::Value),
-            emailVerificationMethod: (property_exists($data, "email_verification_method") ? SdkClient::hydrateStringEnumOrString($data->email_verification_method, NeonAuthEmailVerificationMethod::class) : SdkNotGiven::Value),
-            requireEmailVerification: (property_exists($data, "require_email_verification") ? SdkClient::boolValue($data->require_email_verification) : SdkNotGiven::Value),
-            autoSignInAfterVerification: (property_exists($data, "auto_sign_in_after_verification") ? SdkClient::boolValue($data->auto_sign_in_after_verification) : SdkNotGiven::Value),
-            sendVerificationEmailOnSignUp: (property_exists($data, "send_verification_email_on_sign_up") ? SdkClient::boolValue($data->send_verification_email_on_sign_up) : SdkNotGiven::Value),
-            sendVerificationEmailOnSignIn: (property_exists($data, "send_verification_email_on_sign_in") ? SdkClient::boolValue($data->send_verification_email_on_sign_in) : SdkNotGiven::Value),
-            disableSignUp: (property_exists($data, "disable_sign_up") ? SdkClient::boolValue($data->disable_sign_up) : SdkNotGiven::Value),
+            enabled: (property_exists($data, "enabled") && $data->enabled !== null ? SdkClient::boolValue($data->enabled) : SdkNotGiven::Value),
+            emailVerificationMethod: (property_exists($data, "email_verification_method") && $data->email_verification_method !== null ? SdkClient::hydrateStringEnumOrString($data->email_verification_method, NeonAuthEmailVerificationMethod::class) : SdkNotGiven::Value),
+            requireEmailVerification: (property_exists($data, "require_email_verification") && $data->require_email_verification !== null ? SdkClient::boolValue($data->require_email_verification) : SdkNotGiven::Value),
+            autoSignInAfterVerification: (property_exists($data, "auto_sign_in_after_verification") && $data->auto_sign_in_after_verification !== null ? SdkClient::boolValue($data->auto_sign_in_after_verification) : SdkNotGiven::Value),
+            sendVerificationEmailOnSignUp: (property_exists($data, "send_verification_email_on_sign_up") && $data->send_verification_email_on_sign_up !== null ? SdkClient::boolValue($data->send_verification_email_on_sign_up) : SdkNotGiven::Value),
+            sendVerificationEmailOnSignIn: (property_exists($data, "send_verification_email_on_sign_in") && $data->send_verification_email_on_sign_in !== null ? SdkClient::boolValue($data->send_verification_email_on_sign_in) : SdkNotGiven::Value),
+            disableSignUp: (property_exists($data, "disable_sign_up") && $data->disable_sign_up !== null ? SdkClient::boolValue($data->disable_sign_up) : SdkNotGiven::Value),
         );
     }
 }

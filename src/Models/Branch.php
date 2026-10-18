@@ -96,11 +96,11 @@ class AnonymizationRunMetadata implements \JsonSerializable
     public static function fromObject(object $data): self
     {
         return new self(
-            startedAt: (property_exists($data, "started_at") ? SdkClient::stringValue($data->started_at) : SdkNotGiven::Value),
-            completedAt: (property_exists($data, "completed_at") ? SdkClient::stringValue($data->completed_at) : SdkNotGiven::Value),
-            triggeredBy: (property_exists($data, "triggered_by") ? SdkClient::stringValue($data->triggered_by) : SdkNotGiven::Value),
-            triggeredByUsername: (property_exists($data, "triggered_by_username") ? SdkClient::stringValue($data->triggered_by_username) : SdkNotGiven::Value),
-            maskedColumns: (property_exists($data, "masked_columns") ? SdkClient::intValue($data->masked_columns) : SdkNotGiven::Value),
+            startedAt: (property_exists($data, "started_at") && $data->started_at !== null ? SdkClient::stringValue($data->started_at) : SdkNotGiven::Value),
+            completedAt: (property_exists($data, "completed_at") && $data->completed_at !== null ? SdkClient::stringValue($data->completed_at) : SdkNotGiven::Value),
+            triggeredBy: (property_exists($data, "triggered_by") && $data->triggered_by !== null ? SdkClient::stringValue($data->triggered_by) : SdkNotGiven::Value),
+            triggeredByUsername: (property_exists($data, "triggered_by_username") && $data->triggered_by_username !== null ? SdkClient::stringValue($data->triggered_by_username) : SdkNotGiven::Value),
+            maskedColumns: (property_exists($data, "masked_columns") && $data->masked_columns !== null ? SdkClient::intValue($data->masked_columns) : SdkNotGiven::Value),
         );
     }
 }
@@ -230,9 +230,9 @@ class AnonymizedBranchStatusResponse implements \JsonSerializable
             state: SdkClient::stringValue($data->state),
             createdAt: SdkClient::stringValue($data->created_at),
             updatedAt: SdkClient::stringValue($data->updated_at),
-            statusMessage: (property_exists($data, "status_message") ? SdkClient::stringValue($data->status_message) : SdkNotGiven::Value),
-            failedAt: (property_exists($data, "failed_at") ? SdkClient::stringValue($data->failed_at) : SdkNotGiven::Value),
-            lastRun: (property_exists($data, "last_run") ? SdkClient::hydrateClass($data->last_run, AnonymizationRunMetadata::class) : SdkNotGiven::Value),
+            statusMessage: (property_exists($data, "status_message") && $data->status_message !== null ? SdkClient::stringValue($data->status_message) : SdkNotGiven::Value),
+            failedAt: (property_exists($data, "failed_at") && $data->failed_at !== null ? SdkClient::stringValue($data->failed_at) : SdkNotGiven::Value),
+            lastRun: (property_exists($data, "last_run") && $data->last_run !== null ? SdkClient::hydrateClass($data->last_run, AnonymizationRunMetadata::class) : SdkNotGiven::Value),
         );
     }
 }
@@ -295,9 +295,9 @@ class BranchAnonymizedCreateRequestVariant1 implements \JsonSerializable
     public static function fromObject(object $data): self
     {
         return new self(
-            branchCreate: (property_exists($data, "branch_create") ? SdkClient::hydrateClass($data->branch_create, BranchCreateRequest::class) : SdkNotGiven::Value),
-            maskingRules: (property_exists($data, "masking_rules") ? array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, MaskingRule::class), SdkClient::arrayValue($data->masking_rules))) : SdkNotGiven::Value),
-            startAnonymization: (property_exists($data, "start_anonymization") ? SdkClient::boolValue($data->start_anonymization) : SdkNotGiven::Value),
+            branchCreate: (property_exists($data, "branch_create") && $data->branch_create !== null ? SdkClient::hydrateClass($data->branch_create, BranchCreateRequest::class) : SdkNotGiven::Value),
+            maskingRules: (property_exists($data, "masking_rules") && $data->masking_rules !== null ? array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, MaskingRule::class), SdkClient::arrayValue($data->masking_rules))) : SdkNotGiven::Value),
+            startAnonymization: (property_exists($data, "start_anonymization") && $data->start_anonymization !== null ? SdkClient::boolValue($data->start_anonymization) : SdkNotGiven::Value),
         );
     }
 }

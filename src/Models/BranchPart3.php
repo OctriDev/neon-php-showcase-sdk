@@ -108,11 +108,11 @@ class BranchCreateRequestEndpointOptions implements \JsonSerializable
         if (!property_exists($data, "type") || $data->type === null) { throw new SdkValidationError("type", 'required', "Required property 'type' is missing or null"); }
         return new self(
             type: SdkClient::hydrateStringEnumOrString($data->type, EndpointType::class),
-            settings: (property_exists($data, "settings") ? SdkClient::hydrateClass($data->settings, EndpointSettingsData::class) : SdkNotGiven::Value),
-            autoscalingLimitMinCu: (property_exists($data, "autoscaling_limit_min_cu") ? SdkClient::floatValue($data->autoscaling_limit_min_cu) : SdkNotGiven::Value),
-            autoscalingLimitMaxCu: (property_exists($data, "autoscaling_limit_max_cu") ? SdkClient::floatValue($data->autoscaling_limit_max_cu) : SdkNotGiven::Value),
-            provisioner: (property_exists($data, "provisioner") ? SdkClient::stringValue($data->provisioner) : SdkNotGiven::Value),
-            suspendTimeoutSeconds: (property_exists($data, "suspend_timeout_seconds") ? SdkClient::intValue($data->suspend_timeout_seconds) : SdkNotGiven::Value),
+            settings: (property_exists($data, "settings") && $data->settings !== null ? SdkClient::hydrateClass($data->settings, EndpointSettingsData::class) : SdkNotGiven::Value),
+            autoscalingLimitMinCu: (property_exists($data, "autoscaling_limit_min_cu") && $data->autoscaling_limit_min_cu !== null ? SdkClient::floatValue($data->autoscaling_limit_min_cu) : SdkNotGiven::Value),
+            autoscalingLimitMaxCu: (property_exists($data, "autoscaling_limit_max_cu") && $data->autoscaling_limit_max_cu !== null ? SdkClient::floatValue($data->autoscaling_limit_max_cu) : SdkNotGiven::Value),
+            provisioner: (property_exists($data, "provisioner") && $data->provisioner !== null ? SdkClient::stringValue($data->provisioner) : SdkNotGiven::Value),
+            suspendTimeoutSeconds: (property_exists($data, "suspend_timeout_seconds") && $data->suspend_timeout_seconds !== null ? SdkClient::intValue($data->suspend_timeout_seconds) : SdkNotGiven::Value),
         );
     }
 }
@@ -272,7 +272,7 @@ class BranchRecoverResponse implements \JsonSerializable
         if (!property_exists($data, "branch") || $data->branch === null) { throw new SdkValidationError("branch", 'required', "Required property 'branch' is missing or null"); }
         return new self(
             branch: SdkClient::hydrateClass($data->branch, Branch::class),
-            endpoints: (property_exists($data, "endpoints") ? array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, Endpoint::class), SdkClient::arrayValue($data->endpoints))) : SdkNotGiven::Value),
+            endpoints: (property_exists($data, "endpoints") && $data->endpoints !== null ? array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, Endpoint::class), SdkClient::arrayValue($data->endpoints))) : SdkNotGiven::Value),
         );
     }
 }

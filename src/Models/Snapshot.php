@@ -141,10 +141,10 @@ class BackupScheduleItem implements \JsonSerializable
         if (!property_exists($data, "frequency") || $data->frequency === null) { throw new SdkValidationError("frequency", 'required', "Required property 'frequency' is missing or null"); }
         return new self(
             frequency: SdkClient::stringValue($data->frequency),
-            hour: (property_exists($data, "hour") ? SdkClient::intValue($data->hour) : SdkNotGiven::Value),
-            day: (property_exists($data, "day") ? SdkClient::intValue($data->day) : SdkNotGiven::Value),
-            month: (property_exists($data, "month") ? SdkClient::intValue($data->month) : SdkNotGiven::Value),
-            retentionSeconds: (property_exists($data, "retention_seconds") ? SdkClient::intValue($data->retention_seconds) : SdkNotGiven::Value),
+            hour: (property_exists($data, "hour") && $data->hour !== null ? SdkClient::intValue($data->hour) : SdkNotGiven::Value),
+            day: (property_exists($data, "day") && $data->day !== null ? SdkClient::intValue($data->day) : SdkNotGiven::Value),
+            month: (property_exists($data, "month") && $data->month !== null ? SdkClient::intValue($data->month) : SdkNotGiven::Value),
+            retentionSeconds: (property_exists($data, "retention_seconds") && $data->retention_seconds !== null ? SdkClient::intValue($data->retention_seconds) : SdkNotGiven::Value),
         );
     }
 }
@@ -190,141 +190,59 @@ class EndpointsOptionalResponse implements \JsonSerializable
     public static function fromObject(object $data): self
     {
         return new self(
-            endpoints: (property_exists($data, "endpoints") ? array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, Endpoint::class), SdkClient::arrayValue($data->endpoints))) : SdkNotGiven::Value),
+            endpoints: (property_exists($data, "endpoints") && $data->endpoints !== null ? array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, Endpoint::class), SdkClient::arrayValue($data->endpoints))) : SdkNotGiven::Value),
         );
     }
 }
 
 /**
- * Typed representation of the `Snapshot` API schema.
+ * Typed representation of the `RestoreSnapshotResponse` API schema.
  */
-class Snapshot implements \JsonSerializable
+class RestoreSnapshotResponse implements \JsonSerializable
 {
     /**
-     * The snapshot ID.
+     * Branch returned by the request.
      *
-     * @var string
+     * @var Branch
      */
-    public readonly string $id;
+    public readonly Branch $branch;
     /**
-     * Human-readable label for the snapshot.
+     * Compute endpoints associated with the project.
      *
-     * @var string
+     * @var list<Endpoint>|SdkNotGiven
      */
-    public readonly string $name;
+    public readonly array|SdkNotGiven $endpoints;
     /**
-     * WAL position (Log Sequence Number) at which the snapshot was captured, in Postgres LSN format (for example, `0/3000000`).
+     * Required array value serialized in the `operations` wire field.
      *
-     * @var string|SdkNotGiven
+     * @var list<Operation>
      */
-    public readonly string|SdkNotGiven $lsn;
-    /**
-     * Point in time captured by the snapshot, in RFC 3339 format (UTC).
-     *
-     * @var string|SdkNotGiven
-     */
-    public readonly string|SdkNotGiven $timestamp;
-    /**
-     * Branch from which this snapshot was created.
-     *
-     * @var string|SdkNotGiven
-     */
-    public readonly string|SdkNotGiven $sourceBranchId;
-    /**
-     * Timestamp when the snapshot was created, in RFC 3339 format (UTC).
-     *
-     * @var string
-     */
-    public readonly string $createdAt;
-    /**
-     * RFC 3339 timestamp when the snapshot expires and is eligible for deletion. Null if the snapshot does not have an expiry.
-     *
-     * @var string|SdkNotGiven
-     */
-    public readonly string|SdkNotGiven $expiresAt;
-    /**
-     * True if the snapshot was created manually rather than by a schedule.
-     *
-     * @var bool|SdkNotGiven
-     */
-    public readonly bool|SdkNotGiven $manual;
-    /**
-     * Full logical size of the snapshot in bytes at the time it was taken. When absent, the logical size has not been calculated yet and the snapshot is not being charged. When present, a value of 0 means the snapshot is not being charged.
-     *
-     * @var int|SdkNotGiven
-     */
-    public readonly int|SdkNotGiven $fullSize;
-    /**
-     * Incremental Postgres storage size in bytes since the previous scheduled snapshot, when the snapshot is billed on incremental (diff) usage. When absent, either the incremental size has not been calculated yet and the snapshot is not being charged, or the snapshot is charged at full logical size (in that case `full_size` is set).
-     *
-     * @var int|SdkNotGiven
-     */
-    public readonly int|SdkNotGiven $diffSize;
+    public readonly array $operations;
 
     /**
-     * @param string $id
-     * @param string $name
-     * @param string $createdAt
-     * @param string|SdkNotGiven $lsn
-     * @param string|SdkNotGiven $timestamp
-     * @param string|SdkNotGiven $sourceBranchId
-     * @param string|SdkNotGiven $expiresAt
-     * @param bool|SdkNotGiven $manual
-     * @param int|SdkNotGiven $fullSize
-     * @param int|SdkNotGiven $diffSize
+     * @param Branch $branch
+     * @param list<Operation> $operations
+     * @param list<Endpoint>|SdkNotGiven $endpoints
      */
     public function __construct(
-        string $id,
-        string $name,
-        string $createdAt,
-        string|SdkNotGiven $lsn = SdkNotGiven::Value,
-        string|SdkNotGiven $timestamp = SdkNotGiven::Value,
-        string|SdkNotGiven $sourceBranchId = SdkNotGiven::Value,
-        string|SdkNotGiven $expiresAt = SdkNotGiven::Value,
-        bool|SdkNotGiven $manual = SdkNotGiven::Value,
-        int|SdkNotGiven $fullSize = SdkNotGiven::Value,
-        int|SdkNotGiven $diffSize = SdkNotGiven::Value,
+        Branch $branch,
+        array $operations,
+        array|SdkNotGiven $endpoints = SdkNotGiven::Value,
     ) {
-        $this->id = $id;
-        $this->name = $name;
-        $this->createdAt = $createdAt;
-        $this->lsn = $lsn;
-        $this->timestamp = $timestamp;
-        $this->sourceBranchId = $sourceBranchId;
-        $this->expiresAt = $expiresAt;
-        $this->manual = $manual;
-        $this->fullSize = $fullSize;
-        $this->diffSize = $diffSize;
+        $this->branch = $branch;
+        $this->operations = $operations;
+        $this->endpoints = $endpoints;
     }
 
     /** @return array<array-key, mixed> */
     public function toArray(): array
     {
         $values = [
-            "id" => $this->id,
-            "name" => $this->name,
-            "created_at" => $this->createdAt,
+            "branch" => $this->branch,
+            "operations" => $this->operations,
         ];
-        if ($this->lsn !== SdkNotGiven::Value) {
-            $values["lsn"] = $this->lsn;
-        }
-        if ($this->timestamp !== SdkNotGiven::Value) {
-            $values["timestamp"] = $this->timestamp;
-        }
-        if ($this->sourceBranchId !== SdkNotGiven::Value) {
-            $values["source_branch_id"] = $this->sourceBranchId;
-        }
-        if ($this->expiresAt !== SdkNotGiven::Value) {
-            $values["expires_at"] = $this->expiresAt;
-        }
-        if ($this->manual !== SdkNotGiven::Value) {
-            $values["manual"] = $this->manual;
-        }
-        if ($this->fullSize !== SdkNotGiven::Value) {
-            $values["full_size"] = $this->fullSize;
-        }
-        if ($this->diffSize !== SdkNotGiven::Value) {
-            $values["diff_size"] = $this->diffSize;
+        if ($this->endpoints !== SdkNotGiven::Value) {
+            $values["endpoints"] = $this->endpoints;
         }
         return $values;
     }
@@ -337,20 +255,12 @@ class Snapshot implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "id") || $data->id === null) { throw new SdkValidationError("id", 'required', "Required property 'id' is missing or null"); }
-        if (!property_exists($data, "name") || $data->name === null) { throw new SdkValidationError("name", 'required', "Required property 'name' is missing or null"); }
-        if (!property_exists($data, "created_at") || $data->created_at === null) { throw new SdkValidationError("created_at", 'required', "Required property 'created_at' is missing or null"); }
+        if (!property_exists($data, "branch") || $data->branch === null) { throw new SdkValidationError("branch", 'required', "Required property 'branch' is missing or null"); }
+        if (!property_exists($data, "operations") || $data->operations === null) { throw new SdkValidationError("operations", 'required', "Required property 'operations' is missing or null"); }
         return new self(
-            id: SdkClient::stringValue($data->id),
-            name: SdkClient::stringValue($data->name),
-            createdAt: SdkClient::stringValue($data->created_at),
-            lsn: (property_exists($data, "lsn") ? SdkClient::stringValue($data->lsn) : SdkNotGiven::Value),
-            timestamp: (property_exists($data, "timestamp") ? SdkClient::stringValue($data->timestamp) : SdkNotGiven::Value),
-            sourceBranchId: (property_exists($data, "source_branch_id") ? SdkClient::stringValue($data->source_branch_id) : SdkNotGiven::Value),
-            expiresAt: (property_exists($data, "expires_at") ? SdkClient::stringValue($data->expires_at) : SdkNotGiven::Value),
-            manual: (property_exists($data, "manual") ? SdkClient::boolValue($data->manual) : SdkNotGiven::Value),
-            fullSize: (property_exists($data, "full_size") ? SdkClient::intValue($data->full_size) : SdkNotGiven::Value),
-            diffSize: (property_exists($data, "diff_size") ? SdkClient::intValue($data->diff_size) : SdkNotGiven::Value),
+            branch: SdkClient::hydrateClass($data->branch, Branch::class),
+            operations: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, Operation::class), SdkClient::arrayValue($data->operations))),
+            endpoints: (property_exists($data, "endpoints") && $data->endpoints !== null ? array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, Endpoint::class), SdkClient::arrayValue($data->endpoints))) : SdkNotGiven::Value),
         );
     }
 }

@@ -38,9 +38,9 @@ class OperationApi
      * @param string $projectId
      * @param string|SdkNotGiven $cursor
      * @param int|SdkNotGiven $limit
-     * @return OperationsResponse
+     * @return ListOperationResponse
      */
-    public static function listOperation(ClientConfig $clientConfig, string $projectId, string|SdkNotGiven $cursor = SdkNotGiven::Value, int|SdkNotGiven $limit = SdkNotGiven::Value, ?RequestOptions $requestOptions = null): OperationsResponse
+    public static function listOperation(ClientConfig $clientConfig, string $projectId, string|SdkNotGiven $cursor = SdkNotGiven::Value, int|SdkNotGiven $limit = SdkNotGiven::Value, ?RequestOptions $requestOptions = null): ListOperationResponse
     {
 
         Validation::validatePattern('project_id', $projectId, '^[a-z0-9-]{1,60}$');
@@ -49,7 +49,7 @@ class OperationApi
             Validation::validateRange('limit', $limit, min: 1, max: 1000);
         }
 
-        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/operations", $clientConfig, query: ['cursor' => new SdkQueryValue($cursor, "form", true), 'limit' => new SdkQueryValue($limit, "form", true)], returnType: OperationsResponse::class, decoder: 'json', operationId: 'listOperation', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
-        return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, OperationsResponse::class));
+        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/operations", $clientConfig, query: ['cursor' => new SdkQueryValue($cursor, "form", true), 'limit' => new SdkQueryValue($limit, "form", true)], returnType: ListOperationResponse::class, decoder: 'json', operationId: 'listOperation', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, ListOperationResponse::class));
     }
 }

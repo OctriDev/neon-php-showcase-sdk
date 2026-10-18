@@ -8,6 +8,14 @@ declare(strict_types=1);
 namespace octridev_neon;
 
 /**
+ * Optional enumerated value serialized in the `type` wire field.
+ */
+enum StandardEmailServerTypeEnum: string implements SdkWireEnum
+{
+    case STANDARD = "standard";
+}
+
+/**
  * Typed representation of the `StandardEmailServer` API schema.
  */
 class StandardEmailServer implements NeonAuthEmailServerConfig, \JsonSerializable
@@ -48,6 +56,12 @@ class StandardEmailServer implements NeonAuthEmailServerConfig, \JsonSerializabl
      * @var string|SdkNotGiven
      */
     public readonly string|SdkNotGiven $senderName;
+    /**
+     * Optional enumerated value serialized in the `type` wire field.
+     *
+     * @var StandardEmailServerTypeEnum|SdkNotGiven
+     */
+    public readonly StandardEmailServerTypeEnum|SdkNotGiven $type;
 
     /**
      * @param string|SdkNotGiven $host
@@ -56,6 +70,7 @@ class StandardEmailServer implements NeonAuthEmailServerConfig, \JsonSerializabl
      * @param string|SdkNotGiven $password
      * @param string|SdkNotGiven $senderEmail
      * @param string|SdkNotGiven $senderName
+     * @param StandardEmailServerTypeEnum|SdkNotGiven $type
      */
     public function __construct(
         string|SdkNotGiven $host = SdkNotGiven::Value,
@@ -64,6 +79,7 @@ class StandardEmailServer implements NeonAuthEmailServerConfig, \JsonSerializabl
         string|SdkNotGiven $password = SdkNotGiven::Value,
         string|SdkNotGiven $senderEmail = SdkNotGiven::Value,
         string|SdkNotGiven $senderName = SdkNotGiven::Value,
+        StandardEmailServerTypeEnum|SdkNotGiven $type = SdkNotGiven::Value,
     ) {
         $this->host = $host;
         $this->port = $port;
@@ -71,6 +87,7 @@ class StandardEmailServer implements NeonAuthEmailServerConfig, \JsonSerializabl
         $this->password = $password;
         $this->senderEmail = $senderEmail;
         $this->senderName = $senderName;
+        $this->type = $type;
     }
 
     /** @return array<array-key, mixed> */
@@ -96,6 +113,9 @@ class StandardEmailServer implements NeonAuthEmailServerConfig, \JsonSerializabl
         if ($this->senderName !== SdkNotGiven::Value) {
             $values["sender_name"] = $this->senderName;
         }
+        if ($this->type !== SdkNotGiven::Value) {
+            $values["type"] = $this->type;
+        }
         return $values;
     }
 
@@ -108,14 +128,23 @@ class StandardEmailServer implements NeonAuthEmailServerConfig, \JsonSerializabl
     public static function fromObject(object $data): self
     {
         return new self(
-            host: (property_exists($data, "host") ? SdkClient::stringValue($data->host) : SdkNotGiven::Value),
-            port: (property_exists($data, "port") ? SdkClient::intValue($data->port) : SdkNotGiven::Value),
-            username: (property_exists($data, "username") ? SdkClient::stringValue($data->username) : SdkNotGiven::Value),
-            password: (property_exists($data, "password") ? SdkClient::stringValue($data->password) : SdkNotGiven::Value),
-            senderEmail: (property_exists($data, "sender_email") ? SdkClient::stringValue($data->sender_email) : SdkNotGiven::Value),
-            senderName: (property_exists($data, "sender_name") ? SdkClient::stringValue($data->sender_name) : SdkNotGiven::Value),
+            host: (property_exists($data, "host") && $data->host !== null ? SdkClient::stringValue($data->host) : SdkNotGiven::Value),
+            port: (property_exists($data, "port") && $data->port !== null ? SdkClient::intValue($data->port) : SdkNotGiven::Value),
+            username: (property_exists($data, "username") && $data->username !== null ? SdkClient::stringValue($data->username) : SdkNotGiven::Value),
+            password: (property_exists($data, "password") && $data->password !== null ? SdkClient::stringValue($data->password) : SdkNotGiven::Value),
+            senderEmail: (property_exists($data, "sender_email") && $data->sender_email !== null ? SdkClient::stringValue($data->sender_email) : SdkNotGiven::Value),
+            senderName: (property_exists($data, "sender_name") && $data->sender_name !== null ? SdkClient::stringValue($data->sender_name) : SdkNotGiven::Value),
+            type: (property_exists($data, "type") && $data->type !== null ? SdkClient::hydrateEnum($data->type, StandardEmailServerTypeEnum::class) : SdkNotGiven::Value),
         );
     }
+}
+
+/**
+ * Optional enumerated value serialized in the `type` wire field.
+ */
+enum StandardEmailServerResponseTypeEnum: string implements SdkWireEnum
+{
+    case STANDARD = "standard";
 }
 
 /**
@@ -159,6 +188,12 @@ class StandardEmailServerResponse implements NeonAuthEmailServerConfigResponse, 
      * @var string
      */
     public readonly string $senderName;
+    /**
+     * Optional enumerated value serialized in the `type` wire field.
+     *
+     * @var StandardEmailServerResponseTypeEnum|SdkNotGiven
+     */
+    public readonly StandardEmailServerResponseTypeEnum|SdkNotGiven $type;
 
     /**
      * @param string $host
@@ -167,6 +202,7 @@ class StandardEmailServerResponse implements NeonAuthEmailServerConfigResponse, 
      * @param string $password
      * @param string $senderEmail
      * @param string $senderName
+     * @param StandardEmailServerResponseTypeEnum|SdkNotGiven $type
      */
     public function __construct(
         string $host,
@@ -175,6 +211,7 @@ class StandardEmailServerResponse implements NeonAuthEmailServerConfigResponse, 
         string $password,
         string $senderEmail,
         string $senderName,
+        StandardEmailServerResponseTypeEnum|SdkNotGiven $type = SdkNotGiven::Value,
     ) {
         $this->host = $host;
         $this->port = $port;
@@ -182,6 +219,7 @@ class StandardEmailServerResponse implements NeonAuthEmailServerConfigResponse, 
         $this->password = $password;
         $this->senderEmail = $senderEmail;
         $this->senderName = $senderName;
+        $this->type = $type;
     }
 
     /** @return array<array-key, mixed> */
@@ -195,6 +233,9 @@ class StandardEmailServerResponse implements NeonAuthEmailServerConfigResponse, 
             "sender_email" => $this->senderEmail,
             "sender_name" => $this->senderName,
         ];
+        if ($this->type !== SdkNotGiven::Value) {
+            $values["type"] = $this->type;
+        }
         return $values;
     }
 
@@ -219,6 +260,7 @@ class StandardEmailServerResponse implements NeonAuthEmailServerConfigResponse, 
             password: SdkClient::stringValue($data->password),
             senderEmail: SdkClient::stringValue($data->sender_email),
             senderName: SdkClient::stringValue($data->sender_name),
+            type: (property_exists($data, "type") && $data->type !== null ? SdkClient::hydrateEnum($data->type, StandardEmailServerResponseTypeEnum::class) : SdkNotGiven::Value),
         );
     }
 }

@@ -80,10 +80,10 @@ class BranchAnonymizedCreateRequest implements \JsonSerializable
     public static function fromObject(object $data): self
     {
         return new self(
-            annotationValue: (property_exists($data, "annotation_value") ? SdkClient::mapValues(SdkClient::stringMapValue($data->annotation_value), static fn($item) => SdkClient::stringValue($item)) : SdkNotGiven::Value),
-            branchCreate: (property_exists($data, "branch_create") ? SdkClient::hydrateClass($data->branch_create, BranchCreateRequest::class) : SdkNotGiven::Value),
-            maskingRules: (property_exists($data, "masking_rules") ? array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, MaskingRule::class), SdkClient::arrayValue($data->masking_rules))) : SdkNotGiven::Value),
-            startAnonymization: (property_exists($data, "start_anonymization") ? SdkClient::boolValue($data->start_anonymization) : SdkNotGiven::Value),
+            annotationValue: (property_exists($data, "annotation_value") && $data->annotation_value !== null ? SdkClient::mapValues(SdkClient::stringMapValue($data->annotation_value), static fn($item) => SdkClient::stringValue($item)) : SdkNotGiven::Value),
+            branchCreate: (property_exists($data, "branch_create") && $data->branch_create !== null ? SdkClient::hydrateClass($data->branch_create, BranchCreateRequest::class) : SdkNotGiven::Value),
+            maskingRules: (property_exists($data, "masking_rules") && $data->masking_rules !== null ? array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, MaskingRule::class), SdkClient::arrayValue($data->masking_rules))) : SdkNotGiven::Value),
+            startAnonymization: (property_exists($data, "start_anonymization") && $data->start_anonymization !== null ? SdkClient::boolValue($data->start_anonymization) : SdkNotGiven::Value),
         );
     }
 }
@@ -225,15 +225,15 @@ class BranchCreateRequestBranch implements \JsonSerializable
     public static function fromObject(object $data): self
     {
         return new self(
-            parentId: (property_exists($data, "parent_id") ? SdkClient::stringValue($data->parent_id) : SdkNotGiven::Value),
-            name: (property_exists($data, "name") ? SdkClient::stringValue($data->name) : SdkNotGiven::Value),
-            parentLsn: (property_exists($data, "parent_lsn") ? SdkClient::stringValue($data->parent_lsn) : SdkNotGiven::Value),
-            parentTimestamp: (property_exists($data, "parent_timestamp") ? SdkClient::stringValue($data->parent_timestamp) : SdkNotGiven::Value),
-            protected_: (property_exists($data, "protected") ? SdkClient::boolValue($data->protected) : SdkNotGiven::Value),
-            realtime: (property_exists($data, "realtime") ? SdkClient::hydrateClass($data->realtime, RealtimeOptions::class) : SdkNotGiven::Value),
-            archived: (property_exists($data, "archived") ? SdkClient::boolValue($data->archived) : SdkNotGiven::Value),
-            initSource: (property_exists($data, "init_source") ? SdkClient::stringValue($data->init_source) : SdkNotGiven::Value),
-            expiresAt: (property_exists($data, "expires_at") ? SdkClient::stringValue($data->expires_at) : SdkNotGiven::Value),
+            parentId: (property_exists($data, "parent_id") && $data->parent_id !== null ? SdkClient::stringValue($data->parent_id) : SdkNotGiven::Value),
+            name: (property_exists($data, "name") && $data->name !== null ? SdkClient::stringValue($data->name) : SdkNotGiven::Value),
+            parentLsn: (property_exists($data, "parent_lsn") && $data->parent_lsn !== null ? SdkClient::stringValue($data->parent_lsn) : SdkNotGiven::Value),
+            parentTimestamp: (property_exists($data, "parent_timestamp") && $data->parent_timestamp !== null ? SdkClient::stringValue($data->parent_timestamp) : SdkNotGiven::Value),
+            protected_: (property_exists($data, "protected") && $data->protected !== null ? SdkClient::boolValue($data->protected) : SdkNotGiven::Value),
+            realtime: (property_exists($data, "realtime") && $data->realtime !== null ? SdkClient::hydrateClass($data->realtime, RealtimeOptions::class) : SdkNotGiven::Value),
+            archived: (property_exists($data, "archived") && $data->archived !== null ? SdkClient::boolValue($data->archived) : SdkNotGiven::Value),
+            initSource: (property_exists($data, "init_source") && $data->init_source !== null ? SdkClient::stringValue($data->init_source) : SdkNotGiven::Value),
+            expiresAt: (property_exists($data, "expires_at") && $data->expires_at !== null ? SdkClient::stringValue($data->expires_at) : SdkNotGiven::Value),
         );
     }
 }
@@ -291,8 +291,8 @@ class BranchCreateRequest implements \JsonSerializable
     public static function fromObject(object $data): self
     {
         return new self(
-            endpoints: (property_exists($data, "endpoints") ? array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, BranchCreateRequestEndpointOptions::class), SdkClient::arrayValue($data->endpoints))) : SdkNotGiven::Value),
-            branch: (property_exists($data, "branch") ? SdkClient::hydrateClass($data->branch, BranchCreateRequestBranch::class) : SdkNotGiven::Value),
+            endpoints: (property_exists($data, "endpoints") && $data->endpoints !== null ? array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, BranchCreateRequestEndpointOptions::class), SdkClient::arrayValue($data->endpoints))) : SdkNotGiven::Value),
+            branch: (property_exists($data, "branch") && $data->branch !== null ? SdkClient::hydrateClass($data->branch, BranchCreateRequestBranch::class) : SdkNotGiven::Value),
         );
     }
 }

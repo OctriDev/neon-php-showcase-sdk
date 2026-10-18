@@ -135,13 +135,13 @@ class DataAPICreateRequest implements \JsonSerializable
     public static function fromObject(object $data): self
     {
         return new self(
-            authProvider: (property_exists($data, "auth_provider") ? SdkClient::hydrateStringEnumOrString($data->auth_provider, DataAPICreateRequestAuthProviderEnum::class) : SdkNotGiven::Value),
-            jwksUrl: (property_exists($data, "jwks_url") ? SdkClient::stringValue($data->jwks_url) : SdkNotGiven::Value),
-            providerName: (property_exists($data, "provider_name") ? SdkClient::stringValue($data->provider_name) : SdkNotGiven::Value),
-            jwtAudience: (property_exists($data, "jwt_audience") ? SdkClient::stringValue($data->jwt_audience) : SdkNotGiven::Value),
-            addDefaultGrants: (property_exists($data, "add_default_grants") ? SdkClient::boolValue($data->add_default_grants) : SdkNotGiven::Value),
-            skipAuthSchema: (property_exists($data, "skip_auth_schema") ? SdkClient::boolValue($data->skip_auth_schema) : SdkNotGiven::Value),
-            settings: (property_exists($data, "settings") ? SdkClient::hydrateClass($data->settings, DataAPISettings::class) : SdkNotGiven::Value),
+            authProvider: (property_exists($data, "auth_provider") && $data->auth_provider !== null ? SdkClient::hydrateStringEnumOrString($data->auth_provider, DataAPICreateRequestAuthProviderEnum::class) : SdkNotGiven::Value),
+            jwksUrl: (property_exists($data, "jwks_url") && $data->jwks_url !== null ? SdkClient::stringValue($data->jwks_url) : SdkNotGiven::Value),
+            providerName: (property_exists($data, "provider_name") && $data->provider_name !== null ? SdkClient::stringValue($data->provider_name) : SdkNotGiven::Value),
+            jwtAudience: (property_exists($data, "jwt_audience") && $data->jwt_audience !== null ? SdkClient::stringValue($data->jwt_audience) : SdkNotGiven::Value),
+            addDefaultGrants: (property_exists($data, "add_default_grants") && $data->add_default_grants !== null ? SdkClient::boolValue($data->add_default_grants) : SdkNotGiven::Value),
+            skipAuthSchema: (property_exists($data, "skip_auth_schema") && $data->skip_auth_schema !== null ? SdkClient::boolValue($data->skip_auth_schema) : SdkNotGiven::Value),
+            settings: (property_exists($data, "settings") && $data->settings !== null ? SdkClient::hydrateClass($data->settings, DataAPISettings::class) : SdkNotGiven::Value),
         );
     }
 }
@@ -282,7 +282,7 @@ class DataAPIReponse implements \JsonSerializable
             status: SdkClient::stringValue($data->status),
             settings: (property_exists($data, "settings") ? ($data->settings === null ? null : SdkClient::hydrateClass($data->settings, DataAPISettings::class)) : SdkNotGiven::Value),
             availableSchemas: (property_exists($data, "available_schemas") ? ($data->available_schemas === null ? null : array_values(array_map(static fn($item) => SdkClient::stringValue($item), SdkClient::arrayValue($data->available_schemas)))) : SdkNotGiven::Value),
-            observedAt: (property_exists($data, "observed_at") ? SdkClient::stringValue($data->observed_at) : SdkNotGiven::Value),
+            observedAt: (property_exists($data, "observed_at") && $data->observed_at !== null ? SdkClient::stringValue($data->observed_at) : SdkNotGiven::Value),
         );
     }
 }

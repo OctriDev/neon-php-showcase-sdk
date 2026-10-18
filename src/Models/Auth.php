@@ -60,7 +60,7 @@ class CreateBranchNeonAuthNewUserRequest implements \JsonSerializable
         if (!property_exists($data, "email") || $data->email === null) { throw new SdkValidationError("email", 'required', "Required property 'email' is missing or null"); }
         return new self(
             email: SdkClient::stringValue($data->email),
-            name: (property_exists($data, "name") ? SdkClient::stringValue($data->name) : SdkNotGiven::Value),
+            name: (property_exists($data, "name") && $data->name !== null ? SdkClient::stringValue($data->name) : SdkNotGiven::Value),
         );
     }
 }
@@ -118,7 +118,7 @@ class EnableNeonAuthIntegrationRequest implements \JsonSerializable
         if (!property_exists($data, "auth_provider") || $data->auth_provider === null) { throw new SdkValidationError("auth_provider", 'required', "Required property 'auth_provider' is missing or null"); }
         return new self(
             authProvider: SdkClient::hydrateStringEnumOrString($data->auth_provider, NeonAuthSupportedAuthProvider::class),
-            databaseName: (property_exists($data, "database_name") ? SdkClient::stringValue($data->database_name) : SdkNotGiven::Value),
+            databaseName: (property_exists($data, "database_name") && $data->database_name !== null ? SdkClient::stringValue($data->database_name) : SdkNotGiven::Value),
         );
     }
 }

@@ -96,11 +96,11 @@ class NeonAuthOAuthClientUpdateRequest implements \JsonSerializable
     public static function fromObject(object $data): self
     {
         return new self(
-            name: (property_exists($data, "name") ? SdkClient::stringValue($data->name) : SdkNotGiven::Value),
-            redirectUris: (property_exists($data, "redirect_uris") ? array_values(array_map(static fn($item) => SdkClient::stringValue($item), SdkClient::arrayValue($data->redirect_uris))) : SdkNotGiven::Value),
-            skipConsent: (property_exists($data, "skip_consent") ? SdkClient::boolValue($data->skip_consent) : SdkNotGiven::Value),
-            disabled: (property_exists($data, "disabled") ? SdkClient::boolValue($data->disabled) : SdkNotGiven::Value),
-            resources: (property_exists($data, "resources") ? array_values(array_map(static fn($item) => SdkClient::stringValue($item), SdkClient::arrayValue($data->resources))) : SdkNotGiven::Value),
+            name: (property_exists($data, "name") && $data->name !== null ? SdkClient::stringValue($data->name) : SdkNotGiven::Value),
+            redirectUris: (property_exists($data, "redirect_uris") && $data->redirect_uris !== null ? array_values(array_map(static fn($item) => SdkClient::stringValue($item), SdkClient::arrayValue($data->redirect_uris))) : SdkNotGiven::Value),
+            skipConsent: (property_exists($data, "skip_consent") && $data->skip_consent !== null ? SdkClient::boolValue($data->skip_consent) : SdkNotGiven::Value),
+            disabled: (property_exists($data, "disabled") && $data->disabled !== null ? SdkClient::boolValue($data->disabled) : SdkNotGiven::Value),
+            resources: (property_exists($data, "resources") && $data->resources !== null ? array_values(array_map(static fn($item) => SdkClient::stringValue($item), SdkClient::arrayValue($data->resources))) : SdkNotGiven::Value),
         );
     }
 }
@@ -194,10 +194,10 @@ class NeonAuthOAuthProviderConfig implements \JsonSerializable
         if (!property_exists($data, "enabled") || $data->enabled === null) { throw new SdkValidationError("enabled", 'required', "Required property 'enabled' is missing or null"); }
         return new self(
             enabled: SdkClient::boolValue($data->enabled),
-            loginPage: (property_exists($data, "login_page") ? SdkClient::stringValue($data->login_page) : SdkNotGiven::Value),
-            consentPage: (property_exists($data, "consent_page") ? SdkClient::stringValue($data->consent_page) : SdkNotGiven::Value),
-            mcp: (property_exists($data, "mcp") ? SdkClient::hydrateClass($data->mcp, NeonAuthOAuthProviderMcp::class) : SdkNotGiven::Value),
-            resources: (property_exists($data, "resources") ? array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, NeonAuthOAuthProviderResource::class), SdkClient::arrayValue($data->resources))) : SdkNotGiven::Value),
+            loginPage: (property_exists($data, "login_page") && $data->login_page !== null ? SdkClient::stringValue($data->login_page) : SdkNotGiven::Value),
+            consentPage: (property_exists($data, "consent_page") && $data->consent_page !== null ? SdkClient::stringValue($data->consent_page) : SdkNotGiven::Value),
+            mcp: (property_exists($data, "mcp") && $data->mcp !== null ? SdkClient::hydrateClass($data->mcp, NeonAuthOAuthProviderMcp::class) : SdkNotGiven::Value),
+            resources: (property_exists($data, "resources") && $data->resources !== null ? array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, NeonAuthOAuthProviderResource::class), SdkClient::arrayValue($data->resources))) : SdkNotGiven::Value),
         );
     }
 }
@@ -291,11 +291,11 @@ class NeonAuthOAuthProviderConfigUpdate implements \JsonSerializable
     public static function fromObject(object $data): self
     {
         return new self(
-            enabled: (property_exists($data, "enabled") ? SdkClient::boolValue($data->enabled) : SdkNotGiven::Value),
-            loginPage: (property_exists($data, "login_page") ? SdkClient::stringValue($data->login_page) : SdkNotGiven::Value),
-            consentPage: (property_exists($data, "consent_page") ? SdkClient::stringValue($data->consent_page) : SdkNotGiven::Value),
-            mcp: (property_exists($data, "mcp") ? SdkClient::hydrateClass($data->mcp, NeonAuthOAuthProviderMcpUpdate::class) : SdkNotGiven::Value),
-            resources: (property_exists($data, "resources") ? array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, NeonAuthOAuthProviderResource::class), SdkClient::arrayValue($data->resources))) : SdkNotGiven::Value),
+            enabled: (property_exists($data, "enabled") && $data->enabled !== null ? SdkClient::boolValue($data->enabled) : SdkNotGiven::Value),
+            loginPage: (property_exists($data, "login_page") && $data->login_page !== null ? SdkClient::stringValue($data->login_page) : SdkNotGiven::Value),
+            consentPage: (property_exists($data, "consent_page") && $data->consent_page !== null ? SdkClient::stringValue($data->consent_page) : SdkNotGiven::Value),
+            mcp: (property_exists($data, "mcp") && $data->mcp !== null ? SdkClient::hydrateClass($data->mcp, NeonAuthOAuthProviderMcpUpdate::class) : SdkNotGiven::Value),
+            resources: (property_exists($data, "resources") && $data->resources !== null ? array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, NeonAuthOAuthProviderResource::class), SdkClient::arrayValue($data->resources))) : SdkNotGiven::Value),
         );
     }
 }

@@ -29,9 +29,9 @@ class Functions
      * @param string $branchId
      * @param string|SdkNotGiven $cursor
      * @param int|SdkNotGiven $limit
-     * @return NeonFunctionsListResponse
+     * @return ListFunctionsResponse
      */
-    public static function listFunctions(ClientConfig $clientConfig, string $projectId, string $branchId, string|SdkNotGiven $cursor = SdkNotGiven::Value, int|SdkNotGiven $limit = SdkNotGiven::Value, ?RequestOptions $requestOptions = null): NeonFunctionsListResponse
+    public static function listFunctions(ClientConfig $clientConfig, string $projectId, string $branchId, string|SdkNotGiven $cursor = SdkNotGiven::Value, int|SdkNotGiven $limit = SdkNotGiven::Value, ?RequestOptions $requestOptions = null): ListFunctionsResponse
     {
 
         Validation::validatePattern('project_id', $projectId, '^[a-z0-9-]{1,60}$');
@@ -42,8 +42,8 @@ class Functions
             Validation::validateRange('limit', $limit, min: 1, max: 1000);
         }
 
-        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/functions", $clientConfig, query: ['cursor' => new SdkQueryValue($cursor, "form", true), 'limit' => new SdkQueryValue($limit, "form", true)], returnType: NeonFunctionsListResponse::class, decoder: 'json', operationId: 'listFunctions', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
-        return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, NeonFunctionsListResponse::class));
+        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/functions", $clientConfig, query: ['cursor' => new SdkQueryValue($cursor, "form", true), 'limit' => new SdkQueryValue($limit, "form", true)], returnType: ListFunctionsResponse::class, decoder: 'json', operationId: 'listFunctions', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, ListFunctionsResponse::class));
     }
 
 
@@ -305,9 +305,9 @@ class Functions
      * @param string $branchId
      * @param string|SdkNotGiven $cursor
      * @param int|SdkNotGiven $limit
-     * @return CustomDomainsListResponse
+     * @return ListFunctionsCustomDomainsResponse
      */
-    public static function listFunctionsCustomDomains(ClientConfig $clientConfig, string $projectId, string $branchId, string|SdkNotGiven $cursor = SdkNotGiven::Value, int|SdkNotGiven $limit = SdkNotGiven::Value, ?RequestOptions $requestOptions = null): CustomDomainsListResponse
+    public static function listFunctionsCustomDomains(ClientConfig $clientConfig, string $projectId, string $branchId, string|SdkNotGiven $cursor = SdkNotGiven::Value, int|SdkNotGiven $limit = SdkNotGiven::Value, ?RequestOptions $requestOptions = null): ListFunctionsCustomDomainsResponse
     {
 
         Validation::validatePattern('project_id', $projectId, '^[a-z0-9-]{1,60}$');
@@ -318,8 +318,8 @@ class Functions
             Validation::validateRange('limit', $limit, min: 1, max: 1000);
         }
 
-        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/custom-domains", $clientConfig, query: ['cursor' => new SdkQueryValue($cursor, "form", true), 'limit' => new SdkQueryValue($limit, "form", true)], returnType: CustomDomainsListResponse::class, decoder: 'json', operationId: 'listFunctionsCustomDomains', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
-        return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, CustomDomainsListResponse::class));
+        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/custom-domains", $clientConfig, query: ['cursor' => new SdkQueryValue($cursor, "form", true), 'limit' => new SdkQueryValue($limit, "form", true)], returnType: ListFunctionsCustomDomainsResponse::class, decoder: 'json', operationId: 'listFunctionsCustomDomains', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, ListFunctionsCustomDomainsResponse::class));
     }
 
 

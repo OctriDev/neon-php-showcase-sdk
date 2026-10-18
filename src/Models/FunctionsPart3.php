@@ -8,6 +8,23 @@ declare(strict_types=1);
 namespace octridev_neon;
 
 /**
+ * Build lifecycle status of the deployment.
+ */
+final readonly class NeonFunctionDeploymentStatusEnum implements SdkOpenEnum
+{
+    public const PENDING = "pending";
+    public const BUILDING = "building";
+    public const COMPLETED = "completed";
+    public const FAILED = "failed";
+    private function __construct(public string $value) {}
+    public static function from(string|int $value): static { return new self((string) $value); }
+    public static function tryFrom(string|int|null $value): ?static { return $value === null ? null : self::from($value); }
+    public function getValue(): string { return $this->value; }
+    public function jsonSerialize(): string { return $this->value; }
+    public function __toString(): string { return (string) $this->value; }
+}
+
+/**
  * Typed representation of the `NeonFunctionDeployment` API schema.
  */
 class NeonFunctionDeployment implements \JsonSerializable
@@ -120,8 +137,8 @@ class NeonFunctionDeployment implements \JsonSerializable
             memoryMib: SdkClient::intValue($data->memory_mib),
             runtime: SdkClient::stringValue($data->runtime),
             createdAt: SdkClient::stringValue($data->created_at),
-            environment: (property_exists($data, "environment") ? array_values(array_map(static fn($item) => SdkClient::stringValue($item), SdkClient::arrayValue($data->environment))) : SdkNotGiven::Value),
-            error: (property_exists($data, "error") ? SdkClient::stringValue($data->error) : SdkNotGiven::Value),
+            environment: (property_exists($data, "environment") && $data->environment !== null ? array_values(array_map(static fn($item) => SdkClient::stringValue($item), SdkClient::arrayValue($data->environment))) : SdkNotGiven::Value),
+            error: (property_exists($data, "error") && $data->error !== null ? SdkClient::stringValue($data->error) : SdkNotGiven::Value),
         );
     }
 }

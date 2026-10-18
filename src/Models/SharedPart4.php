@@ -48,7 +48,7 @@ class RealtimeOptions implements \JsonSerializable
     public static function fromObject(object $data): self
     {
         return new self(
-            allowedOrigins: (property_exists($data, "allowed_origins") ? array_values(array_map(static fn($item) => SdkClient::stringValue($item), SdkClient::arrayValue($data->allowed_origins))) : SdkNotGiven::Value),
+            allowedOrigins: (property_exists($data, "allowed_origins") && $data->allowed_origins !== null ? array_values(array_map(static fn($item) => SdkClient::stringValue($item), SdkClient::arrayValue($data->allowed_origins))) : SdkNotGiven::Value),
         );
     }
 }
@@ -166,9 +166,9 @@ class Role implements \JsonSerializable
             name: SdkClient::stringValue($data->name),
             createdAt: SdkClient::stringValue($data->created_at),
             updatedAt: SdkClient::stringValue($data->updated_at),
-            password: (property_exists($data, "password") ? SdkClient::stringValue($data->password) : SdkNotGiven::Value),
-            protected_: (property_exists($data, "protected") ? SdkClient::boolValue($data->protected) : SdkNotGiven::Value),
-            authenticationMethod: (property_exists($data, "authentication_method") ? SdkClient::stringValue($data->authentication_method) : SdkNotGiven::Value),
+            password: (property_exists($data, "password") && $data->password !== null ? SdkClient::stringValue($data->password) : SdkNotGiven::Value),
+            protected_: (property_exists($data, "protected") && $data->protected !== null ? SdkClient::boolValue($data->protected) : SdkNotGiven::Value),
+            authenticationMethod: (property_exists($data, "authentication_method") && $data->authentication_method !== null ? SdkClient::stringValue($data->authentication_method) : SdkNotGiven::Value),
         );
     }
 }
@@ -219,6 +219,14 @@ class RolesResponse implements \JsonSerializable
 }
 
 /**
+ * Optional enumerated value serialized in the `type` wire field.
+ */
+enum SharedEmailServerTypeEnum: string implements SdkWireEnum
+{
+    case SHARED = "shared";
+}
+
+/**
  * Typed representation of the `SharedEmailServer` API schema.
  */
 class SharedEmailServer implements NeonAuthEmailServerConfig, NeonAuthEmailServerConfigResponse, \JsonSerializable
@@ -235,17 +243,26 @@ class SharedEmailServer implements NeonAuthEmailServerConfig, NeonAuthEmailServe
      * @var string|SdkNotGiven
      */
     public readonly string|SdkNotGiven $senderName;
+    /**
+     * Optional enumerated value serialized in the `type` wire field.
+     *
+     * @var SharedEmailServerTypeEnum|SdkNotGiven
+     */
+    public readonly SharedEmailServerTypeEnum|SdkNotGiven $type;
 
     /**
      * @param string|SdkNotGiven $senderEmail
      * @param string|SdkNotGiven $senderName
+     * @param SharedEmailServerTypeEnum|SdkNotGiven $type
      */
     public function __construct(
         string|SdkNotGiven $senderEmail = SdkNotGiven::Value,
         string|SdkNotGiven $senderName = SdkNotGiven::Value,
+        SharedEmailServerTypeEnum|SdkNotGiven $type = SdkNotGiven::Value,
     ) {
         $this->senderEmail = $senderEmail;
         $this->senderName = $senderName;
+        $this->type = $type;
     }
 
     /** @return array<array-key, mixed> */
@@ -259,6 +276,9 @@ class SharedEmailServer implements NeonAuthEmailServerConfig, NeonAuthEmailServe
         if ($this->senderName !== SdkNotGiven::Value) {
             $values["sender_name"] = $this->senderName;
         }
+        if ($this->type !== SdkNotGiven::Value) {
+            $values["type"] = $this->type;
+        }
         return $values;
     }
 
@@ -271,65 +291,9 @@ class SharedEmailServer implements NeonAuthEmailServerConfig, NeonAuthEmailServe
     public static function fromObject(object $data): self
     {
         return new self(
-            senderEmail: (property_exists($data, "sender_email") ? SdkClient::stringValue($data->sender_email) : SdkNotGiven::Value),
-            senderName: (property_exists($data, "sender_name") ? SdkClient::stringValue($data->sender_name) : SdkNotGiven::Value),
-        );
-    }
-}
-
-/**
- * Typed representation of the `TransferProjectsToOrganizationRequest` API schema.
- */
-class TransferProjectsToOrganizationRequest implements \JsonSerializable
-{
-    /**
-     * The destination organization identifier
-     *
-     * @var string
-     */
-    public readonly string $destinationOrgId;
-    /**
-     * The list of projects ids to transfer. Maximum of 400 project ids
-     *
-     * @var list<string>
-     */
-    public readonly array $projectIds;
-
-    /**
-     * @param string $destinationOrgId
-     * @param list<string> $projectIds
-     */
-    public function __construct(
-        string $destinationOrgId,
-        array $projectIds,
-    ) {
-        $this->destinationOrgId = $destinationOrgId;
-        $this->projectIds = $projectIds;
-    }
-
-    /** @return array<array-key, mixed> */
-    public function toArray(): array
-    {
-        $values = [
-            "destination_org_id" => $this->destinationOrgId,
-            "project_ids" => $this->projectIds,
-        ];
-        return $values;
-    }
-
-    /** @return object */
-    public function jsonSerialize(): object
-    {
-        return (object) $this->toArray();
-    }
-
-    public static function fromObject(object $data): self
-    {
-        if (!property_exists($data, "destination_org_id") || $data->destination_org_id === null) { throw new SdkValidationError("destination_org_id", 'required', "Required property 'destination_org_id' is missing or null"); }
-        if (!property_exists($data, "project_ids") || $data->project_ids === null) { throw new SdkValidationError("project_ids", 'required', "Required property 'project_ids' is missing or null"); }
-        return new self(
-            destinationOrgId: SdkClient::stringValue($data->destination_org_id),
-            projectIds: array_values(array_map(static fn($item) => SdkClient::stringValue($item), SdkClient::arrayValue($data->project_ids))),
+            senderEmail: (property_exists($data, "sender_email") && $data->sender_email !== null ? SdkClient::stringValue($data->sender_email) : SdkNotGiven::Value),
+            senderName: (property_exists($data, "sender_name") && $data->sender_name !== null ? SdkClient::stringValue($data->sender_name) : SdkNotGiven::Value),
+            type: (property_exists($data, "type") && $data->type !== null ? SdkClient::hydrateEnum($data->type, SharedEmailServerTypeEnum::class) : SdkNotGiven::Value),
         );
     }
 }

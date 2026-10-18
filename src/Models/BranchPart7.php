@@ -8,6 +8,108 @@ declare(strict_types=1);
 namespace octridev_neon;
 
 /**
+ * Typed representation of the `DatabaseOperations` API schema.
+ */
+class DatabaseOperations implements \JsonSerializable
+{
+    /**
+     * Database object returned by the operation.
+     *
+     * @var Database
+     */
+    public readonly Database $database;
+    /**
+     * Required array value serialized in the `operations` wire field.
+     *
+     * @var list<Operation>
+     */
+    public readonly array $operations;
+
+    /**
+     * @param Database $database
+     * @param list<Operation> $operations
+     */
+    public function __construct(
+        Database $database,
+        array $operations,
+    ) {
+        $this->database = $database;
+        $this->operations = $operations;
+    }
+
+    /** @return array<array-key, mixed> */
+    public function toArray(): array
+    {
+        $values = [
+            "database" => $this->database,
+            "operations" => $this->operations,
+        ];
+        return $values;
+    }
+
+    /** @return object */
+    public function jsonSerialize(): object
+    {
+        return (object) $this->toArray();
+    }
+
+    public static function fromObject(object $data): self
+    {
+        if (!property_exists($data, "database") || $data->database === null) { throw new SdkValidationError("database", 'required', "Required property 'database' is missing or null"); }
+        if (!property_exists($data, "operations") || $data->operations === null) { throw new SdkValidationError("operations", 'required', "Required property 'operations' is missing or null"); }
+        return new self(
+            database: SdkClient::hydrateClass($data->database, Database::class),
+            operations: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, Operation::class), SdkClient::arrayValue($data->operations))),
+        );
+    }
+}
+
+/**
+ * Typed representation of the `DatabaseResponse` API schema.
+ */
+class DatabaseResponse implements \JsonSerializable
+{
+    /**
+     * Database object returned by the operation.
+     *
+     * @var Database
+     */
+    public readonly Database $database;
+
+    /**
+     * @param Database $database
+     */
+    public function __construct(
+        Database $database,
+    ) {
+        $this->database = $database;
+    }
+
+    /** @return array<array-key, mixed> */
+    public function toArray(): array
+    {
+        $values = [
+            "database" => $this->database,
+        ];
+        return $values;
+    }
+
+    /** @return object */
+    public function jsonSerialize(): object
+    {
+        return (object) $this->toArray();
+    }
+
+    public static function fromObject(object $data): self
+    {
+        if (!property_exists($data, "database") || $data->database === null) { throw new SdkValidationError("database", 'required', "Required property 'database' is missing or null"); }
+        return new self(
+            database: SdkClient::hydrateClass($data->database, Database::class),
+        );
+    }
+}
+
+/**
  * Properties to update on the database.
  */
 class DatabaseUpdateRequestDatabase implements \JsonSerializable
@@ -60,8 +162,8 @@ class DatabaseUpdateRequestDatabase implements \JsonSerializable
     public static function fromObject(object $data): self
     {
         return new self(
-            name: (property_exists($data, "name") ? SdkClient::stringValue($data->name) : SdkNotGiven::Value),
-            ownerName: (property_exists($data, "owner_name") ? SdkClient::stringValue($data->owner_name) : SdkNotGiven::Value),
+            name: (property_exists($data, "name") && $data->name !== null ? SdkClient::stringValue($data->name) : SdkNotGiven::Value),
+            ownerName: (property_exists($data, "owner_name") && $data->owner_name !== null ? SdkClient::stringValue($data->owner_name) : SdkNotGiven::Value),
         );
     }
 }
@@ -112,86 +214,42 @@ class DatabaseUpdateRequest implements \JsonSerializable
 }
 
 /**
- * Typed representation of the `MaskingRule` API schema.
+ * Typed representation of the `GetBranchResponse` API schema.
  */
-class MaskingRule implements \JsonSerializable
+class GetBranchResponse implements \JsonSerializable
 {
     /**
-     * The name of the database containing the table to be masked
+     * Branch returned by the request.
      *
-     * @var string
+     * @var Branch
      */
-    public readonly string $databaseName;
+    public readonly Branch $branch;
     /**
-     * The name of the schema containing the table to be masked
+     * Annotation data associated with the annotated object.
      *
-     * @var string
+     * @var AnnotationData
      */
-    public readonly string $schemaName;
-    /**
-     * The name of the table containing the column to be masked
-     *
-     * @var string
-     */
-    public readonly string $tableName;
-    /**
-     * The name of the column to be masked
-     *
-     * @var string
-     */
-    public readonly string $columnName;
-    /**
-     * The PostgreSQL Anonymizer masking function to apply. Can be a predefined function (e.g., 'anon.random_string(10)', 'anon.fake_email()') or a custom function definition (e.g., 'anon.hash(column_name)')
-     *
-     * @var string|SdkNotGiven
-     */
-    public readonly string|SdkNotGiven $maskingFunction;
-    /**
-     * A literal value to set on the column when masking.
-     *
-     * @var string|SdkNotGiven
-     */
-    public readonly string|SdkNotGiven $maskingValue;
+    public readonly AnnotationData $annotation;
 
     /**
-     * @param string $databaseName
-     * @param string $schemaName
-     * @param string $tableName
-     * @param string $columnName
-     * @param string|SdkNotGiven $maskingFunction
-     * @param string|SdkNotGiven $maskingValue
+     * @param Branch $branch
+     * @param AnnotationData $annotation
      */
     public function __construct(
-        string $databaseName,
-        string $schemaName,
-        string $tableName,
-        string $columnName,
-        string|SdkNotGiven $maskingFunction = SdkNotGiven::Value,
-        string|SdkNotGiven $maskingValue = SdkNotGiven::Value,
+        Branch $branch,
+        AnnotationData $annotation,
     ) {
-        $this->databaseName = $databaseName;
-        $this->schemaName = $schemaName;
-        $this->tableName = $tableName;
-        $this->columnName = $columnName;
-        $this->maskingFunction = $maskingFunction;
-        $this->maskingValue = $maskingValue;
+        $this->branch = $branch;
+        $this->annotation = $annotation;
     }
 
     /** @return array<array-key, mixed> */
     public function toArray(): array
     {
         $values = [
-            "database_name" => $this->databaseName,
-            "schema_name" => $this->schemaName,
-            "table_name" => $this->tableName,
-            "column_name" => $this->columnName,
+            "branch" => $this->branch,
+            "annotation" => $this->annotation,
         ];
-        if ($this->maskingFunction !== SdkNotGiven::Value) {
-            $values["masking_function"] = $this->maskingFunction;
-        }
-        if ($this->maskingValue !== SdkNotGiven::Value) {
-            $values["masking_value"] = $this->maskingValue;
-        }
         return $values;
     }
 
@@ -203,48 +261,64 @@ class MaskingRule implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "database_name") || $data->database_name === null) { throw new SdkValidationError("database_name", 'required', "Required property 'database_name' is missing or null"); }
-        if (!property_exists($data, "schema_name") || $data->schema_name === null) { throw new SdkValidationError("schema_name", 'required', "Required property 'schema_name' is missing or null"); }
-        if (!property_exists($data, "table_name") || $data->table_name === null) { throw new SdkValidationError("table_name", 'required', "Required property 'table_name' is missing or null"); }
-        if (!property_exists($data, "column_name") || $data->column_name === null) { throw new SdkValidationError("column_name", 'required', "Required property 'column_name' is missing or null"); }
+        if (!property_exists($data, "branch") || $data->branch === null) { throw new SdkValidationError("branch", 'required', "Required property 'branch' is missing or null"); }
+        if (!property_exists($data, "annotation") || $data->annotation === null) { throw new SdkValidationError("annotation", 'required', "Required property 'annotation' is missing or null"); }
         return new self(
-            databaseName: SdkClient::stringValue($data->database_name),
-            schemaName: SdkClient::stringValue($data->schema_name),
-            tableName: SdkClient::stringValue($data->table_name),
-            columnName: SdkClient::stringValue($data->column_name),
-            maskingFunction: (property_exists($data, "masking_function") ? SdkClient::stringValue($data->masking_function) : SdkNotGiven::Value),
-            maskingValue: (property_exists($data, "masking_value") ? SdkClient::stringValue($data->masking_value) : SdkNotGiven::Value),
+            branch: SdkClient::hydrateClass($data->branch, Branch::class),
+            annotation: SdkClient::hydrateClass($data->annotation, AnnotationData::class),
         );
     }
 }
 
 /**
- * Typed representation of the `MaskingRulesResponse` API schema.
+ * Typed representation of the `ListBranchResponse` API schema.
  */
-class MaskingRulesResponse implements \JsonSerializable
+class ListBranchResponse implements \JsonSerializable
 {
     /**
-     * List of masking rules for the branch
+     * Branches in the project. Each includes `id`, `name`, `current_state`, and `created_at`.
      *
-     * @var list<MaskingRule>
+     * @var list<Branch>
      */
-    public readonly array $maskingRules;
+    public readonly array $branches;
+    /**
+     * Map of annotations keyed by resource identifier, where each value contains the annotation data for that resource.
+     *
+     * @var array<string,AnnotationData>
+     */
+    public readonly array $annotations;
+    /**
+     * To paginate the response, issue an initial request with `limit` value. Then, add the value returned in the response `.pagination.next` attribute into the request under the `cursor` query parameter to the subsequent request to retrieve next page in pagination. The contents on cursor `next` are opaque, clients are not expected to make any assumptions on the format of the data inside the cursor.
+     *
+     * @var CursorPagination|SdkNotGiven
+     */
+    public readonly CursorPagination|SdkNotGiven $pagination;
 
     /**
-     * @param list<MaskingRule> $maskingRules
+     * @param list<Branch> $branches
+     * @param array<string,AnnotationData> $annotations
+     * @param CursorPagination|SdkNotGiven $pagination
      */
     public function __construct(
-        array $maskingRules,
+        array $branches,
+        array $annotations,
+        CursorPagination|SdkNotGiven $pagination = SdkNotGiven::Value,
     ) {
-        $this->maskingRules = $maskingRules;
+        $this->branches = $branches;
+        $this->annotations = $annotations;
+        $this->pagination = $pagination;
     }
 
     /** @return array<array-key, mixed> */
     public function toArray(): array
     {
         $values = [
-            "masking_rules" => $this->maskingRules,
+            "branches" => $this->branches,
+            "annotations" => $this->annotations,
         ];
+        if ($this->pagination !== SdkNotGiven::Value) {
+            $values["pagination"] = $this->pagination;
+        }
         return $values;
     }
 
@@ -256,54 +330,12 @@ class MaskingRulesResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "masking_rules") || $data->masking_rules === null) { throw new SdkValidationError("masking_rules", 'required', "Required property 'masking_rules' is missing or null"); }
+        if (!property_exists($data, "branches") || $data->branches === null) { throw new SdkValidationError("branches", 'required', "Required property 'branches' is missing or null"); }
+        if (!property_exists($data, "annotations") || $data->annotations === null) { throw new SdkValidationError("annotations", 'required', "Required property 'annotations' is missing or null"); }
         return new self(
-            maskingRules: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, MaskingRule::class), SdkClient::arrayValue($data->masking_rules))),
-        );
-    }
-}
-
-/**
- * Typed representation of the `MaskingRulesUpdateRequest` API schema.
- */
-class MaskingRulesUpdateRequest implements \JsonSerializable
-{
-    /**
-     * List of masking rules to apply to the branch. This will replace all existing masking rules for the branch.
-     *
-     * @var list<MaskingRule>
-     */
-    public readonly array $maskingRules;
-
-    /**
-     * @param list<MaskingRule> $maskingRules
-     */
-    public function __construct(
-        array $maskingRules,
-    ) {
-        $this->maskingRules = $maskingRules;
-    }
-
-    /** @return array<array-key, mixed> */
-    public function toArray(): array
-    {
-        $values = [
-            "masking_rules" => $this->maskingRules,
-        ];
-        return $values;
-    }
-
-    /** @return object */
-    public function jsonSerialize(): object
-    {
-        return (object) $this->toArray();
-    }
-
-    public static function fromObject(object $data): self
-    {
-        if (!property_exists($data, "masking_rules") || $data->masking_rules === null) { throw new SdkValidationError("masking_rules", 'required', "Required property 'masking_rules' is missing or null"); }
-        return new self(
-            maskingRules: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, MaskingRule::class), SdkClient::arrayValue($data->masking_rules))),
+            branches: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, Branch::class), SdkClient::arrayValue($data->branches))),
+            annotations: SdkClient::mapValues(SdkClient::stringMapValue($data->annotations), static fn($item) => SdkClient::hydrateClass($item, AnnotationData::class)),
+            pagination: (property_exists($data, "pagination") && $data->pagination !== null ? SdkClient::hydrateClass($data->pagination, CursorPagination::class) : SdkNotGiven::Value),
         );
     }
 }

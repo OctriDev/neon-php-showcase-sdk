@@ -23,9 +23,9 @@ class FunctionsNamespace
      * @param string $branchId
      * @param string|SdkNotGiven $cursor
      * @param int|SdkNotGiven $limit
-     * @return NeonFunctionsListResponse
+     * @return ListFunctionsResponse
      */
-    public function list_(string $projectId, string $branchId, string|SdkNotGiven $cursor = SdkNotGiven::Value, int|SdkNotGiven $limit = SdkNotGiven::Value, ?RequestOptions $requestOptions = null): NeonFunctionsListResponse
+    public function list_(string $projectId, string $branchId, string|SdkNotGiven $cursor = SdkNotGiven::Value, int|SdkNotGiven $limit = SdkNotGiven::Value, ?RequestOptions $requestOptions = null): ListFunctionsResponse
     {
         return Functions::listFunctions($this->clientConfig, $projectId, $branchId, $cursor, $limit, $requestOptions);
     }
@@ -182,9 +182,9 @@ class FunctionsNamespace
      * @param string $branchId
      * @param string|SdkNotGiven $cursor
      * @param int|SdkNotGiven $limit
-     * @return CustomDomainsListResponse
+     * @return ListFunctionsCustomDomainsResponse
      */
-    public function listCustomDomains(string $projectId, string $branchId, string|SdkNotGiven $cursor = SdkNotGiven::Value, int|SdkNotGiven $limit = SdkNotGiven::Value, ?RequestOptions $requestOptions = null): CustomDomainsListResponse
+    public function listCustomDomains(string $projectId, string $branchId, string|SdkNotGiven $cursor = SdkNotGiven::Value, int|SdkNotGiven $limit = SdkNotGiven::Value, ?RequestOptions $requestOptions = null): ListFunctionsCustomDomainsResponse
     {
         return Functions::listFunctionsCustomDomains($this->clientConfig, $projectId, $branchId, $cursor, $limit, $requestOptions);
     }

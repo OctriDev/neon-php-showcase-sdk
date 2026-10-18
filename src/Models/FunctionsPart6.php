@@ -108,8 +108,8 @@ class StorageObjectCreatedTriggerCreateRequest implements TriggerCreateRequest, 
             functionSlug: SdkClient::stringValue($data->function_slug),
             name: SdkClient::stringValue($data->name),
             storageObjectCreated: SdkClient::hydrateClass($data->storage_object_created, FunctionTriggerStorageObjectCreated::class),
-            functionPath: (property_exists($data, "function_path") ? SdkClient::stringValue($data->function_path) : SdkNotGiven::Value),
-            enabled: (property_exists($data, "enabled") ? SdkClient::boolValue($data->enabled) : SdkNotGiven::Value),
+            functionPath: (property_exists($data, "function_path") && $data->function_path !== null ? SdkClient::stringValue($data->function_path) : SdkNotGiven::Value),
+            enabled: (property_exists($data, "enabled") && $data->enabled !== null ? SdkClient::boolValue($data->enabled) : SdkNotGiven::Value),
         );
     }
 }
@@ -223,11 +223,11 @@ class StorageObjectCreatedTriggerUpdateRequest implements TriggerUpdateRequest, 
         if (!property_exists($data, "type") || $data->type === null) { throw new SdkValidationError("type", 'required', "Required property 'type' is missing or null"); }
         return new self(
             type: SdkClient::hydrateEnum($data->type, StorageObjectCreatedTriggerUpdateRequestTypeEnum::class),
-            functionSlug: (property_exists($data, "function_slug") ? SdkClient::stringValue($data->function_slug) : SdkNotGiven::Value),
-            name: (property_exists($data, "name") ? SdkClient::stringValue($data->name) : SdkNotGiven::Value),
-            functionPath: (property_exists($data, "function_path") ? SdkClient::stringValue($data->function_path) : SdkNotGiven::Value),
-            storageObjectCreated: (property_exists($data, "storage_object_created") ? SdkClient::hydrateClass($data->storage_object_created, FunctionTriggerStorageObjectCreated::class) : SdkNotGiven::Value),
-            enabled: (property_exists($data, "enabled") ? SdkClient::boolValue($data->enabled) : SdkNotGiven::Value),
+            functionSlug: (property_exists($data, "function_slug") && $data->function_slug !== null ? SdkClient::stringValue($data->function_slug) : SdkNotGiven::Value),
+            name: (property_exists($data, "name") && $data->name !== null ? SdkClient::stringValue($data->name) : SdkNotGiven::Value),
+            functionPath: (property_exists($data, "function_path") && $data->function_path !== null ? SdkClient::stringValue($data->function_path) : SdkNotGiven::Value),
+            storageObjectCreated: (property_exists($data, "storage_object_created") && $data->storage_object_created !== null ? SdkClient::hydrateClass($data->storage_object_created, FunctionTriggerStorageObjectCreated::class) : SdkNotGiven::Value),
+            enabled: (property_exists($data, "enabled") && $data->enabled !== null ? SdkClient::boolValue($data->enabled) : SdkNotGiven::Value),
         );
     }
 }

@@ -297,8 +297,8 @@ class CurrentUserInfoResponse implements \JsonSerializable
             branchesLimit: SdkClient::intValue($data->branches_limit),
             maxAutoscalingLimit: SdkClient::floatValue($data->max_autoscaling_limit),
             plan: SdkClient::stringValue($data->plan),
-            billingAccount: (property_exists($data, "billing_account") ? SdkClient::hydrateClass($data->billing_account, BillingAccount::class) : SdkNotGiven::Value),
-            computeSecondsLimit: (property_exists($data, "compute_seconds_limit") ? SdkClient::intValue($data->compute_seconds_limit) : SdkNotGiven::Value),
+            billingAccount: (property_exists($data, "billing_account") && $data->billing_account !== null ? SdkClient::hydrateClass($data->billing_account, BillingAccount::class) : SdkNotGiven::Value),
+            computeSecondsLimit: (property_exists($data, "compute_seconds_limit") && $data->compute_seconds_limit !== null ? SdkClient::intValue($data->compute_seconds_limit) : SdkNotGiven::Value),
         );
     }
 }

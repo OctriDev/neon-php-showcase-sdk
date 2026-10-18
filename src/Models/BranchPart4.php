@@ -84,9 +84,9 @@ class BranchRestoreRequest implements \JsonSerializable
         if (!property_exists($data, "source_branch_id") || $data->source_branch_id === null) { throw new SdkValidationError("source_branch_id", 'required', "Required property 'source_branch_id' is missing or null"); }
         return new self(
             sourceBranchId: SdkClient::stringValue($data->source_branch_id),
-            sourceLsn: (property_exists($data, "source_lsn") ? SdkClient::stringValue($data->source_lsn) : SdkNotGiven::Value),
-            sourceTimestamp: (property_exists($data, "source_timestamp") ? SdkClient::stringValue($data->source_timestamp) : SdkNotGiven::Value),
-            preserveUnderName: (property_exists($data, "preserve_under_name") ? SdkClient::stringValue($data->preserve_under_name) : SdkNotGiven::Value),
+            sourceLsn: (property_exists($data, "source_lsn") && $data->source_lsn !== null ? SdkClient::stringValue($data->source_lsn) : SdkNotGiven::Value),
+            sourceTimestamp: (property_exists($data, "source_timestamp") && $data->source_timestamp !== null ? SdkClient::stringValue($data->source_timestamp) : SdkNotGiven::Value),
+            preserveUnderName: (property_exists($data, "preserve_under_name") && $data->preserve_under_name !== null ? SdkClient::stringValue($data->preserve_under_name) : SdkNotGiven::Value),
         );
     }
 }
@@ -132,7 +132,7 @@ class BranchSchemaCompareResponse implements \JsonSerializable
     public static function fromObject(object $data): self
     {
         return new self(
-            diff: (property_exists($data, "diff") ? SdkClient::stringValue($data->diff) : SdkNotGiven::Value),
+            diff: (property_exists($data, "diff") && $data->diff !== null ? SdkClient::stringValue($data->diff) : SdkNotGiven::Value),
         );
     }
 }
@@ -214,8 +214,8 @@ class BranchSchemaJSONTablesItemColumnsItem implements \JsonSerializable
         return new self(
             name: SdkClient::stringValue($data->name),
             type: SdkClient::stringValue($data->type),
-            nullable: (property_exists($data, "nullable") ? SdkClient::boolValue($data->nullable) : SdkNotGiven::Value),
-            generated: (property_exists($data, "generated") ? SdkClient::boolValue($data->generated) : SdkNotGiven::Value),
+            nullable: (property_exists($data, "nullable") && $data->nullable !== null ? SdkClient::boolValue($data->nullable) : SdkNotGiven::Value),
+            generated: (property_exists($data, "generated") && $data->generated !== null ? SdkClient::boolValue($data->generated) : SdkNotGiven::Value),
         );
     }
 }

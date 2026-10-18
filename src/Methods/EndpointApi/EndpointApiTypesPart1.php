@@ -192,17 +192,17 @@ class CreateEndpointEndpoint implements \JsonSerializable
         return new self(
             branchId: SdkClient::stringValue($data->branch_id),
             type: SdkClient::hydrateStringEnumOrString($data->type, EndpointType::class),
-            regionId: (property_exists($data, "region_id") ? SdkClient::stringValue($data->region_id) : SdkNotGiven::Value),
-            settings: (property_exists($data, "settings") ? SdkClient::hydrateClass($data->settings, EndpointSettingsData::class) : SdkNotGiven::Value),
-            autoscalingLimitMinCu: (property_exists($data, "autoscaling_limit_min_cu") ? SdkClient::floatValue($data->autoscaling_limit_min_cu) : SdkNotGiven::Value),
-            autoscalingLimitMaxCu: (property_exists($data, "autoscaling_limit_max_cu") ? SdkClient::floatValue($data->autoscaling_limit_max_cu) : SdkNotGiven::Value),
-            provisioner: (property_exists($data, "provisioner") ? SdkClient::stringValue($data->provisioner) : SdkNotGiven::Value),
-            poolerEnabled: (property_exists($data, "pooler_enabled") ? SdkClient::boolValue($data->pooler_enabled) : SdkNotGiven::Value),
-            poolerMode: (property_exists($data, "pooler_mode") ? SdkClient::hydrateStringEnumOrString($data->pooler_mode, EndpointPoolerMode::class) : SdkNotGiven::Value),
-            disabled: (property_exists($data, "disabled") ? SdkClient::boolValue($data->disabled) : SdkNotGiven::Value),
-            passwordlessAccess: (property_exists($data, "passwordless_access") ? SdkClient::boolValue($data->passwordless_access) : SdkNotGiven::Value),
-            suspendTimeoutSeconds: (property_exists($data, "suspend_timeout_seconds") ? SdkClient::intValue($data->suspend_timeout_seconds) : SdkNotGiven::Value),
-            name: (property_exists($data, "name") ? SdkClient::stringValue($data->name) : SdkNotGiven::Value),
+            regionId: (property_exists($data, "region_id") && $data->region_id !== null ? SdkClient::stringValue($data->region_id) : SdkNotGiven::Value),
+            settings: (property_exists($data, "settings") && $data->settings !== null ? SdkClient::hydrateClass($data->settings, EndpointSettingsData::class) : SdkNotGiven::Value),
+            autoscalingLimitMinCu: (property_exists($data, "autoscaling_limit_min_cu") && $data->autoscaling_limit_min_cu !== null ? SdkClient::floatValue($data->autoscaling_limit_min_cu) : SdkNotGiven::Value),
+            autoscalingLimitMaxCu: (property_exists($data, "autoscaling_limit_max_cu") && $data->autoscaling_limit_max_cu !== null ? SdkClient::floatValue($data->autoscaling_limit_max_cu) : SdkNotGiven::Value),
+            provisioner: (property_exists($data, "provisioner") && $data->provisioner !== null ? SdkClient::stringValue($data->provisioner) : SdkNotGiven::Value),
+            poolerEnabled: (property_exists($data, "pooler_enabled") && $data->pooler_enabled !== null ? SdkClient::boolValue($data->pooler_enabled) : SdkNotGiven::Value),
+            poolerMode: (property_exists($data, "pooler_mode") && $data->pooler_mode !== null ? SdkClient::hydrateStringEnumOrString($data->pooler_mode, EndpointPoolerMode::class) : SdkNotGiven::Value),
+            disabled: (property_exists($data, "disabled") && $data->disabled !== null ? SdkClient::boolValue($data->disabled) : SdkNotGiven::Value),
+            passwordlessAccess: (property_exists($data, "passwordless_access") && $data->passwordless_access !== null ? SdkClient::boolValue($data->passwordless_access) : SdkNotGiven::Value),
+            suspendTimeoutSeconds: (property_exists($data, "suspend_timeout_seconds") && $data->suspend_timeout_seconds !== null ? SdkClient::intValue($data->suspend_timeout_seconds) : SdkNotGiven::Value),
+            name: (property_exists($data, "name") && $data->name !== null ? SdkClient::stringValue($data->name) : SdkNotGiven::Value),
         );
     }
 }
