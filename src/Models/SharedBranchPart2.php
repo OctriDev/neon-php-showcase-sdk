@@ -377,21 +377,51 @@ class Branch implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "id") || $data->id === null) { throw new SdkValidationError("id", 'required', "Required property 'id' is missing or null"); }
-        if (!property_exists($data, "project_id") || $data->project_id === null) { throw new SdkValidationError("project_id", 'required', "Required property 'project_id' is missing or null"); }
-        if (!property_exists($data, "name") || $data->name === null) { throw new SdkValidationError("name", 'required', "Required property 'name' is missing or null"); }
-        if (!property_exists($data, "current_state") || $data->current_state === null) { throw new SdkValidationError("current_state", 'required', "Required property 'current_state' is missing or null"); }
-        if (!property_exists($data, "state_changed_at") || $data->state_changed_at === null) { throw new SdkValidationError("state_changed_at", 'required', "Required property 'state_changed_at' is missing or null"); }
-        if (!property_exists($data, "creation_source") || $data->creation_source === null) { throw new SdkValidationError("creation_source", 'required', "Required property 'creation_source' is missing or null"); }
-        if (!property_exists($data, "default") || $data->default === null) { throw new SdkValidationError("default", 'required', "Required property 'default' is missing or null"); }
-        if (!property_exists($data, "protected") || $data->protected === null) { throw new SdkValidationError("protected", 'required', "Required property 'protected' is missing or null"); }
-        if (!property_exists($data, "cpu_used_sec") || $data->cpu_used_sec === null) { throw new SdkValidationError("cpu_used_sec", 'required', "Required property 'cpu_used_sec' is missing or null"); }
-        if (!property_exists($data, "compute_time_seconds") || $data->compute_time_seconds === null) { throw new SdkValidationError("compute_time_seconds", 'required', "Required property 'compute_time_seconds' is missing or null"); }
-        if (!property_exists($data, "active_time_seconds") || $data->active_time_seconds === null) { throw new SdkValidationError("active_time_seconds", 'required', "Required property 'active_time_seconds' is missing or null"); }
-        if (!property_exists($data, "written_data_bytes") || $data->written_data_bytes === null) { throw new SdkValidationError("written_data_bytes", 'required', "Required property 'written_data_bytes' is missing or null"); }
-        if (!property_exists($data, "data_transfer_bytes") || $data->data_transfer_bytes === null) { throw new SdkValidationError("data_transfer_bytes", 'required', "Required property 'data_transfer_bytes' is missing or null"); }
-        if (!property_exists($data, "created_at") || $data->created_at === null) { throw new SdkValidationError("created_at", 'required', "Required property 'created_at' is missing or null"); }
-        if (!property_exists($data, "updated_at") || $data->updated_at === null) { throw new SdkValidationError("updated_at", 'required', "Required property 'updated_at' is missing or null"); }
+        if (!property_exists($data, "id") || $data->id === null) {
+            throw new SdkValidationError("id", 'required', "Required property 'id' is missing or null");
+        }
+        if (!property_exists($data, "project_id") || $data->project_id === null) {
+            throw new SdkValidationError("project_id", 'required', "Required property 'project_id' is missing or null");
+        }
+        if (!property_exists($data, "name") || $data->name === null) {
+            throw new SdkValidationError("name", 'required', "Required property 'name' is missing or null");
+        }
+        if (!property_exists($data, "current_state") || $data->current_state === null) {
+            throw new SdkValidationError("current_state", 'required', "Required property 'current_state' is missing or null");
+        }
+        if (!property_exists($data, "state_changed_at") || $data->state_changed_at === null) {
+            throw new SdkValidationError("state_changed_at", 'required', "Required property 'state_changed_at' is missing or null");
+        }
+        if (!property_exists($data, "creation_source") || $data->creation_source === null) {
+            throw new SdkValidationError("creation_source", 'required', "Required property 'creation_source' is missing or null");
+        }
+        if (!property_exists($data, "default") || $data->default === null) {
+            throw new SdkValidationError("default", 'required', "Required property 'default' is missing or null");
+        }
+        if (!property_exists($data, "protected") || $data->protected === null) {
+            throw new SdkValidationError("protected", 'required', "Required property 'protected' is missing or null");
+        }
+        if (!property_exists($data, "cpu_used_sec") || $data->cpu_used_sec === null) {
+            throw new SdkValidationError("cpu_used_sec", 'required', "Required property 'cpu_used_sec' is missing or null");
+        }
+        if (!property_exists($data, "compute_time_seconds") || $data->compute_time_seconds === null) {
+            throw new SdkValidationError("compute_time_seconds", 'required', "Required property 'compute_time_seconds' is missing or null");
+        }
+        if (!property_exists($data, "active_time_seconds") || $data->active_time_seconds === null) {
+            throw new SdkValidationError("active_time_seconds", 'required', "Required property 'active_time_seconds' is missing or null");
+        }
+        if (!property_exists($data, "written_data_bytes") || $data->written_data_bytes === null) {
+            throw new SdkValidationError("written_data_bytes", 'required', "Required property 'written_data_bytes' is missing or null");
+        }
+        if (!property_exists($data, "data_transfer_bytes") || $data->data_transfer_bytes === null) {
+            throw new SdkValidationError("data_transfer_bytes", 'required', "Required property 'data_transfer_bytes' is missing or null");
+        }
+        if (!property_exists($data, "created_at") || $data->created_at === null) {
+            throw new SdkValidationError("created_at", 'required', "Required property 'created_at' is missing or null");
+        }
+        if (!property_exists($data, "updated_at") || $data->updated_at === null) {
+            throw new SdkValidationError("updated_at", 'required', "Required property 'updated_at' is missing or null");
+        }
         return new self(
             id: SdkClient::stringValue($data->id),
             projectId: SdkClient::stringValue($data->project_id),

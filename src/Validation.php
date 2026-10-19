@@ -31,7 +31,7 @@ class Validation
             "Validation failed for '{$field}': must be one of " . implode(', ', array_map(
                 self::enumText(...),
                 $members,
-            ))
+            )),
         );
     }
 

@@ -105,13 +105,27 @@ class CreateProjectResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "project") || $data->project === null) { throw new SdkValidationError("project", 'required', "Required property 'project' is missing or null"); }
-        if (!property_exists($data, "connection_uris") || $data->connection_uris === null) { throw new SdkValidationError("connection_uris", 'required', "Required property 'connection_uris' is missing or null"); }
-        if (!property_exists($data, "roles") || $data->roles === null) { throw new SdkValidationError("roles", 'required', "Required property 'roles' is missing or null"); }
-        if (!property_exists($data, "databases") || $data->databases === null) { throw new SdkValidationError("databases", 'required', "Required property 'databases' is missing or null"); }
-        if (!property_exists($data, "operations") || $data->operations === null) { throw new SdkValidationError("operations", 'required', "Required property 'operations' is missing or null"); }
-        if (!property_exists($data, "branch") || $data->branch === null) { throw new SdkValidationError("branch", 'required', "Required property 'branch' is missing or null"); }
-        if (!property_exists($data, "endpoints") || $data->endpoints === null) { throw new SdkValidationError("endpoints", 'required', "Required property 'endpoints' is missing or null"); }
+        if (!property_exists($data, "project") || $data->project === null) {
+            throw new SdkValidationError("project", 'required', "Required property 'project' is missing or null");
+        }
+        if (!property_exists($data, "connection_uris") || $data->connection_uris === null) {
+            throw new SdkValidationError("connection_uris", 'required', "Required property 'connection_uris' is missing or null");
+        }
+        if (!property_exists($data, "roles") || $data->roles === null) {
+            throw new SdkValidationError("roles", 'required', "Required property 'roles' is missing or null");
+        }
+        if (!property_exists($data, "databases") || $data->databases === null) {
+            throw new SdkValidationError("databases", 'required', "Required property 'databases' is missing or null");
+        }
+        if (!property_exists($data, "operations") || $data->operations === null) {
+            throw new SdkValidationError("operations", 'required', "Required property 'operations' is missing or null");
+        }
+        if (!property_exists($data, "branch") || $data->branch === null) {
+            throw new SdkValidationError("branch", 'required', "Required property 'branch' is missing or null");
+        }
+        if (!property_exists($data, "endpoints") || $data->endpoints === null) {
+            throw new SdkValidationError("endpoints", 'required', "Required property 'endpoints' is missing or null");
+        }
         return new self(
             project: SdkClient::hydrateClass($data->project, Project::class),
             connectionUris: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, ConnectionDetails::class), SdkClient::arrayValue($data->connection_uris))),
@@ -260,7 +274,9 @@ class GrantPermissionToProjectRequest implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "email") || $data->email === null) { throw new SdkValidationError("email", 'required', "Required property 'email' is missing or null"); }
+        if (!property_exists($data, "email") || $data->email === null) {
+            throw new SdkValidationError("email", 'required', "Required property 'email' is missing or null");
+        }
         return new self(
             email: SdkClient::stringValue($data->email),
         );

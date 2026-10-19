@@ -157,11 +157,26 @@ final readonly class NeonAuthWebhookConfigEnabledEventsItemEnum implements SdkOp
     public const ORGANIZATION_INVITATION_ACCEPTED = "organization.invitation.accepted";
     public const PHONE_NUMBER_VERIFIED = "phone_number.verified";
     private function __construct(public string $value) {}
-    public static function from(string|int $value): static { return new self((string) $value); }
-    public static function tryFrom(string|int|null $value): ?static { return $value === null ? null : self::from($value); }
-    public function getValue(): string { return $this->value; }
-    public function jsonSerialize(): string { return $this->value; }
-    public function __toString(): string { return (string) $this->value; }
+    public static function from(string|int $value): static
+    {
+        return new self((string) $value);
+    }
+    public static function tryFrom(string|int|null $value): ?static
+    {
+        return $value === null ? null : self::from($value);
+    }
+    public function getValue(): string
+    {
+        return $this->value;
+    }
+    public function jsonSerialize(): string
+    {
+        return $this->value;
+    }
+    public function __toString(): string
+    {
+        return (string) $this->value;
+    }
 }
 
 /**
@@ -238,7 +253,9 @@ class NeonAuthWebhookConfig implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "enabled") || $data->enabled === null) { throw new SdkValidationError("enabled", 'required', "Required property 'enabled' is missing or null"); }
+        if (!property_exists($data, "enabled") || $data->enabled === null) {
+            throw new SdkValidationError("enabled", 'required', "Required property 'enabled' is missing or null");
+        }
         return new self(
             enabled: SdkClient::boolValue($data->enabled),
             webhookUrl: (property_exists($data, "webhook_url") && $data->webhook_url !== null ? SdkClient::stringValue($data->webhook_url) : SdkNotGiven::Value),
@@ -286,7 +303,9 @@ class SendNeonAuthEmailProviderTestRequest implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "recipient_email") || $data->recipient_email === null) { throw new SdkValidationError("recipient_email", 'required', "Required property 'recipient_email' is missing or null"); }
+        if (!property_exists($data, "recipient_email") || $data->recipient_email === null) {
+            throw new SdkValidationError("recipient_email", 'required', "Required property 'recipient_email' is missing or null");
+        }
         return new self(
             recipientEmail: SdkClient::stringValue($data->recipient_email),
         );

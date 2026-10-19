@@ -26,11 +26,26 @@ final readonly class BillingSubscriptionType implements SdkOpenEnum
     public const BUSINESS = "business";
     public const VERCEL_PG_LEGACY = "vercel_pg_legacy";
     private function __construct(public string $value) {}
-    public static function from(string|int $value): static { return new self((string) $value); }
-    public static function tryFrom(string|int|null $value): ?static { return $value === null ? null : self::from($value); }
-    public function getValue(): string { return $this->value; }
-    public function jsonSerialize(): string { return $this->value; }
-    public function __toString(): string { return (string) $this->value; }
+    public static function from(string|int $value): static
+    {
+        return new self((string) $value);
+    }
+    public static function tryFrom(string|int|null $value): ?static
+    {
+        return $value === null ? null : self::from($value);
+    }
+    public function getValue(): string
+    {
+        return $this->value;
+    }
+    public function jsonSerialize(): string
+    {
+        return $this->value;
+    }
+    public function __toString(): string
+    {
+        return (string) $this->value;
+    }
 }
 
 /**
@@ -71,7 +86,9 @@ class BranchesResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "branches") || $data->branches === null) { throw new SdkValidationError("branches", 'required', "Required property 'branches' is missing or null"); }
+        if (!property_exists($data, "branches") || $data->branches === null) {
+            throw new SdkValidationError("branches", 'required', "Required property 'branches' is missing or null");
+        }
         return new self(
             branches: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, Branch::class), SdkClient::arrayValue($data->branches))),
         );
@@ -166,12 +183,24 @@ class Database implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "id") || $data->id === null) { throw new SdkValidationError("id", 'required', "Required property 'id' is missing or null"); }
-        if (!property_exists($data, "branch_id") || $data->branch_id === null) { throw new SdkValidationError("branch_id", 'required', "Required property 'branch_id' is missing or null"); }
-        if (!property_exists($data, "name") || $data->name === null) { throw new SdkValidationError("name", 'required', "Required property 'name' is missing or null"); }
-        if (!property_exists($data, "owner_name") || $data->owner_name === null) { throw new SdkValidationError("owner_name", 'required', "Required property 'owner_name' is missing or null"); }
-        if (!property_exists($data, "created_at") || $data->created_at === null) { throw new SdkValidationError("created_at", 'required', "Required property 'created_at' is missing or null"); }
-        if (!property_exists($data, "updated_at") || $data->updated_at === null) { throw new SdkValidationError("updated_at", 'required', "Required property 'updated_at' is missing or null"); }
+        if (!property_exists($data, "id") || $data->id === null) {
+            throw new SdkValidationError("id", 'required', "Required property 'id' is missing or null");
+        }
+        if (!property_exists($data, "branch_id") || $data->branch_id === null) {
+            throw new SdkValidationError("branch_id", 'required', "Required property 'branch_id' is missing or null");
+        }
+        if (!property_exists($data, "name") || $data->name === null) {
+            throw new SdkValidationError("name", 'required', "Required property 'name' is missing or null");
+        }
+        if (!property_exists($data, "owner_name") || $data->owner_name === null) {
+            throw new SdkValidationError("owner_name", 'required', "Required property 'owner_name' is missing or null");
+        }
+        if (!property_exists($data, "created_at") || $data->created_at === null) {
+            throw new SdkValidationError("created_at", 'required', "Required property 'created_at' is missing or null");
+        }
+        if (!property_exists($data, "updated_at") || $data->updated_at === null) {
+            throw new SdkValidationError("updated_at", 'required', "Required property 'updated_at' is missing or null");
+        }
         return new self(
             id: SdkClient::intValue($data->id),
             branchId: SdkClient::stringValue($data->branch_id),
@@ -221,7 +250,9 @@ class DatabasesResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "databases") || $data->databases === null) { throw new SdkValidationError("databases", 'required', "Required property 'databases' is missing or null"); }
+        if (!property_exists($data, "databases") || $data->databases === null) {
+            throw new SdkValidationError("databases", 'required', "Required property 'databases' is missing or null");
+        }
         return new self(
             databases: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, Database::class), SdkClient::arrayValue($data->databases))),
         );
@@ -306,7 +337,9 @@ class EndpointsResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "endpoints") || $data->endpoints === null) { throw new SdkValidationError("endpoints", 'required', "Required property 'endpoints' is missing or null"); }
+        if (!property_exists($data, "endpoints") || $data->endpoints === null) {
+            throw new SdkValidationError("endpoints", 'required', "Required property 'endpoints' is missing or null");
+        }
         return new self(
             endpoints: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, Endpoint::class), SdkClient::arrayValue($data->endpoints))),
         );
