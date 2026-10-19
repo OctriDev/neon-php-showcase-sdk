@@ -91,12 +91,8 @@ class Realtime implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "enabled") || $data->enabled === null) {
-            throw new SdkValidationError("enabled", 'required', "Required property 'enabled' is missing or null");
-        }
-        if (!property_exists($data, "pending") || $data->pending === null) {
-            throw new SdkValidationError("pending", 'required', "Required property 'pending' is missing or null");
-        }
+        if (!property_exists($data, "enabled") || $data->enabled === null) { throw new SdkValidationError("enabled", 'required', "Required property 'enabled' is missing or null"); }
+        if (!property_exists($data, "pending") || $data->pending === null) { throw new SdkValidationError("pending", 'required', "Required property 'pending' is missing or null"); }
         return new self(
             enabled: SdkClient::boolValue($data->enabled),
             pending: SdkClient::boolValue($data->pending),
@@ -155,12 +151,8 @@ class RealtimeSecret implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "secret") || $data->secret === null) {
-            throw new SdkValidationError("secret", 'required', "Required property 'secret' is missing or null");
-        }
-        if (!property_exists($data, "pending") || $data->pending === null) {
-            throw new SdkValidationError("pending", 'required', "Required property 'pending' is missing or null");
-        }
+        if (!property_exists($data, "secret") || $data->secret === null) { throw new SdkValidationError("secret", 'required', "Required property 'secret' is missing or null"); }
+        if (!property_exists($data, "pending") || $data->pending === null) { throw new SdkValidationError("pending", 'required', "Required property 'pending' is missing or null"); }
         return new self(
             secret: SdkClient::stringValue($data->secret),
             pending: SdkClient::boolValue($data->pending),

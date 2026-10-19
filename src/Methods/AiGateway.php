@@ -25,7 +25,7 @@ class AiGateway
 
         Validation::validatePattern('branch_id', $branchId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/ai_gateway", $clientConfig, returnType: BranchAiGateway::class, decoder: 'json', operationId: 'getAiGateway', requestOptions: $requestOptions, errors: [404 => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, BranchAiGatewayNotEnabled::class), "default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/ai_gateway", $clientConfig, returnType: BranchAiGateway::class, decoder: 'json', operationId: 'getAiGateway', requestOptions: $requestOptions, errors: [404 => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, BranchAiGatewayNotEnabled::class), "default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, BranchAiGateway::class));
     }
 }

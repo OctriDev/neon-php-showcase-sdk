@@ -45,9 +45,7 @@ class OrganizationsResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "organizations") || $data->organizations === null) {
-            throw new SdkValidationError("organizations", 'required', "Required property 'organizations' is missing or null");
-        }
+        if (!property_exists($data, "organizations") || $data->organizations === null) { throw new SdkValidationError("organizations", 'required', "Required property 'organizations' is missing or null"); }
         return new self(
             organizations: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, Organization::class), SdkClient::arrayValue($data->organizations))),
         );
@@ -104,9 +102,7 @@ class PaymentSource implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "type") || $data->type === null) {
-            throw new SdkValidationError("type", 'required', "Required property 'type' is missing or null");
-        }
+        if (!property_exists($data, "type") || $data->type === null) { throw new SdkValidationError("type", 'required', "Required property 'type' is missing or null"); }
         return new self(
             type: SdkClient::stringValue($data->type),
             card: (property_exists($data, "card") && $data->card !== null ? SdkClient::hydrateClass($data->card, PaymentSourceBankCard::class) : SdkNotGiven::Value),
@@ -128,26 +124,11 @@ final readonly class PaymentSourceBankCardBrandEnum implements SdkOpenEnum
     public const UNKNOWN = "unknown";
     public const VISA = "visa";
     private function __construct(public string $value) {}
-    public static function from(string|int $value): static
-    {
-        return new self((string) $value);
-    }
-    public static function tryFrom(string|int|null $value): ?static
-    {
-        return $value === null ? null : self::from($value);
-    }
-    public function getValue(): string
-    {
-        return $this->value;
-    }
-    public function jsonSerialize(): string
-    {
-        return $this->value;
-    }
-    public function __toString(): string
-    {
-        return (string) $this->value;
-    }
+    public static function from(string|int $value): static { return new self((string) $value); }
+    public static function tryFrom(string|int|null $value): ?static { return $value === null ? null : self::from($value); }
+    public function getValue(): string { return $this->value; }
+    public function jsonSerialize(): string { return $this->value; }
+    public function __toString(): string { return (string) $this->value; }
 }
 
 /**
@@ -224,9 +205,7 @@ class PaymentSourceBankCard implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "last4") || $data->last4 === null) {
-            throw new SdkValidationError("last4", 'required', "Required property 'last4' is missing or null");
-        }
+        if (!property_exists($data, "last4") || $data->last4 === null) { throw new SdkValidationError("last4", 'required', "Required property 'last4' is missing or null"); }
         return new self(
             last4: SdkClient::stringValue($data->last4),
             brand: (property_exists($data, "brand") && $data->brand !== null ? SdkClient::hydrateStringEnumOrString($data->brand, PaymentSourceBankCardBrandEnum::class) : SdkNotGiven::Value),
@@ -286,9 +265,7 @@ class PlanDetails implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "name") || $data->name === null) {
-            throw new SdkValidationError("name", 'required', "Required property 'name' is missing or null");
-        }
+        if (!property_exists($data, "name") || $data->name === null) { throw new SdkValidationError("name", 'required', "Required property 'name' is missing or null"); }
         return new self(
             name: SdkClient::stringValue($data->name),
             version: (property_exists($data, "version") && $data->version !== null ? SdkClient::hydrateClass($data->version, PlanVersion::class) : SdkNotGiven::Value),
@@ -344,12 +321,8 @@ class PlanVersion implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "major") || $data->major === null) {
-            throw new SdkValidationError("major", 'required', "Required property 'major' is missing or null");
-        }
-        if (!property_exists($data, "minor") || $data->minor === null) {
-            throw new SdkValidationError("minor", 'required', "Required property 'minor' is missing or null");
-        }
+        if (!property_exists($data, "major") || $data->major === null) { throw new SdkValidationError("major", 'required', "Required property 'major' is missing or null"); }
+        if (!property_exists($data, "minor") || $data->minor === null) { throw new SdkValidationError("minor", 'required', "Required property 'minor' is missing or null"); }
         return new self(
             major: SdkClient::intValue($data->major),
             minor: SdkClient::intValue($data->minor),

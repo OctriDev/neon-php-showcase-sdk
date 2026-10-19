@@ -44,12 +44,8 @@ class CreateSnapshotResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "snapshot") || $data->snapshot === null) {
-            throw new SdkValidationError("snapshot", 'required', "Required property 'snapshot' is missing or null");
-        }
-        if (!property_exists($data, "operations") || $data->operations === null) {
-            throw new SdkValidationError("operations", 'required', "Required property 'operations' is missing or null");
-        }
+        if (!property_exists($data, "snapshot") || $data->snapshot === null) { throw new SdkValidationError("snapshot", 'required', "Required property 'snapshot' is missing or null"); }
+        if (!property_exists($data, "operations") || $data->operations === null) { throw new SdkValidationError("operations", 'required', "Required property 'operations' is missing or null"); }
         return new self(
             snapshot: SdkClient::hydrateClass($data->snapshot, Snapshot::class),
             operations: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, Operation::class), SdkClient::arrayValue($data->operations))),
@@ -88,9 +84,7 @@ class ListSnapshotsResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "snapshots") || $data->snapshots === null) {
-            throw new SdkValidationError("snapshots", 'required', "Required property 'snapshots' is missing or null");
-        }
+        if (!property_exists($data, "snapshots") || $data->snapshots === null) { throw new SdkValidationError("snapshots", 'required', "Required property 'snapshots' is missing or null"); }
         return new self(
             snapshots: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, Snapshot::class), SdkClient::arrayValue($data->snapshots))),
         );
@@ -187,9 +181,7 @@ class UpdateSnapshotResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "snapshot") || $data->snapshot === null) {
-            throw new SdkValidationError("snapshot", 'required', "Required property 'snapshot' is missing or null");
-        }
+        if (!property_exists($data, "snapshot") || $data->snapshot === null) { throw new SdkValidationError("snapshot", 'required', "Required property 'snapshot' is missing or null"); }
         return new self(
             snapshot: SdkClient::hydrateClass($data->snapshot, Snapshot::class),
         );
@@ -218,7 +210,7 @@ class SnapshotApi
 
         Validation::validatePattern('branch_id', $branchId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('POST', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/snapshot", $clientConfig, query: ['lsn' => new SdkQueryValue($lsn, "form", true), 'timestamp' => new SdkQueryValue($timestamp, "form", true), 'name' => new SdkQueryValue($name, "form", true), 'expires_at' => new SdkQueryValue($expiresAt, "form", true)], returnType: CreateSnapshotResponse::class, decoder: 'json', operationId: 'createSnapshot', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('POST', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/snapshot", $clientConfig, query: ['lsn' => new SdkQueryValue($lsn, "form", true), 'timestamp' => new SdkQueryValue($timestamp, "form", true), 'name' => new SdkQueryValue($name, "form", true), 'expires_at' => new SdkQueryValue($expiresAt, "form", true)], returnType: CreateSnapshotResponse::class, decoder: 'json', operationId: 'createSnapshot', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, CreateSnapshotResponse::class));
     }
 
@@ -236,7 +228,7 @@ class SnapshotApi
 
         Validation::validatePattern('project_id', $projectId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/snapshots", $clientConfig, returnType: ListSnapshotsResponse::class, decoder: 'json', operationId: 'listSnapshots', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/snapshots", $clientConfig, returnType: ListSnapshotsResponse::class, decoder: 'json', operationId: 'listSnapshots', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, ListSnapshotsResponse::class));
     }
 
@@ -257,7 +249,7 @@ class SnapshotApi
 
         Validation::validatePattern('snapshot_id', $snapshotId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('DELETE', "/projects/" . SdkClient::encodePathSegment($projectId) . "/snapshots/" . SdkClient::encodePathSegment($snapshotId) . "", $clientConfig, returnType: OperationsResponse::class, decoder: 'json', operationId: 'deleteSnapshot', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('DELETE', "/projects/" . SdkClient::encodePathSegment($projectId) . "/snapshots/" . SdkClient::encodePathSegment($snapshotId) . "", $clientConfig, returnType: OperationsResponse::class, decoder: 'json', operationId: 'deleteSnapshot', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, OperationsResponse::class));
     }
 
@@ -279,7 +271,7 @@ class SnapshotApi
 
         Validation::validatePattern('snapshot_id', $snapshotId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('PATCH', "/projects/" . SdkClient::encodePathSegment($projectId) . "/snapshots/" . SdkClient::encodePathSegment($snapshotId) . "", $clientConfig, body: ['snapshot' => $snapshot], returnType: UpdateSnapshotResponse::class, decoder: 'json', operationId: 'updateSnapshot', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('PATCH', "/projects/" . SdkClient::encodePathSegment($projectId) . "/snapshots/" . SdkClient::encodePathSegment($snapshotId) . "", $clientConfig, body: ['snapshot' => $snapshot], returnType: UpdateSnapshotResponse::class, decoder: 'json', operationId: 'updateSnapshot', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, UpdateSnapshotResponse::class));
     }
 
@@ -304,7 +296,7 @@ class SnapshotApi
 
         Validation::validatePattern('snapshot_id', $snapshotId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('POST', "/projects/" . SdkClient::encodePathSegment($projectId) . "/snapshots/" . SdkClient::encodePathSegment($snapshotId) . "/restore", $clientConfig, query: ['name' => new SdkQueryValue($name, "form", true)], body: ['name' => $name_2, 'target_branch_id' => $targetBranchId, 'finalize_restore' => $finalizeRestore], returnType: RestoreSnapshotResponse::class, decoder: 'json', operationId: 'restoreSnapshot', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('POST', "/projects/" . SdkClient::encodePathSegment($projectId) . "/snapshots/" . SdkClient::encodePathSegment($snapshotId) . "/restore", $clientConfig, query: ['name' => new SdkQueryValue($name, "form", true)], body: ['name' => $name_2, 'target_branch_id' => $targetBranchId, 'finalize_restore' => $finalizeRestore], returnType: RestoreSnapshotResponse::class, decoder: 'json', operationId: 'restoreSnapshot', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, RestoreSnapshotResponse::class));
     }
 
@@ -325,7 +317,7 @@ class SnapshotApi
 
         Validation::validatePattern('branch_id', $branchId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/backup_schedule", $clientConfig, returnType: BackupSchedule::class, decoder: 'json', operationId: 'getSnapshotSchedule', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/backup_schedule", $clientConfig, returnType: BackupSchedule::class, decoder: 'json', operationId: 'getSnapshotSchedule', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, BackupSchedule::class));
     }
 
@@ -347,7 +339,7 @@ class SnapshotApi
 
         Validation::validatePattern('branch_id', $branchId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('PUT', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/backup_schedule", $clientConfig, body: ['schedule' => $schedule], returnType: EmptyResponse::class, decoder: 'json', operationId: 'setSnapshotSchedule', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('PUT', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/backup_schedule", $clientConfig, body: ['schedule' => $schedule], returnType: EmptyResponse::class, decoder: 'json', operationId: 'setSnapshotSchedule', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, EmptyResponse::class));
     }
 }

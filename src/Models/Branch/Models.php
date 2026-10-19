@@ -125,12 +125,8 @@ class AnnotationData implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "object") || $data->object === null) {
-            throw new SdkValidationError("object", 'required', "Required property 'object' is missing or null");
-        }
-        if (!property_exists($data, "value") || $data->value === null) {
-            throw new SdkValidationError("value", 'required', "Required property 'value' is missing or null");
-        }
+        if (!property_exists($data, "object") || $data->object === null) { throw new SdkValidationError("object", 'required', "Required property 'object' is missing or null"); }
+        if (!property_exists($data, "value") || $data->value === null) { throw new SdkValidationError("value", 'required', "Required property 'value' is missing or null"); }
         return new self(
             object_: SdkClient::hydrateClass($data->object, AnnotationObjectData::class),
             value: SdkClient::mapValues(SdkClient::stringMapValue($data->value), static fn($item) => SdkClient::stringValue($item)),
@@ -188,12 +184,8 @@ class AnnotationObjectData implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "type") || $data->type === null) {
-            throw new SdkValidationError("type", 'required', "Required property 'type' is missing or null");
-        }
-        if (!property_exists($data, "id") || $data->id === null) {
-            throw new SdkValidationError("id", 'required', "Required property 'id' is missing or null");
-        }
+        if (!property_exists($data, "type") || $data->type === null) { throw new SdkValidationError("type", 'required', "Required property 'type' is missing or null"); }
+        if (!property_exists($data, "id") || $data->id === null) { throw new SdkValidationError("id", 'required', "Required property 'id' is missing or null"); }
         return new self(
             type: SdkClient::stringValue($data->type),
             id: SdkClient::stringValue($data->id),
@@ -239,9 +231,7 @@ class AnnotationResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "annotation") || $data->annotation === null) {
-            throw new SdkValidationError("annotation", 'required', "Required property 'annotation' is missing or null");
-        }
+        if (!property_exists($data, "annotation") || $data->annotation === null) { throw new SdkValidationError("annotation", 'required', "Required property 'annotation' is missing or null"); }
         return new self(
             annotation: SdkClient::hydrateClass($data->annotation, AnnotationData::class),
         );
@@ -286,9 +276,7 @@ class AnnotationsMapResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "annotations") || $data->annotations === null) {
-            throw new SdkValidationError("annotations", 'required', "Required property 'annotations' is missing or null");
-        }
+        if (!property_exists($data, "annotations") || $data->annotations === null) { throw new SdkValidationError("annotations", 'required', "Required property 'annotations' is missing or null"); }
         return new self(
             annotations: SdkClient::mapValues(SdkClient::stringMapValue($data->annotations), static fn($item) => SdkClient::hydrateClass($item, AnnotationData::class)),
         );

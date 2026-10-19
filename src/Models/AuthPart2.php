@@ -105,27 +105,13 @@ class NeonAuthEmailAndPasswordConfig implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "enabled") || $data->enabled === null) {
-            throw new SdkValidationError("enabled", 'required', "Required property 'enabled' is missing or null");
-        }
-        if (!property_exists($data, "email_verification_method") || $data->email_verification_method === null) {
-            throw new SdkValidationError("email_verification_method", 'required', "Required property 'email_verification_method' is missing or null");
-        }
-        if (!property_exists($data, "require_email_verification") || $data->require_email_verification === null) {
-            throw new SdkValidationError("require_email_verification", 'required', "Required property 'require_email_verification' is missing or null");
-        }
-        if (!property_exists($data, "auto_sign_in_after_verification") || $data->auto_sign_in_after_verification === null) {
-            throw new SdkValidationError("auto_sign_in_after_verification", 'required', "Required property 'auto_sign_in_after_verification' is missing or null");
-        }
-        if (!property_exists($data, "send_verification_email_on_sign_up") || $data->send_verification_email_on_sign_up === null) {
-            throw new SdkValidationError("send_verification_email_on_sign_up", 'required', "Required property 'send_verification_email_on_sign_up' is missing or null");
-        }
-        if (!property_exists($data, "send_verification_email_on_sign_in") || $data->send_verification_email_on_sign_in === null) {
-            throw new SdkValidationError("send_verification_email_on_sign_in", 'required', "Required property 'send_verification_email_on_sign_in' is missing or null");
-        }
-        if (!property_exists($data, "disable_sign_up") || $data->disable_sign_up === null) {
-            throw new SdkValidationError("disable_sign_up", 'required', "Required property 'disable_sign_up' is missing or null");
-        }
+        if (!property_exists($data, "enabled") || $data->enabled === null) { throw new SdkValidationError("enabled", 'required', "Required property 'enabled' is missing or null"); }
+        if (!property_exists($data, "email_verification_method") || $data->email_verification_method === null) { throw new SdkValidationError("email_verification_method", 'required', "Required property 'email_verification_method' is missing or null"); }
+        if (!property_exists($data, "require_email_verification") || $data->require_email_verification === null) { throw new SdkValidationError("require_email_verification", 'required', "Required property 'require_email_verification' is missing or null"); }
+        if (!property_exists($data, "auto_sign_in_after_verification") || $data->auto_sign_in_after_verification === null) { throw new SdkValidationError("auto_sign_in_after_verification", 'required', "Required property 'auto_sign_in_after_verification' is missing or null"); }
+        if (!property_exists($data, "send_verification_email_on_sign_up") || $data->send_verification_email_on_sign_up === null) { throw new SdkValidationError("send_verification_email_on_sign_up", 'required', "Required property 'send_verification_email_on_sign_up' is missing or null"); }
+        if (!property_exists($data, "send_verification_email_on_sign_in") || $data->send_verification_email_on_sign_in === null) { throw new SdkValidationError("send_verification_email_on_sign_in", 'required', "Required property 'send_verification_email_on_sign_in' is missing or null"); }
+        if (!property_exists($data, "disable_sign_up") || $data->disable_sign_up === null) { throw new SdkValidationError("disable_sign_up", 'required', "Required property 'disable_sign_up' is missing or null"); }
         return new self(
             enabled: SdkClient::boolValue($data->enabled),
             emailVerificationMethod: SdkClient::hydrateStringEnumOrString($data->email_verification_method, NeonAuthEmailVerificationMethod::class),
@@ -270,26 +256,11 @@ final readonly class NeonAuthEmailVerificationMethod implements SdkOpenEnum
     public const LINK = "link";
     public const OTP = "otp";
     private function __construct(public string $value) {}
-    public static function from(string|int $value): static
-    {
-        return new self((string) $value);
-    }
-    public static function tryFrom(string|int|null $value): ?static
-    {
-        return $value === null ? null : self::from($value);
-    }
-    public function getValue(): string
-    {
-        return $this->value;
-    }
-    public function jsonSerialize(): string
-    {
-        return $this->value;
-    }
-    public function __toString(): string
-    {
-        return (string) $this->value;
-    }
+    public static function from(string|int $value): static { return new self((string) $value); }
+    public static function tryFrom(string|int|null $value): ?static { return $value === null ? null : self::from($value); }
+    public function getValue(): string { return $this->value; }
+    public function jsonSerialize(): string { return $this->value; }
+    public function __toString(): string { return (string) $this->value; }
 }
 
 /**
@@ -350,15 +321,9 @@ class NeonAuthMagicLinkConfig implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "enabled") || $data->enabled === null) {
-            throw new SdkValidationError("enabled", 'required', "Required property 'enabled' is missing or null");
-        }
-        if (!property_exists($data, "expires_in") || $data->expires_in === null) {
-            throw new SdkValidationError("expires_in", 'required', "Required property 'expires_in' is missing or null");
-        }
-        if (!property_exists($data, "disable_sign_up") || $data->disable_sign_up === null) {
-            throw new SdkValidationError("disable_sign_up", 'required', "Required property 'disable_sign_up' is missing or null");
-        }
+        if (!property_exists($data, "enabled") || $data->enabled === null) { throw new SdkValidationError("enabled", 'required', "Required property 'enabled' is missing or null"); }
+        if (!property_exists($data, "expires_in") || $data->expires_in === null) { throw new SdkValidationError("expires_in", 'required', "Required property 'expires_in' is missing or null"); }
+        if (!property_exists($data, "disable_sign_up") || $data->disable_sign_up === null) { throw new SdkValidationError("disable_sign_up", 'required', "Required property 'disable_sign_up' is missing or null"); }
         return new self(
             enabled: SdkClient::boolValue($data->enabled),
             expiresIn: SdkClient::intValue($data->expires_in),

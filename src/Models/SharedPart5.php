@@ -55,12 +55,8 @@ class TransferProjectsToOrganizationRequest implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "destination_org_id") || $data->destination_org_id === null) {
-            throw new SdkValidationError("destination_org_id", 'required', "Required property 'destination_org_id' is missing or null");
-        }
-        if (!property_exists($data, "project_ids") || $data->project_ids === null) {
-            throw new SdkValidationError("project_ids", 'required', "Required property 'project_ids' is missing or null");
-        }
+        if (!property_exists($data, "destination_org_id") || $data->destination_org_id === null) { throw new SdkValidationError("destination_org_id", 'required', "Required property 'destination_org_id' is missing or null"); }
+        if (!property_exists($data, "project_ids") || $data->project_ids === null) { throw new SdkValidationError("project_ids", 'required', "Required property 'project_ids' is missing or null"); }
         return new self(
             destinationOrgId: SdkClient::stringValue($data->destination_org_id),
             projectIds: array_values(array_map(static fn($item) => SdkClient::stringValue($item), SdkClient::arrayValue($data->project_ids))),
@@ -106,9 +102,7 @@ class VPCEndpointsResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "endpoints") || $data->endpoints === null) {
-            throw new SdkValidationError("endpoints", 'required', "Required property 'endpoints' is missing or null");
-        }
+        if (!property_exists($data, "endpoints") || $data->endpoints === null) { throw new SdkValidationError("endpoints", 'required', "Required property 'endpoints' is missing or null"); }
         return new self(
             endpoints: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, VPCEndpoint::class), SdkClient::arrayValue($data->endpoints))),
         );

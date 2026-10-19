@@ -55,12 +55,8 @@ class MemberWithUser implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "member") || $data->member === null) {
-            throw new SdkValidationError("member", 'required', "Required property 'member' is missing or null");
-        }
-        if (!property_exists($data, "user") || $data->user === null) {
-            throw new SdkValidationError("user", 'required', "Required property 'user' is missing or null");
-        }
+        if (!property_exists($data, "member") || $data->member === null) { throw new SdkValidationError("member", 'required', "Required property 'member' is missing or null"); }
+        if (!property_exists($data, "user") || $data->user === null) { throw new SdkValidationError("user", 'required', "Required property 'user' is missing or null"); }
         return new self(
             member: SdkClient::hydrateClass($data->member, Member::class),
             user: SdkClient::hydrateClass($data->user, MemberUserInfo::class),
@@ -106,9 +102,7 @@ class OrganizationInvitationsResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "invitations") || $data->invitations === null) {
-            throw new SdkValidationError("invitations", 'required', "Required property 'invitations' is missing or null");
-        }
+        if (!property_exists($data, "invitations") || $data->invitations === null) { throw new SdkValidationError("invitations", 'required', "Required property 'invitations' is missing or null"); }
         return new self(
             invitations: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, Invitation::class), SdkClient::arrayValue($data->invitations))),
         );
@@ -163,12 +157,8 @@ class OrganizationInviteCreateRequest implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "email") || $data->email === null) {
-            throw new SdkValidationError("email", 'required', "Required property 'email' is missing or null");
-        }
-        if (!property_exists($data, "role") || $data->role === null) {
-            throw new SdkValidationError("role", 'required', "Required property 'role' is missing or null");
-        }
+        if (!property_exists($data, "email") || $data->email === null) { throw new SdkValidationError("email", 'required', "Required property 'email' is missing or null"); }
+        if (!property_exists($data, "role") || $data->role === null) { throw new SdkValidationError("role", 'required', "Required property 'role' is missing or null"); }
         return new self(
             email: SdkClient::stringValue($data->email),
             role: SdkClient::hydrateStringEnumOrString($data->role, MemberRole::class),
@@ -214,9 +204,7 @@ class OrganizationInvitesCreateRequest implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "invitations") || $data->invitations === null) {
-            throw new SdkValidationError("invitations", 'required', "Required property 'invitations' is missing or null");
-        }
+        if (!property_exists($data, "invitations") || $data->invitations === null) { throw new SdkValidationError("invitations", 'required', "Required property 'invitations' is missing or null"); }
         return new self(
             invitations: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, OrganizationInviteCreateRequest::class), SdkClient::arrayValue($data->invitations))),
         );
@@ -261,9 +249,7 @@ class OrganizationMembersResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "members") || $data->members === null) {
-            throw new SdkValidationError("members", 'required', "Required property 'members' is missing or null");
-        }
+        if (!property_exists($data, "members") || $data->members === null) { throw new SdkValidationError("members", 'required', "Required property 'members' is missing or null"); }
         return new self(
             members: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, MemberWithUser::class), SdkClient::arrayValue($data->members))),
         );
@@ -308,9 +294,7 @@ class OrganizationMemberUpdateRequest implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "role") || $data->role === null) {
-            throw new SdkValidationError("role", 'required', "Required property 'role' is missing or null");
-        }
+        if (!property_exists($data, "role") || $data->role === null) { throw new SdkValidationError("role", 'required', "Required property 'role' is missing or null"); }
         return new self(
             role: SdkClient::hydrateStringEnumOrString($data->role, MemberRole::class),
         );

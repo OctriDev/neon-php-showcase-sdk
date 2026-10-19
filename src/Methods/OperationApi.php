@@ -25,7 +25,7 @@ class OperationApi
 
         Validation::validateUuid('operation_id', $operationId);
 
-        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/operations/" . SdkClient::encodePathSegment($operationId) . "", $clientConfig, returnType: OperationResponse::class, decoder: 'json', operationId: 'getOperation', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/operations/" . SdkClient::encodePathSegment($operationId) . "", $clientConfig, returnType: OperationResponse::class, decoder: 'json', operationId: 'getOperation', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, OperationResponse::class));
     }
 
@@ -49,7 +49,7 @@ class OperationApi
             Validation::validateRange('limit', $limit, min: 1, max: 1000);
         }
 
-        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/operations", $clientConfig, query: ['cursor' => new SdkQueryValue($cursor, "form", true), 'limit' => new SdkQueryValue($limit, "form", true)], returnType: ListOperationResponse::class, decoder: 'json', operationId: 'listOperation', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/operations", $clientConfig, query: ['cursor' => new SdkQueryValue($cursor, "form", true), 'limit' => new SdkQueryValue($limit, "form", true)], returnType: ListOperationResponse::class, decoder: 'json', operationId: 'listOperation', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, ListOperationResponse::class));
     }
 }

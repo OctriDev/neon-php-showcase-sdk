@@ -247,24 +247,12 @@ class StandardEmailServerResponse implements NeonAuthEmailServerConfigResponse, 
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "host") || $data->host === null) {
-            throw new SdkValidationError("host", 'required', "Required property 'host' is missing or null");
-        }
-        if (!property_exists($data, "port") || $data->port === null) {
-            throw new SdkValidationError("port", 'required', "Required property 'port' is missing or null");
-        }
-        if (!property_exists($data, "username") || $data->username === null) {
-            throw new SdkValidationError("username", 'required', "Required property 'username' is missing or null");
-        }
-        if (!property_exists($data, "password") || $data->password === null) {
-            throw new SdkValidationError("password", 'required', "Required property 'password' is missing or null");
-        }
-        if (!property_exists($data, "sender_email") || $data->sender_email === null) {
-            throw new SdkValidationError("sender_email", 'required', "Required property 'sender_email' is missing or null");
-        }
-        if (!property_exists($data, "sender_name") || $data->sender_name === null) {
-            throw new SdkValidationError("sender_name", 'required', "Required property 'sender_name' is missing or null");
-        }
+        if (!property_exists($data, "host") || $data->host === null) { throw new SdkValidationError("host", 'required', "Required property 'host' is missing or null"); }
+        if (!property_exists($data, "port") || $data->port === null) { throw new SdkValidationError("port", 'required', "Required property 'port' is missing or null"); }
+        if (!property_exists($data, "username") || $data->username === null) { throw new SdkValidationError("username", 'required', "Required property 'username' is missing or null"); }
+        if (!property_exists($data, "password") || $data->password === null) { throw new SdkValidationError("password", 'required', "Required property 'password' is missing or null"); }
+        if (!property_exists($data, "sender_email") || $data->sender_email === null) { throw new SdkValidationError("sender_email", 'required', "Required property 'sender_email' is missing or null"); }
+        if (!property_exists($data, "sender_name") || $data->sender_name === null) { throw new SdkValidationError("sender_name", 'required', "Required property 'sender_name' is missing or null"); }
         return new self(
             host: SdkClient::stringValue($data->host),
             port: SdkClient::intValue($data->port),

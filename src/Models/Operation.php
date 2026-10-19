@@ -57,9 +57,7 @@ class ListOperationResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "operations") || $data->operations === null) {
-            throw new SdkValidationError("operations", 'required', "Required property 'operations' is missing or null");
-        }
+        if (!property_exists($data, "operations") || $data->operations === null) { throw new SdkValidationError("operations", 'required', "Required property 'operations' is missing or null"); }
         return new self(
             operations: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, Operation::class), SdkClient::arrayValue($data->operations))),
             pagination: (property_exists($data, "pagination") && $data->pagination !== null ? SdkClient::hydrateClass($data->pagination, Pagination::class) : SdkNotGiven::Value),
@@ -105,9 +103,7 @@ class OperationResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "operation") || $data->operation === null) {
-            throw new SdkValidationError("operation", 'required', "Required property 'operation' is missing or null");
-        }
+        if (!property_exists($data, "operation") || $data->operation === null) { throw new SdkValidationError("operation", 'required', "Required property 'operation' is missing or null"); }
         return new self(
             operation: SdkClient::hydrateClass($data->operation, Operation::class),
         );

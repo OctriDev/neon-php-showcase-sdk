@@ -67,12 +67,8 @@ class GeneralError implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "code") || $data->code === null) {
-            throw new SdkValidationError("code", 'required', "Required property 'code' is missing or null");
-        }
-        if (!property_exists($data, "message") || $data->message === null) {
-            throw new SdkValidationError("message", 'required', "Required property 'message' is missing or null");
-        }
+        if (!property_exists($data, "code") || $data->code === null) { throw new SdkValidationError("code", 'required', "Required property 'code' is missing or null"); }
+        if (!property_exists($data, "message") || $data->message === null) { throw new SdkValidationError("message", 'required', "Required property 'message' is missing or null"); }
         return new self(
             code: SdkClient::stringValue($data->code),
             message: SdkClient::stringValue($data->message),
@@ -139,15 +135,9 @@ class LimitsUnsatisfiedResponseLimitsItem implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "name") || $data->name === null) {
-            throw new SdkValidationError("name", 'required', "Required property 'name' is missing or null");
-        }
-        if (!property_exists($data, "expected") || $data->expected === null) {
-            throw new SdkValidationError("expected", 'required', "Required property 'expected' is missing or null");
-        }
-        if (!property_exists($data, "actual") || $data->actual === null) {
-            throw new SdkValidationError("actual", 'required', "Required property 'actual' is missing or null");
-        }
+        if (!property_exists($data, "name") || $data->name === null) { throw new SdkValidationError("name", 'required', "Required property 'name' is missing or null"); }
+        if (!property_exists($data, "expected") || $data->expected === null) { throw new SdkValidationError("expected", 'required', "Required property 'expected' is missing or null"); }
+        if (!property_exists($data, "actual") || $data->actual === null) { throw new SdkValidationError("actual", 'required', "Required property 'actual' is missing or null"); }
         return new self(
             name: SdkClient::stringValue($data->name),
             expected: SdkClient::stringValue($data->expected),
@@ -194,9 +184,7 @@ class LimitsUnsatisfiedResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "limits") || $data->limits === null) {
-            throw new SdkValidationError("limits", 'required', "Required property 'limits' is missing or null");
-        }
+        if (!property_exists($data, "limits") || $data->limits === null) { throw new SdkValidationError("limits", 'required', "Required property 'limits' is missing or null"); }
         return new self(
             limits: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, LimitsUnsatisfiedResponseLimitsItem::class), SdkClient::arrayValue($data->limits))),
         );
@@ -241,9 +229,7 @@ class ListNeonAuthOauthProvidersResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "providers") || $data->providers === null) {
-            throw new SdkValidationError("providers", 'required', "Required property 'providers' is missing or null");
-        }
+        if (!property_exists($data, "providers") || $data->providers === null) { throw new SdkValidationError("providers", 'required', "Required property 'providers' is missing or null"); }
         return new self(
             providers: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, NeonAuthOauthProvider::class), SdkClient::arrayValue($data->providers))),
         );
@@ -288,9 +274,7 @@ class OperationsResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "operations") || $data->operations === null) {
-            throw new SdkValidationError("operations", 'required', "Required property 'operations' is missing or null");
-        }
+        if (!property_exists($data, "operations") || $data->operations === null) { throw new SdkValidationError("operations", 'required', "Required property 'operations' is missing or null"); }
         return new self(
             operations: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, Operation::class), SdkClient::arrayValue($data->operations))),
         );

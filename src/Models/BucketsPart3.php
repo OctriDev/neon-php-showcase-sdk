@@ -75,18 +75,10 @@ class PresignResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "url") || $data->url === null) {
-            throw new SdkValidationError("url", 'required', "Required property 'url' is missing or null");
-        }
-        if (!property_exists($data, "method") || $data->method === null) {
-            throw new SdkValidationError("method", 'required', "Required property 'method' is missing or null");
-        }
-        if (!property_exists($data, "headers") || $data->headers === null) {
-            throw new SdkValidationError("headers", 'required', "Required property 'headers' is missing or null");
-        }
-        if (!property_exists($data, "expires_at") || $data->expires_at === null) {
-            throw new SdkValidationError("expires_at", 'required', "Required property 'expires_at' is missing or null");
-        }
+        if (!property_exists($data, "url") || $data->url === null) { throw new SdkValidationError("url", 'required', "Required property 'url' is missing or null"); }
+        if (!property_exists($data, "method") || $data->method === null) { throw new SdkValidationError("method", 'required', "Required property 'method' is missing or null"); }
+        if (!property_exists($data, "headers") || $data->headers === null) { throw new SdkValidationError("headers", 'required', "Required property 'headers' is missing or null"); }
+        if (!property_exists($data, "expires_at") || $data->expires_at === null) { throw new SdkValidationError("expires_at", 'required', "Required property 'expires_at' is missing or null"); }
         return new self(
             url: SdkClient::stringValue($data->url),
             method: SdkClient::stringValue($data->method),

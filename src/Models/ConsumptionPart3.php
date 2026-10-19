@@ -127,12 +127,8 @@ class ConsumptionMetricValue implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "metric_name") || $data->metric_name === null) {
-            throw new SdkValidationError("metric_name", 'required', "Required property 'metric_name' is missing or null");
-        }
-        if (!property_exists($data, "value") || $data->value === null) {
-            throw new SdkValidationError("value", 'required', "Required property 'value' is missing or null");
-        }
+        if (!property_exists($data, "metric_name") || $data->metric_name === null) { throw new SdkValidationError("metric_name", 'required', "Required property 'metric_name' is missing or null"); }
+        if (!property_exists($data, "value") || $data->value === null) { throw new SdkValidationError("value", 'required', "Required property 'value' is missing or null"); }
         return new self(
             metricName: SdkClient::stringValue($data->metric_name),
             value: SdkClient::intValue($data->value),
@@ -190,9 +186,7 @@ class GetConsumptionHistoryPerBranchV2Response implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "branches") || $data->branches === null) {
-            throw new SdkValidationError("branches", 'required', "Required property 'branches' is missing or null");
-        }
+        if (!property_exists($data, "branches") || $data->branches === null) { throw new SdkValidationError("branches", 'required', "Required property 'branches' is missing or null"); }
         return new self(
             branches: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, ConsumptionHistoryPerBranchV2::class), SdkClient::arrayValue($data->branches))),
             pagination: (property_exists($data, "pagination") && $data->pagination !== null ? SdkClient::hydrateClass($data->pagination, Pagination::class) : SdkNotGiven::Value),
@@ -250,9 +244,7 @@ class GetConsumptionHistoryPerProjectResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "projects") || $data->projects === null) {
-            throw new SdkValidationError("projects", 'required', "Required property 'projects' is missing or null");
-        }
+        if (!property_exists($data, "projects") || $data->projects === null) { throw new SdkValidationError("projects", 'required', "Required property 'projects' is missing or null"); }
         return new self(
             projects: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, ConsumptionHistoryPerProject::class), SdkClient::arrayValue($data->projects))),
             pagination: (property_exists($data, "pagination") && $data->pagination !== null ? SdkClient::hydrateClass($data->pagination, Pagination::class) : SdkNotGiven::Value),
@@ -310,9 +302,7 @@ class GetConsumptionHistoryPerProjectV2Response implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "projects") || $data->projects === null) {
-            throw new SdkValidationError("projects", 'required', "Required property 'projects' is missing or null");
-        }
+        if (!property_exists($data, "projects") || $data->projects === null) { throw new SdkValidationError("projects", 'required', "Required property 'projects' is missing or null"); }
         return new self(
             projects: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, ConsumptionHistoryPerProjectV2::class), SdkClient::arrayValue($data->projects))),
             pagination: (property_exists($data, "pagination") && $data->pagination !== null ? SdkClient::hydrateClass($data->pagination, Pagination::class) : SdkNotGiven::Value),

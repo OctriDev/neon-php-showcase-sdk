@@ -17,26 +17,11 @@ final readonly class NeonFunctionDeploymentStatusEnum implements SdkOpenEnum
     public const COMPLETED = "completed";
     public const FAILED = "failed";
     private function __construct(public string $value) {}
-    public static function from(string|int $value): static
-    {
-        return new self((string) $value);
-    }
-    public static function tryFrom(string|int|null $value): ?static
-    {
-        return $value === null ? null : self::from($value);
-    }
-    public function getValue(): string
-    {
-        return $this->value;
-    }
-    public function jsonSerialize(): string
-    {
-        return $this->value;
-    }
-    public function __toString(): string
-    {
-        return (string) $this->value;
-    }
+    public static function from(string|int $value): static { return new self((string) $value); }
+    public static function tryFrom(string|int|null $value): ?static { return $value === null ? null : self::from($value); }
+    public function getValue(): string { return $this->value; }
+    public function jsonSerialize(): string { return $this->value; }
+    public function __toString(): string { return (string) $this->value; }
 }
 
 /**
@@ -141,21 +126,11 @@ class NeonFunctionDeployment implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "id") || $data->id === null) {
-            throw new SdkValidationError("id", 'required', "Required property 'id' is missing or null");
-        }
-        if (!property_exists($data, "status") || $data->status === null) {
-            throw new SdkValidationError("status", 'required', "Required property 'status' is missing or null");
-        }
-        if (!property_exists($data, "memory_mib") || $data->memory_mib === null) {
-            throw new SdkValidationError("memory_mib", 'required', "Required property 'memory_mib' is missing or null");
-        }
-        if (!property_exists($data, "runtime") || $data->runtime === null) {
-            throw new SdkValidationError("runtime", 'required', "Required property 'runtime' is missing or null");
-        }
-        if (!property_exists($data, "created_at") || $data->created_at === null) {
-            throw new SdkValidationError("created_at", 'required', "Required property 'created_at' is missing or null");
-        }
+        if (!property_exists($data, "id") || $data->id === null) { throw new SdkValidationError("id", 'required', "Required property 'id' is missing or null"); }
+        if (!property_exists($data, "status") || $data->status === null) { throw new SdkValidationError("status", 'required', "Required property 'status' is missing or null"); }
+        if (!property_exists($data, "memory_mib") || $data->memory_mib === null) { throw new SdkValidationError("memory_mib", 'required', "Required property 'memory_mib' is missing or null"); }
+        if (!property_exists($data, "runtime") || $data->runtime === null) { throw new SdkValidationError("runtime", 'required', "Required property 'runtime' is missing or null"); }
+        if (!property_exists($data, "created_at") || $data->created_at === null) { throw new SdkValidationError("created_at", 'required', "Required property 'created_at' is missing or null"); }
         return new self(
             id: SdkClient::intValue($data->id),
             status: SdkClient::hydrateStringEnumOrString($data->status, NeonFunctionDeploymentStatusEnum::class),
@@ -206,9 +181,7 @@ class NeonFunctionDeploymentResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "deployment") || $data->deployment === null) {
-            throw new SdkValidationError("deployment", 'required', "Required property 'deployment' is missing or null");
-        }
+        if (!property_exists($data, "deployment") || $data->deployment === null) { throw new SdkValidationError("deployment", 'required', "Required property 'deployment' is missing or null"); }
         return new self(
             deployment: SdkClient::hydrateClass($data->deployment, NeonFunctionDeployment::class),
         );
@@ -253,9 +226,7 @@ class NeonFunctionResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "function") || $data->function === null) {
-            throw new SdkValidationError("function", 'required', "Required property 'function' is missing or null");
-        }
+        if (!property_exists($data, "function") || $data->function === null) { throw new SdkValidationError("function", 'required', "Required property 'function' is missing or null"); }
         return new self(
             function_: SdkClient::hydrateClass($data->function, NeonFunction::class),
         );
@@ -300,9 +271,7 @@ class NeonFunctionsListResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "functions") || $data->functions === null) {
-            throw new SdkValidationError("functions", 'required', "Required property 'functions' is missing or null");
-        }
+        if (!property_exists($data, "functions") || $data->functions === null) { throw new SdkValidationError("functions", 'required', "Required property 'functions' is missing or null"); }
         return new self(
             functions: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, NeonFunction::class), SdkClient::arrayValue($data->functions))),
         );
@@ -347,9 +316,7 @@ class NeonFunctionUpdateRequest implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "name")) {
-            throw new SdkValidationError("name", 'required', "Missing required property 'name'");
-        }
+        if (!property_exists($data, "name")) { throw new SdkValidationError("name", 'required', "Missing required property 'name'"); }
         return new self(
             name: ($data->name === null ? null : SdkClient::stringValue($data->name)),
         );

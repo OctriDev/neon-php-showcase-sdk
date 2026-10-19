@@ -157,21 +157,11 @@ class CredentialMeta implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "token_id") || $data->token_id === null) {
-            throw new SdkValidationError("token_id", 'required', "Required property 'token_id' is missing or null");
-        }
-        if (!property_exists($data, "token_id_short") || $data->token_id_short === null) {
-            throw new SdkValidationError("token_id_short", 'required', "Required property 'token_id_short' is missing or null");
-        }
-        if (!property_exists($data, "scopes") || $data->scopes === null) {
-            throw new SdkValidationError("scopes", 'required', "Required property 'scopes' is missing or null");
-        }
-        if (!property_exists($data, "principal_type") || $data->principal_type === null) {
-            throw new SdkValidationError("principal_type", 'required', "Required property 'principal_type' is missing or null");
-        }
-        if (!property_exists($data, "created_at") || $data->created_at === null) {
-            throw new SdkValidationError("created_at", 'required', "Required property 'created_at' is missing or null");
-        }
+        if (!property_exists($data, "token_id") || $data->token_id === null) { throw new SdkValidationError("token_id", 'required', "Required property 'token_id' is missing or null"); }
+        if (!property_exists($data, "token_id_short") || $data->token_id_short === null) { throw new SdkValidationError("token_id_short", 'required', "Required property 'token_id_short' is missing or null"); }
+        if (!property_exists($data, "scopes") || $data->scopes === null) { throw new SdkValidationError("scopes", 'required', "Required property 'scopes' is missing or null"); }
+        if (!property_exists($data, "principal_type") || $data->principal_type === null) { throw new SdkValidationError("principal_type", 'required', "Required property 'principal_type' is missing or null"); }
+        if (!property_exists($data, "created_at") || $data->created_at === null) { throw new SdkValidationError("created_at", 'required', "Required property 'created_at' is missing or null"); }
         return new self(
             tokenId: SdkClient::stringValue($data->token_id),
             tokenIdShort: SdkClient::stringValue($data->token_id_short),
@@ -198,26 +188,11 @@ final readonly class CredentialScope implements SdkOpenEnum
     public const AI_GATEWAY_INVOKE = "ai_gateway:invoke";
     public const FUNCTIONS_INVOKE = "functions:invoke";
     private function __construct(public string $value) {}
-    public static function from(string|int $value): static
-    {
-        return new self((string) $value);
-    }
-    public static function tryFrom(string|int|null $value): ?static
-    {
-        return $value === null ? null : self::from($value);
-    }
-    public function getValue(): string
-    {
-        return $this->value;
-    }
-    public function jsonSerialize(): string
-    {
-        return $this->value;
-    }
-    public function __toString(): string
-    {
-        return (string) $this->value;
-    }
+    public static function from(string|int $value): static { return new self((string) $value); }
+    public static function tryFrom(string|int|null $value): ?static { return $value === null ? null : self::from($value); }
+    public function getValue(): string { return $this->value; }
+    public function jsonSerialize(): string { return $this->value; }
+    public function __toString(): string { return (string) $this->value; }
 }
 
 /**
@@ -278,15 +253,9 @@ class CredentialSecret implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "token_id") || $data->token_id === null) {
-            throw new SdkValidationError("token_id", 'required', "Required property 'token_id' is missing or null");
-        }
-        if (!property_exists($data, "api_token") || $data->api_token === null) {
-            throw new SdkValidationError("api_token", 'required', "Required property 'api_token' is missing or null");
-        }
-        if (!property_exists($data, "s3_secret_access_key") || $data->s3_secret_access_key === null) {
-            throw new SdkValidationError("s3_secret_access_key", 'required', "Required property 's3_secret_access_key' is missing or null");
-        }
+        if (!property_exists($data, "token_id") || $data->token_id === null) { throw new SdkValidationError("token_id", 'required', "Required property 'token_id' is missing or null"); }
+        if (!property_exists($data, "api_token") || $data->api_token === null) { throw new SdkValidationError("api_token", 'required', "Required property 'api_token' is missing or null"); }
+        if (!property_exists($data, "s3_secret_access_key") || $data->s3_secret_access_key === null) { throw new SdkValidationError("s3_secret_access_key", 'required', "Required property 's3_secret_access_key' is missing or null"); }
         return new self(
             tokenId: SdkClient::stringValue($data->token_id),
             apiToken: SdkClient::stringValue($data->api_token),
@@ -306,26 +275,11 @@ final readonly class GrantedCredentialScope implements SdkOpenEnum
     public const TELEMETRY_WRITE = "telemetry:write";
     public const FUNCTIONS_INVOKE = "functions:invoke";
     private function __construct(public string $value) {}
-    public static function from(string|int $value): static
-    {
-        return new self((string) $value);
-    }
-    public static function tryFrom(string|int|null $value): ?static
-    {
-        return $value === null ? null : self::from($value);
-    }
-    public function getValue(): string
-    {
-        return $this->value;
-    }
-    public function jsonSerialize(): string
-    {
-        return $this->value;
-    }
-    public function __toString(): string
-    {
-        return (string) $this->value;
-    }
+    public static function from(string|int $value): static { return new self((string) $value); }
+    public static function tryFrom(string|int|null $value): ?static { return $value === null ? null : self::from($value); }
+    public function getValue(): string { return $this->value; }
+    public function jsonSerialize(): string { return $this->value; }
+    public function __toString(): string { return (string) $this->value; }
 }
 
 /**
@@ -366,9 +320,7 @@ class ListCredentialsResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "credentials") || $data->credentials === null) {
-            throw new SdkValidationError("credentials", 'required', "Required property 'credentials' is missing or null");
-        }
+        if (!property_exists($data, "credentials") || $data->credentials === null) { throw new SdkValidationError("credentials", 'required', "Required property 'credentials' is missing or null"); }
         return new self(
             credentials: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, CredentialMeta::class), SdkClient::arrayValue($data->credentials))),
         );
@@ -382,24 +334,9 @@ final readonly class RotateCredentialResponsePrincipalTypeEnum implements SdkOpe
 {
     public const USER = "user";
     private function __construct(public string $value) {}
-    public static function from(string|int $value): static
-    {
-        return new self((string) $value);
-    }
-    public static function tryFrom(string|int|null $value): ?static
-    {
-        return $value === null ? null : self::from($value);
-    }
-    public function getValue(): string
-    {
-        return $this->value;
-    }
-    public function jsonSerialize(): string
-    {
-        return $this->value;
-    }
-    public function __toString(): string
-    {
-        return (string) $this->value;
-    }
+    public static function from(string|int $value): static { return new self((string) $value); }
+    public static function tryFrom(string|int|null $value): ?static { return $value === null ? null : self::from($value); }
+    public function getValue(): string { return $this->value; }
+    public function jsonSerialize(): string { return $this->value; }
+    public function __toString(): string { return (string) $this->value; }
 }

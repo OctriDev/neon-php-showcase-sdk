@@ -45,9 +45,7 @@ class ProjectJWKSResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "jwks") || $data->jwks === null) {
-            throw new SdkValidationError("jwks", 'required', "Required property 'jwks' is missing or null");
-        }
+        if (!property_exists($data, "jwks") || $data->jwks === null) { throw new SdkValidationError("jwks", 'required', "Required property 'jwks' is missing or null"); }
         return new self(
             jwks: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, JWKS::class), SdkClient::arrayValue($data->jwks))),
         );

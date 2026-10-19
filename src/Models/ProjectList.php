@@ -89,15 +89,9 @@ class ListProjectsResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "projects") || $data->projects === null) {
-            throw new SdkValidationError("projects", 'required', "Required property 'projects' is missing or null");
-        }
-        if (!property_exists($data, "applications") || $data->applications === null) {
-            throw new SdkValidationError("applications", 'required', "Required property 'applications' is missing or null");
-        }
-        if (!property_exists($data, "integrations") || $data->integrations === null) {
-            throw new SdkValidationError("integrations", 'required', "Required property 'integrations' is missing or null");
-        }
+        if (!property_exists($data, "projects") || $data->projects === null) { throw new SdkValidationError("projects", 'required', "Required property 'projects' is missing or null"); }
+        if (!property_exists($data, "applications") || $data->applications === null) { throw new SdkValidationError("applications", 'required', "Required property 'applications' is missing or null"); }
+        if (!property_exists($data, "integrations") || $data->integrations === null) { throw new SdkValidationError("integrations", 'required', "Required property 'integrations' is missing or null"); }
         return new self(
             projects: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, ProjectListItem::class), SdkClient::arrayValue($data->projects))),
             applications: SdkClient::mapValues(SdkClient::stringMapValue($data->applications), static fn($item) => array_values(array_map(static fn($item2) => SdkClient::hydrateStringEnumOrString($item2, ApplicationType::class), SdkClient::arrayValue($item)))),
@@ -170,9 +164,7 @@ class ListSharedProjectsResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "projects") || $data->projects === null) {
-            throw new SdkValidationError("projects", 'required', "Required property 'projects' is missing or null");
-        }
+        if (!property_exists($data, "projects") || $data->projects === null) { throw new SdkValidationError("projects", 'required', "Required property 'projects' is missing or null"); }
         return new self(
             projects: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, ProjectListItem::class), SdkClient::arrayValue($data->projects))),
             unavailableProjectIds: (property_exists($data, "unavailable_project_ids") && $data->unavailable_project_ids !== null ? array_values(array_map(static fn($item) => SdkClient::stringValue($item), SdkClient::arrayValue($data->unavailable_project_ids))) : SdkNotGiven::Value),
