@@ -45,9 +45,7 @@ class CustomDomainsListResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "custom_domains") || $data->custom_domains === null) {
-            throw new SdkValidationError("custom_domains", 'required', "Required property 'custom_domains' is missing or null");
-        }
+        if (!property_exists($data, "custom_domains") || $data->custom_domains === null) { throw new SdkValidationError("custom_domains", 'required', "Required property 'custom_domains' is missing or null"); }
         return new self(
             customDomains: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, CustomDomain::class), SdkClient::arrayValue($data->custom_domains))),
         );
@@ -104,9 +102,7 @@ class ListFunctionsCustomDomainsResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "custom_domains") || $data->custom_domains === null) {
-            throw new SdkValidationError("custom_domains", 'required', "Required property 'custom_domains' is missing or null");
-        }
+        if (!property_exists($data, "custom_domains") || $data->custom_domains === null) { throw new SdkValidationError("custom_domains", 'required', "Required property 'custom_domains' is missing or null"); }
         return new self(
             customDomains: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, CustomDomain::class), SdkClient::arrayValue($data->custom_domains))),
             pagination: (property_exists($data, "pagination") && $data->pagination !== null ? SdkClient::hydrateClass($data->pagination, CursorPagination::class) : SdkNotGiven::Value),

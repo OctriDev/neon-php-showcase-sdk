@@ -22,7 +22,7 @@ trait OrganizationsVpcMethods
 
         Validation::validatePattern('org_id', $orgId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('GET', "/organizations/" . SdkClient::encodePathSegment($orgId) . "/vpc/vpc_endpoints", $clientConfig, returnType: VPCEndpointsWithRegionResponse::class, decoder: 'json', operationId: 'listOrganizationVpcEndpointsAllRegions', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('GET', "/organizations/" . SdkClient::encodePathSegment($orgId) . "/vpc/vpc_endpoints", $clientConfig, returnType: VPCEndpointsWithRegionResponse::class, decoder: 'json', operationId: 'listOrganizationVpcEndpointsAllRegions', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, VPCEndpointsWithRegionResponse::class));
     }
 
@@ -41,7 +41,7 @@ trait OrganizationsVpcMethods
 
         Validation::validatePattern('org_id', $orgId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('GET', "/organizations/" . SdkClient::encodePathSegment($orgId) . "/vpc/region/" . SdkClient::encodePathSegment($regionId) . "/vpc_endpoints", $clientConfig, returnType: VPCEndpointsResponse::class, decoder: 'json', operationId: 'listOrganizationVpcEndpoints', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('GET', "/organizations/" . SdkClient::encodePathSegment($orgId) . "/vpc/region/" . SdkClient::encodePathSegment($regionId) . "/vpc_endpoints", $clientConfig, returnType: VPCEndpointsResponse::class, decoder: 'json', operationId: 'listOrganizationVpcEndpoints', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, VPCEndpointsResponse::class));
     }
 
@@ -61,7 +61,7 @@ trait OrganizationsVpcMethods
 
         Validation::validatePattern('org_id', $orgId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('GET', "/organizations/" . SdkClient::encodePathSegment($orgId) . "/vpc/region/" . SdkClient::encodePathSegment($regionId) . "/vpc_endpoints/" . SdkClient::encodePathSegment($vpcEndpointId) . "", $clientConfig, returnType: VPCEndpointDetails::class, decoder: 'json', operationId: 'getOrganizationsVpcEndpoint', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('GET', "/organizations/" . SdkClient::encodePathSegment($orgId) . "/vpc/region/" . SdkClient::encodePathSegment($regionId) . "/vpc_endpoints/" . SdkClient::encodePathSegment($vpcEndpointId) . "", $clientConfig, returnType: VPCEndpointDetails::class, decoder: 'json', operationId: 'getOrganizationsVpcEndpoint', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, VPCEndpointDetails::class));
     }
 
@@ -81,7 +81,7 @@ trait OrganizationsVpcMethods
 
         Validation::validatePattern('org_id', $orgId, '^[a-z0-9-]{1,60}$');
 
-        return SdkClient::request('POST', "/organizations/" . SdkClient::encodePathSegment($orgId) . "/vpc/region/" . SdkClient::encodePathSegment($regionId) . "/vpc_endpoints/" . SdkClient::encodePathSegment($vpcEndpointId) . "", $clientConfig, body: ['label' => $label], decoder: 'empty', operationId: 'assignOrganizationVpcEndpoint', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)])->data;
+        return SdkClient::request('POST', "/organizations/" . SdkClient::encodePathSegment($orgId) . "/vpc/region/" . SdkClient::encodePathSegment($regionId) . "/vpc_endpoints/" . SdkClient::encodePathSegment($vpcEndpointId) . "", $clientConfig, body: ['label' => $label], decoder: 'empty', operationId: 'assignOrganizationVpcEndpoint', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)])->data;
     }
 
 
@@ -99,6 +99,6 @@ trait OrganizationsVpcMethods
 
         Validation::validatePattern('org_id', $orgId, '^[a-z0-9-]{1,60}$');
 
-        return SdkClient::request('DELETE', "/organizations/" . SdkClient::encodePathSegment($orgId) . "/vpc/region/" . SdkClient::encodePathSegment($regionId) . "/vpc_endpoints/" . SdkClient::encodePathSegment($vpcEndpointId) . "", $clientConfig, decoder: 'empty', operationId: 'deleteOrganizationVpcEndpoint', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)])->data;
+        return SdkClient::request('DELETE', "/organizations/" . SdkClient::encodePathSegment($orgId) . "/vpc/region/" . SdkClient::encodePathSegment($regionId) . "/vpc_endpoints/" . SdkClient::encodePathSegment($vpcEndpointId) . "", $clientConfig, decoder: 'empty', operationId: 'deleteOrganizationVpcEndpoint', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)])->data;
     }
 }

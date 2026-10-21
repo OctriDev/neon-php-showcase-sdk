@@ -25,6 +25,6 @@ trait AuthLegacyIntegrationMethods
 
         Validation::validatePattern('project_id', $projectId, '^[a-z0-9-]{1,60}$');
 
-        return SdkClient::request('DELETE', "/projects/" . SdkClient::encodePathSegment($projectId) . "/auth/integration/" . SdkClient::encodePathSegment($authProvider) . "", $clientConfig, body: ['delete_data' => $deleteData], decoder: 'empty', operationId: 'deleteAuthLegacyIntegration', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)])->data;
+        return SdkClient::request('DELETE', "/projects/" . SdkClient::encodePathSegment($projectId) . "/auth/integration/" . SdkClient::encodePathSegment($authProvider) . "", $clientConfig, body: ['delete_data' => $deleteData], decoder: 'empty', operationId: 'deleteAuthLegacyIntegration', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)])->data;
     }
 }

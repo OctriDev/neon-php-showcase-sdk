@@ -45,9 +45,7 @@ class SendNeonAuthEmailProviderTestRequest implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "recipient_email") || $data->recipient_email === null) {
-            throw new SdkValidationError("recipient_email", 'required', "Required property 'recipient_email' is missing or null");
-        }
+        if (!property_exists($data, "recipient_email") || $data->recipient_email === null) { throw new SdkValidationError("recipient_email", 'required', "Required property 'recipient_email' is missing or null"); }
         return new self(
             recipientEmail: SdkClient::stringValue($data->recipient_email),
         );

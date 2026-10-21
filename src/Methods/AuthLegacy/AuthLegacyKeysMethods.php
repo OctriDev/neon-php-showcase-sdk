@@ -23,7 +23,7 @@ trait AuthLegacyKeysMethods
 
         Validation::validatePattern('project_id', $projectId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('POST', "/projects/auth/keys", $clientConfig, body: ['project_id' => $projectId, 'auth_provider' => $authProvider], returnType: NeonAuthCreateIntegrationResponse::class, decoder: 'json', operationId: 'createAuthLegacyProviderSdkKeys', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('POST', "/projects/auth/keys", $clientConfig, body: ['project_id' => $projectId, 'auth_provider' => $authProvider], returnType: NeonAuthCreateIntegrationResponse::class, decoder: 'json', operationId: 'createAuthLegacyProviderSdkKeys', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, NeonAuthCreateIntegrationResponse::class));
     }
 }

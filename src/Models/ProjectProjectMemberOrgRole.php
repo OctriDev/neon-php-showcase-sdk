@@ -18,26 +18,11 @@ final readonly class ProjectMemberOrgRole implements SdkOpenEnum
     public const VIEWER = "viewer";
     public const COLLABORATOR = "collaborator";
     private function __construct(public string $value) {}
-    public static function from(string|int $value): static
-    {
-        return new self((string) $value);
-    }
-    public static function tryFrom(string|int|null $value): ?static
-    {
-        return $value === null ? null : self::from($value);
-    }
-    public function getValue(): string
-    {
-        return $this->value;
-    }
-    public function jsonSerialize(): string
-    {
-        return $this->value;
-    }
-    public function __toString(): string
-    {
-        return (string) $this->value;
-    }
+    public static function from(string|int $value): static { return new self((string) $value); }
+    public static function tryFrom(string|int|null $value): ?static { return $value === null ? null : self::from($value); }
+    public function getValue(): string { return $this->value; }
+    public function jsonSerialize(): string { return $this->value; }
+    public function __toString(): string { return (string) $this->value; }
 }
 
 /**
@@ -204,18 +189,10 @@ class ProjectMemberRoleResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "project_id") || $data->project_id === null) {
-            throw new SdkValidationError("project_id", 'required', "Required property 'project_id' is missing or null");
-        }
-        if (!property_exists($data, "member_id") || $data->member_id === null) {
-            throw new SdkValidationError("member_id", 'required', "Required property 'member_id' is missing or null");
-        }
-        if (!property_exists($data, "user_id") || $data->user_id === null) {
-            throw new SdkValidationError("user_id", 'required', "Required property 'user_id' is missing or null");
-        }
-        if (!property_exists($data, "org_role") || $data->org_role === null) {
-            throw new SdkValidationError("org_role", 'required', "Required property 'org_role' is missing or null");
-        }
+        if (!property_exists($data, "project_id") || $data->project_id === null) { throw new SdkValidationError("project_id", 'required', "Required property 'project_id' is missing or null"); }
+        if (!property_exists($data, "member_id") || $data->member_id === null) { throw new SdkValidationError("member_id", 'required', "Required property 'member_id' is missing or null"); }
+        if (!property_exists($data, "user_id") || $data->user_id === null) { throw new SdkValidationError("user_id", 'required', "Required property 'user_id' is missing or null"); }
+        if (!property_exists($data, "org_role") || $data->org_role === null) { throw new SdkValidationError("org_role", 'required', "Required property 'org_role' is missing or null"); }
         return new self(
             projectId: SdkClient::stringValue($data->project_id),
             memberId: SdkClient::stringValue($data->member_id),
@@ -301,18 +278,10 @@ class ProjectOwnerData implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "email") || $data->email === null) {
-            throw new SdkValidationError("email", 'required', "Required property 'email' is missing or null");
-        }
-        if (!property_exists($data, "name") || $data->name === null) {
-            throw new SdkValidationError("name", 'required', "Required property 'name' is missing or null");
-        }
-        if (!property_exists($data, "branches_limit") || $data->branches_limit === null) {
-            throw new SdkValidationError("branches_limit", 'required', "Required property 'branches_limit' is missing or null");
-        }
-        if (!property_exists($data, "subscription_type") || $data->subscription_type === null) {
-            throw new SdkValidationError("subscription_type", 'required', "Required property 'subscription_type' is missing or null");
-        }
+        if (!property_exists($data, "email") || $data->email === null) { throw new SdkValidationError("email", 'required', "Required property 'email' is missing or null"); }
+        if (!property_exists($data, "name") || $data->name === null) { throw new SdkValidationError("name", 'required', "Required property 'name' is missing or null"); }
+        if (!property_exists($data, "branches_limit") || $data->branches_limit === null) { throw new SdkValidationError("branches_limit", 'required', "Required property 'branches_limit' is missing or null"); }
+        if (!property_exists($data, "subscription_type") || $data->subscription_type === null) { throw new SdkValidationError("subscription_type", 'required', "Required property 'subscription_type' is missing or null"); }
         return new self(
             email: SdkClient::stringValue($data->email),
             name: SdkClient::stringValue($data->name),

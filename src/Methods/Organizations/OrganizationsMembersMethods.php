@@ -30,7 +30,7 @@ trait OrganizationsMembersMethods
             Validation::validateRange('limit', $limit, min: 1, max: 500);
         }
 
-        $sdkResponse = SdkClient::request('GET', "/organizations/" . SdkClient::encodePathSegment($orgId) . "/members", $clientConfig, query: ['sort_by' => new SdkQueryValue($sortBy, "form", true), 'cursor' => new SdkQueryValue($cursor, "form", true), 'sort_order' => new SdkQueryValue($sortOrder, "form", true), 'limit' => new SdkQueryValue($limit, "form", true)], returnType: ListOrganizationsMembersResponse::class, decoder: 'json', operationId: 'listOrganizationsMembers', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('GET', "/organizations/" . SdkClient::encodePathSegment($orgId) . "/members", $clientConfig, query: ['sort_by' => new SdkQueryValue($sortBy, "form", true), 'cursor' => new SdkQueryValue($cursor, "form", true), 'sort_order' => new SdkQueryValue($sortOrder, "form", true), 'limit' => new SdkQueryValue($limit, "form", true)], returnType: ListOrganizationsMembersResponse::class, decoder: 'json', operationId: 'listOrganizationsMembers', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, ListOrganizationsMembersResponse::class));
     }
 
@@ -51,7 +51,7 @@ trait OrganizationsMembersMethods
 
         Validation::validateUuid('member_id', $memberId);
 
-        $sdkResponse = SdkClient::request('GET', "/organizations/" . SdkClient::encodePathSegment($orgId) . "/members/" . SdkClient::encodePathSegment($memberId) . "", $clientConfig, returnType: Member::class, decoder: 'json', operationId: 'getOrganizationMember', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('GET', "/organizations/" . SdkClient::encodePathSegment($orgId) . "/members/" . SdkClient::encodePathSegment($memberId) . "", $clientConfig, returnType: Member::class, decoder: 'json', operationId: 'getOrganizationMember', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, Member::class));
     }
 
@@ -73,7 +73,7 @@ trait OrganizationsMembersMethods
 
         Validation::validateUuid('member_id', $memberId);
 
-        $sdkResponse = SdkClient::request('PATCH', "/organizations/" . SdkClient::encodePathSegment($orgId) . "/members/" . SdkClient::encodePathSegment($memberId) . "", $clientConfig, body: ['role' => $role], returnType: Member::class, decoder: 'json', operationId: 'updateOrganizationMember', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('PATCH', "/organizations/" . SdkClient::encodePathSegment($orgId) . "/members/" . SdkClient::encodePathSegment($memberId) . "", $clientConfig, body: ['role' => $role], returnType: Member::class, decoder: 'json', operationId: 'updateOrganizationMember', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, Member::class));
     }
 
@@ -94,7 +94,7 @@ trait OrganizationsMembersMethods
 
         Validation::validateUuid('member_id', $memberId);
 
-        $sdkResponse = SdkClient::request('DELETE', "/organizations/" . SdkClient::encodePathSegment($orgId) . "/members/" . SdkClient::encodePathSegment($memberId) . "", $clientConfig, returnType: EmptyResponse::class, decoder: 'json', operationId: 'removeOrganizationMember', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('DELETE', "/organizations/" . SdkClient::encodePathSegment($orgId) . "/members/" . SdkClient::encodePathSegment($memberId) . "", $clientConfig, returnType: EmptyResponse::class, decoder: 'json', operationId: 'removeOrganizationMember', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, EmptyResponse::class));
     }
 }

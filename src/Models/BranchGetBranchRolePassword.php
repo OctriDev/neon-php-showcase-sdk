@@ -45,9 +45,7 @@ class RolePasswordResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "password") || $data->password === null) {
-            throw new SdkValidationError("password", 'required', "Required property 'password' is missing or null");
-        }
+        if (!property_exists($data, "password") || $data->password === null) { throw new SdkValidationError("password", 'required', "Required property 'password' is missing or null"); }
         return new self(
             password: SdkClient::stringValue($data->password),
         );

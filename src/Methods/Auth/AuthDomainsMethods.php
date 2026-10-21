@@ -25,7 +25,7 @@ trait AuthDomainsMethods
 
         Validation::validatePattern('branch_id', $branchId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth/domains", $clientConfig, returnType: NeonAuthRedirectURIWhitelistResponse::class, decoder: 'json', operationId: 'listAuthTrustedDomains', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth/domains", $clientConfig, returnType: NeonAuthRedirectURIWhitelistResponse::class, decoder: 'json', operationId: 'listAuthTrustedDomains', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, NeonAuthRedirectURIWhitelistResponse::class));
     }
 
@@ -49,7 +49,7 @@ trait AuthDomainsMethods
 
         Validation::validateUri('domain', $domain);
 
-        return SdkClient::request('POST', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth/domains", $clientConfig, body: ['domain' => $domain, 'auth_provider' => $authProvider], decoder: 'empty', operationId: 'addAuthTrustedDomain', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)])->data;
+        return SdkClient::request('POST', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth/domains", $clientConfig, body: ['domain' => $domain, 'auth_provider' => $authProvider], decoder: 'empty', operationId: 'addAuthTrustedDomain', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)])->data;
     }
 
 
@@ -70,6 +70,6 @@ trait AuthDomainsMethods
 
         Validation::validatePattern('branch_id', $branchId, '^[a-z0-9-]{1,60}$');
 
-        return SdkClient::request('DELETE', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth/domains", $clientConfig, body: ['auth_provider' => $authProvider, 'domains' => $domains], decoder: 'empty', operationId: 'deleteAuthTrustedDomain', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)])->data;
+        return SdkClient::request('DELETE', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth/domains", $clientConfig, body: ['auth_provider' => $authProvider, 'domains' => $domains], decoder: 'empty', operationId: 'deleteAuthTrustedDomain', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)])->data;
     }
 }

@@ -55,12 +55,8 @@ class ConsumptionHistoryPerProjectV2 implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "project_id") || $data->project_id === null) {
-            throw new SdkValidationError("project_id", 'required', "Required property 'project_id' is missing or null");
-        }
-        if (!property_exists($data, "periods") || $data->periods === null) {
-            throw new SdkValidationError("periods", 'required', "Required property 'periods' is missing or null");
-        }
+        if (!property_exists($data, "project_id") || $data->project_id === null) { throw new SdkValidationError("project_id", 'required', "Required property 'project_id' is missing or null"); }
+        if (!property_exists($data, "periods") || $data->periods === null) { throw new SdkValidationError("periods", 'required', "Required property 'periods' is missing or null"); }
         return new self(
             projectId: SdkClient::stringValue($data->project_id),
             periods: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, ConsumptionHistoryPerPeriodV2::class), SdkClient::arrayValue($data->periods))),
@@ -106,9 +102,7 @@ class ConsumptionHistoryPerProjectV2Response implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "projects") || $data->projects === null) {
-            throw new SdkValidationError("projects", 'required', "Required property 'projects' is missing or null");
-        }
+        if (!property_exists($data, "projects") || $data->projects === null) { throw new SdkValidationError("projects", 'required', "Required property 'projects' is missing or null"); }
         return new self(
             projects: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, ConsumptionHistoryPerProjectV2::class), SdkClient::arrayValue($data->projects))),
         );
@@ -165,9 +159,7 @@ class GetConsumptionHistoryPerProjectV2Response implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "projects") || $data->projects === null) {
-            throw new SdkValidationError("projects", 'required', "Required property 'projects' is missing or null");
-        }
+        if (!property_exists($data, "projects") || $data->projects === null) { throw new SdkValidationError("projects", 'required', "Required property 'projects' is missing or null"); }
         return new self(
             projects: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, ConsumptionHistoryPerProjectV2::class), SdkClient::arrayValue($data->projects))),
             pagination: (property_exists($data, "pagination") && $data->pagination !== null ? SdkClient::hydrateClass($data->pagination, Pagination::class) : SdkNotGiven::Value),

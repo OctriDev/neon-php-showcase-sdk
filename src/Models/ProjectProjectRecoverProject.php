@@ -55,12 +55,8 @@ class ProjectRecoverResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "project") || $data->project === null) {
-            throw new SdkValidationError("project", 'required', "Required property 'project' is missing or null");
-        }
-        if (!property_exists($data, "branches") || $data->branches === null) {
-            throw new SdkValidationError("branches", 'required', "Required property 'branches' is missing or null");
-        }
+        if (!property_exists($data, "project") || $data->project === null) { throw new SdkValidationError("project", 'required', "Required property 'project' is missing or null"); }
+        if (!property_exists($data, "branches") || $data->branches === null) { throw new SdkValidationError("branches", 'required', "Required property 'branches' is missing or null"); }
         return new self(
             project: SdkClient::hydrateClass($data->project, Project::class),
             branches: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, Branch::class), SdkClient::arrayValue($data->branches))),

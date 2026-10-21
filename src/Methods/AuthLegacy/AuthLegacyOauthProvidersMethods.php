@@ -24,7 +24,7 @@ trait AuthLegacyOauthProvidersMethods
 
         Validation::validatePattern('project_id', $projectId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/auth/oauth_providers", $clientConfig, returnType: ListNeonAuthOauthProvidersResponse::class, decoder: 'json', operationId: 'listAuthLegacyOauthProviders', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/auth/oauth_providers", $clientConfig, returnType: ListNeonAuthOauthProvidersResponse::class, decoder: 'json', operationId: 'listAuthLegacyOauthProviders', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, ListNeonAuthOauthProvidersResponse::class));
     }
 
@@ -48,7 +48,7 @@ trait AuthLegacyOauthProvidersMethods
 
         Validation::validatePattern('project_id', $projectId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('POST', "/projects/" . SdkClient::encodePathSegment($projectId) . "/auth/oauth_providers", $clientConfig, body: ['id' => $id, 'client_id' => $clientId, 'client_secret' => $clientSecret, 'microsoft_tenant_id' => $microsoftTenantId], returnType: NeonAuthOauthProvider::class, decoder: 'json', operationId: 'addAuthLegacyOauthProvider', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('POST', "/projects/" . SdkClient::encodePathSegment($projectId) . "/auth/oauth_providers", $clientConfig, body: ['id' => $id, 'client_id' => $clientId, 'client_secret' => $clientSecret, 'microsoft_tenant_id' => $microsoftTenantId], returnType: NeonAuthOauthProvider::class, decoder: 'json', operationId: 'addAuthLegacyOauthProvider', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, NeonAuthOauthProvider::class));
     }
 
@@ -72,7 +72,7 @@ trait AuthLegacyOauthProvidersMethods
 
         Validation::validatePattern('project_id', $projectId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('PATCH', "/projects/" . SdkClient::encodePathSegment($projectId) . "/auth/oauth_providers/" . SdkClient::encodePathSegment($oauthProviderId) . "", $clientConfig, body: ['client_id' => $clientId, 'client_secret' => $clientSecret, 'microsoft_tenant_id' => $microsoftTenantId], returnType: NeonAuthOauthProvider::class, decoder: 'json', operationId: 'updateAuthLegacyOauthProvider', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('PATCH', "/projects/" . SdkClient::encodePathSegment($projectId) . "/auth/oauth_providers/" . SdkClient::encodePathSegment($oauthProviderId) . "", $clientConfig, body: ['client_id' => $clientId, 'client_secret' => $clientSecret, 'microsoft_tenant_id' => $microsoftTenantId], returnType: NeonAuthOauthProvider::class, decoder: 'json', operationId: 'updateAuthLegacyOauthProvider', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, NeonAuthOauthProvider::class));
     }
 
@@ -92,6 +92,6 @@ trait AuthLegacyOauthProvidersMethods
 
         Validation::validatePattern('project_id', $projectId, '^[a-z0-9-]{1,60}$');
 
-        return SdkClient::request('DELETE', "/projects/" . SdkClient::encodePathSegment($projectId) . "/auth/oauth_providers/" . SdkClient::encodePathSegment($oauthProviderId) . "", $clientConfig, decoder: 'empty', operationId: 'deleteAuthLegacyOauthProvider', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)])->data;
+        return SdkClient::request('DELETE', "/projects/" . SdkClient::encodePathSegment($projectId) . "/auth/oauth_providers/" . SdkClient::encodePathSegment($oauthProviderId) . "", $clientConfig, decoder: 'empty', operationId: 'deleteAuthLegacyOauthProvider', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)])->data;
     }
 }

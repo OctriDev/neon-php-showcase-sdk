@@ -22,7 +22,7 @@ trait OrganizationsMethods
 
         Validation::validatePattern('org_id', $orgId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('GET', "/organizations/" . SdkClient::encodePathSegment($orgId) . "", $clientConfig, returnType: Organization::class, decoder: 'json', operationId: 'getOrganization', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('GET', "/organizations/" . SdkClient::encodePathSegment($orgId) . "", $clientConfig, returnType: Organization::class, decoder: 'json', operationId: 'getOrganization', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, Organization::class));
     }
 }

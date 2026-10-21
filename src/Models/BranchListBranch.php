@@ -67,12 +67,8 @@ class ListBranchResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "branches") || $data->branches === null) {
-            throw new SdkValidationError("branches", 'required', "Required property 'branches' is missing or null");
-        }
-        if (!property_exists($data, "annotations") || $data->annotations === null) {
-            throw new SdkValidationError("annotations", 'required', "Required property 'annotations' is missing or null");
-        }
+        if (!property_exists($data, "branches") || $data->branches === null) { throw new SdkValidationError("branches", 'required', "Required property 'branches' is missing or null"); }
+        if (!property_exists($data, "annotations") || $data->annotations === null) { throw new SdkValidationError("annotations", 'required', "Required property 'annotations' is missing or null"); }
         return new self(
             branches: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, Branch::class), SdkClient::arrayValue($data->branches))),
             annotations: SdkClient::mapValues(SdkClient::stringMapValue($data->annotations), static fn($item) => SdkClient::hydrateClass($item, AnnotationData::class)),

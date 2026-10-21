@@ -28,7 +28,7 @@ trait OrganizationsProjectsMethods
 
         Validation::validateItems('project_ids', $projectIds, min: 1, max: 400);
 
-        $sdkResponse = SdkClient::request('POST', "/organizations/" . SdkClient::encodePathSegment($sourceOrgId) . "/projects/transfer", $clientConfig, body: ['destination_org_id' => $destinationOrgId, 'project_ids' => $projectIds], returnType: EmptyResponse::class, decoder: 'json', operationId: 'transferOrganizationsProjects', requestOptions: $requestOptions, errors: [406 => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, LimitsUnsatisfiedResponse::class), 422 => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, ProjectsWithIntegrationResponse::class), "default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('POST', "/organizations/" . SdkClient::encodePathSegment($sourceOrgId) . "/projects/transfer", $clientConfig, body: ['destination_org_id' => $destinationOrgId, 'project_ids' => $projectIds], returnType: EmptyResponse::class, decoder: 'json', operationId: 'transferOrganizationsProjects', requestOptions: $requestOptions, errors: [406 => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, LimitsUnsatisfiedResponse::class), 422 => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, ProjectsWithIntegrationResponse::class), "default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, EmptyResponse::class));
     }
 }

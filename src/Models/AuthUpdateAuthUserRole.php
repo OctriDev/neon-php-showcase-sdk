@@ -45,9 +45,7 @@ class UpdateNeonAuthUserRoleRequest implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "roles") || $data->roles === null) {
-            throw new SdkValidationError("roles", 'required', "Required property 'roles' is missing or null");
-        }
+        if (!property_exists($data, "roles") || $data->roles === null) { throw new SdkValidationError("roles", 'required', "Required property 'roles' is missing or null"); }
         return new self(
             roles: array_values(array_map(static fn($item) => SdkClient::stringValue($item), SdkClient::arrayValue($data->roles))),
         );
@@ -92,9 +90,7 @@ class UpdateNeonAuthUserRoleResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "id") || $data->id === null) {
-            throw new SdkValidationError("id", 'required', "Required property 'id' is missing or null");
-        }
+        if (!property_exists($data, "id") || $data->id === null) { throw new SdkValidationError("id", 'required', "Required property 'id' is missing or null"); }
         return new self(
             id: SdkClient::stringValue($data->id),
         );

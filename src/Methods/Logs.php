@@ -12,26 +12,11 @@ final readonly class QueryLogsSortOrder implements SdkOpenEnum
     public const ASC = "asc";
     public const DESC = "desc";
     private function __construct(public string $value) {}
-    public static function from(string|int $value): static
-    {
-        return new self((string) $value);
-    }
-    public static function tryFrom(string|int|null $value): ?static
-    {
-        return $value === null ? null : self::from($value);
-    }
-    public function getValue(): string
-    {
-        return $this->value;
-    }
-    public function jsonSerialize(): string
-    {
-        return $this->value;
-    }
-    public function __toString(): string
-    {
-        return (string) $this->value;
-    }
+    public static function from(string|int $value): static { return new self((string) $value); }
+    public static function tryFrom(string|int|null $value): ?static { return $value === null ? null : self::from($value); }
+    public function getValue(): string { return $this->value; }
+    public function jsonSerialize(): string { return $this->value; }
+    public function __toString(): string { return (string) $this->value; }
 }
 
 class Logs
@@ -102,7 +87,7 @@ class Logs
             Validation::validateLength('logql', $logql, min: 1);
         }
 
-        $sdkResponse = SdkClient::request('POST', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/logs/query", $clientConfig, body: ['since' => $since, 'start_time' => $startTime, 'end_time' => $endTime, 'limit' => $limit, 'cursor' => $cursor, 'sort_order' => $sortOrder, 'source' => $source, 'service_name' => $serviceName, 'scope_name' => $scopeName, 'minimum_severity' => $minimumSeverity, 'severity_text' => $severityText, 'body_contains' => $bodyContains, 'trace_id' => $traceId, 'logql' => $logql], returnType: ProjectBranchLogsQueryResponse::class, decoder: 'json', operationId: 'queryLogs', requestOptions: $requestOptions, errors: [400 => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, ProjectBranchLogsInvalidQuery::class), 404 => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, ProjectBranchLogsNotAvailable::class), "default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('POST', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/logs/query", $clientConfig, body: ['since' => $since, 'start_time' => $startTime, 'end_time' => $endTime, 'limit' => $limit, 'cursor' => $cursor, 'sort_order' => $sortOrder, 'source' => $source, 'service_name' => $serviceName, 'scope_name' => $scopeName, 'minimum_severity' => $minimumSeverity, 'severity_text' => $severityText, 'body_contains' => $bodyContains, 'trace_id' => $traceId, 'logql' => $logql], returnType: ProjectBranchLogsQueryResponse::class, decoder: 'json', operationId: 'queryLogs', requestOptions: $requestOptions, errors: [400 => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, ProjectBranchLogsInvalidQuery::class), 404 => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, ProjectBranchLogsNotAvailable::class), "default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, ProjectBranchLogsQueryResponse::class));
     }
 
@@ -123,7 +108,7 @@ class Logs
 
         Validation::validatePattern('branch_id', $branchId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/logs/fields", $clientConfig, returnType: ProjectBranchLogFieldsResponse::class, decoder: 'json', operationId: 'listLogsFields', requestOptions: $requestOptions, errors: [404 => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, ProjectBranchLogsNotAvailable::class), "default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/logs/fields", $clientConfig, returnType: ProjectBranchLogFieldsResponse::class, decoder: 'json', operationId: 'listLogsFields', requestOptions: $requestOptions, errors: [404 => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, ProjectBranchLogsNotAvailable::class), "default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, ProjectBranchLogFieldsResponse::class));
     }
 
@@ -168,7 +153,7 @@ class Logs
             Validation::validateRange('limit', $limit, min: 1, max: 1000);
         }
 
-        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/logs/fields/" . SdkClient::encodePathSegment($fieldName) . "/values", $clientConfig, query: ['since' => new SdkQueryValue($since, "form", true), 'start_time' => new SdkQueryValue($startTime, "form", true), 'end_time' => new SdkQueryValue($endTime, "form", true), 'source' => new SdkQueryValue($source, "form", true), 'limit' => new SdkQueryValue($limit, "form", true)], returnType: ProjectBranchLogFieldValuesResponse::class, decoder: 'json', operationId: 'listLogsFieldValues', requestOptions: $requestOptions, errors: [400 => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, ProjectBranchLogsInvalidQuery::class), 404 => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, ProjectBranchLogsNotAvailable::class), "default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/logs/fields/" . SdkClient::encodePathSegment($fieldName) . "/values", $clientConfig, query: ['since' => new SdkQueryValue($since, "form", true), 'start_time' => new SdkQueryValue($startTime, "form", true), 'end_time' => new SdkQueryValue($endTime, "form", true), 'source' => new SdkQueryValue($source, "form", true), 'limit' => new SdkQueryValue($limit, "form", true)], returnType: ProjectBranchLogFieldValuesResponse::class, decoder: 'json', operationId: 'listLogsFieldValues', requestOptions: $requestOptions, errors: [400 => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, ProjectBranchLogsInvalidQuery::class), 404 => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, ProjectBranchLogsNotAvailable::class), "default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, ProjectBranchLogFieldValuesResponse::class));
     }
 }

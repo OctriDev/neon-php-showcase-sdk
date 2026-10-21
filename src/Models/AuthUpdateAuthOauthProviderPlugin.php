@@ -155,9 +155,7 @@ class NeonAuthOAuthProviderMcpUpdate implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "resource") || $data->resource === null) {
-            throw new SdkValidationError("resource", 'required', "Required property 'resource' is missing or null");
-        }
+        if (!property_exists($data, "resource") || $data->resource === null) { throw new SdkValidationError("resource", 'required', "Required property 'resource' is missing or null"); }
         return new self(
             resource_: SdkClient::stringValue($data->resource),
             dynamicRegistration: (property_exists($data, "dynamic_registration") && $data->dynamic_registration !== null ? SdkClient::boolValue($data->dynamic_registration) : SdkNotGiven::Value),

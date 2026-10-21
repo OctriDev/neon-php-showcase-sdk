@@ -45,9 +45,7 @@ class ApiKeyCreateRequest implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "key_name") || $data->key_name === null) {
-            throw new SdkValidationError("key_name", 'required', "Required property 'key_name' is missing or null");
-        }
+        if (!property_exists($data, "key_name") || $data->key_name === null) { throw new SdkValidationError("key_name", 'required', "Required property 'key_name' is missing or null"); }
         return new self(
             keyName: SdkClient::stringValue($data->key_name),
         );
@@ -132,21 +130,11 @@ class ApiKeyCreateResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "id") || $data->id === null) {
-            throw new SdkValidationError("id", 'required', "Required property 'id' is missing or null");
-        }
-        if (!property_exists($data, "key") || $data->key === null) {
-            throw new SdkValidationError("key", 'required', "Required property 'key' is missing or null");
-        }
-        if (!property_exists($data, "name") || $data->name === null) {
-            throw new SdkValidationError("name", 'required', "Required property 'name' is missing or null");
-        }
-        if (!property_exists($data, "created_at") || $data->created_at === null) {
-            throw new SdkValidationError("created_at", 'required', "Required property 'created_at' is missing or null");
-        }
-        if (!property_exists($data, "created_by") || $data->created_by === null) {
-            throw new SdkValidationError("created_by", 'required', "Required property 'created_by' is missing or null");
-        }
+        if (!property_exists($data, "id") || $data->id === null) { throw new SdkValidationError("id", 'required', "Required property 'id' is missing or null"); }
+        if (!property_exists($data, "key") || $data->key === null) { throw new SdkValidationError("key", 'required', "Required property 'key' is missing or null"); }
+        if (!property_exists($data, "name") || $data->name === null) { throw new SdkValidationError("name", 'required', "Required property 'name' is missing or null"); }
+        if (!property_exists($data, "created_at") || $data->created_at === null) { throw new SdkValidationError("created_at", 'required', "Required property 'created_at' is missing or null"); }
+        if (!property_exists($data, "created_by") || $data->created_by === null) { throw new SdkValidationError("created_by", 'required', "Required property 'created_by' is missing or null"); }
         return new self(
             id: SdkClient::intValue($data->id),
             key: SdkClient::stringValue($data->key),
@@ -215,15 +203,9 @@ class ApiKeyCreatorData implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "id") || $data->id === null) {
-            throw new SdkValidationError("id", 'required', "Required property 'id' is missing or null");
-        }
-        if (!property_exists($data, "name") || $data->name === null) {
-            throw new SdkValidationError("name", 'required', "Required property 'name' is missing or null");
-        }
-        if (!property_exists($data, "image") || $data->image === null) {
-            throw new SdkValidationError("image", 'required', "Required property 'image' is missing or null");
-        }
+        if (!property_exists($data, "id") || $data->id === null) { throw new SdkValidationError("id", 'required', "Required property 'id' is missing or null"); }
+        if (!property_exists($data, "name") || $data->name === null) { throw new SdkValidationError("name", 'required', "Required property 'name' is missing or null"); }
+        if (!property_exists($data, "image") || $data->image === null) { throw new SdkValidationError("image", 'required', "Required property 'image' is missing or null"); }
         return new self(
             id: SdkClient::stringValue($data->id),
             name: SdkClient::stringValue($data->name),
@@ -332,24 +314,12 @@ class ApiKeyRevokeResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "id") || $data->id === null) {
-            throw new SdkValidationError("id", 'required', "Required property 'id' is missing or null");
-        }
-        if (!property_exists($data, "name") || $data->name === null) {
-            throw new SdkValidationError("name", 'required', "Required property 'name' is missing or null");
-        }
-        if (!property_exists($data, "created_at") || $data->created_at === null) {
-            throw new SdkValidationError("created_at", 'required', "Required property 'created_at' is missing or null");
-        }
-        if (!property_exists($data, "created_by") || $data->created_by === null) {
-            throw new SdkValidationError("created_by", 'required', "Required property 'created_by' is missing or null");
-        }
-        if (!property_exists($data, "last_used_from_addr") || $data->last_used_from_addr === null) {
-            throw new SdkValidationError("last_used_from_addr", 'required', "Required property 'last_used_from_addr' is missing or null");
-        }
-        if (!property_exists($data, "revoked") || $data->revoked === null) {
-            throw new SdkValidationError("revoked", 'required', "Required property 'revoked' is missing or null");
-        }
+        if (!property_exists($data, "id") || $data->id === null) { throw new SdkValidationError("id", 'required', "Required property 'id' is missing or null"); }
+        if (!property_exists($data, "name") || $data->name === null) { throw new SdkValidationError("name", 'required', "Required property 'name' is missing or null"); }
+        if (!property_exists($data, "created_at") || $data->created_at === null) { throw new SdkValidationError("created_at", 'required', "Required property 'created_at' is missing or null"); }
+        if (!property_exists($data, "created_by") || $data->created_by === null) { throw new SdkValidationError("created_by", 'required', "Required property 'created_by' is missing or null"); }
+        if (!property_exists($data, "last_used_from_addr") || $data->last_used_from_addr === null) { throw new SdkValidationError("last_used_from_addr", 'required', "Required property 'last_used_from_addr' is missing or null"); }
+        if (!property_exists($data, "revoked") || $data->revoked === null) { throw new SdkValidationError("revoked", 'required', "Required property 'revoked' is missing or null"); }
         return new self(
             id: SdkClient::intValue($data->id),
             name: SdkClient::stringValue($data->name),

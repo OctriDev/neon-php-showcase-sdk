@@ -65,15 +65,9 @@ class CredentialSecret implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "token_id") || $data->token_id === null) {
-            throw new SdkValidationError("token_id", 'required', "Required property 'token_id' is missing or null");
-        }
-        if (!property_exists($data, "api_token") || $data->api_token === null) {
-            throw new SdkValidationError("api_token", 'required', "Required property 'api_token' is missing or null");
-        }
-        if (!property_exists($data, "s3_secret_access_key") || $data->s3_secret_access_key === null) {
-            throw new SdkValidationError("s3_secret_access_key", 'required', "Required property 's3_secret_access_key' is missing or null");
-        }
+        if (!property_exists($data, "token_id") || $data->token_id === null) { throw new SdkValidationError("token_id", 'required', "Required property 'token_id' is missing or null"); }
+        if (!property_exists($data, "api_token") || $data->api_token === null) { throw new SdkValidationError("api_token", 'required', "Required property 'api_token' is missing or null"); }
+        if (!property_exists($data, "s3_secret_access_key") || $data->s3_secret_access_key === null) { throw new SdkValidationError("s3_secret_access_key", 'required', "Required property 's3_secret_access_key' is missing or null"); }
         return new self(
             tokenId: SdkClient::stringValue($data->token_id),
             apiToken: SdkClient::stringValue($data->api_token),

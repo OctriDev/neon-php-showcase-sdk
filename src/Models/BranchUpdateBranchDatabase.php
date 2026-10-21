@@ -104,9 +104,7 @@ class DatabaseUpdateRequest implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "database") || $data->database === null) {
-            throw new SdkValidationError("database", 'required', "Required property 'database' is missing or null");
-        }
+        if (!property_exists($data, "database") || $data->database === null) { throw new SdkValidationError("database", 'required', "Required property 'database' is missing or null"); }
         return new self(
             database: SdkClient::hydrateClass($data->database, DatabaseUpdateRequestDatabase::class),
         );

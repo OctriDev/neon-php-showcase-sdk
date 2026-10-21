@@ -25,7 +25,7 @@ trait AuthAllowLocalhostMethods
 
         Validation::validatePattern('branch_id', $branchId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth/allow_localhost", $clientConfig, returnType: NeonAuthAllowLocalhostResponse::class, decoder: 'json', operationId: 'getAuthAllowLocalhost', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth/allow_localhost", $clientConfig, returnType: NeonAuthAllowLocalhostResponse::class, decoder: 'json', operationId: 'getAuthAllowLocalhost', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, NeonAuthAllowLocalhostResponse::class));
     }
 
@@ -47,7 +47,7 @@ trait AuthAllowLocalhostMethods
 
         Validation::validatePattern('branch_id', $branchId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('PATCH', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth/allow_localhost", $clientConfig, body: ['allow_localhost' => $allowLocalhost], returnType: NeonAuthAllowLocalhostResponse::class, decoder: 'json', operationId: 'updateAuthAllowLocalhost', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('PATCH', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth/allow_localhost", $clientConfig, body: ['allow_localhost' => $allowLocalhost], returnType: NeonAuthAllowLocalhostResponse::class, decoder: 'json', operationId: 'updateAuthAllowLocalhost', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, NeonAuthAllowLocalhostResponse::class));
     }
 }

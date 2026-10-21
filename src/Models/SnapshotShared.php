@@ -45,9 +45,7 @@ class BackupSchedule implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "schedule") || $data->schedule === null) {
-            throw new SdkValidationError("schedule", 'required', "Required property 'schedule' is missing or null");
-        }
+        if (!property_exists($data, "schedule") || $data->schedule === null) { throw new SdkValidationError("schedule", 'required', "Required property 'schedule' is missing or null"); }
         return new self(
             schedule: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, BackupScheduleItem::class), SdkClient::arrayValue($data->schedule))),
         );
@@ -140,9 +138,7 @@ class BackupScheduleItem implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "frequency") || $data->frequency === null) {
-            throw new SdkValidationError("frequency", 'required', "Required property 'frequency' is missing or null");
-        }
+        if (!property_exists($data, "frequency") || $data->frequency === null) { throw new SdkValidationError("frequency", 'required', "Required property 'frequency' is missing or null"); }
         return new self(
             frequency: SdkClient::stringValue($data->frequency),
             hour: (property_exists($data, "hour") && $data->hour !== null ? SdkClient::intValue($data->hour) : SdkNotGiven::Value),
@@ -295,15 +291,9 @@ class Snapshot implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "id") || $data->id === null) {
-            throw new SdkValidationError("id", 'required', "Required property 'id' is missing or null");
-        }
-        if (!property_exists($data, "name") || $data->name === null) {
-            throw new SdkValidationError("name", 'required', "Required property 'name' is missing or null");
-        }
-        if (!property_exists($data, "created_at") || $data->created_at === null) {
-            throw new SdkValidationError("created_at", 'required', "Required property 'created_at' is missing or null");
-        }
+        if (!property_exists($data, "id") || $data->id === null) { throw new SdkValidationError("id", 'required', "Required property 'id' is missing or null"); }
+        if (!property_exists($data, "name") || $data->name === null) { throw new SdkValidationError("name", 'required', "Required property 'name' is missing or null"); }
+        if (!property_exists($data, "created_at") || $data->created_at === null) { throw new SdkValidationError("created_at", 'required', "Required property 'created_at' is missing or null"); }
         return new self(
             id: SdkClient::stringValue($data->id),
             name: SdkClient::stringValue($data->name),

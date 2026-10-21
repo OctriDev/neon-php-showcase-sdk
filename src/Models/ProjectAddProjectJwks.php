@@ -103,12 +103,8 @@ class AddProjectJWKSRequest implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "jwks_url") || $data->jwks_url === null) {
-            throw new SdkValidationError("jwks_url", 'required', "Required property 'jwks_url' is missing or null");
-        }
-        if (!property_exists($data, "provider_name") || $data->provider_name === null) {
-            throw new SdkValidationError("provider_name", 'required', "Required property 'provider_name' is missing or null");
-        }
+        if (!property_exists($data, "jwks_url") || $data->jwks_url === null) { throw new SdkValidationError("jwks_url", 'required', "Required property 'jwks_url' is missing or null"); }
+        if (!property_exists($data, "provider_name") || $data->provider_name === null) { throw new SdkValidationError("provider_name", 'required', "Required property 'provider_name' is missing or null"); }
         return new self(
             jwksUrl: SdkClient::stringValue($data->jwks_url),
             providerName: SdkClient::stringValue($data->provider_name),
@@ -168,12 +164,8 @@ class JWKSCreationOperation implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "jwks") || $data->jwks === null) {
-            throw new SdkValidationError("jwks", 'required', "Required property 'jwks' is missing or null");
-        }
-        if (!property_exists($data, "operations") || $data->operations === null) {
-            throw new SdkValidationError("operations", 'required', "Required property 'operations' is missing or null");
-        }
+        if (!property_exists($data, "jwks") || $data->jwks === null) { throw new SdkValidationError("jwks", 'required', "Required property 'jwks' is missing or null"); }
+        if (!property_exists($data, "operations") || $data->operations === null) { throw new SdkValidationError("operations", 'required', "Required property 'operations' is missing or null"); }
         return new self(
             jwks: SdkClient::hydrateClass($data->jwks, JWKS::class),
             operations: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, Operation::class), SdkClient::arrayValue($data->operations))),
@@ -219,9 +211,7 @@ class JWKSResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "jwks") || $data->jwks === null) {
-            throw new SdkValidationError("jwks", 'required', "Required property 'jwks' is missing or null");
-        }
+        if (!property_exists($data, "jwks") || $data->jwks === null) { throw new SdkValidationError("jwks", 'required', "Required property 'jwks' is missing or null"); }
         return new self(
             jwks: SdkClient::hydrateClass($data->jwks, JWKS::class),
         );

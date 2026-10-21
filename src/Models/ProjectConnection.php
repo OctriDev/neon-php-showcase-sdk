@@ -45,9 +45,7 @@ class ConnectionURIResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "uri") || $data->uri === null) {
-            throw new SdkValidationError("uri", 'required', "Required property 'uri' is missing or null");
-        }
+        if (!property_exists($data, "uri") || $data->uri === null) { throw new SdkValidationError("uri", 'required', "Required property 'uri' is missing or null"); }
         return new self(
             uri: SdkClient::stringValue($data->uri),
         );
@@ -92,9 +90,7 @@ class ConnectionURIsResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "connection_uris") || $data->connection_uris === null) {
-            throw new SdkValidationError("connection_uris", 'required', "Required property 'connection_uris' is missing or null");
-        }
+        if (!property_exists($data, "connection_uris") || $data->connection_uris === null) { throw new SdkValidationError("connection_uris", 'required', "Required property 'connection_uris' is missing or null"); }
         return new self(
             connectionUris: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, ConnectionDetails::class), SdkClient::arrayValue($data->connection_uris))),
         );

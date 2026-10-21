@@ -55,12 +55,8 @@ class VPCEndpoint implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "vpc_endpoint_id") || $data->vpc_endpoint_id === null) {
-            throw new SdkValidationError("vpc_endpoint_id", 'required', "Required property 'vpc_endpoint_id' is missing or null");
-        }
-        if (!property_exists($data, "label") || $data->label === null) {
-            throw new SdkValidationError("label", 'required', "Required property 'label' is missing or null");
-        }
+        if (!property_exists($data, "vpc_endpoint_id") || $data->vpc_endpoint_id === null) { throw new SdkValidationError("vpc_endpoint_id", 'required', "Required property 'vpc_endpoint_id' is missing or null"); }
+        if (!property_exists($data, "label") || $data->label === null) { throw new SdkValidationError("label", 'required', "Required property 'label' is missing or null"); }
         return new self(
             vpcEndpointId: SdkClient::stringValue($data->vpc_endpoint_id),
             label: SdkClient::stringValue($data->label),
@@ -106,9 +102,7 @@ class VPCEndpointAssignment implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "label") || $data->label === null) {
-            throw new SdkValidationError("label", 'required', "Required property 'label' is missing or null");
-        }
+        if (!property_exists($data, "label") || $data->label === null) { throw new SdkValidationError("label", 'required', "Required property 'label' is missing or null"); }
         return new self(
             label: SdkClient::stringValue($data->label),
         );

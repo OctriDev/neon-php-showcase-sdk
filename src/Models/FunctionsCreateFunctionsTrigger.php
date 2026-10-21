@@ -107,18 +107,10 @@ class ScheduleTriggerCreateRequest implements TriggerCreateRequest, \JsonSeriali
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "type") || $data->type === null) {
-            throw new SdkValidationError("type", 'required', "Required property 'type' is missing or null");
-        }
-        if (!property_exists($data, "function_slug") || $data->function_slug === null) {
-            throw new SdkValidationError("function_slug", 'required', "Required property 'function_slug' is missing or null");
-        }
-        if (!property_exists($data, "name") || $data->name === null) {
-            throw new SdkValidationError("name", 'required', "Required property 'name' is missing or null");
-        }
-        if (!property_exists($data, "schedule") || $data->schedule === null) {
-            throw new SdkValidationError("schedule", 'required', "Required property 'schedule' is missing or null");
-        }
+        if (!property_exists($data, "type") || $data->type === null) { throw new SdkValidationError("type", 'required', "Required property 'type' is missing or null"); }
+        if (!property_exists($data, "function_slug") || $data->function_slug === null) { throw new SdkValidationError("function_slug", 'required', "Required property 'function_slug' is missing or null"); }
+        if (!property_exists($data, "name") || $data->name === null) { throw new SdkValidationError("name", 'required', "Required property 'name' is missing or null"); }
+        if (!property_exists($data, "schedule") || $data->schedule === null) { throw new SdkValidationError("schedule", 'required', "Required property 'schedule' is missing or null"); }
         return new self(
             type: SdkClient::hydrateEnum($data->type, ScheduleTriggerCreateRequestTypeEnum::class),
             functionSlug: SdkClient::stringValue($data->function_slug),
@@ -230,18 +222,10 @@ class StorageObjectCreatedTriggerCreateRequest implements TriggerCreateRequest, 
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "type") || $data->type === null) {
-            throw new SdkValidationError("type", 'required', "Required property 'type' is missing or null");
-        }
-        if (!property_exists($data, "function_slug") || $data->function_slug === null) {
-            throw new SdkValidationError("function_slug", 'required', "Required property 'function_slug' is missing or null");
-        }
-        if (!property_exists($data, "name") || $data->name === null) {
-            throw new SdkValidationError("name", 'required', "Required property 'name' is missing or null");
-        }
-        if (!property_exists($data, "storage_object_created") || $data->storage_object_created === null) {
-            throw new SdkValidationError("storage_object_created", 'required', "Required property 'storage_object_created' is missing or null");
-        }
+        if (!property_exists($data, "type") || $data->type === null) { throw new SdkValidationError("type", 'required', "Required property 'type' is missing or null"); }
+        if (!property_exists($data, "function_slug") || $data->function_slug === null) { throw new SdkValidationError("function_slug", 'required', "Required property 'function_slug' is missing or null"); }
+        if (!property_exists($data, "name") || $data->name === null) { throw new SdkValidationError("name", 'required', "Required property 'name' is missing or null"); }
+        if (!property_exists($data, "storage_object_created") || $data->storage_object_created === null) { throw new SdkValidationError("storage_object_created", 'required', "Required property 'storage_object_created' is missing or null"); }
         return new self(
             type: SdkClient::hydrateEnum($data->type, StorageObjectCreatedTriggerCreateRequestTypeEnum::class),
             functionSlug: SdkClient::stringValue($data->function_slug),

@@ -11,26 +11,11 @@ final readonly class CreateFunctionsDeploymentRuntime implements SdkOpenEnum
 {
     public const NODEJS24 = "nodejs24";
     private function __construct(public string $value) {}
-    public static function from(string|int $value): static
-    {
-        return new self((string) $value);
-    }
-    public static function tryFrom(string|int|null $value): ?static
-    {
-        return $value === null ? null : self::from($value);
-    }
-    public function getValue(): string
-    {
-        return $this->value;
-    }
-    public function jsonSerialize(): string
-    {
-        return $this->value;
-    }
-    public function __toString(): string
-    {
-        return (string) $this->value;
-    }
+    public static function from(string|int $value): static { return new self((string) $value); }
+    public static function tryFrom(string|int|null $value): ?static { return $value === null ? null : self::from($value); }
+    public function getValue(): string { return $this->value; }
+    public function jsonSerialize(): string { return $this->value; }
+    public function __toString(): string { return (string) $this->value; }
 }
 
 class Functions
@@ -57,7 +42,7 @@ class Functions
             Validation::validateRange('limit', $limit, min: 1, max: 1000);
         }
 
-        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/functions", $clientConfig, query: ['cursor' => new SdkQueryValue($cursor, "form", true), 'limit' => new SdkQueryValue($limit, "form", true)], returnType: ListFunctionsResponse::class, decoder: 'json', operationId: 'listFunctions', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/functions", $clientConfig, query: ['cursor' => new SdkQueryValue($cursor, "form", true), 'limit' => new SdkQueryValue($limit, "form", true)], returnType: ListFunctionsResponse::class, decoder: 'json', operationId: 'listFunctions', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, ListFunctionsResponse::class));
     }
 
@@ -81,7 +66,7 @@ class Functions
 
         Validation::validatePattern('slug', $slug, '^[a-z0-9]{1,20}$');
 
-        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/functions/" . SdkClient::encodePathSegment($slug) . "", $clientConfig, returnType: NeonFunctionResponse::class, decoder: 'json', operationId: 'getFunctions', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/functions/" . SdkClient::encodePathSegment($slug) . "", $clientConfig, returnType: NeonFunctionResponse::class, decoder: 'json', operationId: 'getFunctions', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, NeonFunctionResponse::class));
     }
 
@@ -110,7 +95,7 @@ class Functions
             Validation::validateLength('name', $name, min: 1, max: 256);
         }
 
-        $sdkResponse = SdkClient::request('PATCH', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/functions/" . SdkClient::encodePathSegment($slug) . "", $clientConfig, body: ['name' => $name], returnType: NeonFunctionResponse::class, decoder: 'json', operationId: 'updateFunctions', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('PATCH', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/functions/" . SdkClient::encodePathSegment($slug) . "", $clientConfig, body: ['name' => $name], returnType: NeonFunctionResponse::class, decoder: 'json', operationId: 'updateFunctions', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, NeonFunctionResponse::class));
     }
 
@@ -133,7 +118,7 @@ class Functions
 
         Validation::validatePattern('slug', $slug, '^[a-z0-9]{1,20}$');
 
-        return SdkClient::request('DELETE', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/functions/" . SdkClient::encodePathSegment($slug) . "", $clientConfig, decoder: 'empty', operationId: 'deleteFunctions', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)])->data;
+        return SdkClient::request('DELETE', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/functions/" . SdkClient::encodePathSegment($slug) . "", $clientConfig, decoder: 'empty', operationId: 'deleteFunctions', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)])->data;
     }
 
 
@@ -159,7 +144,7 @@ class Functions
 
         Validation::validatePattern('slug', $slug, '^[a-z0-9]{1,20}$');
 
-        $sdkResponse = SdkClient::request('POST', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/functions/" . SdkClient::encodePathSegment($slug) . "/deployments", $clientConfig, body: ['zip' => $zip, 'runtime' => $runtime, 'environment' => $environment], contentType: 'multipart/form-data', returnType: NeonFunctionDeploymentResponse::class, decoder: 'json', operationId: 'createFunctionsDeployment', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('POST', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/functions/" . SdkClient::encodePathSegment($slug) . "/deployments", $clientConfig, body: ['zip' => $zip, 'runtime' => $runtime, 'environment' => $environment], contentType: 'multipart/form-data', returnType: NeonFunctionDeploymentResponse::class, decoder: 'json', operationId: 'createFunctionsDeployment', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, NeonFunctionDeploymentResponse::class));
     }
 
@@ -180,7 +165,7 @@ class Functions
 
         Validation::validatePattern('branch_id', $branchId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/triggers", $clientConfig, returnType: TriggersListResponse::class, decoder: 'json', operationId: 'listFunctionsTriggers', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/triggers", $clientConfig, returnType: TriggersListResponse::class, decoder: 'json', operationId: 'listFunctionsTriggers', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, TriggersListResponse::class));
     }
 
@@ -202,7 +187,7 @@ class Functions
 
         Validation::validatePattern('branch_id', $branchId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('POST', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/triggers", $clientConfig, body: $body, returnType: TriggerResponse::class, decoder: 'json', operationId: 'createFunctionsTrigger', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('POST', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/triggers", $clientConfig, body: $body, returnType: TriggerResponse::class, decoder: 'json', operationId: 'createFunctionsTrigger', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, TriggerResponse::class));
     }
 
@@ -227,7 +212,7 @@ class Functions
         Validation::validateLength('trigger_id', $triggerId, min: 1, max: 128);
         Validation::validatePattern('trigger_id', $triggerId, '^[A-Za-z0-9][A-Za-z0-9_.\\-]{0,127}$');
 
-        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/triggers/" . SdkClient::encodePathSegment($triggerId) . "", $clientConfig, returnType: TriggerResponse::class, decoder: 'json', operationId: 'getFunctionsTrigger', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/triggers/" . SdkClient::encodePathSegment($triggerId) . "", $clientConfig, returnType: TriggerResponse::class, decoder: 'json', operationId: 'getFunctionsTrigger', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, TriggerResponse::class));
     }
 
@@ -253,7 +238,7 @@ class Functions
         Validation::validateLength('trigger_id', $triggerId, min: 1, max: 128);
         Validation::validatePattern('trigger_id', $triggerId, '^[A-Za-z0-9][A-Za-z0-9_.\\-]{0,127}$');
 
-        $sdkResponse = SdkClient::request('PATCH', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/triggers/" . SdkClient::encodePathSegment($triggerId) . "", $clientConfig, body: $body, returnType: TriggerResponse::class, decoder: 'json', operationId: 'updateFunctionTrigger', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('PATCH', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/triggers/" . SdkClient::encodePathSegment($triggerId) . "", $clientConfig, body: $body, returnType: TriggerResponse::class, decoder: 'json', operationId: 'updateFunctionTrigger', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, TriggerResponse::class));
     }
 
@@ -277,7 +262,7 @@ class Functions
         Validation::validateLength('trigger_id', $triggerId, min: 1, max: 128);
         Validation::validatePattern('trigger_id', $triggerId, '^[A-Za-z0-9][A-Za-z0-9_.\\-]{0,127}$');
 
-        return SdkClient::request('DELETE', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/triggers/" . SdkClient::encodePathSegment($triggerId) . "", $clientConfig, decoder: 'empty', operationId: 'deleteFunctionsTrigger', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)])->data;
+        return SdkClient::request('DELETE', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/triggers/" . SdkClient::encodePathSegment($triggerId) . "", $clientConfig, decoder: 'empty', operationId: 'deleteFunctionsTrigger', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)])->data;
     }
 
 
@@ -306,7 +291,7 @@ class Functions
 
         Validation::validateLength('entity_id', $entityId, min: 1, max: 255);
 
-        $sdkResponse = SdkClient::request('POST', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/custom-domains", $clientConfig, body: ['domain' => $domain, 'entity_type' => $entityType, 'entity_id' => $entityId], returnType: CustomDomain::class, decoder: 'json', operationId: 'registerFunctionsCustomDomain', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('POST', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/custom-domains", $clientConfig, body: ['domain' => $domain, 'entity_type' => $entityType, 'entity_id' => $entityId], returnType: CustomDomain::class, decoder: 'json', operationId: 'registerFunctionsCustomDomain', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, CustomDomain::class));
     }
 
@@ -333,7 +318,7 @@ class Functions
             Validation::validateRange('limit', $limit, min: 1, max: 1000);
         }
 
-        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/custom-domains", $clientConfig, query: ['cursor' => new SdkQueryValue($cursor, "form", true), 'limit' => new SdkQueryValue($limit, "form", true)], returnType: ListFunctionsCustomDomainsResponse::class, decoder: 'json', operationId: 'listFunctionsCustomDomains', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/custom-domains", $clientConfig, query: ['cursor' => new SdkQueryValue($cursor, "form", true), 'limit' => new SdkQueryValue($limit, "form", true)], returnType: ListFunctionsCustomDomainsResponse::class, decoder: 'json', operationId: 'listFunctionsCustomDomains', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, ListFunctionsCustomDomainsResponse::class));
     }
 
@@ -357,6 +342,6 @@ class Functions
         Validation::validateLength('domain', $domain, min: 3, max: 254);
         Validation::validatePattern('domain', $domain, '^[A-Za-z0-9.-]+$');
 
-        return SdkClient::request('DELETE', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/custom-domains/" . SdkClient::encodePathSegment($domain) . "", $clientConfig, decoder: 'empty', operationId: 'deleteFunctionsCustomDomain', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)])->data;
+        return SdkClient::request('DELETE', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/custom-domains/" . SdkClient::encodePathSegment($domain) . "", $clientConfig, decoder: 'empty', operationId: 'deleteFunctionsCustomDomain', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)])->data;
     }
 }

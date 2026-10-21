@@ -30,7 +30,7 @@ trait AuthLegacyCreateMethods
 
         Validation::validatePattern('branch_id', $branchId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('POST', "/projects/auth/create", $clientConfig, body: ['auth_provider' => $authProvider, 'project_id' => $projectId, 'branch_id' => $branchId, 'database_name' => $databaseName, 'role_name' => $roleName], returnType: NeonAuthCreateIntegrationResponse::class, decoder: 'json', operationId: 'createAuthLegacyIntegration', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('POST', "/projects/auth/create", $clientConfig, body: ['auth_provider' => $authProvider, 'project_id' => $projectId, 'branch_id' => $branchId, 'database_name' => $databaseName, 'role_name' => $roleName], returnType: NeonAuthCreateIntegrationResponse::class, decoder: 'json', operationId: 'createAuthLegacyIntegration', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, NeonAuthCreateIntegrationResponse::class));
     }
 }

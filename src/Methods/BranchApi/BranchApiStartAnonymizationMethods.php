@@ -25,7 +25,7 @@ trait BranchApiStartAnonymizationMethods
 
         Validation::validatePattern('branch_id', $branchId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('POST', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/anonymize", $clientConfig, returnType: AnonymizedBranchStatusResponse::class, decoder: 'json', operationId: 'startAnonymization', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('POST', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/anonymize", $clientConfig, returnType: AnonymizedBranchStatusResponse::class, decoder: 'json', operationId: 'startAnonymization', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, AnonymizedBranchStatusResponse::class));
     }
 
@@ -46,7 +46,7 @@ trait BranchApiStartAnonymizationMethods
 
         Validation::validatePattern('branch_id', $branchId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('POST', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/set_as_default", $clientConfig, returnType: BranchOperations::class, decoder: 'json', operationId: 'setBranchDefault', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('POST', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/set_as_default", $clientConfig, returnType: BranchOperations::class, decoder: 'json', operationId: 'setBranchDefault', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, BranchOperations::class));
     }
 
@@ -68,7 +68,7 @@ trait BranchApiStartAnonymizationMethods
 
         Validation::validatePattern('branch_id', $branchId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('POST', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/finalize_restore", $clientConfig, body: ['name' => $name], returnType: OperationsResponse::class, decoder: 'json', operationId: 'finalizeRestoreBranch', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('POST', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/finalize_restore", $clientConfig, body: ['name' => $name], returnType: OperationsResponse::class, decoder: 'json', operationId: 'finalizeRestoreBranch', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, OperationsResponse::class));
     }
 
@@ -89,7 +89,7 @@ trait BranchApiStartAnonymizationMethods
 
         Validation::validatePattern('branch_id', $branchId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/endpoints", $clientConfig, returnType: EndpointsResponse::class, decoder: 'json', operationId: 'listBranchEndpoints', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/endpoints", $clientConfig, returnType: EndpointsResponse::class, decoder: 'json', operationId: 'listBranchEndpoints', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, EndpointsResponse::class));
     }
 
@@ -110,7 +110,7 @@ trait BranchApiStartAnonymizationMethods
 
         Validation::validatePattern('branch_id', $branchId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/databases", $clientConfig, returnType: DatabasesResponse::class, decoder: 'json', operationId: 'listBranchDatabases', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/databases", $clientConfig, returnType: DatabasesResponse::class, decoder: 'json', operationId: 'listBranchDatabases', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, DatabasesResponse::class));
     }
 
@@ -132,7 +132,7 @@ trait BranchApiStartAnonymizationMethods
 
         Validation::validatePattern('branch_id', $branchId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('POST', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/databases", $clientConfig, body: ['database' => $database], returnType: DatabaseOperations::class, decoder: 'json', operationId: 'createBranchDatabase', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('POST', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/databases", $clientConfig, body: ['database' => $database], returnType: DatabaseOperations::class, decoder: 'json', operationId: 'createBranchDatabase', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, DatabaseOperations::class));
     }
 
@@ -154,7 +154,7 @@ trait BranchApiStartAnonymizationMethods
 
         Validation::validatePattern('branch_id', $branchId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/databases/" . SdkClient::encodePathSegment($databaseName) . "", $clientConfig, returnType: DatabaseResponse::class, decoder: 'json', operationId: 'getBranchDatabase', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/databases/" . SdkClient::encodePathSegment($databaseName) . "", $clientConfig, returnType: DatabaseResponse::class, decoder: 'json', operationId: 'getBranchDatabase', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, DatabaseResponse::class));
     }
 
@@ -177,7 +177,7 @@ trait BranchApiStartAnonymizationMethods
 
         Validation::validatePattern('branch_id', $branchId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('PATCH', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/databases/" . SdkClient::encodePathSegment($databaseName) . "", $clientConfig, body: ['database' => $database], returnType: DatabaseOperations::class, decoder: 'json', operationId: 'updateBranchDatabase', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('PATCH', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/databases/" . SdkClient::encodePathSegment($databaseName) . "", $clientConfig, body: ['database' => $database], returnType: DatabaseOperations::class, decoder: 'json', operationId: 'updateBranchDatabase', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, DatabaseOperations::class));
     }
 
@@ -199,7 +199,7 @@ trait BranchApiStartAnonymizationMethods
 
         Validation::validatePattern('branch_id', $branchId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('DELETE', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/databases/" . SdkClient::encodePathSegment($databaseName) . "", $clientConfig, returnType: DatabaseOperations::class, decoder: 'json', operationId: 'deleteBranchDatabase', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('DELETE', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/databases/" . SdkClient::encodePathSegment($databaseName) . "", $clientConfig, returnType: DatabaseOperations::class, decoder: 'json', operationId: 'deleteBranchDatabase', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, DatabaseOperations::class));
     }
 
@@ -220,7 +220,7 @@ trait BranchApiStartAnonymizationMethods
 
         Validation::validatePattern('branch_id', $branchId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/roles", $clientConfig, returnType: RolesResponse::class, decoder: 'json', operationId: 'listBranchRoles', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/roles", $clientConfig, returnType: RolesResponse::class, decoder: 'json', operationId: 'listBranchRoles', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, RolesResponse::class));
     }
 
@@ -242,7 +242,7 @@ trait BranchApiStartAnonymizationMethods
 
         Validation::validatePattern('branch_id', $branchId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('POST', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/roles", $clientConfig, body: ['role' => $role], returnType: RoleOperations::class, decoder: 'json', operationId: 'createBranchRole', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('POST', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/roles", $clientConfig, body: ['role' => $role], returnType: RoleOperations::class, decoder: 'json', operationId: 'createBranchRole', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, RoleOperations::class));
     }
 
@@ -264,7 +264,7 @@ trait BranchApiStartAnonymizationMethods
 
         Validation::validatePattern('branch_id', $branchId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/roles/" . SdkClient::encodePathSegment($roleName) . "", $clientConfig, returnType: RoleResponse::class, decoder: 'json', operationId: 'getBranchRole', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/roles/" . SdkClient::encodePathSegment($roleName) . "", $clientConfig, returnType: RoleResponse::class, decoder: 'json', operationId: 'getBranchRole', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, RoleResponse::class));
     }
 
@@ -286,7 +286,7 @@ trait BranchApiStartAnonymizationMethods
 
         Validation::validatePattern('branch_id', $branchId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('DELETE', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/roles/" . SdkClient::encodePathSegment($roleName) . "", $clientConfig, returnType: RoleOperations::class, decoder: 'json', operationId: 'deleteBranchRole', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('DELETE', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/roles/" . SdkClient::encodePathSegment($roleName) . "", $clientConfig, returnType: RoleOperations::class, decoder: 'json', operationId: 'deleteBranchRole', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, RoleOperations::class));
     }
 
@@ -308,7 +308,7 @@ trait BranchApiStartAnonymizationMethods
 
         Validation::validatePattern('branch_id', $branchId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/roles/" . SdkClient::encodePathSegment($roleName) . "/reveal_password", $clientConfig, returnType: RolePasswordResponse::class, decoder: 'json', operationId: 'getBranchRolePassword', requestOptions: $requestOptions, errors: [404 => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class), 412 => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class), "default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/roles/" . SdkClient::encodePathSegment($roleName) . "/reveal_password", $clientConfig, returnType: RolePasswordResponse::class, decoder: 'json', operationId: 'getBranchRolePassword', requestOptions: $requestOptions, errors: [404 => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class), 412 => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class), "default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, RolePasswordResponse::class));
     }
 }

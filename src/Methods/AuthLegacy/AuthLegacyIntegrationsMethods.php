@@ -24,7 +24,7 @@ trait AuthLegacyIntegrationsMethods
 
         Validation::validatePattern('project_id', $projectId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/auth/integrations", $clientConfig, returnType: ListNeonAuthIntegrationsResponse::class, decoder: 'json', operationId: 'listAuthLegacyIntegrations', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/auth/integrations", $clientConfig, returnType: ListNeonAuthIntegrationsResponse::class, decoder: 'json', operationId: 'listAuthLegacyIntegrations', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, ListNeonAuthIntegrationsResponse::class));
     }
 }

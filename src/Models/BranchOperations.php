@@ -55,12 +55,8 @@ class BranchOperations implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "branch") || $data->branch === null) {
-            throw new SdkValidationError("branch", 'required', "Required property 'branch' is missing or null");
-        }
-        if (!property_exists($data, "operations") || $data->operations === null) {
-            throw new SdkValidationError("operations", 'required', "Required property 'operations' is missing or null");
-        }
+        if (!property_exists($data, "branch") || $data->branch === null) { throw new SdkValidationError("branch", 'required', "Required property 'branch' is missing or null"); }
+        if (!property_exists($data, "operations") || $data->operations === null) { throw new SdkValidationError("operations", 'required', "Required property 'operations' is missing or null"); }
         return new self(
             branch: SdkClient::hydrateClass($data->branch, Branch::class),
             operations: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, Operation::class), SdkClient::arrayValue($data->operations))),
@@ -118,9 +114,7 @@ class BranchRecoverResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "branch") || $data->branch === null) {
-            throw new SdkValidationError("branch", 'required', "Required property 'branch' is missing or null");
-        }
+        if (!property_exists($data, "branch") || $data->branch === null) { throw new SdkValidationError("branch", 'required', "Required property 'branch' is missing or null"); }
         return new self(
             branch: SdkClient::hydrateClass($data->branch, Branch::class),
             endpoints: (property_exists($data, "endpoints") && $data->endpoints !== null ? array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, Endpoint::class), SdkClient::arrayValue($data->endpoints))) : SdkNotGiven::Value),
@@ -264,21 +258,11 @@ class CreateBranchResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "branch") || $data->branch === null) {
-            throw new SdkValidationError("branch", 'required', "Required property 'branch' is missing or null");
-        }
-        if (!property_exists($data, "endpoints") || $data->endpoints === null) {
-            throw new SdkValidationError("endpoints", 'required', "Required property 'endpoints' is missing or null");
-        }
-        if (!property_exists($data, "operations") || $data->operations === null) {
-            throw new SdkValidationError("operations", 'required', "Required property 'operations' is missing or null");
-        }
-        if (!property_exists($data, "roles") || $data->roles === null) {
-            throw new SdkValidationError("roles", 'required', "Required property 'roles' is missing or null");
-        }
-        if (!property_exists($data, "databases") || $data->databases === null) {
-            throw new SdkValidationError("databases", 'required', "Required property 'databases' is missing or null");
-        }
+        if (!property_exists($data, "branch") || $data->branch === null) { throw new SdkValidationError("branch", 'required', "Required property 'branch' is missing or null"); }
+        if (!property_exists($data, "endpoints") || $data->endpoints === null) { throw new SdkValidationError("endpoints", 'required', "Required property 'endpoints' is missing or null"); }
+        if (!property_exists($data, "operations") || $data->operations === null) { throw new SdkValidationError("operations", 'required', "Required property 'operations' is missing or null"); }
+        if (!property_exists($data, "roles") || $data->roles === null) { throw new SdkValidationError("roles", 'required', "Required property 'roles' is missing or null"); }
+        if (!property_exists($data, "databases") || $data->databases === null) { throw new SdkValidationError("databases", 'required', "Required property 'databases' is missing or null"); }
         return new self(
             branch: SdkClient::hydrateClass($data->branch, Branch::class),
             endpoints: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, Endpoint::class), SdkClient::arrayValue($data->endpoints))),
@@ -338,12 +322,8 @@ class DatabaseOperations implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "database") || $data->database === null) {
-            throw new SdkValidationError("database", 'required', "Required property 'database' is missing or null");
-        }
-        if (!property_exists($data, "operations") || $data->operations === null) {
-            throw new SdkValidationError("operations", 'required', "Required property 'operations' is missing or null");
-        }
+        if (!property_exists($data, "database") || $data->database === null) { throw new SdkValidationError("database", 'required', "Required property 'database' is missing or null"); }
+        if (!property_exists($data, "operations") || $data->operations === null) { throw new SdkValidationError("operations", 'required', "Required property 'operations' is missing or null"); }
         return new self(
             database: SdkClient::hydrateClass($data->database, Database::class),
             operations: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, Operation::class), SdkClient::arrayValue($data->operations))),

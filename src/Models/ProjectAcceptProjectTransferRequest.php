@@ -55,12 +55,8 @@ class AcceptProjectTransferRequestSatisfiesPlanErrorReasonsItem implements \Json
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "message") || $data->message === null) {
-            throw new SdkValidationError("message", 'required', "Required property 'message' is missing or null");
-        }
-        if (!property_exists($data, "code") || $data->code === null) {
-            throw new SdkValidationError("code", 'required', "Required property 'code' is missing or null");
-        }
+        if (!property_exists($data, "message") || $data->message === null) { throw new SdkValidationError("message", 'required', "Required property 'message' is missing or null"); }
+        if (!property_exists($data, "code") || $data->code === null) { throw new SdkValidationError("code", 'required', "Required property 'code' is missing or null"); }
         return new self(
             message: SdkClient::stringValue($data->message),
             code: SdkClient::stringValue($data->code),
@@ -106,9 +102,7 @@ class AcceptProjectTransferRequestSatisfiesPlanError implements \JsonSerializabl
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "reasons") || $data->reasons === null) {
-            throw new SdkValidationError("reasons", 'required', "Required property 'reasons' is missing or null");
-        }
+        if (!property_exists($data, "reasons") || $data->reasons === null) { throw new SdkValidationError("reasons", 'required', "Required property 'reasons' is missing or null"); }
         return new self(
             reasons: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, AcceptProjectTransferRequestSatisfiesPlanErrorReasonsItem::class), SdkClient::arrayValue($data->reasons))),
         );

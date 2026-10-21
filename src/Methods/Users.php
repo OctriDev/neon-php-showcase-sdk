@@ -17,7 +17,7 @@ class Users
     public static function getCurrentUserInfo(ClientConfig $clientConfig, ?RequestOptions $requestOptions = null): CurrentUserInfoResponse
     {
 
-        $sdkResponse = SdkClient::request('GET', "/users/me", $clientConfig, returnType: CurrentUserInfoResponse::class, decoder: 'json', operationId: 'getCurrentUserInfo', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('GET', "/users/me", $clientConfig, returnType: CurrentUserInfoResponse::class, decoder: 'json', operationId: 'getCurrentUserInfo', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, CurrentUserInfoResponse::class));
     }
 
@@ -30,7 +30,7 @@ class Users
     public static function getCurrentUserOrganizations(ClientConfig $clientConfig, ?RequestOptions $requestOptions = null): OrganizationsResponse
     {
 
-        $sdkResponse = SdkClient::request('GET', "/users/me/organizations", $clientConfig, returnType: OrganizationsResponse::class, decoder: 'json', operationId: 'getCurrentUserOrganizations', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('GET', "/users/me/organizations", $clientConfig, returnType: OrganizationsResponse::class, decoder: 'json', operationId: 'getCurrentUserOrganizations', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, OrganizationsResponse::class));
     }
 
@@ -53,7 +53,7 @@ class Users
 
         Validation::validateItems('project_ids', $projectIds, min: 1, max: 400);
 
-        $sdkResponse = SdkClient::request('POST', "/users/me/projects/transfer", $clientConfig, body: ['destination_org_id' => $destinationOrgId, 'project_ids' => $projectIds], returnType: EmptyResponse::class, decoder: 'json', operationId: 'transferUsersProjects', requestOptions: $requestOptions, errors: [406 => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, LimitsUnsatisfiedResponse::class), 422 => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, ProjectsWithIntegrationResponse::class), "default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('POST', "/users/me/projects/transfer", $clientConfig, body: ['destination_org_id' => $destinationOrgId, 'project_ids' => $projectIds], returnType: EmptyResponse::class, decoder: 'json', operationId: 'transferUsersProjects', requestOptions: $requestOptions, errors: [406 => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, LimitsUnsatisfiedResponse::class), 422 => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, ProjectsWithIntegrationResponse::class), "default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, EmptyResponse::class));
     }
 
@@ -66,7 +66,7 @@ class Users
     public static function getAuthDetails(ClientConfig $clientConfig, ?RequestOptions $requestOptions = null): AuthDetailsResponse
     {
 
-        $sdkResponse = SdkClient::request('GET', "/auth", $clientConfig, returnType: AuthDetailsResponse::class, decoder: 'json', operationId: 'getAuthDetails', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('GET', "/auth", $clientConfig, returnType: AuthDetailsResponse::class, decoder: 'json', operationId: 'getAuthDetails', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, AuthDetailsResponse::class));
     }
 }

@@ -45,9 +45,7 @@ class ProjectBranchLogFieldsResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "fields") || $data->fields === null) {
-            throw new SdkValidationError("fields", 'required', "Required property 'fields' is missing or null");
-        }
+        if (!property_exists($data, "fields") || $data->fields === null) { throw new SdkValidationError("fields", 'required', "Required property 'fields' is missing or null"); }
         return new self(
             fields: array_values(array_map(static fn($item) => SdkClient::stringValue($item), SdkClient::arrayValue($data->fields))),
         );

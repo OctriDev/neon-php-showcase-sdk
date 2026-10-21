@@ -45,9 +45,7 @@ class BranchSchemaJSON implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "tables") || $data->tables === null) {
-            throw new SdkValidationError("tables", 'required', "Required property 'tables' is missing or null");
-        }
+        if (!property_exists($data, "tables") || $data->tables === null) { throw new SdkValidationError("tables", 'required', "Required property 'tables' is missing or null"); }
         return new self(
             tables: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, BranchSchemaJSONTablesItem::class), SdkClient::arrayValue($data->tables))),
         );

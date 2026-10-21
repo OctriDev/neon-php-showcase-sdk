@@ -45,9 +45,7 @@ class NeonFunctionUpdateRequest implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "name")) {
-            throw new SdkValidationError("name", 'required', "Missing required property 'name'");
-        }
+        if (!property_exists($data, "name")) { throw new SdkValidationError("name", 'required', "Missing required property 'name'"); }
         return new self(
             name: ($data->name === null ? null : SdkClient::stringValue($data->name)),
         );
