@@ -9,6 +9,14 @@ namespace octridev_neon;
 
 class AuthLegacy
 {
-    use AuthLegacyMethodsPart1;
-    use AuthLegacyMethodsPart2;
+    use AuthLegacyCreateMethods;
+    use AuthLegacyDomainsMethods;
+    use AuthLegacyKeysMethods;
+    use AuthLegacyUserMethods;
+    use AuthLegacyUsersMethods;
+    use AuthLegacyTransferOwnershipMethods;
+    use AuthLegacyIntegrationsMethods;
+    use AuthLegacyOauthProvidersMethods;
+    use AuthLegacyEmailServerMethods;
+    use AuthLegacyIntegrationMethods;
 }

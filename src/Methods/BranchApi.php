@@ -9,7 +9,7 @@ namespace octridev_neon;
 
 class BranchApi
 {
-    use BranchApiMethodsPart1;
-    use BranchApiMethodsPart2;
-    use BranchApiMethodsPart3;
+    use BranchApiProjectsMethods;
+    use BranchApiStartAnonymizationMethods;
+    use BranchApiResetBranchRolePasswordMethods;
 }

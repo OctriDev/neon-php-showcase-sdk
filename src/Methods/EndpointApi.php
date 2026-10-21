@@ -9,5 +9,5 @@ namespace octridev_neon;
 
 class EndpointApi
 {
-    use EndpointApiMethodsPart1;
+    use EndpointApiMethods;
 }

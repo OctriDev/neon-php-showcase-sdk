@@ -9,6 +9,6 @@ namespace octridev_neon;
 
 class ProjectApi
 {
-    use ProjectApiMethodsPart1;
-    use ProjectApiMethodsPart2;
+    use ProjectApiProjectsMethods;
+    use ProjectApiGetAvailablePreloadLibrariesMethods;
 }

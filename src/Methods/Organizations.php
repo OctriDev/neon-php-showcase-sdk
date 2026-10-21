@@ -9,6 +9,11 @@ namespace octridev_neon;
 
 class Organizations
 {
-    use OrganizationsMethodsPart1;
-    use OrganizationsMethodsPart2;
+    use OrganizationsMethods;
+    use OrganizationsApiKeysMethods;
+    use OrganizationsBillingMethods;
+    use OrganizationsMembersMethods;
+    use OrganizationsInvitationsMethods;
+    use OrganizationsProjectsMethods;
+    use OrganizationsVpcMethods;
 }
