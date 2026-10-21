@@ -65,9 +65,15 @@ class ConsumptionHistoryPerBranchV2 implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "project_id") || $data->project_id === null) { throw new SdkValidationError("project_id", 'required', "Required property 'project_id' is missing or null"); }
-        if (!property_exists($data, "branch_id") || $data->branch_id === null) { throw new SdkValidationError("branch_id", 'required', "Required property 'branch_id' is missing or null"); }
-        if (!property_exists($data, "periods") || $data->periods === null) { throw new SdkValidationError("periods", 'required', "Required property 'periods' is missing or null"); }
+        if (!property_exists($data, "project_id") || $data->project_id === null) {
+            throw new SdkValidationError("project_id", 'required', "Required property 'project_id' is missing or null");
+        }
+        if (!property_exists($data, "branch_id") || $data->branch_id === null) {
+            throw new SdkValidationError("branch_id", 'required', "Required property 'branch_id' is missing or null");
+        }
+        if (!property_exists($data, "periods") || $data->periods === null) {
+            throw new SdkValidationError("periods", 'required', "Required property 'periods' is missing or null");
+        }
         return new self(
             projectId: SdkClient::stringValue($data->project_id),
             branchId: SdkClient::stringValue($data->branch_id),
@@ -114,7 +120,9 @@ class ConsumptionHistoryPerBranchV2Response implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "branches") || $data->branches === null) { throw new SdkValidationError("branches", 'required', "Required property 'branches' is missing or null"); }
+        if (!property_exists($data, "branches") || $data->branches === null) {
+            throw new SdkValidationError("branches", 'required', "Required property 'branches' is missing or null");
+        }
         return new self(
             branches: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, ConsumptionHistoryPerBranchV2::class), SdkClient::arrayValue($data->branches))),
         );
@@ -171,7 +179,9 @@ class GetConsumptionHistoryPerBranchV2Response implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "branches") || $data->branches === null) { throw new SdkValidationError("branches", 'required', "Required property 'branches' is missing or null"); }
+        if (!property_exists($data, "branches") || $data->branches === null) {
+            throw new SdkValidationError("branches", 'required', "Required property 'branches' is missing or null");
+        }
         return new self(
             branches: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, ConsumptionHistoryPerBranchV2::class), SdkClient::arrayValue($data->branches))),
             pagination: (property_exists($data, "pagination") && $data->pagination !== null ? SdkClient::hydrateClass($data->pagination, Pagination::class) : SdkNotGiven::Value),

@@ -45,7 +45,9 @@ class SpendingLimitUpdateRequest implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "spending_limit_cents") || $data->spending_limit_cents === null) { throw new SdkValidationError("spending_limit_cents", 'required', "Required property 'spending_limit_cents' is missing or null"); }
+        if (!property_exists($data, "spending_limit_cents") || $data->spending_limit_cents === null) {
+            throw new SdkValidationError("spending_limit_cents", 'required', "Required property 'spending_limit_cents' is missing or null");
+        }
         return new self(
             spendingLimitCents: SdkClient::intValue($data->spending_limit_cents),
         );

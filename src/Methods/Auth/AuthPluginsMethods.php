@@ -25,7 +25,7 @@ trait AuthPluginsMethods
 
         Validation::validatePattern('branch_id', $branchId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth/plugins", $clientConfig, returnType: NeonAuthPluginConfigs::class, decoder: 'json', operationId: 'getAuthPluginConfigs', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth/plugins", $clientConfig, returnType: NeonAuthPluginConfigs::class, decoder: 'json', operationId: 'getAuthPluginConfigs', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, NeonAuthPluginConfigs::class));
     }
 
@@ -59,7 +59,7 @@ trait AuthPluginsMethods
             Validation::validateRange('membership_limit', $membershipLimit, min: 1);
         }
 
-        $sdkResponse = SdkClient::request('PATCH', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth/plugins/organization", $clientConfig, body: ['enabled' => $enabled, 'organization_limit' => $organizationLimit, 'membership_limit' => $membershipLimit, 'creator_role' => $creatorRole, 'send_invitation_email' => $sendInvitationEmail], returnType: NeonAuthOrganizationConfig::class, decoder: 'json', operationId: 'updateAuthOrganizationPlugin', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('PATCH', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth/plugins/organization", $clientConfig, body: ['enabled' => $enabled, 'organization_limit' => $organizationLimit, 'membership_limit' => $membershipLimit, 'creator_role' => $creatorRole, 'send_invitation_email' => $sendInvitationEmail], returnType: NeonAuthOrganizationConfig::class, decoder: 'json', operationId: 'updateAuthOrganizationPlugin', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, NeonAuthOrganizationConfig::class));
     }
 
@@ -87,7 +87,7 @@ trait AuthPluginsMethods
             Validation::validateRange('expires_in', $expiresIn, min: 5, max: 1440);
         }
 
-        $sdkResponse = SdkClient::request('PATCH', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth/plugins/magic-link", $clientConfig, body: ['enabled' => $enabled, 'expires_in' => $expiresIn, 'disable_sign_up' => $disableSignUp], returnType: NeonAuthMagicLinkConfig::class, decoder: 'json', operationId: 'updateAuthMagicLinkPlugin', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('PATCH', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth/plugins/magic-link", $clientConfig, body: ['enabled' => $enabled, 'expires_in' => $expiresIn, 'disable_sign_up' => $disableSignUp], returnType: NeonAuthMagicLinkConfig::class, decoder: 'json', operationId: 'updateAuthMagicLinkPlugin', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, NeonAuthMagicLinkConfig::class));
     }
 
@@ -108,7 +108,7 @@ trait AuthPluginsMethods
 
         Validation::validatePattern('branch_id', $branchId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth/plugins/phone-number", $clientConfig, returnType: NeonAuthPhoneNumberConfig::class, decoder: 'json', operationId: 'getAuthPhoneNumberPlugin', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth/plugins/phone-number", $clientConfig, returnType: NeonAuthPhoneNumberConfig::class, decoder: 'json', operationId: 'getAuthPhoneNumberPlugin', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, NeonAuthPhoneNumberConfig::class));
     }
 
@@ -135,7 +135,7 @@ trait AuthPluginsMethods
             Validation::validateRange('otp_expires_in', $otpExpiresIn, min: 60, max: 600);
         }
 
-        $sdkResponse = SdkClient::request('PATCH', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth/plugins/phone-number", $clientConfig, body: ['enabled' => $enabled, 'otp_expires_in' => $otpExpiresIn], returnType: NeonAuthPhoneNumberConfig::class, decoder: 'json', operationId: 'updateAuthPhoneNumberPlugin', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('PATCH', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth/plugins/phone-number", $clientConfig, body: ['enabled' => $enabled, 'otp_expires_in' => $otpExpiresIn], returnType: NeonAuthPhoneNumberConfig::class, decoder: 'json', operationId: 'updateAuthPhoneNumberPlugin', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, NeonAuthPhoneNumberConfig::class));
     }
 
@@ -156,7 +156,7 @@ trait AuthPluginsMethods
 
         Validation::validatePattern('branch_id', $branchId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth/plugins/oauth-provider", $clientConfig, returnType: NeonAuthOAuthProviderConfig::class, decoder: 'json', operationId: 'getAuthOAuthProviderPlugin', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth/plugins/oauth-provider", $clientConfig, returnType: NeonAuthOAuthProviderConfig::class, decoder: 'json', operationId: 'getAuthOAuthProviderPlugin', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, NeonAuthOAuthProviderConfig::class));
     }
 
@@ -182,7 +182,7 @@ trait AuthPluginsMethods
 
         Validation::validatePattern('branch_id', $branchId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('PATCH', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth/plugins/oauth-provider", $clientConfig, body: ['enabled' => $enabled, 'login_page' => $loginPage, 'consent_page' => $consentPage, 'mcp' => $mcp, 'resources' => $resources], returnType: NeonAuthOAuthProviderConfig::class, decoder: 'json', operationId: 'updateAuthOAuthProviderPlugin', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('PATCH', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth/plugins/oauth-provider", $clientConfig, body: ['enabled' => $enabled, 'login_page' => $loginPage, 'consent_page' => $consentPage, 'mcp' => $mcp, 'resources' => $resources], returnType: NeonAuthOAuthProviderConfig::class, decoder: 'json', operationId: 'updateAuthOAuthProviderPlugin', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, NeonAuthOAuthProviderConfig::class));
     }
 }

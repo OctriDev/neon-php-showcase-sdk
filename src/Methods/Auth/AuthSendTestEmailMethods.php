@@ -37,7 +37,7 @@ trait AuthSendTestEmailMethods
         Validation::validateLength('recipient_email', $recipientEmail, min: 1, max: 256);
         Validation::validateEmail('recipient_email', $recipientEmail);
 
-        $sdkResponse = SdkClient::request('POST', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth/send_test_email", $clientConfig, body: ['host' => $host, 'port' => $port, 'username' => $username, 'password' => $password, 'sender_email' => $senderEmail, 'sender_name' => $senderName, 'recipient_email' => $recipientEmail], returnType: SendNeonAuthTestEmailResponse::class, decoder: 'json', operationId: 'sendAuthTestEmail', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('POST', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth/send_test_email", $clientConfig, body: ['host' => $host, 'port' => $port, 'username' => $username, 'password' => $password, 'sender_email' => $senderEmail, 'sender_name' => $senderName, 'recipient_email' => $recipientEmail], returnType: SendNeonAuthTestEmailResponse::class, decoder: 'json', operationId: 'sendAuthTestEmail', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, SendNeonAuthTestEmailResponse::class));
     }
 }

@@ -15,11 +15,26 @@ final readonly class NeonAuthOrganizationConfigCreatorRoleEnum implements SdkOpe
     public const ADMIN = "admin";
     public const OWNER = "owner";
     private function __construct(public string $value) {}
-    public static function from(string|int $value): static { return new self((string) $value); }
-    public static function tryFrom(string|int|null $value): ?static { return $value === null ? null : self::from($value); }
-    public function getValue(): string { return $this->value; }
-    public function jsonSerialize(): string { return $this->value; }
-    public function __toString(): string { return (string) $this->value; }
+    public static function from(string|int $value): static
+    {
+        return new self((string) $value);
+    }
+    public static function tryFrom(string|int|null $value): ?static
+    {
+        return $value === null ? null : self::from($value);
+    }
+    public function getValue(): string
+    {
+        return $this->value;
+    }
+    public function jsonSerialize(): string
+    {
+        return $this->value;
+    }
+    public function __toString(): string
+    {
+        return (string) $this->value;
+    }
 }
 
 /**
@@ -100,11 +115,21 @@ class NeonAuthOrganizationConfig implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "enabled") || $data->enabled === null) { throw new SdkValidationError("enabled", 'required', "Required property 'enabled' is missing or null"); }
-        if (!property_exists($data, "organization_limit") || $data->organization_limit === null) { throw new SdkValidationError("organization_limit", 'required', "Required property 'organization_limit' is missing or null"); }
-        if (!property_exists($data, "membership_limit") || $data->membership_limit === null) { throw new SdkValidationError("membership_limit", 'required', "Required property 'membership_limit' is missing or null"); }
-        if (!property_exists($data, "creator_role") || $data->creator_role === null) { throw new SdkValidationError("creator_role", 'required', "Required property 'creator_role' is missing or null"); }
-        if (!property_exists($data, "send_invitation_email") || $data->send_invitation_email === null) { throw new SdkValidationError("send_invitation_email", 'required', "Required property 'send_invitation_email' is missing or null"); }
+        if (!property_exists($data, "enabled") || $data->enabled === null) {
+            throw new SdkValidationError("enabled", 'required', "Required property 'enabled' is missing or null");
+        }
+        if (!property_exists($data, "organization_limit") || $data->organization_limit === null) {
+            throw new SdkValidationError("organization_limit", 'required', "Required property 'organization_limit' is missing or null");
+        }
+        if (!property_exists($data, "membership_limit") || $data->membership_limit === null) {
+            throw new SdkValidationError("membership_limit", 'required', "Required property 'membership_limit' is missing or null");
+        }
+        if (!property_exists($data, "creator_role") || $data->creator_role === null) {
+            throw new SdkValidationError("creator_role", 'required', "Required property 'creator_role' is missing or null");
+        }
+        if (!property_exists($data, "send_invitation_email") || $data->send_invitation_email === null) {
+            throw new SdkValidationError("send_invitation_email", 'required', "Required property 'send_invitation_email' is missing or null");
+        }
         return new self(
             enabled: SdkClient::boolValue($data->enabled),
             organizationLimit: SdkClient::intValue($data->organization_limit),
@@ -165,7 +190,9 @@ class NeonAuthPhoneNumberConfig implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "enabled") || $data->enabled === null) { throw new SdkValidationError("enabled", 'required', "Required property 'enabled' is missing or null"); }
+        if (!property_exists($data, "enabled") || $data->enabled === null) {
+            throw new SdkValidationError("enabled", 'required', "Required property 'enabled' is missing or null");
+        }
         return new self(
             enabled: SdkClient::boolValue($data->enabled),
             otpExpiresIn: (property_exists($data, "otp_expires_in") && $data->otp_expires_in !== null ? SdkClient::intValue($data->otp_expires_in) : SdkNotGiven::Value),
@@ -186,11 +213,26 @@ final readonly class NeonAuthWebhookConfigEnabledEventsItemEnum implements SdkOp
     public const ORGANIZATION_INVITATION_ACCEPTED = "organization.invitation.accepted";
     public const PHONE_NUMBER_VERIFIED = "phone_number.verified";
     private function __construct(public string $value) {}
-    public static function from(string|int $value): static { return new self((string) $value); }
-    public static function tryFrom(string|int|null $value): ?static { return $value === null ? null : self::from($value); }
-    public function getValue(): string { return $this->value; }
-    public function jsonSerialize(): string { return $this->value; }
-    public function __toString(): string { return (string) $this->value; }
+    public static function from(string|int $value): static
+    {
+        return new self((string) $value);
+    }
+    public static function tryFrom(string|int|null $value): ?static
+    {
+        return $value === null ? null : self::from($value);
+    }
+    public function getValue(): string
+    {
+        return $this->value;
+    }
+    public function jsonSerialize(): string
+    {
+        return $this->value;
+    }
+    public function __toString(): string
+    {
+        return (string) $this->value;
+    }
 }
 
 /**
@@ -267,7 +309,9 @@ class NeonAuthWebhookConfig implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "enabled") || $data->enabled === null) { throw new SdkValidationError("enabled", 'required', "Required property 'enabled' is missing or null"); }
+        if (!property_exists($data, "enabled") || $data->enabled === null) {
+            throw new SdkValidationError("enabled", 'required', "Required property 'enabled' is missing or null");
+        }
         return new self(
             enabled: SdkClient::boolValue($data->enabled),
             webhookUrl: (property_exists($data, "webhook_url") && $data->webhook_url !== null ? SdkClient::stringValue($data->webhook_url) : SdkNotGiven::Value),
@@ -327,7 +371,9 @@ class SendNeonAuthTestEmailResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "success") || $data->success === null) { throw new SdkValidationError("success", 'required', "Required property 'success' is missing or null"); }
+        if (!property_exists($data, "success") || $data->success === null) {
+            throw new SdkValidationError("success", 'required', "Required property 'success' is missing or null");
+        }
         return new self(
             success: SdkClient::boolValue($data->success),
             errorMessage: (property_exists($data, "error_message") && $data->error_message !== null ? SdkClient::stringValue($data->error_message) : SdkNotGiven::Value),

@@ -55,8 +55,12 @@ class NeonAuthOAuthClientSecret implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "client_id") || $data->client_id === null) { throw new SdkValidationError("client_id", 'required', "Required property 'client_id' is missing or null"); }
-        if (!property_exists($data, "client_secret") || $data->client_secret === null) { throw new SdkValidationError("client_secret", 'required', "Required property 'client_secret' is missing or null"); }
+        if (!property_exists($data, "client_id") || $data->client_id === null) {
+            throw new SdkValidationError("client_id", 'required', "Required property 'client_id' is missing or null");
+        }
+        if (!property_exists($data, "client_secret") || $data->client_secret === null) {
+            throw new SdkValidationError("client_secret", 'required', "Required property 'client_secret' is missing or null");
+        }
         return new self(
             clientId: SdkClient::stringValue($data->client_id),
             clientSecret: SdkClient::stringValue($data->client_secret),

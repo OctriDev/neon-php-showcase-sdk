@@ -16,11 +16,26 @@ final readonly class ConsumptionHistoryGranularity implements SdkOpenEnum
     public const DAILY = "daily";
     public const MONTHLY = "monthly";
     private function __construct(public string $value) {}
-    public static function from(string|int $value): static { return new self((string) $value); }
-    public static function tryFrom(string|int|null $value): ?static { return $value === null ? null : self::from($value); }
-    public function getValue(): string { return $this->value; }
-    public function jsonSerialize(): string { return $this->value; }
-    public function __toString(): string { return (string) $this->value; }
+    public static function from(string|int $value): static
+    {
+        return new self((string) $value);
+    }
+    public static function tryFrom(string|int|null $value): ?static
+    {
+        return $value === null ? null : self::from($value);
+    }
+    public function getValue(): string
+    {
+        return $this->value;
+    }
+    public function jsonSerialize(): string
+    {
+        return $this->value;
+    }
+    public function __toString(): string
+    {
+        return (string) $this->value;
+    }
 }
 
 /**
@@ -103,10 +118,18 @@ class ConsumptionHistoryPerPeriodV2 implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "period_id") || $data->period_id === null) { throw new SdkValidationError("period_id", 'required', "Required property 'period_id' is missing or null"); }
-        if (!property_exists($data, "period_plan") || $data->period_plan === null) { throw new SdkValidationError("period_plan", 'required', "Required property 'period_plan' is missing or null"); }
-        if (!property_exists($data, "period_start") || $data->period_start === null) { throw new SdkValidationError("period_start", 'required', "Required property 'period_start' is missing or null"); }
-        if (!property_exists($data, "consumption") || $data->consumption === null) { throw new SdkValidationError("consumption", 'required', "Required property 'consumption' is missing or null"); }
+        if (!property_exists($data, "period_id") || $data->period_id === null) {
+            throw new SdkValidationError("period_id", 'required', "Required property 'period_id' is missing or null");
+        }
+        if (!property_exists($data, "period_plan") || $data->period_plan === null) {
+            throw new SdkValidationError("period_plan", 'required', "Required property 'period_plan' is missing or null");
+        }
+        if (!property_exists($data, "period_start") || $data->period_start === null) {
+            throw new SdkValidationError("period_start", 'required', "Required property 'period_start' is missing or null");
+        }
+        if (!property_exists($data, "consumption") || $data->consumption === null) {
+            throw new SdkValidationError("consumption", 'required', "Required property 'consumption' is missing or null");
+        }
         return new self(
             periodId: SdkClient::stringValue($data->period_id),
             periodPlan: SdkClient::stringValue($data->period_plan),
@@ -237,8 +260,12 @@ class ConsumptionMetricValue implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "metric_name") || $data->metric_name === null) { throw new SdkValidationError("metric_name", 'required', "Required property 'metric_name' is missing or null"); }
-        if (!property_exists($data, "value") || $data->value === null) { throw new SdkValidationError("value", 'required', "Required property 'value' is missing or null"); }
+        if (!property_exists($data, "metric_name") || $data->metric_name === null) {
+            throw new SdkValidationError("metric_name", 'required', "Required property 'metric_name' is missing or null");
+        }
+        if (!property_exists($data, "value") || $data->value === null) {
+            throw new SdkValidationError("value", 'required', "Required property 'value' is missing or null");
+        }
         return new self(
             metricName: SdkClient::stringValue($data->metric_name),
             value: SdkClient::intValue($data->value),

@@ -85,11 +85,21 @@ class VPCEndpointDetails implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "vpc_endpoint_id") || $data->vpc_endpoint_id === null) { throw new SdkValidationError("vpc_endpoint_id", 'required', "Required property 'vpc_endpoint_id' is missing or null"); }
-        if (!property_exists($data, "label") || $data->label === null) { throw new SdkValidationError("label", 'required', "Required property 'label' is missing or null"); }
-        if (!property_exists($data, "state") || $data->state === null) { throw new SdkValidationError("state", 'required', "Required property 'state' is missing or null"); }
-        if (!property_exists($data, "num_restricted_projects") || $data->num_restricted_projects === null) { throw new SdkValidationError("num_restricted_projects", 'required', "Required property 'num_restricted_projects' is missing or null"); }
-        if (!property_exists($data, "example_restricted_projects") || $data->example_restricted_projects === null) { throw new SdkValidationError("example_restricted_projects", 'required', "Required property 'example_restricted_projects' is missing or null"); }
+        if (!property_exists($data, "vpc_endpoint_id") || $data->vpc_endpoint_id === null) {
+            throw new SdkValidationError("vpc_endpoint_id", 'required', "Required property 'vpc_endpoint_id' is missing or null");
+        }
+        if (!property_exists($data, "label") || $data->label === null) {
+            throw new SdkValidationError("label", 'required', "Required property 'label' is missing or null");
+        }
+        if (!property_exists($data, "state") || $data->state === null) {
+            throw new SdkValidationError("state", 'required', "Required property 'state' is missing or null");
+        }
+        if (!property_exists($data, "num_restricted_projects") || $data->num_restricted_projects === null) {
+            throw new SdkValidationError("num_restricted_projects", 'required', "Required property 'num_restricted_projects' is missing or null");
+        }
+        if (!property_exists($data, "example_restricted_projects") || $data->example_restricted_projects === null) {
+            throw new SdkValidationError("example_restricted_projects", 'required', "Required property 'example_restricted_projects' is missing or null");
+        }
         return new self(
             vpcEndpointId: SdkClient::stringValue($data->vpc_endpoint_id),
             label: SdkClient::stringValue($data->label),

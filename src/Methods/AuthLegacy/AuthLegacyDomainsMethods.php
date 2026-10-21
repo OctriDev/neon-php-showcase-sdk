@@ -24,7 +24,7 @@ trait AuthLegacyDomainsMethods
 
         Validation::validatePattern('project_id', $projectId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/auth/domains", $clientConfig, returnType: NeonAuthRedirectURIWhitelistResponse::class, decoder: 'json', operationId: 'listAuthLegacyRedirectUriWhitelistDomains', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/auth/domains", $clientConfig, returnType: NeonAuthRedirectURIWhitelistResponse::class, decoder: 'json', operationId: 'listAuthLegacyRedirectUriWhitelistDomains', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, NeonAuthRedirectURIWhitelistResponse::class));
     }
 
@@ -47,7 +47,7 @@ trait AuthLegacyDomainsMethods
 
         Validation::validateUri('domain', $domain);
 
-        return SdkClient::request('POST', "/projects/" . SdkClient::encodePathSegment($projectId) . "/auth/domains", $clientConfig, body: ['domain' => $domain, 'auth_provider' => $authProvider], decoder: 'empty', operationId: 'addAuthLegacyDomainToRedirectUriWhitelist', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)])->data;
+        return SdkClient::request('POST', "/projects/" . SdkClient::encodePathSegment($projectId) . "/auth/domains", $clientConfig, body: ['domain' => $domain, 'auth_provider' => $authProvider], decoder: 'empty', operationId: 'addAuthLegacyDomainToRedirectUriWhitelist', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)])->data;
     }
 
 
@@ -67,6 +67,6 @@ trait AuthLegacyDomainsMethods
 
         Validation::validatePattern('project_id', $projectId, '^[a-z0-9-]{1,60}$');
 
-        return SdkClient::request('DELETE', "/projects/" . SdkClient::encodePathSegment($projectId) . "/auth/domains", $clientConfig, body: ['auth_provider' => $authProvider, 'domains' => $domains], decoder: 'empty', operationId: 'deleteAuthLegacyDomainFromRedirectUriWhitelist', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)])->data;
+        return SdkClient::request('DELETE', "/projects/" . SdkClient::encodePathSegment($projectId) . "/auth/domains", $clientConfig, body: ['auth_provider' => $authProvider, 'domains' => $domains], decoder: 'empty', operationId: 'deleteAuthLegacyDomainFromRedirectUriWhitelist', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)])->data;
     }
 }

@@ -45,7 +45,9 @@ class VPCEndpointsWithRegionResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "endpoints") || $data->endpoints === null) { throw new SdkValidationError("endpoints", 'required', "Required property 'endpoints' is missing or null"); }
+        if (!property_exists($data, "endpoints") || $data->endpoints === null) {
+            throw new SdkValidationError("endpoints", 'required', "Required property 'endpoints' is missing or null");
+        }
         return new self(
             endpoints: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, VPCEndpointWithRegion::class), SdkClient::arrayValue($data->endpoints))),
         );
@@ -87,7 +89,9 @@ class VPCEndpointWithRegionVariant1 implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "region_id") || $data->region_id === null) { throw new SdkValidationError("region_id", 'required', "Required property 'region_id' is missing or null"); }
+        if (!property_exists($data, "region_id") || $data->region_id === null) {
+            throw new SdkValidationError("region_id", 'required', "Required property 'region_id' is missing or null");
+        }
         return new self(
             regionId: SdkClient::stringValue($data->region_id),
         );
@@ -152,9 +156,15 @@ class VPCEndpointWithRegion implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "vpc_endpoint_id") || $data->vpc_endpoint_id === null) { throw new SdkValidationError("vpc_endpoint_id", 'required', "Required property 'vpc_endpoint_id' is missing or null"); }
-        if (!property_exists($data, "label") || $data->label === null) { throw new SdkValidationError("label", 'required', "Required property 'label' is missing or null"); }
-        if (!property_exists($data, "region_id") || $data->region_id === null) { throw new SdkValidationError("region_id", 'required', "Required property 'region_id' is missing or null"); }
+        if (!property_exists($data, "vpc_endpoint_id") || $data->vpc_endpoint_id === null) {
+            throw new SdkValidationError("vpc_endpoint_id", 'required', "Required property 'vpc_endpoint_id' is missing or null");
+        }
+        if (!property_exists($data, "label") || $data->label === null) {
+            throw new SdkValidationError("label", 'required', "Required property 'label' is missing or null");
+        }
+        if (!property_exists($data, "region_id") || $data->region_id === null) {
+            throw new SdkValidationError("region_id", 'required', "Required property 'region_id' is missing or null");
+        }
         return new self(
             vpcEndpointId: SdkClient::stringValue($data->vpc_endpoint_id),
             label: SdkClient::stringValue($data->label),

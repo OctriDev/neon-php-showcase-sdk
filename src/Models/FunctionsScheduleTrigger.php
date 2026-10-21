@@ -135,16 +135,36 @@ class ScheduleTrigger implements Trigger, \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "type") || $data->type === null) { throw new SdkValidationError("type", 'required', "Required property 'type' is missing or null"); }
-        if (!property_exists($data, "trigger_id") || $data->trigger_id === null) { throw new SdkValidationError("trigger_id", 'required', "Required property 'trigger_id' is missing or null"); }
-        if (!property_exists($data, "function_slug") || $data->function_slug === null) { throw new SdkValidationError("function_slug", 'required', "Required property 'function_slug' is missing or null"); }
-        if (!property_exists($data, "name") || $data->name === null) { throw new SdkValidationError("name", 'required', "Required property 'name' is missing or null"); }
-        if (!property_exists($data, "function_path") || $data->function_path === null) { throw new SdkValidationError("function_path", 'required', "Required property 'function_path' is missing or null"); }
-        if (!property_exists($data, "schedule") || $data->schedule === null) { throw new SdkValidationError("schedule", 'required', "Required property 'schedule' is missing or null"); }
-        if (!property_exists($data, "enabled") || $data->enabled === null) { throw new SdkValidationError("enabled", 'required', "Required property 'enabled' is missing or null"); }
-        if (!property_exists($data, "version") || $data->version === null) { throw new SdkValidationError("version", 'required', "Required property 'version' is missing or null"); }
-        if (!property_exists($data, "next_run_at")) { throw new SdkValidationError("next_run_at", 'required', "Missing required property 'next_run_at'"); }
-        if (!property_exists($data, "inherited") || $data->inherited === null) { throw new SdkValidationError("inherited", 'required', "Required property 'inherited' is missing or null"); }
+        if (!property_exists($data, "type") || $data->type === null) {
+            throw new SdkValidationError("type", 'required', "Required property 'type' is missing or null");
+        }
+        if (!property_exists($data, "trigger_id") || $data->trigger_id === null) {
+            throw new SdkValidationError("trigger_id", 'required', "Required property 'trigger_id' is missing or null");
+        }
+        if (!property_exists($data, "function_slug") || $data->function_slug === null) {
+            throw new SdkValidationError("function_slug", 'required', "Required property 'function_slug' is missing or null");
+        }
+        if (!property_exists($data, "name") || $data->name === null) {
+            throw new SdkValidationError("name", 'required', "Required property 'name' is missing or null");
+        }
+        if (!property_exists($data, "function_path") || $data->function_path === null) {
+            throw new SdkValidationError("function_path", 'required', "Required property 'function_path' is missing or null");
+        }
+        if (!property_exists($data, "schedule") || $data->schedule === null) {
+            throw new SdkValidationError("schedule", 'required', "Required property 'schedule' is missing or null");
+        }
+        if (!property_exists($data, "enabled") || $data->enabled === null) {
+            throw new SdkValidationError("enabled", 'required', "Required property 'enabled' is missing or null");
+        }
+        if (!property_exists($data, "version") || $data->version === null) {
+            throw new SdkValidationError("version", 'required', "Required property 'version' is missing or null");
+        }
+        if (!property_exists($data, "next_run_at")) {
+            throw new SdkValidationError("next_run_at", 'required', "Missing required property 'next_run_at'");
+        }
+        if (!property_exists($data, "inherited") || $data->inherited === null) {
+            throw new SdkValidationError("inherited", 'required', "Required property 'inherited' is missing or null");
+        }
         return new self(
             type: SdkClient::hydrateEnum($data->type, ScheduleTriggerTypeEnum::class),
             triggerId: SdkClient::stringValue($data->trigger_id),
@@ -286,15 +306,33 @@ class StorageObjectCreatedTrigger implements Trigger, \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "type") || $data->type === null) { throw new SdkValidationError("type", 'required', "Required property 'type' is missing or null"); }
-        if (!property_exists($data, "trigger_id") || $data->trigger_id === null) { throw new SdkValidationError("trigger_id", 'required', "Required property 'trigger_id' is missing or null"); }
-        if (!property_exists($data, "function_slug") || $data->function_slug === null) { throw new SdkValidationError("function_slug", 'required', "Required property 'function_slug' is missing or null"); }
-        if (!property_exists($data, "name") || $data->name === null) { throw new SdkValidationError("name", 'required', "Required property 'name' is missing or null"); }
-        if (!property_exists($data, "function_path") || $data->function_path === null) { throw new SdkValidationError("function_path", 'required', "Required property 'function_path' is missing or null"); }
-        if (!property_exists($data, "storage_object_created") || $data->storage_object_created === null) { throw new SdkValidationError("storage_object_created", 'required', "Required property 'storage_object_created' is missing or null"); }
-        if (!property_exists($data, "enabled") || $data->enabled === null) { throw new SdkValidationError("enabled", 'required', "Required property 'enabled' is missing or null"); }
-        if (!property_exists($data, "version") || $data->version === null) { throw new SdkValidationError("version", 'required', "Required property 'version' is missing or null"); }
-        if (!property_exists($data, "inherited") || $data->inherited === null) { throw new SdkValidationError("inherited", 'required', "Required property 'inherited' is missing or null"); }
+        if (!property_exists($data, "type") || $data->type === null) {
+            throw new SdkValidationError("type", 'required', "Required property 'type' is missing or null");
+        }
+        if (!property_exists($data, "trigger_id") || $data->trigger_id === null) {
+            throw new SdkValidationError("trigger_id", 'required', "Required property 'trigger_id' is missing or null");
+        }
+        if (!property_exists($data, "function_slug") || $data->function_slug === null) {
+            throw new SdkValidationError("function_slug", 'required', "Required property 'function_slug' is missing or null");
+        }
+        if (!property_exists($data, "name") || $data->name === null) {
+            throw new SdkValidationError("name", 'required', "Required property 'name' is missing or null");
+        }
+        if (!property_exists($data, "function_path") || $data->function_path === null) {
+            throw new SdkValidationError("function_path", 'required', "Required property 'function_path' is missing or null");
+        }
+        if (!property_exists($data, "storage_object_created") || $data->storage_object_created === null) {
+            throw new SdkValidationError("storage_object_created", 'required', "Required property 'storage_object_created' is missing or null");
+        }
+        if (!property_exists($data, "enabled") || $data->enabled === null) {
+            throw new SdkValidationError("enabled", 'required', "Required property 'enabled' is missing or null");
+        }
+        if (!property_exists($data, "version") || $data->version === null) {
+            throw new SdkValidationError("version", 'required', "Required property 'version' is missing or null");
+        }
+        if (!property_exists($data, "inherited") || $data->inherited === null) {
+            throw new SdkValidationError("inherited", 'required', "Required property 'inherited' is missing or null");
+        }
         return new self(
             type: SdkClient::hydrateEnum($data->type, StorageObjectCreatedTriggerTypeEnum::class),
             triggerId: SdkClient::stringValue($data->trigger_id),
@@ -347,7 +385,9 @@ class TriggerResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "trigger") || $data->trigger === null) { throw new SdkValidationError("trigger", 'required', "Required property 'trigger' is missing or null"); }
+        if (!property_exists($data, "trigger") || $data->trigger === null) {
+            throw new SdkValidationError("trigger", 'required', "Required property 'trigger' is missing or null");
+        }
         return new self(
             trigger: SdkClient::hydrateUnionAs($data->trigger, Trigger::class, [ScheduleTrigger::class, StorageObjectCreatedTrigger::class], "type", ["schedule" => ScheduleTrigger::class, "storage_object_created" => StorageObjectCreatedTrigger::class], UnknownTrigger::class),
         );

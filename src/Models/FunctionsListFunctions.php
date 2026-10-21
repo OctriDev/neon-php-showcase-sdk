@@ -57,7 +57,9 @@ class ListFunctionsResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "functions") || $data->functions === null) { throw new SdkValidationError("functions", 'required', "Required property 'functions' is missing or null"); }
+        if (!property_exists($data, "functions") || $data->functions === null) {
+            throw new SdkValidationError("functions", 'required', "Required property 'functions' is missing or null");
+        }
         return new self(
             functions: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, NeonFunction::class), SdkClient::arrayValue($data->functions))),
             pagination: (property_exists($data, "pagination") && $data->pagination !== null ? SdkClient::hydrateClass($data->pagination, CursorPagination::class) : SdkNotGiven::Value),
@@ -103,7 +105,9 @@ class NeonFunctionsListResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "functions") || $data->functions === null) { throw new SdkValidationError("functions", 'required', "Required property 'functions' is missing or null"); }
+        if (!property_exists($data, "functions") || $data->functions === null) {
+            throw new SdkValidationError("functions", 'required', "Required property 'functions' is missing or null");
+        }
         return new self(
             functions: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, NeonFunction::class), SdkClient::arrayValue($data->functions))),
         );

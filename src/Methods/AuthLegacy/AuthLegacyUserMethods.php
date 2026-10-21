@@ -34,7 +34,7 @@ trait AuthLegacyUserMethods
             Validation::validateLength('name', $name, min: 1, max: 255);
         }
 
-        $sdkResponse = SdkClient::request('POST', "/projects/auth/user", $clientConfig, body: ['project_id' => $projectId, 'auth_provider' => $authProvider, 'email' => $email, 'name' => $name], returnType: NeonAuthCreateNewUserResponse::class, decoder: 'json', operationId: 'createAuthLegacyUser', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('POST', "/projects/auth/user", $clientConfig, body: ['project_id' => $projectId, 'auth_provider' => $authProvider, 'email' => $email, 'name' => $name], returnType: NeonAuthCreateNewUserResponse::class, decoder: 'json', operationId: 'createAuthLegacyUser', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, NeonAuthCreateNewUserResponse::class));
     }
 }

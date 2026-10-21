@@ -57,7 +57,9 @@ class EnableNeonAuthIntegrationRequest implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "auth_provider") || $data->auth_provider === null) { throw new SdkValidationError("auth_provider", 'required', "Required property 'auth_provider' is missing or null"); }
+        if (!property_exists($data, "auth_provider") || $data->auth_provider === null) {
+            throw new SdkValidationError("auth_provider", 'required', "Required property 'auth_provider' is missing or null");
+        }
         return new self(
             authProvider: SdkClient::hydrateStringEnumOrString($data->auth_provider, NeonAuthSupportedAuthProvider::class),
             databaseName: (property_exists($data, "database_name") && $data->database_name !== null ? SdkClient::stringValue($data->database_name) : SdkNotGiven::Value),

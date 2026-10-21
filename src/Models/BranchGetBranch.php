@@ -55,8 +55,12 @@ class GetBranchResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "branch") || $data->branch === null) { throw new SdkValidationError("branch", 'required', "Required property 'branch' is missing or null"); }
-        if (!property_exists($data, "annotation") || $data->annotation === null) { throw new SdkValidationError("annotation", 'required', "Required property 'annotation' is missing or null"); }
+        if (!property_exists($data, "branch") || $data->branch === null) {
+            throw new SdkValidationError("branch", 'required', "Required property 'branch' is missing or null");
+        }
+        if (!property_exists($data, "annotation") || $data->annotation === null) {
+            throw new SdkValidationError("annotation", 'required', "Required property 'annotation' is missing or null");
+        }
         return new self(
             branch: SdkClient::hydrateClass($data->branch, Branch::class),
             annotation: SdkClient::hydrateClass($data->annotation, AnnotationData::class),

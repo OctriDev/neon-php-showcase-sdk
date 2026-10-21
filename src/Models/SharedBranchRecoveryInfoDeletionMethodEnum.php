@@ -15,11 +15,26 @@ final readonly class BranchRecoveryInfoDeletionMethodEnum implements SdkOpenEnum
     public const USER = "user";
     public const TTL = "ttl";
     private function __construct(public string $value) {}
-    public static function from(string|int $value): static { return new self((string) $value); }
-    public static function tryFrom(string|int|null $value): ?static { return $value === null ? null : self::from($value); }
-    public function getValue(): string { return $this->value; }
-    public function jsonSerialize(): string { return $this->value; }
-    public function __toString(): string { return (string) $this->value; }
+    public static function from(string|int $value): static
+    {
+        return new self((string) $value);
+    }
+    public static function tryFrom(string|int|null $value): ?static
+    {
+        return $value === null ? null : self::from($value);
+    }
+    public function getValue(): string
+    {
+        return $this->value;
+    }
+    public function jsonSerialize(): string
+    {
+        return $this->value;
+    }
+    public function __toString(): string
+    {
+        return (string) $this->value;
+    }
 }
 
 /**
@@ -80,9 +95,15 @@ class BranchRecoveryInfo implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "deleted_at") || $data->deleted_at === null) { throw new SdkValidationError("deleted_at", 'required', "Required property 'deleted_at' is missing or null"); }
-        if (!property_exists($data, "recoverable_until") || $data->recoverable_until === null) { throw new SdkValidationError("recoverable_until", 'required', "Required property 'recoverable_until' is missing or null"); }
-        if (!property_exists($data, "deletion_method") || $data->deletion_method === null) { throw new SdkValidationError("deletion_method", 'required', "Required property 'deletion_method' is missing or null"); }
+        if (!property_exists($data, "deleted_at") || $data->deleted_at === null) {
+            throw new SdkValidationError("deleted_at", 'required', "Required property 'deleted_at' is missing or null");
+        }
+        if (!property_exists($data, "recoverable_until") || $data->recoverable_until === null) {
+            throw new SdkValidationError("recoverable_until", 'required', "Required property 'recoverable_until' is missing or null");
+        }
+        if (!property_exists($data, "deletion_method") || $data->deletion_method === null) {
+            throw new SdkValidationError("deletion_method", 'required', "Required property 'deletion_method' is missing or null");
+        }
         return new self(
             deletedAt: SdkClient::stringValue($data->deleted_at),
             recoverableUntil: SdkClient::stringValue($data->recoverable_until),
@@ -129,7 +150,9 @@ class BranchResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "branch") || $data->branch === null) { throw new SdkValidationError("branch", 'required', "Required property 'branch' is missing or null"); }
+        if (!property_exists($data, "branch") || $data->branch === null) {
+            throw new SdkValidationError("branch", 'required', "Required property 'branch' is missing or null");
+        }
         return new self(
             branch: SdkClient::hydrateClass($data->branch, Branch::class),
         );
@@ -184,8 +207,12 @@ class BranchRestrictedAction implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "name") || $data->name === null) { throw new SdkValidationError("name", 'required', "Required property 'name' is missing or null"); }
-        if (!property_exists($data, "reason") || $data->reason === null) { throw new SdkValidationError("reason", 'required', "Required property 'reason' is missing or null"); }
+        if (!property_exists($data, "name") || $data->name === null) {
+            throw new SdkValidationError("name", 'required', "Required property 'name' is missing or null");
+        }
+        if (!property_exists($data, "reason") || $data->reason === null) {
+            throw new SdkValidationError("reason", 'required', "Required property 'reason' is missing or null");
+        }
         return new self(
             name: SdkClient::stringValue($data->name),
             reason: SdkClient::stringValue($data->reason),

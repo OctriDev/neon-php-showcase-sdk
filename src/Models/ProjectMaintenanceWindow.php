@@ -65,9 +65,15 @@ class MaintenanceWindow implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "weekdays") || $data->weekdays === null) { throw new SdkValidationError("weekdays", 'required', "Required property 'weekdays' is missing or null"); }
-        if (!property_exists($data, "start_time") || $data->start_time === null) { throw new SdkValidationError("start_time", 'required', "Required property 'start_time' is missing or null"); }
-        if (!property_exists($data, "end_time") || $data->end_time === null) { throw new SdkValidationError("end_time", 'required', "Required property 'end_time' is missing or null"); }
+        if (!property_exists($data, "weekdays") || $data->weekdays === null) {
+            throw new SdkValidationError("weekdays", 'required', "Required property 'weekdays' is missing or null");
+        }
+        if (!property_exists($data, "start_time") || $data->start_time === null) {
+            throw new SdkValidationError("start_time", 'required', "Required property 'start_time' is missing or null");
+        }
+        if (!property_exists($data, "end_time") || $data->end_time === null) {
+            throw new SdkValidationError("end_time", 'required', "Required property 'end_time' is missing or null");
+        }
         return new self(
             weekdays: array_values(array_map(static fn($item) => SdkClient::intValue($item), SdkClient::arrayValue($data->weekdays))),
             startTime: SdkClient::stringValue($data->start_time),
@@ -126,7 +132,9 @@ class ProjectsResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "projects") || $data->projects === null) { throw new SdkValidationError("projects", 'required', "Required property 'projects' is missing or null"); }
+        if (!property_exists($data, "projects") || $data->projects === null) {
+            throw new SdkValidationError("projects", 'required', "Required property 'projects' is missing or null");
+        }
         return new self(
             projects: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, ProjectListItem::class), SdkClient::arrayValue($data->projects))),
             unavailableProjectIds: (property_exists($data, "unavailable_project_ids") && $data->unavailable_project_ids !== null ? array_values(array_map(static fn($item) => SdkClient::stringValue($item), SdkClient::arrayValue($data->unavailable_project_ids))) : SdkNotGiven::Value),

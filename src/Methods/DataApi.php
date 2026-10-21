@@ -12,11 +12,26 @@ final readonly class CreateDataApiAuthProvider implements SdkOpenEnum
     public const NEON_AUTH = "neon_auth";
     public const EXTERNAL = "external";
     private function __construct(public string $value) {}
-    public static function from(string|int $value): static { return new self((string) $value); }
-    public static function tryFrom(string|int|null $value): ?static { return $value === null ? null : self::from($value); }
-    public function getValue(): string { return $this->value; }
-    public function jsonSerialize(): string { return $this->value; }
-    public function __toString(): string { return (string) $this->value; }
+    public static function from(string|int $value): static
+    {
+        return new self((string) $value);
+    }
+    public static function tryFrom(string|int|null $value): ?static
+    {
+        return $value === null ? null : self::from($value);
+    }
+    public function getValue(): string
+    {
+        return $this->value;
+    }
+    public function jsonSerialize(): string
+    {
+        return $this->value;
+    }
+    public function __toString(): string
+    {
+        return (string) $this->value;
+    }
 }
 
 class DataApi
@@ -49,7 +64,7 @@ class DataApi
             Validation::validateUri('jwks_url', $jwksUrl);
         }
 
-        $sdkResponse = SdkClient::request('POST', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/data-api/" . SdkClient::encodePathSegment($databaseName) . "", $clientConfig, body: ['auth_provider' => $authProvider, 'jwks_url' => $jwksUrl, 'provider_name' => $providerName, 'jwt_audience' => $jwtAudience, 'add_default_grants' => $addDefaultGrants, 'skip_auth_schema' => $skipAuthSchema, 'settings' => $settings], returnType: DataAPICreateResponse::class, decoder: 'json', operationId: 'createDataApi', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('POST', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/data-api/" . SdkClient::encodePathSegment($databaseName) . "", $clientConfig, body: ['auth_provider' => $authProvider, 'jwks_url' => $jwksUrl, 'provider_name' => $providerName, 'jwt_audience' => $jwtAudience, 'add_default_grants' => $addDefaultGrants, 'skip_auth_schema' => $skipAuthSchema, 'settings' => $settings], returnType: DataAPICreateResponse::class, decoder: 'json', operationId: 'createDataApi', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, DataAPICreateResponse::class));
     }
 
@@ -72,7 +87,7 @@ class DataApi
 
         Validation::validatePattern('branch_id', $branchId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('PATCH', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/data-api/" . SdkClient::encodePathSegment($databaseName) . "", $clientConfig, body: ['settings' => $settings], returnType: EmptyResponse::class, decoder: 'json', operationId: 'updateDataApi', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('PATCH', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/data-api/" . SdkClient::encodePathSegment($databaseName) . "", $clientConfig, body: ['settings' => $settings], returnType: EmptyResponse::class, decoder: 'json', operationId: 'updateDataApi', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, EmptyResponse::class));
     }
 
@@ -94,7 +109,7 @@ class DataApi
 
         Validation::validatePattern('branch_id', $branchId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('DELETE', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/data-api/" . SdkClient::encodePathSegment($databaseName) . "", $clientConfig, returnType: EmptyResponse::class, decoder: 'json', operationId: 'deleteDataApi', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('DELETE', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/data-api/" . SdkClient::encodePathSegment($databaseName) . "", $clientConfig, returnType: EmptyResponse::class, decoder: 'json', operationId: 'deleteDataApi', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, EmptyResponse::class));
     }
 
@@ -116,7 +131,7 @@ class DataApi
 
         Validation::validatePattern('branch_id', $branchId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/data-api/" . SdkClient::encodePathSegment($databaseName) . "", $clientConfig, returnType: DataAPIReponse::class, decoder: 'json', operationId: 'getDataApi', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/data-api/" . SdkClient::encodePathSegment($databaseName) . "", $clientConfig, returnType: DataAPIReponse::class, decoder: 'json', operationId: 'getDataApi', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, DataAPIReponse::class));
     }
 }
