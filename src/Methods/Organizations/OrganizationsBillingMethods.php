@@ -22,7 +22,7 @@ trait OrganizationsBillingMethods
 
         Validation::validatePattern('org_id', $orgId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('GET', "/organizations/" . SdkClient::encodePathSegment($orgId) . "/billing/spending_limit", $clientConfig, returnType: SpendingLimitResponse::class, decoder: 'json', operationId: 'getOrganizationSpendingLimit', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('GET', "/organizations/" . SdkClient::encodePathSegment($orgId) . "/billing/spending_limit", $clientConfig, returnType: SpendingLimitResponse::class, decoder: 'json', operationId: 'getOrganizationSpendingLimit', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, SpendingLimitResponse::class));
     }
 
@@ -43,7 +43,7 @@ trait OrganizationsBillingMethods
 
         Validation::validateRange('spending_limit_cents', $spendingLimitCents, min: 1);
 
-        $sdkResponse = SdkClient::request('PUT', "/organizations/" . SdkClient::encodePathSegment($orgId) . "/billing/spending_limit", $clientConfig, body: ['spending_limit_cents' => $spendingLimitCents], returnType: SpendingLimitResponse::class, decoder: 'json', operationId: 'setOrganizationSpendingLimit', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('PUT', "/organizations/" . SdkClient::encodePathSegment($orgId) . "/billing/spending_limit", $clientConfig, body: ['spending_limit_cents' => $spendingLimitCents], returnType: SpendingLimitResponse::class, decoder: 'json', operationId: 'setOrganizationSpendingLimit', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, SpendingLimitResponse::class));
     }
 
@@ -61,7 +61,7 @@ trait OrganizationsBillingMethods
 
         Validation::validatePattern('org_id', $orgId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('DELETE', "/organizations/" . SdkClient::encodePathSegment($orgId) . "/billing/spending_limit", $clientConfig, returnType: EmptyResponse::class, decoder: 'json', operationId: 'deleteOrganizationSpendingLimit', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('DELETE', "/organizations/" . SdkClient::encodePathSegment($orgId) . "/billing/spending_limit", $clientConfig, returnType: EmptyResponse::class, decoder: 'json', operationId: 'deleteOrganizationSpendingLimit', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, EmptyResponse::class));
     }
 }

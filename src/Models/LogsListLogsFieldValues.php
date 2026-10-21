@@ -55,8 +55,12 @@ class ProjectBranchLogFieldValuesResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "values") || $data->values === null) { throw new SdkValidationError("values", 'required', "Required property 'values' is missing or null"); }
-        if (!property_exists($data, "is_truncated") || $data->is_truncated === null) { throw new SdkValidationError("is_truncated", 'required', "Required property 'is_truncated' is missing or null"); }
+        if (!property_exists($data, "values") || $data->values === null) {
+            throw new SdkValidationError("values", 'required', "Required property 'values' is missing or null");
+        }
+        if (!property_exists($data, "is_truncated") || $data->is_truncated === null) {
+            throw new SdkValidationError("is_truncated", 'required', "Required property 'is_truncated' is missing or null");
+        }
         return new self(
             values: array_values(array_map(static fn($item) => SdkClient::stringValue($item), SdkClient::arrayValue($data->values))),
             isTruncated: SdkClient::boolValue($data->is_truncated),

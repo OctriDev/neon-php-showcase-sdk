@@ -45,7 +45,9 @@ class UpdateNeonAuthAllowLocalhostRequest implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "allow_localhost") || $data->allow_localhost === null) { throw new SdkValidationError("allow_localhost", 'required', "Required property 'allow_localhost' is missing or null"); }
+        if (!property_exists($data, "allow_localhost") || $data->allow_localhost === null) {
+            throw new SdkValidationError("allow_localhost", 'required', "Required property 'allow_localhost' is missing or null");
+        }
         return new self(
             allowLocalhost: SdkClient::boolValue($data->allow_localhost),
         );

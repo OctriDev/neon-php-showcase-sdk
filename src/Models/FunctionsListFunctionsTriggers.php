@@ -45,7 +45,9 @@ class TriggersListResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "triggers") || $data->triggers === null) { throw new SdkValidationError("triggers", 'required', "Required property 'triggers' is missing or null"); }
+        if (!property_exists($data, "triggers") || $data->triggers === null) {
+            throw new SdkValidationError("triggers", 'required', "Required property 'triggers' is missing or null");
+        }
         return new self(
             triggers: array_values(array_map(static fn($item) => SdkClient::hydrateUnionAs($item, Trigger::class, [ScheduleTrigger::class, StorageObjectCreatedTrigger::class], "type", ["schedule" => ScheduleTrigger::class, "storage_object_created" => StorageObjectCreatedTrigger::class], UnknownTrigger::class), SdkClient::arrayValue($data->triggers))),
         );

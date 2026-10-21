@@ -157,11 +157,21 @@ class CredentialMeta implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "token_id") || $data->token_id === null) { throw new SdkValidationError("token_id", 'required', "Required property 'token_id' is missing or null"); }
-        if (!property_exists($data, "token_id_short") || $data->token_id_short === null) { throw new SdkValidationError("token_id_short", 'required', "Required property 'token_id_short' is missing or null"); }
-        if (!property_exists($data, "scopes") || $data->scopes === null) { throw new SdkValidationError("scopes", 'required', "Required property 'scopes' is missing or null"); }
-        if (!property_exists($data, "principal_type") || $data->principal_type === null) { throw new SdkValidationError("principal_type", 'required', "Required property 'principal_type' is missing or null"); }
-        if (!property_exists($data, "created_at") || $data->created_at === null) { throw new SdkValidationError("created_at", 'required', "Required property 'created_at' is missing or null"); }
+        if (!property_exists($data, "token_id") || $data->token_id === null) {
+            throw new SdkValidationError("token_id", 'required', "Required property 'token_id' is missing or null");
+        }
+        if (!property_exists($data, "token_id_short") || $data->token_id_short === null) {
+            throw new SdkValidationError("token_id_short", 'required', "Required property 'token_id_short' is missing or null");
+        }
+        if (!property_exists($data, "scopes") || $data->scopes === null) {
+            throw new SdkValidationError("scopes", 'required', "Required property 'scopes' is missing or null");
+        }
+        if (!property_exists($data, "principal_type") || $data->principal_type === null) {
+            throw new SdkValidationError("principal_type", 'required', "Required property 'principal_type' is missing or null");
+        }
+        if (!property_exists($data, "created_at") || $data->created_at === null) {
+            throw new SdkValidationError("created_at", 'required', "Required property 'created_at' is missing or null");
+        }
         return new self(
             tokenId: SdkClient::stringValue($data->token_id),
             tokenIdShort: SdkClient::stringValue($data->token_id_short),
@@ -216,7 +226,9 @@ class ListCredentialsResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "credentials") || $data->credentials === null) { throw new SdkValidationError("credentials", 'required', "Required property 'credentials' is missing or null"); }
+        if (!property_exists($data, "credentials") || $data->credentials === null) {
+            throw new SdkValidationError("credentials", 'required', "Required property 'credentials' is missing or null");
+        }
         return new self(
             credentials: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, CredentialMeta::class), SdkClient::arrayValue($data->credentials))),
         );

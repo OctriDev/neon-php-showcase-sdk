@@ -45,7 +45,9 @@ class Pagination implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "cursor") || $data->cursor === null) { throw new SdkValidationError("cursor", 'required', "Required property 'cursor' is missing or null"); }
+        if (!property_exists($data, "cursor") || $data->cursor === null) {
+            throw new SdkValidationError("cursor", 'required', "Required property 'cursor' is missing or null");
+        }
         return new self(
             cursor: SdkClient::stringValue($data->cursor),
         );

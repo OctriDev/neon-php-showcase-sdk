@@ -25,7 +25,7 @@ trait AuthEmailAndPasswordMethods
 
         Validation::validatePattern('branch_id', $branchId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth/email_and_password", $clientConfig, returnType: NeonAuthEmailAndPasswordConfig::class, decoder: 'json', operationId: 'getAuthEmailAndPasswordConfig', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth/email_and_password", $clientConfig, returnType: NeonAuthEmailAndPasswordConfig::class, decoder: 'json', operationId: 'getAuthEmailAndPasswordConfig', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, NeonAuthEmailAndPasswordConfig::class));
     }
 
@@ -53,7 +53,7 @@ trait AuthEmailAndPasswordMethods
 
         Validation::validatePattern('branch_id', $branchId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('PATCH', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth/email_and_password", $clientConfig, body: ['enabled' => $enabled, 'email_verification_method' => $emailVerificationMethod, 'require_email_verification' => $requireEmailVerification, 'auto_sign_in_after_verification' => $autoSignInAfterVerification, 'send_verification_email_on_sign_up' => $sendVerificationEmailOnSignUp, 'send_verification_email_on_sign_in' => $sendVerificationEmailOnSignIn, 'disable_sign_up' => $disableSignUp], returnType: NeonAuthEmailAndPasswordConfig::class, decoder: 'json', operationId: 'updateAuthEmailAndPasswordConfig', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('PATCH', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth/email_and_password", $clientConfig, body: ['enabled' => $enabled, 'email_verification_method' => $emailVerificationMethod, 'require_email_verification' => $requireEmailVerification, 'auto_sign_in_after_verification' => $autoSignInAfterVerification, 'send_verification_email_on_sign_up' => $sendVerificationEmailOnSignUp, 'send_verification_email_on_sign_in' => $sendVerificationEmailOnSignIn, 'disable_sign_up' => $disableSignUp], returnType: NeonAuthEmailAndPasswordConfig::class, decoder: 'json', operationId: 'updateAuthEmailAndPasswordConfig', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, NeonAuthEmailAndPasswordConfig::class));
     }
 }

@@ -45,7 +45,9 @@ class DatabaseResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "database") || $data->database === null) { throw new SdkValidationError("database", 'required', "Required property 'database' is missing or null"); }
+        if (!property_exists($data, "database") || $data->database === null) {
+            throw new SdkValidationError("database", 'required', "Required property 'database' is missing or null");
+        }
         return new self(
             database: SdkClient::hydrateClass($data->database, Database::class),
         );
@@ -144,10 +146,18 @@ class MaskingRule implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "database_name") || $data->database_name === null) { throw new SdkValidationError("database_name", 'required', "Required property 'database_name' is missing or null"); }
-        if (!property_exists($data, "schema_name") || $data->schema_name === null) { throw new SdkValidationError("schema_name", 'required', "Required property 'schema_name' is missing or null"); }
-        if (!property_exists($data, "table_name") || $data->table_name === null) { throw new SdkValidationError("table_name", 'required', "Required property 'table_name' is missing or null"); }
-        if (!property_exists($data, "column_name") || $data->column_name === null) { throw new SdkValidationError("column_name", 'required', "Required property 'column_name' is missing or null"); }
+        if (!property_exists($data, "database_name") || $data->database_name === null) {
+            throw new SdkValidationError("database_name", 'required', "Required property 'database_name' is missing or null");
+        }
+        if (!property_exists($data, "schema_name") || $data->schema_name === null) {
+            throw new SdkValidationError("schema_name", 'required', "Required property 'schema_name' is missing or null");
+        }
+        if (!property_exists($data, "table_name") || $data->table_name === null) {
+            throw new SdkValidationError("table_name", 'required', "Required property 'table_name' is missing or null");
+        }
+        if (!property_exists($data, "column_name") || $data->column_name === null) {
+            throw new SdkValidationError("column_name", 'required', "Required property 'column_name' is missing or null");
+        }
         return new self(
             databaseName: SdkClient::stringValue($data->database_name),
             schemaName: SdkClient::stringValue($data->schema_name),
@@ -197,7 +207,9 @@ class MaskingRulesResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "masking_rules") || $data->masking_rules === null) { throw new SdkValidationError("masking_rules", 'required', "Required property 'masking_rules' is missing or null"); }
+        if (!property_exists($data, "masking_rules") || $data->masking_rules === null) {
+            throw new SdkValidationError("masking_rules", 'required', "Required property 'masking_rules' is missing or null");
+        }
         return new self(
             maskingRules: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, MaskingRule::class), SdkClient::arrayValue($data->masking_rules))),
         );
@@ -252,8 +264,12 @@ class RoleOperations implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "role") || $data->role === null) { throw new SdkValidationError("role", 'required', "Required property 'role' is missing or null"); }
-        if (!property_exists($data, "operations") || $data->operations === null) { throw new SdkValidationError("operations", 'required', "Required property 'operations' is missing or null"); }
+        if (!property_exists($data, "role") || $data->role === null) {
+            throw new SdkValidationError("role", 'required', "Required property 'role' is missing or null");
+        }
+        if (!property_exists($data, "operations") || $data->operations === null) {
+            throw new SdkValidationError("operations", 'required', "Required property 'operations' is missing or null");
+        }
         return new self(
             role: SdkClient::hydrateClass($data->role, Role::class),
             operations: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, Operation::class), SdkClient::arrayValue($data->operations))),
@@ -299,7 +315,9 @@ class RoleResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "role") || $data->role === null) { throw new SdkValidationError("role", 'required', "Required property 'role' is missing or null"); }
+        if (!property_exists($data, "role") || $data->role === null) {
+            throw new SdkValidationError("role", 'required', "Required property 'role' is missing or null");
+        }
         return new self(
             role: SdkClient::hydrateClass($data->role, Role::class),
         );

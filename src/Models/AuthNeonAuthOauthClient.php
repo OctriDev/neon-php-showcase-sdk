@@ -117,13 +117,27 @@ class NeonAuthOAuthClient implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "client_id") || $data->client_id === null) { throw new SdkValidationError("client_id", 'required', "Required property 'client_id' is missing or null"); }
-        if (!property_exists($data, "name") || $data->name === null) { throw new SdkValidationError("name", 'required', "Required property 'name' is missing or null"); }
-        if (!property_exists($data, "type") || $data->type === null) { throw new SdkValidationError("type", 'required', "Required property 'type' is missing or null"); }
-        if (!property_exists($data, "redirect_uris") || $data->redirect_uris === null) { throw new SdkValidationError("redirect_uris", 'required', "Required property 'redirect_uris' is missing or null"); }
-        if (!property_exists($data, "resources") || $data->resources === null) { throw new SdkValidationError("resources", 'required', "Required property 'resources' is missing or null"); }
-        if (!property_exists($data, "skip_consent") || $data->skip_consent === null) { throw new SdkValidationError("skip_consent", 'required', "Required property 'skip_consent' is missing or null"); }
-        if (!property_exists($data, "disabled") || $data->disabled === null) { throw new SdkValidationError("disabled", 'required', "Required property 'disabled' is missing or null"); }
+        if (!property_exists($data, "client_id") || $data->client_id === null) {
+            throw new SdkValidationError("client_id", 'required', "Required property 'client_id' is missing or null");
+        }
+        if (!property_exists($data, "name") || $data->name === null) {
+            throw new SdkValidationError("name", 'required', "Required property 'name' is missing or null");
+        }
+        if (!property_exists($data, "type") || $data->type === null) {
+            throw new SdkValidationError("type", 'required', "Required property 'type' is missing or null");
+        }
+        if (!property_exists($data, "redirect_uris") || $data->redirect_uris === null) {
+            throw new SdkValidationError("redirect_uris", 'required', "Required property 'redirect_uris' is missing or null");
+        }
+        if (!property_exists($data, "resources") || $data->resources === null) {
+            throw new SdkValidationError("resources", 'required', "Required property 'resources' is missing or null");
+        }
+        if (!property_exists($data, "skip_consent") || $data->skip_consent === null) {
+            throw new SdkValidationError("skip_consent", 'required', "Required property 'skip_consent' is missing or null");
+        }
+        if (!property_exists($data, "disabled") || $data->disabled === null) {
+            throw new SdkValidationError("disabled", 'required', "Required property 'disabled' is missing or null");
+        }
         return new self(
             clientId: SdkClient::stringValue($data->client_id),
             name: SdkClient::stringValue($data->name),
@@ -145,11 +159,26 @@ final readonly class NeonAuthOAuthClientType implements SdkOpenEnum
     public const CONFIDENTIAL = "confidential";
     public const PUBLIC = "public";
     private function __construct(public string $value) {}
-    public static function from(string|int $value): static { return new self((string) $value); }
-    public static function tryFrom(string|int|null $value): ?static { return $value === null ? null : self::from($value); }
-    public function getValue(): string { return $this->value; }
-    public function jsonSerialize(): string { return $this->value; }
-    public function __toString(): string { return (string) $this->value; }
+    public static function from(string|int $value): static
+    {
+        return new self((string) $value);
+    }
+    public static function tryFrom(string|int|null $value): ?static
+    {
+        return $value === null ? null : self::from($value);
+    }
+    public function getValue(): string
+    {
+        return $this->value;
+    }
+    public function jsonSerialize(): string
+    {
+        return $this->value;
+    }
+    public function __toString(): string
+    {
+        return (string) $this->value;
+    }
 }
 
 /**
@@ -238,7 +267,9 @@ class NeonAuthOAuthProviderConfig implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "enabled") || $data->enabled === null) { throw new SdkValidationError("enabled", 'required', "Required property 'enabled' is missing or null"); }
+        if (!property_exists($data, "enabled") || $data->enabled === null) {
+            throw new SdkValidationError("enabled", 'required', "Required property 'enabled' is missing or null");
+        }
         return new self(
             enabled: SdkClient::boolValue($data->enabled),
             loginPage: (property_exists($data, "login_page") && $data->login_page !== null ? SdkClient::stringValue($data->login_page) : SdkNotGiven::Value),
@@ -346,7 +377,9 @@ class NeonAuthOAuthProviderResource implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "identifier") || $data->identifier === null) { throw new SdkValidationError("identifier", 'required', "Required property 'identifier' is missing or null"); }
+        if (!property_exists($data, "identifier") || $data->identifier === null) {
+            throw new SdkValidationError("identifier", 'required', "Required property 'identifier' is missing or null");
+        }
         return new self(
             identifier: SdkClient::stringValue($data->identifier),
         );

@@ -11,11 +11,26 @@ final readonly class CreateCredentialPrincipalType implements SdkOpenEnum
 {
     public const USER = "user";
     private function __construct(public string $value) {}
-    public static function from(string|int $value): static { return new self((string) $value); }
-    public static function tryFrom(string|int|null $value): ?static { return $value === null ? null : self::from($value); }
-    public function getValue(): string { return $this->value; }
-    public function jsonSerialize(): string { return $this->value; }
-    public function __toString(): string { return (string) $this->value; }
+    public static function from(string|int $value): static
+    {
+        return new self((string) $value);
+    }
+    public static function tryFrom(string|int|null $value): ?static
+    {
+        return $value === null ? null : self::from($value);
+    }
+    public function getValue(): string
+    {
+        return $this->value;
+    }
+    public function jsonSerialize(): string
+    {
+        return $this->value;
+    }
+    public function __toString(): string
+    {
+        return (string) $this->value;
+    }
 }
 
 class Credentials
@@ -45,7 +60,7 @@ class Credentials
             Validation::validateLength('name', $name, max: 256);
         }
 
-        $sdkResponse = SdkClient::request('POST', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/credentials", $clientConfig, body: ['scopes' => $scopes, 'principal_type' => $principalType, 'name' => $name], returnType: CreateCredentialResponse::class, decoder: 'json', operationId: 'createCredential', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('POST', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/credentials", $clientConfig, body: ['scopes' => $scopes, 'principal_type' => $principalType, 'name' => $name], returnType: CreateCredentialResponse::class, decoder: 'json', operationId: 'createCredential', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, CreateCredentialResponse::class));
     }
 
@@ -66,7 +81,7 @@ class Credentials
 
         Validation::validatePattern('branch_id', $branchId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/credentials", $clientConfig, returnType: ListCredentialsResponse::class, decoder: 'json', operationId: 'listCredentials', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/credentials", $clientConfig, returnType: ListCredentialsResponse::class, decoder: 'json', operationId: 'listCredentials', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, ListCredentialsResponse::class));
     }
 
@@ -87,7 +102,7 @@ class Credentials
 
         Validation::validatePattern('branch_id', $branchId, '^[a-z0-9-]{1,60}$');
 
-        return SdkClient::request('DELETE', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/credentials/" . SdkClient::encodePathSegment($tokenId) . "", $clientConfig, decoder: 'empty', operationId: 'revokeCredential', requestOptions: $requestOptions, errors: [404 => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class), "default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)])->data;
+        return SdkClient::request('DELETE', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/credentials/" . SdkClient::encodePathSegment($tokenId) . "", $clientConfig, decoder: 'empty', operationId: 'revokeCredential', requestOptions: $requestOptions, errors: [404 => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class), "default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)])->data;
     }
 
 
@@ -108,7 +123,7 @@ class Credentials
 
         Validation::validatePattern('branch_id', $branchId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('POST', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/credentials/" . SdkClient::encodePathSegment($tokenId) . "/reveal", $clientConfig, returnType: CredentialSecret::class, decoder: 'json', operationId: 'revealCredential', requestOptions: $requestOptions, errors: [404 => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class), 409 => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class), "default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('POST', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/credentials/" . SdkClient::encodePathSegment($tokenId) . "/reveal", $clientConfig, returnType: CredentialSecret::class, decoder: 'json', operationId: 'revealCredential', requestOptions: $requestOptions, errors: [404 => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class), 409 => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class), "default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, CredentialSecret::class));
     }
 
@@ -130,7 +145,7 @@ class Credentials
 
         Validation::validatePattern('branch_id', $branchId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('POST', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/credentials/" . SdkClient::encodePathSegment($tokenId) . "/rotate", $clientConfig, returnType: RotateCredentialResponse::class, decoder: 'json', operationId: 'rotateCredential', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('POST', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/credentials/" . SdkClient::encodePathSegment($tokenId) . "/rotate", $clientConfig, returnType: RotateCredentialResponse::class, decoder: 'json', operationId: 'rotateCredential', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, RotateCredentialResponse::class));
     }
 }

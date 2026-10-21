@@ -75,10 +75,18 @@ class BucketObject implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "key") || $data->key === null) { throw new SdkValidationError("key", 'required', "Required property 'key' is missing or null"); }
-        if (!property_exists($data, "size") || $data->size === null) { throw new SdkValidationError("size", 'required', "Required property 'size' is missing or null"); }
-        if (!property_exists($data, "last_modified") || $data->last_modified === null) { throw new SdkValidationError("last_modified", 'required', "Required property 'last_modified' is missing or null"); }
-        if (!property_exists($data, "etag") || $data->etag === null) { throw new SdkValidationError("etag", 'required', "Required property 'etag' is missing or null"); }
+        if (!property_exists($data, "key") || $data->key === null) {
+            throw new SdkValidationError("key", 'required', "Required property 'key' is missing or null");
+        }
+        if (!property_exists($data, "size") || $data->size === null) {
+            throw new SdkValidationError("size", 'required', "Required property 'size' is missing or null");
+        }
+        if (!property_exists($data, "last_modified") || $data->last_modified === null) {
+            throw new SdkValidationError("last_modified", 'required', "Required property 'last_modified' is missing or null");
+        }
+        if (!property_exists($data, "etag") || $data->etag === null) {
+            throw new SdkValidationError("etag", 'required', "Required property 'etag' is missing or null");
+        }
         return new self(
             key: SdkClient::stringValue($data->key),
             size: SdkClient::intValue($data->size),
@@ -168,10 +176,18 @@ class BucketObjectsListResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "folders") || $data->folders === null) { throw new SdkValidationError("folders", 'required', "Required property 'folders' is missing or null"); }
-        if (!property_exists($data, "objects") || $data->objects === null) { throw new SdkValidationError("objects", 'required', "Required property 'objects' is missing or null"); }
-        if (!property_exists($data, "prefix") || $data->prefix === null) { throw new SdkValidationError("prefix", 'required', "Required property 'prefix' is missing or null"); }
-        if (!property_exists($data, "is_truncated") || $data->is_truncated === null) { throw new SdkValidationError("is_truncated", 'required', "Required property 'is_truncated' is missing or null"); }
+        if (!property_exists($data, "folders") || $data->folders === null) {
+            throw new SdkValidationError("folders", 'required', "Required property 'folders' is missing or null");
+        }
+        if (!property_exists($data, "objects") || $data->objects === null) {
+            throw new SdkValidationError("objects", 'required', "Required property 'objects' is missing or null");
+        }
+        if (!property_exists($data, "prefix") || $data->prefix === null) {
+            throw new SdkValidationError("prefix", 'required', "Required property 'prefix' is missing or null");
+        }
+        if (!property_exists($data, "is_truncated") || $data->is_truncated === null) {
+            throw new SdkValidationError("is_truncated", 'required', "Required property 'is_truncated' is missing or null");
+        }
         return new self(
             folders: array_values(array_map(static fn($item) => SdkClient::stringValue($item), SdkClient::arrayValue($data->folders))),
             objects: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, BucketObject::class), SdkClient::arrayValue($data->objects))),

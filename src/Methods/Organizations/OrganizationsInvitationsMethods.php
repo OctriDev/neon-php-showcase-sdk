@@ -22,7 +22,7 @@ trait OrganizationsInvitationsMethods
 
         Validation::validatePattern('org_id', $orgId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('GET', "/organizations/" . SdkClient::encodePathSegment($orgId) . "/invitations", $clientConfig, returnType: OrganizationInvitationsResponse::class, decoder: 'json', operationId: 'listOrganizationsInvitations', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('GET', "/organizations/" . SdkClient::encodePathSegment($orgId) . "/invitations", $clientConfig, returnType: OrganizationInvitationsResponse::class, decoder: 'json', operationId: 'listOrganizationsInvitations', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, OrganizationInvitationsResponse::class));
     }
 
@@ -41,7 +41,7 @@ trait OrganizationsInvitationsMethods
 
         Validation::validatePattern('org_id', $orgId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('POST', "/organizations/" . SdkClient::encodePathSegment($orgId) . "/invitations", $clientConfig, body: ['invitations' => $invitations], returnType: OrganizationInvitationsResponse::class, decoder: 'json', operationId: 'createOrganizationInvitations', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('POST', "/organizations/" . SdkClient::encodePathSegment($orgId) . "/invitations", $clientConfig, body: ['invitations' => $invitations], returnType: OrganizationInvitationsResponse::class, decoder: 'json', operationId: 'createOrganizationInvitations', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, OrganizationInvitationsResponse::class));
     }
 }

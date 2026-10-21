@@ -17,7 +17,7 @@ class ApiKey
     public static function listApiKey(ClientConfig $clientConfig, ?RequestOptions $requestOptions = null): array
     {
 
-        $sdkResponse = SdkClient::request('GET', "/api_keys", $clientConfig, decoder: 'json', operationId: 'listApiKey', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('GET', "/api_keys", $clientConfig, decoder: 'json', operationId: 'listApiKey', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, ApiKeysListResponseItem::class), SdkClient::arrayValue($sdkResponse->data))));
     }
 
@@ -35,7 +35,7 @@ class ApiKey
 
         Validation::validateLength('key_name', $keyName, max: 64);
 
-        $sdkResponse = SdkClient::request('POST', "/api_keys", $clientConfig, body: ['key_name' => $keyName], returnType: ApiKeyCreateResponse::class, decoder: 'json', operationId: 'createApiKey', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('POST', "/api_keys", $clientConfig, body: ['key_name' => $keyName], returnType: ApiKeyCreateResponse::class, decoder: 'json', operationId: 'createApiKey', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, ApiKeyCreateResponse::class));
     }
 
@@ -51,7 +51,7 @@ class ApiKey
     public static function revokeApiKey(ClientConfig $clientConfig, int $keyId, ?RequestOptions $requestOptions = null): ApiKeyRevokeResponse
     {
 
-        $sdkResponse = SdkClient::request('DELETE', "/api_keys/" . SdkClient::encodePathSegment($keyId) . "", $clientConfig, returnType: ApiKeyRevokeResponse::class, decoder: 'json', operationId: 'revokeApiKey', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('DELETE', "/api_keys/" . SdkClient::encodePathSegment($keyId) . "", $clientConfig, returnType: ApiKeyRevokeResponse::class, decoder: 'json', operationId: 'revokeApiKey', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, ApiKeyRevokeResponse::class));
     }
 }

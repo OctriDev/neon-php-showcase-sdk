@@ -45,7 +45,9 @@ class BucketsListResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "buckets") || $data->buckets === null) { throw new SdkValidationError("buckets", 'required', "Required property 'buckets' is missing or null"); }
+        if (!property_exists($data, "buckets") || $data->buckets === null) {
+            throw new SdkValidationError("buckets", 'required', "Required property 'buckets' is missing or null");
+        }
         return new self(
             buckets: array_values(array_map(static fn($item) => SdkClient::hydrateClass($item, Bucket::class), SdkClient::arrayValue($data->buckets))),
         );

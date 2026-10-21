@@ -113,7 +113,9 @@ class ScheduleTriggerUpdateRequest implements TriggerUpdateRequest, \JsonSeriali
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "type") || $data->type === null) { throw new SdkValidationError("type", 'required', "Required property 'type' is missing or null"); }
+        if (!property_exists($data, "type") || $data->type === null) {
+            throw new SdkValidationError("type", 'required', "Required property 'type' is missing or null");
+        }
         return new self(
             type: SdkClient::hydrateEnum($data->type, ScheduleTriggerUpdateRequestTypeEnum::class),
             functionSlug: (property_exists($data, "function_slug") && $data->function_slug !== null ? SdkClient::stringValue($data->function_slug) : SdkNotGiven::Value),
@@ -231,7 +233,9 @@ class StorageObjectCreatedTriggerUpdateRequest implements TriggerUpdateRequest, 
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "type") || $data->type === null) { throw new SdkValidationError("type", 'required', "Required property 'type' is missing or null"); }
+        if (!property_exists($data, "type") || $data->type === null) {
+            throw new SdkValidationError("type", 'required', "Required property 'type' is missing or null");
+        }
         return new self(
             type: SdkClient::hydrateEnum($data->type, StorageObjectCreatedTriggerUpdateRequestTypeEnum::class),
             functionSlug: (property_exists($data, "function_slug") && $data->function_slug !== null ? SdkClient::stringValue($data->function_slug) : SdkNotGiven::Value),

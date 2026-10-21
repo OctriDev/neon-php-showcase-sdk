@@ -24,7 +24,7 @@ trait AuthLegacyEmailServerMethods
 
         Validation::validatePattern('project_id', $projectId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/auth/email_server", $clientConfig, decoder: 'json', operationId: 'getAuthLegacyEmailServer', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/auth/email_server", $clientConfig, decoder: 'json', operationId: 'getAuthLegacyEmailServer', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::hydrateUnionAs($sdkResponse->data, NeonAuthEmailServerConfigResponse::class, [StandardEmailServerResponse::class, SharedEmailServer::class], "type", ["standard" => StandardEmailServerResponse::class, "shared" => SharedEmailServer::class], UnknownNeonAuthEmailServerConfigResponse::class));
     }
 
@@ -45,7 +45,7 @@ trait AuthLegacyEmailServerMethods
 
         Validation::validatePattern('project_id', $projectId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('PATCH', "/projects/" . SdkClient::encodePathSegment($projectId) . "/auth/email_server", $clientConfig, body: $body, decoder: 'json', operationId: 'updateAuthLegacyEmailServer', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('PATCH', "/projects/" . SdkClient::encodePathSegment($projectId) . "/auth/email_server", $clientConfig, body: $body, decoder: 'json', operationId: 'updateAuthLegacyEmailServer', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::hydrateUnionAs($sdkResponse->data, NeonAuthEmailServerConfigResponse::class, [StandardEmailServerResponse::class, SharedEmailServer::class], "type", ["standard" => StandardEmailServerResponse::class, "shared" => SharedEmailServer::class], UnknownNeonAuthEmailServerConfigResponse::class));
     }
 }

@@ -25,7 +25,7 @@ trait AuthWebhooksMethods
 
         Validation::validatePattern('branch_id', $branchId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth/webhooks", $clientConfig, returnType: NeonAuthWebhookConfig::class, decoder: 'json', operationId: 'getAuthWebhookConfig', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('GET', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth/webhooks", $clientConfig, returnType: NeonAuthWebhookConfig::class, decoder: 'json', operationId: 'getAuthWebhookConfig', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, NeonAuthWebhookConfig::class));
     }
 
@@ -54,7 +54,7 @@ trait AuthWebhooksMethods
             Validation::validateRange('timeout_seconds', $timeoutSeconds, min: 1, max: 10);
         }
 
-        $sdkResponse = SdkClient::request('PUT', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth/webhooks", $clientConfig, body: ['enabled' => $enabled, 'webhook_url' => $webhookUrl, 'enabled_events' => $enabledEvents, 'timeout_seconds' => $timeoutSeconds], returnType: NeonAuthWebhookConfig::class, decoder: 'json', operationId: 'updateAuthWebhookConfig', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('PUT', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth/webhooks", $clientConfig, body: ['enabled' => $enabled, 'webhook_url' => $webhookUrl, 'enabled_events' => $enabledEvents, 'timeout_seconds' => $timeoutSeconds], returnType: NeonAuthWebhookConfig::class, decoder: 'json', operationId: 'updateAuthWebhookConfig', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, NeonAuthWebhookConfig::class));
     }
 }

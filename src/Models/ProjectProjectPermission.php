@@ -77,9 +77,15 @@ class ProjectPermission implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "id") || $data->id === null) { throw new SdkValidationError("id", 'required', "Required property 'id' is missing or null"); }
-        if (!property_exists($data, "granted_to_email") || $data->granted_to_email === null) { throw new SdkValidationError("granted_to_email", 'required', "Required property 'granted_to_email' is missing or null"); }
-        if (!property_exists($data, "granted_at") || $data->granted_at === null) { throw new SdkValidationError("granted_at", 'required', "Required property 'granted_at' is missing or null"); }
+        if (!property_exists($data, "id") || $data->id === null) {
+            throw new SdkValidationError("id", 'required', "Required property 'id' is missing or null");
+        }
+        if (!property_exists($data, "granted_to_email") || $data->granted_to_email === null) {
+            throw new SdkValidationError("granted_to_email", 'required', "Required property 'granted_to_email' is missing or null");
+        }
+        if (!property_exists($data, "granted_at") || $data->granted_at === null) {
+            throw new SdkValidationError("granted_at", 'required', "Required property 'granted_at' is missing or null");
+        }
         return new self(
             id: SdkClient::stringValue($data->id),
             grantedToEmail: SdkClient::stringValue($data->granted_to_email),
@@ -98,11 +104,26 @@ final readonly class ProjectPermissionLevel implements SdkOpenEnum
     public const EDITOR = "EDITOR";
     public const ADMIN = "ADMIN";
     private function __construct(public string $value) {}
-    public static function from(string|int $value): static { return new self((string) $value); }
-    public static function tryFrom(string|int|null $value): ?static { return $value === null ? null : self::from($value); }
-    public function getValue(): string { return $this->value; }
-    public function jsonSerialize(): string { return $this->value; }
-    public function __toString(): string { return (string) $this->value; }
+    public static function from(string|int $value): static
+    {
+        return new self((string) $value);
+    }
+    public static function tryFrom(string|int|null $value): ?static
+    {
+        return $value === null ? null : self::from($value);
+    }
+    public function getValue(): string
+    {
+        return $this->value;
+    }
+    public function jsonSerialize(): string
+    {
+        return $this->value;
+    }
+    public function __toString(): string
+    {
+        return (string) $this->value;
+    }
 }
 
 /**
@@ -241,7 +262,9 @@ class ProjectResponse implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "project") || $data->project === null) { throw new SdkValidationError("project", 'required', "Required property 'project' is missing or null"); }
+        if (!property_exists($data, "project") || $data->project === null) {
+            throw new SdkValidationError("project", 'required', "Required property 'project' is missing or null");
+        }
         return new self(
             project: SdkClient::hydrateClass($data->project, Project::class),
         );
@@ -257,9 +280,24 @@ final readonly class ProjectRole implements SdkOpenEnum
     public const EDITOR = "editor";
     public const ADMIN = "admin";
     private function __construct(public string $value) {}
-    public static function from(string|int $value): static { return new self((string) $value); }
-    public static function tryFrom(string|int|null $value): ?static { return $value === null ? null : self::from($value); }
-    public function getValue(): string { return $this->value; }
-    public function jsonSerialize(): string { return $this->value; }
-    public function __toString(): string { return (string) $this->value; }
+    public static function from(string|int $value): static
+    {
+        return new self((string) $value);
+    }
+    public static function tryFrom(string|int|null $value): ?static
+    {
+        return $value === null ? null : self::from($value);
+    }
+    public function getValue(): string
+    {
+        return $this->value;
+    }
+    public function jsonSerialize(): string
+    {
+        return $this->value;
+    }
+    public function __toString(): string
+    {
+        return (string) $this->value;
+    }
 }

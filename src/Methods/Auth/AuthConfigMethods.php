@@ -28,7 +28,7 @@ trait AuthConfigMethods
 
         Validation::validateLength('name', $name, min: 1, max: 256);
 
-        $sdkResponse = SdkClient::request('PATCH', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth/config", $clientConfig, body: ['name' => $name], returnType: NeonAuthConfigResponse::class, decoder: 'json', operationId: 'updateAuthConfig', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('PATCH', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/auth/config", $clientConfig, body: ['name' => $name], returnType: NeonAuthConfigResponse::class, decoder: 'json', operationId: 'updateAuthConfig', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, NeonAuthConfigResponse::class));
     }
 }

@@ -26,7 +26,7 @@ trait BranchApiResetBranchRolePasswordMethods
 
         Validation::validatePattern('branch_id', $branchId, '^[a-z0-9-]{1,60}$');
 
-        $sdkResponse = SdkClient::request('POST', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/roles/" . SdkClient::encodePathSegment($roleName) . "/reset_password", $clientConfig, returnType: RoleOperations::class, decoder: 'json', operationId: 'resetBranchRolePassword', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('POST', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/roles/" . SdkClient::encodePathSegment($roleName) . "/reset_password", $clientConfig, returnType: RoleOperations::class, decoder: 'json', operationId: 'resetBranchRolePassword', requestOptions: $requestOptions, errors: ["default" => static fn(mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, RoleOperations::class));
     }
 }

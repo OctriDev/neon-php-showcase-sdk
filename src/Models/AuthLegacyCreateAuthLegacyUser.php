@@ -77,9 +77,15 @@ class NeonAuthCreateNewUserRequest implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "project_id") || $data->project_id === null) { throw new SdkValidationError("project_id", 'required', "Required property 'project_id' is missing or null"); }
-        if (!property_exists($data, "auth_provider") || $data->auth_provider === null) { throw new SdkValidationError("auth_provider", 'required', "Required property 'auth_provider' is missing or null"); }
-        if (!property_exists($data, "email") || $data->email === null) { throw new SdkValidationError("email", 'required', "Required property 'email' is missing or null"); }
+        if (!property_exists($data, "project_id") || $data->project_id === null) {
+            throw new SdkValidationError("project_id", 'required', "Required property 'project_id' is missing or null");
+        }
+        if (!property_exists($data, "auth_provider") || $data->auth_provider === null) {
+            throw new SdkValidationError("auth_provider", 'required', "Required property 'auth_provider' is missing or null");
+        }
+        if (!property_exists($data, "email") || $data->email === null) {
+            throw new SdkValidationError("email", 'required', "Required property 'email' is missing or null");
+        }
         return new self(
             projectId: SdkClient::stringValue($data->project_id),
             authProvider: SdkClient::hydrateStringEnumOrString($data->auth_provider, NeonAuthSupportedAuthProvider::class),

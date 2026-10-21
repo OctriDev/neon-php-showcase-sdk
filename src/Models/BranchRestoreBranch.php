@@ -81,7 +81,9 @@ class BranchRestoreRequest implements \JsonSerializable
 
     public static function fromObject(object $data): self
     {
-        if (!property_exists($data, "source_branch_id") || $data->source_branch_id === null) { throw new SdkValidationError("source_branch_id", 'required', "Required property 'source_branch_id' is missing or null"); }
+        if (!property_exists($data, "source_branch_id") || $data->source_branch_id === null) {
+            throw new SdkValidationError("source_branch_id", 'required', "Required property 'source_branch_id' is missing or null");
+        }
         return new self(
             sourceBranchId: SdkClient::stringValue($data->source_branch_id),
             sourceLsn: (property_exists($data, "source_lsn") && $data->source_lsn !== null ? SdkClient::stringValue($data->source_lsn) : SdkNotGiven::Value),
