@@ -228,7 +228,7 @@ class Functions
      * @param TriggerUpdateRequest $body
      * @return TriggerResponse
      */
-    public static function updateFunctionsTrigger(ClientConfig $clientConfig, string $projectId, string $branchId, string $triggerId, TriggerUpdateRequest $body, ?RequestOptions $requestOptions = null): TriggerResponse
+    public static function updateFunctionTrigger(ClientConfig $clientConfig, string $projectId, string $branchId, string $triggerId, TriggerUpdateRequest $body, ?RequestOptions $requestOptions = null): TriggerResponse
     {
 
         Validation::validatePattern('project_id', $projectId, '^[a-z0-9-]{1,60}$');
@@ -238,7 +238,7 @@ class Functions
         Validation::validateLength('trigger_id', $triggerId, min: 1, max: 128);
         Validation::validatePattern('trigger_id', $triggerId, '^[A-Za-z0-9][A-Za-z0-9_.\\-]{0,127}$');
 
-        $sdkResponse = SdkClient::request('PATCH', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/triggers/" . SdkClient::encodePathSegment($triggerId) . "", $clientConfig, body: $body, returnType: TriggerResponse::class, decoder: 'json', operationId: 'updateFunctionsTrigger', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
+        $sdkResponse = SdkClient::request('PATCH', "/projects/" . SdkClient::encodePathSegment($projectId) . "/branches/" . SdkClient::encodePathSegment($branchId) . "/triggers/" . SdkClient::encodePathSegment($triggerId) . "", $clientConfig, body: $body, returnType: TriggerResponse::class, decoder: 'json', operationId: 'updateFunctionTrigger', requestOptions: $requestOptions, errors: ["default" => static fn (mixed $value): mixed => SdkClient::hydrateClass($value, GeneralError::class)]);
         return SdkClient::decoded($sdkResponse, static fn() => SdkClient::typedData($sdkResponse, TriggerResponse::class));
     }
 

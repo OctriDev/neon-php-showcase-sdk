@@ -9,7 +9,16 @@ namespace octridev_neon;
 
 class Auth
 {
-    use AuthMethodsPart1;
-    use AuthMethodsPart2;
-    use AuthMethodsPart3;
+    use AuthMethods;
+    use AuthDomainsMethods;
+    use AuthUsersMethods;
+    use AuthOauthProvidersMethods;
+    use AuthSendTestEmailMethods;
+    use AuthEmailProviderMethods;
+    use AuthEmailAndPasswordMethods;
+    use AuthAllowLocalhostMethods;
+    use AuthPluginsMethods;
+    use AuthConfigMethods;
+    use AuthOauthProviderMethods;
+    use AuthWebhooksMethods;
 }
